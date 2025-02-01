@@ -51,7 +51,7 @@ p{
 
 .hero {
     height: 100vh;
-    background: url('images/img0.png') no-repeat center center/cover;
+    background: url('../images/img0.png') no-repeat center center/cover;
     color: white;
     display: flex;
     flex-direction: column;
@@ -92,7 +92,7 @@ p{
     position: relative;
     width: 100%; /* Ensure container takes full width */
     height: 500px; /* Set a height for the container */
-    background: url('images/img4.png') no-repeat center center/contain;
+    background: url('../images/img4.png') no-repeat center center/contain;
     background-size: cover; /* To make sure the image covers the area */
 }
 
