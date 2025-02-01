@@ -1,0 +1,142 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+body {
+    font-family: 'Gilroy-bold', sans-serif;
+    background-color: #F5F5F5;
+}
+p{
+    color: #000000;
+    font-weight: 400;
+    font-size: 20px;
+}
+.header{
+    background-color: gainsboro;
+}
+/*Header*/
+.gradient-text {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: bold;
+}
+
+
+.btn-gradient {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-gradient:hover {
+    opacity: 0.8;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    padding-left: 50px;
+}
+
+/*Footer*/
+
+.footer {
+    height: 450px;
+    background: #FFFFFF;
+    color: black;
+    padding: 100px 0;
+}
+.footer h2{
+    font-size: 30px;
+}
+.footer h5 {
+    padding-left: 80px;
+    color: #FFC300;
+}
+
+.footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column; 
+    padding-left: 50px; 
+}
+
+.footer ul li {
+    margin-bottom: 13px; 
+}
+
+.footer ul li a {
+    color: #9F9F9F;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+.footer ul li a:hover{
+    color: #000000;
+}
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url('fonts/Gilroy-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Gilroy-SemiBold';
+    src: url('fonts/Gilroy-SemiBold.woff2') format('woff2');
+}
+.your-activities{
+    padding: 100px;
+    background-color: #FFFFFF;
+}
+.title {
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.activity-card {
+    display: flex;
+    align-items: center;
+    background: #F5F5F5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.activity-img {
+    width: 200px;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 50px;
+}
+
+.activity-info h5 {
+    font-family: 'Gilroy-Bold', sans-serif;
+    margin: 0;
+    font-size: 18px;
+}
+
+.activity-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.btn {
+    font-size: 14px;
+    margin-right: 5px;
+}
+.notifications img{
+    width:30px;
+    height:30px;
+    margin-right: 25px;
+    margin-top: 6px;
+}
+.notifications img:hover{
+    opacity: 0.8;
+}
