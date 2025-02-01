@@ -1,0 +1,185 @@
+h2 {
+    padding: 200px 0px 50px 30px;
+    text-align: center;
+    font-size: 48px;
+}
+.swiper-container {
+    text-align: center;
+    padding: 0px 50px 0px 50px;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    padding-bottom: 5px;
+}
+
+.swiper-slide {
+    width: auto;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-slide img {
+    padding: 15px;
+    width: 90%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+
+}
+.ptitle {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: black;
+
+}
+.plocat{
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+    padding-left: 10px;
+
+}
+/* Pagination dots below */
+.swiper-pagination {
+    
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.swiper-pagination-bullet {
+    background: gray;
+    width: 10px;
+    height: 10px;
+    opacity: 0.6;
+    margin: 0 5px;
+}
+
+.swiper-pagination-bullet-active {
+    background: black;
+    opacity: 1;
+}
+
+.your-act{
+    padding-left: 300px;
+}
+
+
+/*Calendar*/
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Gilroy', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+    padding-bottom: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.calendar-grid div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    font-size: 18px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.calendar-grid div.inactive {
+    color: #aaa;
+}
+
+.calendar-grid div.today {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+}
+
+.calendar-grid div.activity-day {
+    background-color: #d0f4f7;
+    font-weight: bold;
+}
+
+.calendar-grid div:hover {
+    background-color: #e8f4f8;
+    transform: scale(1.1);
+}
+
+.activity-details {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 320px;
+    margin-left: 30px;
+}
+
+.activity-details img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.activity-details h3 {
+    font-size: 22px;
+    margin-top: 15px;
+    color: #333;
+}
+
+.activity-details p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Calendar Navigation Buttons */
+
+.calendar-nav button {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.calendar-nav button:hover {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+}
