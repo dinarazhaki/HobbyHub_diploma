@@ -1,14 +1,14 @@
-h2 {
-    padding: 200px 0px 50px 30px;
+.activities h2 {
+    padding: 150px 0px 20px 30px;
     text-align: center;
-    font-size: 48px;
+    
 }
 .swiper-container {
     text-align: center;
     padding: 0px 50px 0px 50px;
     width: 100%;
-    height: 320px;
-    overflow: hidden;
+    height: 500px;
+    overflow: hidden ;
 }
 
 .swiper-wrapper {
@@ -17,46 +17,63 @@ h2 {
     padding-bottom: 5px;
 }
 
-.swiper-slide {
-    width: auto;
-    text-align: center;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
+.swiper-slide{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
+    margin-left: -20px;
+    overflow: hidden; 
+    border-radius: 10px; 
+    
 }
 
-.swiper-slide img {
-    padding: 15px;
-    width: 90%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
 
+.actphoto {
+    width: 304px;
+    height: 283px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block; 
 }
 .ptitle {
     font-size: 16px;
-    margin-bottom: 5px;
-    color: black;
+    margin-top: 20px ;
+    color:#333;
+
+}
+
+.location-part {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    
+}
+.location-part img{
+    width: 12px; 
+    height: 14.5px;
+    margin-top: -18px;
+
 
 }
 .plocat{
+    margin-left: -20px;
     font-size: 14px;
     color: #666;
-    text-align: left;
-    padding-left: 10px;
+    text-align: center;
+    
 
 }
+.location-part p{
+    margin-left: 10px;
+}
+
 /* Pagination dots below */
 .swiper-pagination {
     
     position: absolute;
     bottom: 10px;
-    left: 50%;
+    margin-left: 300px;
     transform: translateX(-50%);
     display: flex;
 }
@@ -78,13 +95,23 @@ h2 {
     padding-left: 300px;
 }
 
+.activities-your h2{
+    margin-top: -60px;
+}
+.activities-your .swiper-slide{
+    margin-left: 0px;
+}
 
+.activities-your img{
+    border-radius: 10px;
+}
 /*Calendar*/
 .calendar-container {
     display: flex;
     justify-content: center;
     padding: 20px;
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .calendar-header {
@@ -131,12 +158,12 @@ h2 {
 }
 
 .calendar-grid div.activity-day {
-    background-color: #d0f4f7;
+    color: #FFC300;
     font-weight: bold;
 }
 
 .calendar-grid div:hover {
-    background-color: #e8f4f8;
+    color: #e4d18f;
     transform: scale(1.1);
 }
 
@@ -182,4 +209,8 @@ h2 {
 
 .calendar-nav button:hover {
     background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+}
+
+body{
+    overflow-x: hidden;
 }

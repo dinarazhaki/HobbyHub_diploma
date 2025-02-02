@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     new Swiper('.swiper-container', {
         direction: 'horizontal',  // Horizontal scrolling
-        slidesPerView: 4,  // Show 3 slides at a time
+        slidesPerView: 4,  // Show 4 slides at a time
         spaceBetween: 20,
-        loop: true,  
+        loop: true,
         autoplay: {
-            delay: 5000,  // Auto-scroll every 5 minutes
+            delay: 5000,  // Auto-scroll every 5 seconds
             disableOnInteraction: false
         },
         pagination: {
@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const currentMonthYear = document.querySelector(".current-month-year");
     const calendarGrid = document.querySelector(".calendar-grid");
@@ -24,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const activityDescription = document.getElementById("activity-description");
     const activityImage = document.getElementById("activity-image");
 
-    let currentDate = new Date();
+    let currentDate = new Date();  // Track current date
+    let selectedDate = new Date();  // Track selected date to prevent highlighting wrong date
 
     // Activities with images, names, and locations
     const activities = {
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const lastDayOfMonth = new Date(year, month + 1, 0);
         const lastDayOfPrevMonth = new Date(year, month, 0);
 
-        // Calculate the first day of the month with Monday as the start of the week
         let firstDay = firstDayOfMonth.getDay();
         if (firstDay === 0) {
             firstDay = 7; // Adjust Sunday (0) to be treated as 7 (Monday start)
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const div = document.createElement("div");
             div.textContent = i;
 
-            // Mark the day as 'today'
+            // Update "today" check based on currentDate month and year
             if (i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
                 div.classList.add("today");
             }
@@ -90,7 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Add an event listener for the click event
             div.addEventListener("click", function () {
+                selectedDate.setDate(i);  // Update selected date when clicking on a day
                 showActivity(i);  // Show activity for the clicked date
+                renderCalendar(selectedDate);  // Re-render calendar with the selected date highlighted
             });
 
             calendarGrid.appendChild(div);
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showActivity(day) {
         const activity = activities[day];
         if (activity) {
-            activityTitle.textContent = `${activity.title} 📍 ${activity.location}`;
+            activityTitle.textContent = `${activity.title}`;
             activityDescription.textContent = `Join us for the ${activity.title} at ${activity.location}.`;
             activityImage.src = activity.image;
         } else {
@@ -121,16 +122,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Navigation buttons
-    document.querySelector(".next-year").addEventListener("click", function () {
-        currentDate.setFullYear(currentDate.getFullYear() + 1);
-        renderCalendar(currentDate);
+    document.querySelector(".next-month").addEventListener("click", function () {
+        selectedDate.setMonth(selectedDate.getMonth() + 1);  // Increment the month
+        renderCalendar(selectedDate);
     });
 
-    document.querySelector(".prev-year").addEventListener("click", function () {
-        currentDate.setFullYear(currentDate.getFullYear() - 1);
-        renderCalendar(currentDate);
+    document.querySelector(".prev-month").addEventListener("click", function () {
+        selectedDate.setMonth(selectedDate.getMonth() - 1);  // Decrement the month
+        renderCalendar(selectedDate);
     });
 
     // Initial calendar rendering
-    renderCalendar(currentDate);
+    renderCalendar(selectedDate);
 });
