@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HobbyHub</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}"> {% endcomment %}
+    
+</head>
+<body>
+
+    <!-- Header -->
+    <section class="header">
+        <nav class="navbar navbar-expand-lg navbar-bold bg-white  px-4 fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Employee</a></li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <button class="btn btn-gradient">Profile</button>
+            </div>
+        </nav>
+    </section>
+
+    <section class="your-activities">
+        <div class="container mt-5">
+            <h2 class="title text-center">Created activities by you</h2>
+            <div class="row mt-4">
+                {% for event in events %}
+                <div class="col-md-6 mb-4" id="activities">
+                    <div class="activity-card">
+                            <img src="{{ event.image.url }}" class="activity-img" alt="{{ event.title }}" width="200">
+                            <div class="activity-info">
+                                <h5>{{ event.title }}</h5>
+                                <p>Date: {{ event.date }}</p>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
