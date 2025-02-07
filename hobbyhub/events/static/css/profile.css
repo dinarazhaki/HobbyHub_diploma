@@ -765,3 +765,8 @@ h3 {
     background: white;
     color: #ff4b2b;
 }
+
+a:hover{
+    color: #666;
+}
+
