@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HobbyHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var eventsData = {{ events_data|safe }};
+    </script>
+    
+    <script src="{% static 'js/user.js' %}"></script>
+    
+</head>
+<body>
+
+    <!-- Header -->
+    <section class="header">
+        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Challenges</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Leaderboard</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Profile Lookup</a></li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <button class="btn btn-gradient">Profile</button>
+            </div>
+        </nav>
+        </section>
+
+        <div class="container mt-4">
+            <div class="row  mainpartpro">
+                <div class="col-md-2">
+                    <div class="sidebar p-4">
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                        <h5>Ualkhan Ayauym</h5>
+                        <p><i class="bi bi-gem"></i> 25</p>
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="setting/" >   Settings</a></div>
+                    </div>
+                </div>
+                <div class="col-md-10 mainpartpro">
+                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
+                    <div class="navbar user_det">
+                        <div class="tab active-tab" ><a href="#">Your Information</a></div>  <!--need to update-->
+                        
+                    </div>
+                
+                    <!-- Form Section -->
+                    <div class="form-container">
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Company Name</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Company_ID</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                        </div>
+            
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Email</label>
+                                <input type="email" value="infohobbyhub@gmail.com">
+                                <i><img src="{% static 'images/mail_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Password</label>
+                                <input type="password" value="*****">
+                                <i><img src="{% static 'images/hide_icon.png' %}" width="22"></i>
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Date of Foundation</label>
+                                <input type="text" value="17 Nov, 2000">
+                                <i><img src="{% static 'images/calendar_icon.png' %}" width="17"></i>
+                            </div>
+                           
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+  
+</body>
+</html>
+
+

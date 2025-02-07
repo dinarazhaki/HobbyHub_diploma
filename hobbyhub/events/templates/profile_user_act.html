@@ -6,6 +6,7 @@
     <title>HobbyHub</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
@@ -41,85 +42,116 @@
         </nav>
         </section>
 
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Sidebar -->
-                <div class="col-md-3 sidebar p-3 text-white text-center">
-                    <img src="profile.png" class="rounded-circle mb-3" width="80" height="80" alt="Profile">
-                    <h5>Ualikhan Ayauym</h5>
-                    <p class="points">⭐ 25</p>
-                    <button class="btn btn-light w-100 mb-2">Profile Info</button>
-                    <button class="btn btn-warning w-100">Settings</button>
-                </div>
-                
-                <!-- Main Content -->
-                <div class="col-md-9">
-                    <!-- Banner -->
-                    <div class="banner">
-                        <img src="banner.jpg" class="w-100 rounded" alt="Banner">
+        <div class="container mt-4">
+            <div class="row  mainpartpro">
+                <div class="col-md-2">
+                    <div class="sidebar p-4">
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                        <h5>Ualkhan Ayauym</h5>
+                        <p><i class="bi bi-gem"></i> 25</p>
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="setting/" >   Settings</a></div> <!--need to update-->
                     </div>
-                    
-                    <!-- Navigation Tabs -->
-                    <ul class="nav nav-tabs mt-3">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#info">Your Information</a> <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Your Activities</a>  <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Achievements</a>  <!-- need to update-->
-                        </li>
-                    </ul>
+                </div>
+                <div class="col-md-10 mainpartpro">
+                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
+                    <div class="navbar user_det">
+                        <div class="tab " ><a href="user_profile">Your Information</a></div>  <!--need to update-->
+                        <div class="tab act-active-tab" ><a href="">Your Activities</a></div> <!--need to update-->
+                        <div class="tab" ><a href="user_achievements">Achievements</a></div> <!--need to update-->
+                    </div>
                     
                     <!-- Activities -->
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <div class="card activity-card">
-                                <img src="photo.jpg" class="card-img-top" alt="Photography Walk">
-                                <div class="card-body">
-                                    <h6>Photography Walk</h6>
-                                    <p>📅 May 10, 2025<br>📍 Botanical Garden</p>
-                                </div>
+                    <div class="events-container">
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{% static 'images/photo_walk.jpg' %}" alt="Photography Walk">
+                            </div>
+                            <div class="event-details">
+                                <h3>Photography Walk</h3>
+                                <p>
+                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                    May 10, 2025
+                                </p>
+                                <p>
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                    Botanical Garden
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card activity-card">
-                                <img src="origami.jpg" class="card-img-top" alt="Origami Workshop">
-                                <div class="card-body">
-                                    <h6>Origami Workshop</h6>
-                                    <p>📅 June 9, 2025<br>📍 Art Studio</p>
-                                </div>
+                
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{% static 'images/origami.jpg' %}" alt="Origami Workshop">
+                            </div>
+                            <div class="event-details">
+                                <h3>Origami Workshop</h3>
+                                <p>
+                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                    June 9, 2025
+                                </p>
+                                <p>
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                    Art Studio
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card activity-card">
-                                <img src="coding.jpg" class="card-img-top" alt="Coding for Fun">
-                                <div class="card-body">
-                                    <h6>Coding for Fun</h6>
-                                    <p>📅 May 15, 2025<br>📍 Tech Club</p>
-                                </div>
+                
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{% static 'images/code_for_fun.jpg' %}" alt="Coding for Fun">
+                            </div>
+                            <div class="event-details">
+                                <h3>Coding for Fun</h3>
+                                <p>
+                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                    May 15, 2025
+                                </p>
+                                <p>
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                    Tech Club
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card activity-card">
-                                <img src="cooking.jpg" class="card-img-top" alt="Cooking Challenge">
-                                <div class="card-body">
-                                    <h6>Cooking Challenge</h6>
-                                    <p>📅 May 28, 2025<br>📍 Office Kitchen</p>
-                                </div>
+                
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{% static 'images/cook_chal.png' %}" alt="Cooking Challenge">
+                            </div>
+                            <div class="event-details">
+                                <h3>Cooking Challenge</h3>
+                                <p>
+                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                    May 28, 2025
+                                </p>
+                                <p>
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                    Office Kitchen
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card activity-card">
-                                <img src="guitar.jpg" class="card-img-top" alt="Guitar Jam">
-                                <div class="card-body">
-                                    <h6>Guitar Jam</h6>
-                                    <p>📅 May 25, 2025<br>📍 Art Studio</p>
-                                </div>
+                
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{% static 'images/guitar_jam.jpg' %}" alt="Guitar Jam">
+                            </div>
+                            <div class="event-details">
+                                <h3>Guitar Jam</h3>
+                                <p>
+                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                    May 25, 2025
+                                </p>
+                                <p>
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                    Art Studio
+                                </p>
                             </div>
                         </div>
                     </div>
+
+                    
+                    
+
                 </div>
             </div>
         </div>

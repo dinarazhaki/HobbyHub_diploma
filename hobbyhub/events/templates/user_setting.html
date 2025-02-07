@@ -6,6 +6,8 @@
     <title>HobbyHub</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
@@ -42,98 +44,119 @@
         </section>
 
         <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="sidebar">
+            <div class="row  mainpartpro">
+                <div class="col-md-2">
+                    <div class="sidebar p-4">
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
                         <h5>Ualkhan Ayauym</h5>
-                        <p>💎 25</p>
-                        <button class="btn btn-light btn-sm w-100">Profile Info</button>
-                        <button class="btn btn-warning btn-sm w-100 mt-2">Settings</button>
+                        <p><i class="bi bi-gem"></i> 25</p>
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div> <!--need to update-->
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="setting/" >   Settings</a></div>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <ul class="nav nav-tabs mb-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#">Account Setting</a> <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#">Language Options</a>  <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#">Notification Preferences</a>  <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#">Privacy Settings</a>  <!-- need to update-->
-                        </li>
-                    </ul>
-                    <div class="text-center mt-4">
-                        <img src="profile-pic.png" class="rounded-circle" width="80" alt="Profile">
-                        <div>
-                            <button class="btn btn-custom">Upload Now</button>
-                            <button class="btn btn-outline-secondary">Remove Profile Picture</button>
+                <div class="col-md-10 mainpartpro">
+                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
+                    <div class="navbar user_det">
+                        <div class="tab active-tab" ><a href="#">Account Setting</a></div>  <!--need to update-->
+                        <div class="tab " ><a href="language">Language Options</a></div> <!--need to update-->
+                        <div class="tab " ><a href="notification_preferences">Notification Preferences</a></div> <!--need to update-->
+                        <div class="tab " ><a href="privacy">Privacy Settings</a></div> <!--need to update-->
+                    </div>
+
+                    
+                    <div class="profile-section">
+                        <div class="profile-wrapper">
+                            <div class="profile-picture">
+                                <img src="{% static 'images/profile_photo.png' %}" alt="Profile">
+                                <p>Edit</p>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="upload-btn">Upload New</button>
+                                <button class="remove-btn">Remove Profile Picture</button>
+                            </div>
                         </div>
                     </div>
-                    <form class="mt-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" value="HobbyHub">
+
+
+                    <div class="form-container">
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>First Name</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" value="HobbyHub">
+                            <div class="input-field">
+                                <label>Last Name</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">User ID</label>
-                                <input type="text" class="form-control" value="HobbyHub">
+                        </div>
+                
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>User_ID</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">Company ID</label>
-                                <input type="text" class="form-control" value="#HobbyHub">
+                            <div class="input-field">
+                                <label>Company_ID</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" value="infohobbyhub@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Email</label>
+                                <input type="email" value="infohobbyhub@gmail.com">
+                                <i><img src="{% static 'images/mail_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" value="******">
+                            <div class="input-field">
+                                <label>Password</label>
+                                <input type="password" value="*****">
+                                <i><img src="{% static 'images/hide_icon.png' %}" width="22"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">Date of Foundation</label>
-                                <input type="date" class="form-control" value="2000-11-17">
+                        </div>
+                
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Date of Birth</label>
+                                <input type="text" value="17 Nov, 2000">
+                                <i><img src="{% static 'images/calendar_icon.png' %}" width="17"></i>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label class="form-label">Gender</label>
-                                <select class="form-control">
+                            <div class="input-field">
+                                <label>Gender</label>
+                                <select>
                                     <option>Female</option>
                                     <option>Male</option>
                                     <option>Other</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <h6>Hobbies</h6>
-                            <div class="hobbies">
-                                <button>Photography</button>
-                                <button>Crafting</button>
-                                <button>Technology</button>
-                                <button>Music</button>
-                                <button>Cooking</button>
-                                <button>Writing</button>
-                                <button>Gardening</button>
-                                <button>Dance</button>
-                                <button>Outdoor Adventure</button>
-                                <button>Crafting</button>
-                            </div>
+                    </div>
+                    <div class="container hobbies-section">
+                        <h3>Hobbies</h3>
+                        <div class="hobbies-edit">
+                            <span class="hobby-clicked">Photography</span>
+                            <span class="hobby-clicked">Crafting</span>
+                            <span class="hobby-clicked">Technology</span>
+                            <span class="hobby-clicked">Music</span>
+                            <span class="hobby-clicked">Cooking</span>
+                            <span class="hobby-clicked">Writing</span>
+                            <span class="hobby-clicked">Gardening</span>
+                            <span class="hobby-clicked">Dance</span>
+                            <span class="hobby-clicked">Outdoor Adventure</span>
                         </div>
-                        <div class="text-center mt-4">
-                            <button class="btn btn-custom w-25">Update Profile</button>
-                        </div>
-                    </form>
+                    </div>
+                
+                    <!-- Update Profile Button -->
+                    <div class="update-btn-container">
+                        <button class="update-profile-btn">Update Profile</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+                
 
 
         <!-- Footer -->

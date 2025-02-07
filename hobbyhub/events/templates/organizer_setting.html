@@ -6,7 +6,6 @@
     <title>HobbyHub</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
@@ -50,57 +49,82 @@
                         <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
                         <h5>Ualkhan Ayauym</h5>
                         <p><i class="bi bi-gem"></i> 25</p>
-                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
-                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="setting/" >   Settings</a></div> <!--need to update-->
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="#" >   Settings</a></div>
                     </div>
                 </div>
                 <div class="col-md-10 mainpartpro">
                     <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
                     <div class="navbar user_det">
-                        <div class="tab" ><a href="user_profile">Your Information</a></div>  <!--need to update-->
-                        <div class="tab tab_act_ach" ><a href="user_activities">Your Activities</a></div> <!--need to update-->
-                        <div class="tab active-tab" ><a href="#">Achievements</a></div> <!--need to update-->
+                        <div class="tab active-tab" ><a href="#">Account Setting</a></div>  <!--need to update-->
+                        <div class="tab " ><a href="language">Language Options</a></div> <!--need to update-->
+                        <div class="tab " ><a href="notification_preferences">Notification Preferences</a></div> <!--need to update-->
+                        <div class="tab " ><a href="privacy">Privacy Settings</a></div> <!--need to update-->
+                    </div>
+
+                    
+                    <div class="profile-section">
+                        <div class="profile-wrapper">
+                            <div class="profile-picture">
+                                <img src="{% static 'images/profile_photo.png' %}" alt="Profile">
+                                <p>Edit</p>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="upload-btn">Upload New</button>
+                                <button class="remove-btn">Remove Profile Picture</button>
+                            </div>
+                        </div>
                     </div>
 
 
-
-                    <div class="earned-activity-container">
-                        <!-- Activity 1 -->
-                        <div class="earned-activity-box">
-                            <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 7</p>
-                            <img src="{% static 'images/cook_chal.png' %}" alt="Cooking Challenge" class="earned-activity-image">
-                            <h3>Cooking Challenge</h3>
-                            <p class="earned-activity-category">Cooking</p>
-                            <p class="earned-activity-location">
-                                <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Office Kitchen
-                            </p>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Company Name</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Company_ID</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                        </div>
+            
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Email</label>
+                                <input type="email" value="infohobbyhub@gmail.com">
+                                <i><img src="{% static 'images/mail_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Password</label>
+                                <input type="password" value="*****">
+                                <i><img src="{% static 'images/hide_icon.png' %}" width="22"></i>
+                            </div>
                         </div>
                 
-                        <!-- Activity 2 -->
-                        <div class="earned-activity-box">
-                            <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 8</p>
-                            <img src="{% static 'images/creative_writing.jpg' %}" alt="Creative Writing Club" class="earned-activity-image">
-                            <h3>Creative Writing Club</h3>
-                            <p class="earned-activity-category">Writing</p>
-                            <p class="earned-activity-location">
-                                <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Library Lounge
-                            </p>
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Date of Foundation</label>
+                                <input type="text" value="17 Nov, 2000">
+                                <i><img src="{% static 'images/calendar_icon.png' %}" width="17"></i>
+                            </div>
+                           
                         </div>
+                    </div>
+                    
                 
-                        <!-- Activity 3 -->
-                        <div class="earned-activity-box">
-                            <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 10</p>
-                            <img src="{% static 'images/origami.jpg' %}" alt="Origami Workshop" class="earned-activity-image">
-                            <h3>Origami Workshop</h3>
-                            <p class="earned-activity-category">Crafting</p>
-                            <p class="earned-activity-location">
-                                <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Art Studio
-                            </p>
-                        </div>
+                    <!-- Update Profile Button -->
+                    <div class="update-btn-container">
+                        <button class="update-profile-btn">Update Profile</button>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
+    </div>
+                
+
 
         <!-- Footer -->
     <footer class="footer">

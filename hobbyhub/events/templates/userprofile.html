@@ -6,9 +6,11 @@
     <title>HobbyHub</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
-    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         var eventsData = {{ events_data|safe }};
@@ -42,78 +44,89 @@
         </section>
 
         <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="row  mainpartpro">
+                <div class="col-md-2">
                     <div class="sidebar p-4">
                         <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
                         <h5>Ualkhan Ayauym</h5>
                         <p><i class="bi bi-gem"></i> 25</p>
-                        <button class="btn btn-light w-100 mb-2">Profile Info</button>
-                        <button class="btn btn-light w-100">Settings</button>
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="setting/" >   Settings</a></div>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid rounded mb-3" alt="Banner">
-                    <ul class="nav nav-tabs mb-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#info">Your Information</a> <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="user_activities">Your Activities</a>  <!-- need to update-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="user_achievements">Achievements</a>  <!-- need to update-->
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="info" class="tab-pane fade show active">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" value="HobbyHub">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" value="@HobbyHub">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">User_ID</label>
-                                    <input type="text" class="form-control" value="HobbyHub">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Company_ID</label>
-                                    <input type="text" class="form-control" value="@HobbyHub">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" value="infohobbyhub@gmail.com">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" value="******">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" value="2000-11-17">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Gender</label>
-                                    <select class="form-control">
-                                        <option>Female</option>
-                                        <option>Male</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
+                <div class="col-md-10 mainpartpro">
+                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
+                    <div class="navbar user_det">
+                        <div class="tab active-tab" ><a href="#">Your Information</a></div>  <!--need to update-->
+                        <div class="tab tab_act" ><a href="user_activities">Your Activities</a></div> <!--need to update-->
+                        <div class="tab " ><a href="user_achievements">Achievements</a></div> <!--need to update-->
+                    </div>
+                
+                    <!-- Form Section -->
+                    <div class="form-container">
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>First Name</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Last Name</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
                             </div>
                         </div>
-                        <div id="hobbies" class="mt-4">
-                            <h4>Your Hobbies</h4>
-                            <span class="hobby-badge">Photography</span>
-                            <span class="hobby-badge">Crafting</span>
-                            <span class="hobby-badge">Technology</span>
-                            <span class="hobby-badge">Music</span>
-                            <span class="hobby-badge">Cooking</span>
+                
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>User_ID</label>
+                                <input type="text" value="HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Company_ID</label>
+                                <input type="text" value="@HobbyHub">
+                                <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Email</label>
+                                <input type="email" value="infohobbyhub@gmail.com">
+                                <i><img src="{% static 'images/mail_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Password</label>
+                                <input type="password" value="*****">
+                                <i><img src="{% static 'images/hide_icon.png' %}" width="22"></i>
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label>Date of Birth</label>
+                                <input type="text" value="17 Nov, 2000">
+                                <i><img src="{% static 'images/calendar_icon.png' %}" width="17"></i>
+                            </div>
+                            <div class="input-field">
+                                <label>Gender</label>
+                                <select>
+                                    <option>Female</option>
+                                    <option>Male</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Hobbies Section -->
+                    <div class="hobbies">
+                        <span>Your Hobbies</span>
+                        <button class="hobby-btn">Photography</button>
+                        <button class="hobby-btn">Crafting</button>
+                        <button class="hobby-btn">Technology</button>
+                        <button class="hobby-btn">Music</button>
+                        <button class="hobby-btn">Cooking</button>
                     </div>
                 </div>
             </div>

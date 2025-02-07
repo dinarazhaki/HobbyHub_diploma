@@ -137,3 +137,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderCalendar(selectedDate);
 });
+
+document.querySelectorAll('.hobby-clicked').forEach(hobby => {
+    hobby.addEventListener('click', function() {
+        this.classList.toggle('active'); // Toggle the "active" class
+    });
+});
+
+document.querySelectorAll('.language-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.language-btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+    });
+});

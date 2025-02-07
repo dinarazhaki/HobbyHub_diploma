@@ -6,6 +6,7 @@
     <title>HobbyHub</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
@@ -41,56 +42,79 @@
         </nav>
         </section>
 
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Sidebar -->
-                <div class="col-md-3 sidebar text-center">
-                    <img src="profile.png" alt="User Profile">
-                    <h4>Ualikhan Ayalym</h4>
-                    <p>⭐ 25</p>
-                    <button class="btn btn-light">Profile Info</button>
-                    <button class="btn btn-light mt-2">Settings</button>
+        <div class="container mt-4">
+            <div class="row  mainpartpro">
+                <div class="col-md-2">
+                    <div class="sidebar p-4">
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                        <h5>Ualkhan Ayauym</h5>
+                        <p><i class="bi bi-gem"></i> 25</p>
+                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div><!--need to update-->
+                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="" >   Settings</a></div>
+                    </div>
                 </div>
+                <div class="col-md-10 mainpartpro">
+                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
+                    <div class="navbar user_det">
+                        <div class="tab " ><a href="#">Account Setting</a></div>  <!--need to update-->
+                        <div class="tab " ><a href="language">Language Options</a></div> <!--need to update-->
+                        <div class="tab active-tab " ><a href="notification_preferences">Notification Preferences</a></div> <!--need to update-->
+                        <div class="tab " ><a href="privacy">Privacy Settings</a></div> <!--need to update-->
+                    </div>
     
-                <!-- Main Content -->
-                <div class="col-md-9 p-4">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Account Setting</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Language Options</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Notification Preferences</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Privacy Settings</a>
-                        </li>
-                    </ul>
+                
     
-                    <div class="card p-4 mt-3">
-                        <h4>Notification Preferences</h4>
-                        <p>Get emails to find out what is going on when you are not online.</p>
-    
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="sms" checked>
-                            <label class="form-check-label" for="sms">SMS Notifications</label>
+                    <div class="notification-container">
+                        <h2>Notification preferences</h2>
+                        <p class="description">
+                            Get emails to find out what is going on when you are not online. You can turn them off anytime.
+                        </p>
+                
+                        <h3>Notify me when</h3>
+                        <p class="sub-description">
+                            Receive the latest news, updates, and industry tutorials from us.
+                        </p>
+                
+                        <div class="notification-option">
+                            <input type="checkbox" id="sms" checked>
+                            <label for="sms">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>SMS Notifications</strong>
+                                <p>News about product and feature updates.</p>
+                                </div>
+                            </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="reminders">
-                            <label class="form-check-label" for="reminders">Reminders and Activities</label>
+                
+                        <div class="notification-option">
+                            <input type="checkbox" id="reminders">
+                            <label for="reminders">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>Reminders and Activities</strong>
+                                <p>Tips on getting more out of Courier.</p>
+                                </div>
+                                
+                            </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="email">
-                            <label class="form-check-label" for="email">Email Notifications</label>
+                
+                        <div class="notification-option">
+                            <input type="checkbox" id="email">
+                            <label for="email">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>Email Notifications</strong>
+                                    <p>Data results to help you better understand your users.</p>
+                                </div>
+                            </label>
                         </div>
-    
-                        <button class="btn btn-save mt-3">Save</button>
+                
+                        <button class="save-btn">Save</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
         <!-- Footer -->

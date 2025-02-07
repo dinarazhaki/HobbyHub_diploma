@@ -26,7 +26,6 @@ def user_view(request):
 def user_profile(request):  #!!!!need to update
     return render(request,'userprofile.html')
 
-
 def profile_user_act(request):  #!!!!need to update
     return render(request,'profile_user_act.html')
 
@@ -44,3 +43,10 @@ def user_notification(request):  #!!!!need to update
 
 def user_privacy(request):  #!!!!need to update
     return render(request,'privacy_settings.html')
+
+def organizer_profile(request):  #!!!!need to update
+    return render(request,'organizerprofile.html')
+
+
+def organizer_setting(request):  #!!!!need to update
+    return render(request,'organizer_setting.html')
