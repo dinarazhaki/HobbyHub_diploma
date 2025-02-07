@@ -1,0 +1,88 @@
+
+.sidebar {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+.nav-tabs .nav-link.active {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: white;
+    border-radius: 10px;
+}
+.hobby-badge {
+    background: white;
+    border: 2px solid #ff416c;
+    color: #ff416c;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+
+.points {
+    font-size: 1.2rem;
+}
+.banner img {
+    height: 150px;
+    object-fit: cover;
+}
+.activity-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.activity-card:hover {
+    transform: scale(1.05);
+}
+
+
+
+.sidebar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.tab-section {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+.achievement-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+.tab-section {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.form-control {
+    border-radius: 10px;
+}
+.btn-custom {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border-radius: 10px;
+}
+.hobbies button {
+    border: 1px solid #ff4b2b;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin: 5px;
+    background: white;
+    color: #ff4b2b;
+}

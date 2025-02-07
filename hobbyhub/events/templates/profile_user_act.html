@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HobbyHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var eventsData = {{ events_data|safe }};
+    </script>
+    
+    <script src="{% static 'js/user.js' %}"></script>
+    
+</head>
+<body>
+
+    <!-- Header -->
+    <section class="header">
+        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Challenges</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Leaderboard</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Profile Lookup</a></li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <button class="btn btn-gradient">Profile</button>
+            </div>
+        </nav>
+        </section>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 sidebar p-3 text-white text-center">
+                    <img src="profile.png" class="rounded-circle mb-3" width="80" height="80" alt="Profile">
+                    <h5>Ualikhan Ayauym</h5>
+                    <p class="points">⭐ 25</p>
+                    <button class="btn btn-light w-100 mb-2">Profile Info</button>
+                    <button class="btn btn-warning w-100">Settings</button>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="col-md-9">
+                    <!-- Banner -->
+                    <div class="banner">
+                        <img src="banner.jpg" class="w-100 rounded" alt="Banner">
+                    </div>
+                    
+                    <!-- Navigation Tabs -->
+                    <ul class="nav nav-tabs mt-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#info">Your Information</a> <!-- need to update-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Your Activities</a>  <!-- need to update-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Achievements</a>  <!-- need to update-->
+                        </li>
+                    </ul>
+                    
+                    <!-- Activities -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="card activity-card">
+                                <img src="photo.jpg" class="card-img-top" alt="Photography Walk">
+                                <div class="card-body">
+                                    <h6>Photography Walk</h6>
+                                    <p>📅 May 10, 2025<br>📍 Botanical Garden</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card activity-card">
+                                <img src="origami.jpg" class="card-img-top" alt="Origami Workshop">
+                                <div class="card-body">
+                                    <h6>Origami Workshop</h6>
+                                    <p>📅 June 9, 2025<br>📍 Art Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card activity-card">
+                                <img src="coding.jpg" class="card-img-top" alt="Coding for Fun">
+                                <div class="card-body">
+                                    <h6>Coding for Fun</h6>
+                                    <p>📅 May 15, 2025<br>📍 Tech Club</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card activity-card">
+                                <img src="cooking.jpg" class="card-img-top" alt="Cooking Challenge">
+                                <div class="card-body">
+                                    <h6>Cooking Challenge</h6>
+                                    <p>📅 May 28, 2025<br>📍 Office Kitchen</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card activity-card">
+                                <img src="guitar.jpg" class="card-img-top" alt="Guitar Jam">
+                                <div class="card-body">
+                                    <h6>Guitar Jam</h6>
+                                    <p>📅 May 25, 2025<br>📍 Art Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+  
+</body>
+</html>
+
+
