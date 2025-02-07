@@ -1,4 +1,6 @@
-
+.container{
+    margin-top: 200px;
+}
 .sidebar {
     background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
     color: white;
@@ -14,7 +16,7 @@
 .hobby-badge {
     background: white;
     border: 2px solid #ff416c;
-    color: #ff416c;
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
     padding: 5px 15px;
     border-radius: 20px;
     margin: 5px;
