@@ -50,3 +50,12 @@ def organizer_profile(request):  #!!!!need to update
 
 def organizer_setting(request):  #!!!!need to update
     return render(request,'organizer_setting.html')
+
+def sign_in(request):
+    return render(request, 'sign_in.html')   #!!! update
+
+def signup(request):
+    return render(request, 'sign_up.html')  #!!! update
+
+def employees(request):
+    return render(request, 'employees.html')  #!!! update

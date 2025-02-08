@@ -14,5 +14,8 @@ urlpatterns = [
     path('user_profile/privacy/',user_privacy), #!!!!need to update
     path('organizer_profile/',organizer_profile), #!!!!need to update
     path('organizer_profile/setting/',organizer_setting), #!!!!need to update
+     path('sign_in/', sign_in, name='sign_in'),
+    path('sign_up/', signup, name='sign_up'),
+    path('employees/', employees, name='employees'),
     
 ]
