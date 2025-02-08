@@ -150,3 +150,11 @@ document.querySelectorAll('.language-btn').forEach(button => {
         this.classList.add('active');
     });
 });
+
+
+function makeEditable() {
+    let input = document.getElementById('dobInput');
+    input.type = 'date';  // Change input type to date
+    input.readOnly = false;  // Allow editing
+    input.focus();  // Focus on input
+}
