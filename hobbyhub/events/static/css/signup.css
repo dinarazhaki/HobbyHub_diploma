@@ -6,6 +6,9 @@ body {
     font-family: 'Gilroy-Medium', sans-serif;
     background: #f8f8f8;
 }
+h1,h2,p{
+    cursor: default;
+}
 
 /* Container */
 .container {
