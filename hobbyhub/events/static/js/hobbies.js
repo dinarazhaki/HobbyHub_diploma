@@ -4,6 +4,8 @@ const hobbies = [
 ];
 
 const hobbyList = document.getElementById('hobby-list');
+const skipButton = document.querySelector('.skip-btn');
+const continueButton = document.querySelector('.continue-btn');
 
 hobbies.forEach(hobby => {
     const btn = document.createElement('button');
@@ -13,4 +15,11 @@ hobbies.forEach(hobby => {
         btn.classList.toggle('selected');
     });
     hobbyList.appendChild(btn);
+});
+
+skipButton.addEventListener('click', () => {
+    window.location.href = "/sign_in/"; 
+});
+continueButton.addEventListener('click', () => {
+    window.location.href = "/sign_in/"; 
 });

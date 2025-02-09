@@ -31,8 +31,8 @@
             </div>
             
             <p class="or-divider">OR</p>
-
-            <form id="signup-form", onsubmit="return validateForm()">
+            <p id="msg" style="color: red;"></span>
+            <form id="signup-form">
                 {% csrf_token %}
                 <div class="name-fields">
                     <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
@@ -41,15 +41,11 @@
                 </div>
                 <div class="name-fields">
                     <input type="text" id="nickname" name="nickname" placeholder="Nickname" required >
-                    <span id="user_ID_msg" style="color: red;"></span>
-                    <input type="number" id="company_ID" name="company_ID" placeholder="Company ID" required min="100000">
-                    <span id="company_ID_msg" style="color: red;"></span>
+                    <input type="number" id="company_ID" name="company_ID" placeholder="Company ID" required>
                 </div>
 
                 <input type="email" id="email" name="email" placeholder="Email address" required>
-                <span id="email_msg" style="color: red;"></span>
                 <input type="password" id="password" name="password" placeholder="Password" required>
-                <span id="password_msg" style="color: red;"></span><br>
                 <button type="submit" class="btn-gradient" >Sign Up</button>
             </form>
 
