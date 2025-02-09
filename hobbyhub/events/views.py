@@ -59,3 +59,6 @@ def signup(request):
 
 def employees(request):
     return render(request, 'employees.html')  #!!! update
+
+def hobbies(request):
+    return render(request, 'hobbies.html')  #!!! update

@@ -17,5 +17,5 @@ urlpatterns = [
      path('sign_in/', sign_in, name='sign_in'),
     path('sign_up/', signup, name='sign_up'),
     path('employees/', employees, name='employees'),
-    
+    path('hobbies/', hobbies, name='hobbies'),
 ]
