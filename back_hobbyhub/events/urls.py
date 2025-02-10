@@ -36,5 +36,5 @@ urlpatterns = [
     path('deny_employee/', deny_employee, name='deny_employee'),
     path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
     path('hobbies/', hobbies, name='hobbies'),
-    path('save-hobbies/', save_hobbies, name='save_hobbies'),
+    # path('save-hobbies/', save_hobbies, name='save_hobbies'),
 ]
