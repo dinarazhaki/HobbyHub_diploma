@@ -121,11 +121,13 @@
                     <!-- Hobbies Section -->
                     <div class="hobbies">
                         <span>Your Hobbies</span>
-                        <button class="hobby-btn">Photography</button>
-                        <button class="hobby-btn">Crafting</button>
-                        <button class="hobby-btn">Technology</button>
-                        <button class="hobby-btn">Music</button>
-                        <button class="hobby-btn">Cooking</button>
+                        {% if user.hobbies.all %}
+                            {% for hobby in user.hobbies.all %}
+                                <button class="hobby-btn">{{ hobby.name }}</button>
+                            {% endfor %}
+                        {% else %}
+                            <p>No hobbies selected.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

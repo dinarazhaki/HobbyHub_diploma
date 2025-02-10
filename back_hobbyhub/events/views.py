@@ -11,8 +11,7 @@ from django.core.files.base import ContentFile
 from django.utils import timezone
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
-import os
-import json
+
 
 
 
@@ -29,8 +28,8 @@ def user_profile(request):
     user = Employee.objects.filter(nickname=nickname).first()
     if not user:
         return redirect("sign_in")
-
-    return render(request, "userprofile.html", {"user": user})
+    hobbies = user.hobbies.all() 
+    return render(request, "userprofile.html", {"user": user, "hobbies": hobbies})
 
 @login_required
 def update_user_profile(request):
@@ -43,45 +42,43 @@ def update_user_profile(request):
         return redirect("sign_in")
 
     if request.method == "POST":
-        # Обновление текстовых данных
         user.name = request.POST.get("name", user.name)
         user.last_name = request.POST.get("last_name", user.last_name)
         user.mail = request.POST.get("mail", user.mail)
         user.gender = request.POST.get("gender", user.gender)
         user.date_of_birth = request.POST.get("date_of_birth", user.date_of_birth)
-
-        # Обновление пароля
         new_password = request.POST.get("password")
         if new_password:
             user.password = make_password(new_password)
 
-        # Обновление профиля (фото)
         if "profile_photo" in request.FILES:
             image = request.FILES["profile_photo"]
             file_path = f"profile_photos/{nickname}_{image.name}"
 
-            # Удаляем старое фото перед добавлением нового
             if user.profile_photo and default_storage.exists(user.profile_photo.path):
                 default_storage.delete(user.profile_photo.path)
 
             user.profile_photo.save(file_path, ContentFile(image.read()))
+
+        selected_hobby_ids = request.POST.getlist('hobbies[]')
+        user.hobbies.set(Hobby.objects.filter(id__in=selected_hobby_ids))
 
         user.save()
         return redirect("user_setting")
 
     return redirect("user_setting")
 
-
-
 def user_setting(request):
     nickname=request.session.get("nickname")
+    all_hobbies = Hobby.objects.all()
+
     if not nickname:
         return redirect("sign_in")
 
     user = Employee.objects.filter(nickname=nickname).first()
-    if not nickname:
+    if not user:
         return redirect("sign_in")
-    return render(request, 'user_setting.html', {"user":user})
+    return render(request, 'user_setting.html', {"user":user, 'all_hobbies': all_hobbies})
 
 @login_required
 def remove_user_profile_photo(request):
@@ -184,10 +181,7 @@ def sign_in(request):
                 else:
                     # Если сотрудник одобрен, перенаправляем на профиль
                     request.session["nickname"] = employee.nickname
-                    if employee.hobbies_of_users.exists():
-                        return redirect("user_profile")
-                    else:
-                        return redirect("hobbies")
+                    return redirect("user_profile")
 
         # В случае неверных данных показываем сообщение об ошибке
         messages.error(request, "Invalid credentials. Please try again.")
@@ -344,24 +338,3 @@ def organizer_profile(request):
         return redirect("sign_in")
 
     return render(request, "organizerprofile.html", {"company": company})
-
-
-
-@csrf_exempt
-def save_hobbies(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        hobbies = data.get('hobbies', [])
-        
-        user = request.user  # Assuming authentication is used
-        employee = Employee.objects.get(nickname=user.username)
-
-        # Clear existing hobbies and add new ones
-        employee.hobbies_of_users.clear()
-        for hobby_name in hobbies:
-            hobby, created = Hobby.objects.get_or_create(name=hobby_name)
-            employee.hobbies_of_users.add(hobby)
-
-        return render(request, "userprofile.html", {"success": True})
-
-    return render(request, "userprofile.html", {"success": False})
