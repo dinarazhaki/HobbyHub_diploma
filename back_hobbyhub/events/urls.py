@@ -35,5 +35,5 @@ urlpatterns = [
     path('approve_employee/', approve_employee, name='approve_employee'),
     path('deny_employee/', deny_employee, name='deny_employee'),
     path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
-
+    path('hobbies/', hobbies, name='hobbies'),
 ]

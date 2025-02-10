@@ -142,3 +142,6 @@ input, select, option {
     color: #ffbf00;
     text-decoration: underline;
 }
+.hidden{
+    display: none;
+}

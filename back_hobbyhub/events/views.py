@@ -222,6 +222,8 @@ def user_notification(request):
 def user_privacy(request):
     return render(request, 'privacy_settings.html')
 
+def hobbies(request):
+    return render(request, 'hobbies.html')
 
 
 
