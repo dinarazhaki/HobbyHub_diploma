@@ -62,14 +62,14 @@
                         </div>
                         <div class="profile-actions mt-2">
                             <input type="file" name="profile_photo" accept="image/*" class="form-control mb-2">
-                            <button type="submit" class="upload-btn btn btn-primary btn-sm">Upload New</button>
+                            <button type="submit" class="upload-btn btn btn-primary btn-sm" style="width: 150px; height: 50px; margin-top: 5px">Upload New</button>
                         </div>
                     </div>
                 </form>
                 
                 <form method="POST" action="{% url 'remove_organizer_profile_photo' %}">
                     {% csrf_token %}
-                    <button type="submit" class="remove-btn btn btn-danger btn-sm">Remove Profile Picture</button>
+                    <button type="submit" class="remove-btn btn btn-danger btn-sm " style="margin-top: -95px; margin-left: 630px;width: 200px; height: 50px;">Remove Profile Picture</button>
                 </form>
                 
                 <form method="POST" action="{% url 'update_organizer_profile' %}">

@@ -338,3 +338,5 @@ def organizer_profile(request):
         return redirect("sign_in")
 
     return render(request, "organizerprofile.html", {"company": company})
+
+
