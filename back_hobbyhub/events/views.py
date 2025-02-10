@@ -362,6 +362,6 @@ def save_hobbies(request):
             hobby, created = Hobby.objects.get_or_create(name=hobby_name)
             employee.hobbies_of_users.add(hobby)
 
-        return JsonResponse({"success": True})
+        return render(request, "userprofile.html", {"success": True})
 
-    return JsonResponse({"success": False}, status=400)
+    return render(request, "userprofile.html", {"success": False})

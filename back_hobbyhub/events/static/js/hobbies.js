@@ -60,7 +60,7 @@ continueButton.addEventListener('click', () => {
         if (data.success) {
             window.location.href = "/user_profile/";
         } else {
-            alert("Error saving hobbies. Try again.");
+            window.location.href = "/user_profile/";
         }
     });
 });

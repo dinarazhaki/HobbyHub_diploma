@@ -11,8 +11,8 @@ urlpatterns = [
     # Профиль пользователя
     path('user_profile/', login_required(user_profile), name='user_profile'),
     path('user_profile/setting/', login_required(user_setting), name='user_setting'),
-    path("user_profile/update-settings/", login_required(update_user_profile), name="update_user_profile"),
-    path("user_profile/remove_profile_photo/", login_required(remove_user_profile_photo), name="remove_user_profile_photo"),
+    path('user_profile/update-settings/', login_required(update_user_profile), name="update_user_profile"),
+    path('user_profile/remove_profile_photo/', login_required(remove_user_profile_photo), name="remove_user_profile_photo"),
 
     path('user_profile/activities/', login_required(profile_user_act), name='profile_user_act'),
     path('user_profile/achievements/', login_required(user_achievements), name='user_achievements'),
@@ -23,8 +23,8 @@ urlpatterns = [
     # Профиль организатора
     path('organizer_profile/', login_required(organizer_profile), name='organizer_profile'),
     path('organizer_profile/settings/', login_required(organizer_settings), name='organizer_settings'),
-    path("organizer/update-settings/", login_required(update_organizer_profile), name="update_organizer_profile"),
-    path("organizer/remove_profile_photo/", login_required(remove_organizer_profile_photo), name="remove_organizer_profile_photo"),
+    path('organizer/update-settings/', login_required(update_organizer_profile), name="update_organizer_profile"),
+    path('organizer/remove_profile_photo/', login_required(remove_organizer_profile_photo), name="remove_organizer_profile_photo"),
 
     # Аутентификацияa
     path('sign_in/', sign_in, name='sign_in'),
