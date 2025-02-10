@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 import os
-
+import json
 
 
 
@@ -184,7 +184,10 @@ def sign_in(request):
                 else:
                     # Если сотрудник одобрен, перенаправляем на профиль
                     request.session["nickname"] = employee.nickname
-                    return redirect("user_profile")
+                    if employee.hobbies_of_users.exists():
+                        return redirect("user_profile")
+                    else:
+                        return redirect("hobbies")
 
         # В случае неверных данных показываем сообщение об ошибке
         messages.error(request, "Invalid credentials. Please try again.")
@@ -341,3 +344,24 @@ def organizer_profile(request):
         return redirect("sign_in")
 
     return render(request, "organizerprofile.html", {"company": company})
+
+
+
+@csrf_exempt
+def save_hobbies(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        hobbies = data.get('hobbies', [])
+        
+        user = request.user  # Assuming authentication is used
+        employee = Employee.objects.get(nickname=user.username)
+
+        # Clear existing hobbies and add new ones
+        employee.hobbies_of_users.clear()
+        for hobby_name in hobbies:
+            hobby, created = Hobby.objects.get_or_create(name=hobby_name)
+            employee.hobbies_of_users.add(hobby)
+
+        return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False}, status=400)
