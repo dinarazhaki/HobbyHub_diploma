@@ -60,9 +60,9 @@
                 <div class="col-md-10 mainpartpro">
                     <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
                     <div class="navbar user_det">
-                        <div class="tab active-tab" ><a href="#">Your Information</a></div>  <!--need to update-->
-                        <div class="tab tab_act" ><a href="user_activities">Your Activities</a></div> <!--need to update-->
-                        <div class="tab " ><a href="user_achievements">Achievements</a></div> <!--need to update-->
+                        <div class="tab active-tab" ><a href="{% url 'user_profile' %}">Your Information</a></div> 
+                        <div class="tab tab_act" ><a href="{% url 'profile_user_act' %}">Your Activities</a></div> 
+                        <div class="tab" ><a href="{% url 'user_achievements' %}">Achievements</a></div>
                     </div>
                 
                     <!-- Form Section -->

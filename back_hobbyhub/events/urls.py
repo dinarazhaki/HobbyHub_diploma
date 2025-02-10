@@ -16,9 +16,9 @@ urlpatterns = [
 
     path('user_profile/activities/', login_required(profile_user_act), name='profile_user_act'),
     path('user_profile/achievements/', login_required(user_achievements), name='user_achievements'),
-    path('user_profile/language/', login_required(user_language), name='user_language'),
-    path('user_profile/notification_preferences/', login_required(user_notification), name='user_notification'),
-    path('user_profile/privacy/', login_required(user_privacy), name='user_privacy'),
+    path('user_profile/setting/language/', login_required(user_language), name='user_language'),
+    path('user_profile/setting/notification_preferences/', login_required(user_notification), name='user_notification'),
+    path('user_profile/setting/privacy/', login_required(user_privacy), name='user_privacy'),
 
     # Профиль организатора
     path('organizer_profile/', login_required(organizer_profile), name='organizer_profile'),

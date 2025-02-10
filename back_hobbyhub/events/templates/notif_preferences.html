@@ -46,20 +46,25 @@
             <div class="row  mainpartpro">
                 <div class="col-md-2">
                     <div class="sidebar p-4">
-                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
-                        <h5>Ualkhan Ayauym</h5>
+                        {% if user.profile_photo %}
+                            <img src="{{ user.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80" alt="Profile">
+                        {% else %}
+                            <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                        {% endif %}                 
+                        <h5>{{ user.name }}</h5>
                         <p><i class="bi bi-gem"></i> 25</p>
-                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div><!--need to update-->
-                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="" >   Settings</a></div>
+                            <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                            <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="{% url 'user_setting' %}" >   Settings</a></div>
                     </div>
                 </div>
                 <div class="col-md-10 mainpartpro">
                     <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
                     <div class="navbar user_det">
-                        <div class="tab " ><a href="#">Account Setting</a></div>  <!--need to update-->
-                        <div class="tab " ><a href="language">Language Options</a></div> <!--need to update-->
-                        <div class="tab active-tab " ><a href="notification_preferences">Notification Preferences</a></div> <!--need to update-->
-                        <div class="tab " ><a href="privacy">Privacy Settings</a></div> <!--need to update-->
+                        <div class="tab " ><a href="{% url 'user_setting' %}">Account Setting</a></div>  <!--need to update-->
+
+                    <div class="tab"><a href="{% url 'user_language' %}">Language Options</a></div>
+                    <div class="tab active-tab"><a href="{% url 'user_notification' %}">Notification Preferences</a></div>
+                    <div class="tab"><a href="{% url 'user_privacy' %}">Privacy Settings</a></div>
                     </div>
     
                 
