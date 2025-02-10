@@ -38,24 +38,23 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            <form id="signup-form" method="POST" action="{% url 'sign_up' %}">
+            <form id="signup-form">
                 {% csrf_token %}
                 <div class="name-fields">
-                    <input type="text" id="nickname" name="nickname" placeholder="Nickname" required>
-                    <span id="user_ID_msg" style="color: red;"></span>
+                    <input type="text" id="nickname" name="nickname" placeholder="Nickname" required >
+                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth" required>
                 </div>
                 <div class="name-fields">
                     <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
                     <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+
                 </div>
-                <div class="name-fields">
-                    <input type="text" id="number" name="number" placeholder="Phone Number" required>
-                </div>
-                <div class="name-fields">
-                    <label for="date_of_birth">Date of Birth</label>
-                    <input type="date" id="date_of_birth" name="date_of_birth" required>
-                </div>
-                <div class="name-fields">
+                <div class="name-fields options">
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                     <select id="company_id" name="company_id" required>
                         <option value="" disabled selected>Select Company ID</option>
                         {% for company in companies %}
@@ -63,18 +62,10 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="name-fields">
-                    <select id="gender" name="gender" required>
-                        <option value="" disabled selected>Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
+
                 <input type="email" id="email" name="email" placeholder="Email address" required>
-                <span id="email_msg" style="color: red;"></span>
                 <input type="password" id="password" name="password" placeholder="Password" required>
-                <span id="password_msg" style="color: red;"></span><br>
-                <button type="submit" class="btn-gradient">Sign Up</button>
+                <button type="submit" class="btn-gradient" >Sign Up</button>
             </form>
             
             <p class="terms-text">By signing up, I agree to HobbyHub’s <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>

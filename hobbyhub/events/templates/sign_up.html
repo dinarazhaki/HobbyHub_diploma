@@ -35,13 +35,26 @@
             <form id="signup-form">
                 {% csrf_token %}
                 <div class="name-fields">
+                    <input type="text" id="nickname" name="nickname" placeholder="Nickname" required >
+                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth" required>
+                </div>
+                <div class="name-fields">
                     <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
                     <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
 
                 </div>
                 <div class="name-fields">
-                    <input type="text" id="nickname" name="nickname" placeholder="Nickname" required >
-                    <input type="number" id="company_ID" name="company_ID" placeholder="Company ID" required>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <select id="company_id" name="company_id" required>
+                        <option value="" disabled selected>Select Company ID</option>
+                        {% for company in companies %}
+                            <option value="{{ company.company_id }}">{{ company.company_id }} - {{ company.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <input type="email" id="email" name="email" placeholder="Email address" required>

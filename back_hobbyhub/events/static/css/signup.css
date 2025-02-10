@@ -6,6 +6,9 @@ body {
     font-family: 'Gilroy-Medium', sans-serif;
     background: #f8f8f8;
 }
+h1,h2,p{
+    cursor: default;
+}
 
 /* Container */
 .container {
@@ -83,21 +86,25 @@ h2 span {
 }
 
 /* Form */
-.signup-form {
+form{
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
+    gap:10px;
 }
 
 .name-fields {
     display: flex;
-    flex:1;
-    min-width: 0;
-    width:100%;
-    gap: 10px;
+    gap:5px;
+    width:max-content;
 }
 
-input {
+input, select, option {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+#gender, #company_ID{
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
