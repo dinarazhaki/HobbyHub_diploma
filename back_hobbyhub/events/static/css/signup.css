@@ -90,25 +90,22 @@ form{
     display: flex;
     flex-direction: column;
     gap:10px;
+    justify-content: center;
 }
 
 .name-fields {
     display: flex;
     gap:5px;
-    width:max-content;
+    width: 100%;
+    width: max-content;
 }
 
-input, select, option {
+input, select{
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-}
-#gender, #company_ID{
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
+    box-sizing: border-box;
 }
 
 .btn-gradient {

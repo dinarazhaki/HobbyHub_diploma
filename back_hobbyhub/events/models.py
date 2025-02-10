@@ -35,6 +35,12 @@ class Company(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.company_id)
+
+class Hobby(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="Hobby Name")
+
+    def __str__(self):
+        return self.name
     
 # Модель сотрудника
 class Employee(models.Model):
@@ -56,6 +62,7 @@ class Employee(models.Model):
     password = models.CharField(max_length=255, verbose_name="Password")
     is_approved = models.BooleanField(default=False, verbose_name="Approved")
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, verbose_name="Profile Photo")
+    hobbies = models.ManyToManyField(Hobby, blank=True, related_name='employees')
 
     def save(self, *args, **kwargs):
         if not self.password.startswith('pbkdf2_sha256$'):
@@ -65,6 +72,7 @@ class Employee(models.Model):
     def __str__(self):
         return self.nickname
     
+
     
 # Модель события
 class Event(models.Model):

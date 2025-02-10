@@ -85,7 +85,7 @@
                         <button type="submit" class="remove-btn btn btn-danger btn-sm">Remove Profile Picture</button>
                     </form>
 
-                    <form method="POST" action="{% url 'update_user_profile' %}">
+                    <form method="POST" action="{% url 'update_user_profile' %}" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="form-container">
@@ -141,19 +141,15 @@
                             </div>
                             
                         </div>
-                        <div class="container hobbies-section">
-                            <h3>Hobbies</h3>
-                            <div class="hobbies-edit">
-                                <span class="hobby-clicked">Photography</span>
-                                <span class="hobby-clicked">Crafting</span>
-                                <span class="hobby-clicked">Technology</span>
-                                <span class="hobby-clicked">Music</span>
-                                <span class="hobby-clicked">Cooking</span>
-                                <span class="hobby-clicked">Writing</span>
-                                <span class="hobby-clicked">Gardening</span>
-                                <span class="hobby-clicked">Dance</span>
-                                <span class="hobby-clicked">Outdoor Adventure</span>
-                            </div>
+                        <div class="form-group">
+                            <label for="hobbies">Select Your Hobbies:</label>
+                            <select name="hobbies[]" id="hobbies" multiple class="form-control">
+                                {% for hobby in all_hobbies %}
+                                    <option value="{{ hobby.id }}" {% if hobby in user.hobbies.all %}selected{% endif %}>
+                                        {{ hobby.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
                     
                         <!-- Update Profile Button -->

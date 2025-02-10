@@ -81,7 +81,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width:100%;
+    width: 40%;
 }
 
 input{
@@ -89,9 +89,6 @@ input{
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-}
-.signin-form input{
-    width: 300px;
 }
 
 .btn-gradient {
