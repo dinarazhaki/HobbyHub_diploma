@@ -6,41 +6,103 @@
     padding: 20px;
     margin-top: 100px;
 }
-.filter-container {
-    width: 250px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+
+.filter-panel {
+    width: 25%;
     background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-.filter-container h3 {
+
+.filter-panel h3, .filter-panel h4 {
     margin-bottom: 10px;
 }
-.filter-container label {
+
+.filter-panel ul {
+    list-style: none;
+    padding: 0;
+}
+
+.filter-panel li {
+    margin-bottom: 5px;
+}
+
+.event-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-.filter-container input[type="checkbox"] {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #555;
-    border-radius: 4px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
     position: relative;
-    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #e0e0e0;
 }
-.filter-container input[type="checkbox"]:checked {
-    background-color: #ff4081;
-    border: none;
+
+/* Hover effect */
+.event-card:hover {
+    border-color: #ff007f;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 20px;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
-.filter-container input[type="checkbox"]:checked::after {
-    content: '✔';
-    font-size: 14px;
-    color: white;
-    position: absolute;
-    top: 0px;
-    left: 3px;
+
+/* Image container */
+.event-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.05);
+}
+
+/* Event details */
+.event-details {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.event-details h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-details p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Icons */
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.event-card:hover .icon {
+    opacity: 1;
 }
