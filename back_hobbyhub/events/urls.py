@@ -37,4 +37,13 @@ urlpatterns = [
     path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
     path('hobbies/', hobbies, name='hobbies'),
     # path('save-hobbies/', save_hobbies, name='save_hobbies'),
+    
+    
+    
+    
+    
+    
+    
+    #!!!!! need to update
+    path('user_activities/', user_activities, name='user_activities')
 ]

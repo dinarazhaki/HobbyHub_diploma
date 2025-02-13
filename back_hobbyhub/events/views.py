@@ -340,3 +340,9 @@ def organizer_profile(request):
     return render(request, "organizerprofile.html", {"company": company})
 
 
+#!!!! need to update 
+
+def user_activities(request):
+    return render(request, 'user_activities.html')
+
+
