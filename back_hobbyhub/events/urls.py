@@ -40,7 +40,7 @@ urlpatterns = [
     
     
     
-    
+    path('activity_details/', activity_details, name='activity_details'),
     
     
     

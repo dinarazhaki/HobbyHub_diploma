@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HobbyHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/activity_details.css' %}">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+<body>
+
+    <!-- Header -->
+    <section class="header">
+        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Challenges</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Leaderboard</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="#">Profile Lookup</a></li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <button class="btn btn-gradient">Profile</button>
+            </div>
+        </nav>
+    </section>
+
+
+    <!-- Main Content -->
+        <div class="activity-bg">
+            <div class="challenge-container">
+                <div class="challenge-info">
+                    <h2 class="gradient-text">Cooking Challenge</h2>
+                    <p>Cook a dish using surprise ingredients and compete for the best recipe!</p>
+                    <div class="tags">
+                        <span class="tag food">Food</span>
+                        <span class="tag cooking">Cooking</span>
+                        <span class="points">&#128176; 25</span>
+                    </div>
+                    <button class="apply-btn" onclick="toggleDivs()">Apply</button>
+                </div>
+
+                <div class="secondContainer hidden">
+                    <h2 class="gradient-text">Cooking Challenge</h2>
+                    <p>Cook a dish using surprise ingredients and compete for the best recipe!</p>
+                    <div class="game-code-container">
+                        <h2>Live Game Code</h2>
+                        <div class="code-box" id="gameCode"></div>
+                    </div>
+                    <p class="applied">Congradulations! You are participant of Cooking Challenge. Take Live Game code for more rewards at <a href="#">Live Game</a></p>
+                </div>
+            </div>
+         </div>
+
+        <div class="info_section">
+            <div class="timing-location">
+                <h3>Timing and location</h3>
+                <div class="details">
+                    <div class="detail-box">
+                        <span class="icon"><img src="{% static 'images/dateicon.jpg' %}" alt="icon" class="custom-icon"></span>
+                        <div>
+                            <p class="label">DATE AND TIME</p>
+                            <p>Wednesday, May 28<br>06:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="detail-box">
+                        <span class="icon"><img src="{% static 'images/locicon.jpg' %}" alt="icon" class="custom-icon"></span>
+                        <div>
+                            <p class="label">PLACE</p>
+                            <p>Office Kitchen</p>
+                        </div>
+                    </div>
+                    <div class="detail-box">
+                        <span class="icon"><img src="{% static 'images/timeicon.jpg' %}" alt="icon" class="custom-icon"></span>
+                        <div>
+                            <p class="label">DURATION</p>
+                            <p>5 hours</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+</body>
+<script src="{% static 'js/activity_details.js' %}"></script>
+</html>

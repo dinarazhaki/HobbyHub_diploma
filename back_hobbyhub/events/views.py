@@ -345,4 +345,6 @@ def organizer_profile(request):
 def user_activities(request):
     return render(request, 'user_activities.html')
 
+def activity_details(request):
+    return render(request, 'activity_details.html')
 
