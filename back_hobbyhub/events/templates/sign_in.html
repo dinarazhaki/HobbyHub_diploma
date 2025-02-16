@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In | HobbyHub</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <script src="{% static 'js/signin.js' %}"></script>
@@ -34,7 +34,8 @@
             <!-- Sign-In Form -->
             <form class="signin-form" method="POST" action="{% url 'sign_in' %}">
                 {% csrf_token %}
-                
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
                 <!-- User Type Selection -->
                 <select name="user_type" required>
                     <option value="" disabled selected>Select User Type</option>

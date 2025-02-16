@@ -30,7 +30,10 @@
             </div>
             <div class="d-flex">
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
-                <button class="btn btn-gradient" >Profile</button>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Sign Out</button>
+                </form>
             </div>
         </nav>
     </section>

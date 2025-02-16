@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +7,32 @@
     <title>Choose Hobbies</title>
     <link rel="stylesheet" href="{% static 'css/hobbies.css' %}">
     <script>
-        document.cookie = "csrftoken={{ csrf_token }}";
-        </script>
+        const userHobbies = {{ user_hobbies|default:"[]"|safe }};  // IDs of already selected hobbies
+    </script>
 </head>
 <body>
     <div class="container">
         <h1 class="logo">Hobby<span>Hub</span></h1>
         <h2 class="title">Choose your hobbies</h2>
         <p class="subtitle">This will help us find interesting communities for you!</p>
-        <div class="hobbies-container" id="hobby-list"></div>
-        <div class="buttons">
-            <button class="skip-btn">Skip</button>
-            <button class="continue-btn" id="continue-btn">Continue</button>
-        </div>
+
+        <form id="hobby-form" method="POST" action="{% url 'save_hobbies' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="hobbies">Select Your Hobbies:</label>
+                <select name="hobbies[]" id="hobbies" multiple class="form-control">
+                    {% for hobby in hobbies %}
+                        <option value="{{ hobby.id }}">{{ hobby.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="buttons">
+                <a href={% url 'sign_in' %}><button type="button" class="skip-btn" >Skip</button></a>
+                <button type="submit" class="continue-btn">Continue</button>
+            </div>
+        </form>
     </div>
+
     <script src="{% static 'js/hobbies.js' %}"></script>
 </body>
 </html>
-

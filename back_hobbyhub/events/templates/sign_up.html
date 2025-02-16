@@ -39,7 +39,7 @@
                 </ul>
             {% endif %}
             <p id="msg" class="msg hidden"style="color: red;"></span>
-            <form id="signup-form">
+            <form id="signup-form" method="POST" action="{% url 'sign_up' %}">
                 {% csrf_token %}
                 <div class="name-fields">
                     <input type="text" id="nickname" name="nickname" placeholder="Nickname" required >
@@ -48,7 +48,6 @@
                 <div class="name-fields">
                     <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
                     <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-
                 </div>
                 <div class="name-fields options">
                     <select id="gender" name="gender" required>
@@ -57,13 +56,16 @@
                         <option value="Female">Female</option>
                     </select>
                     
+                    
                     <select id="company_id" name="company_id" required>
                         <option value="" disabled selected>Select Company ID</option>
                         {% for company in companies %}
                             <option value="{{ company.company_id }}">{{ company.company_id }} - {{ company.name }}</option>
-                        {% endfor %}
+                        {% endfor %}w
                     </select>
                 </div>
+                
+                <input type="text" id="number" name="number" placeholder="Number" required>
 
                 <input type="email" id="email" name="email" placeholder="Email address" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>

@@ -1,15 +1,15 @@
 
 document.getElementById("signup-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
     let isValid=true;
     let email = document.getElementById("email").value.trim();
-    let msg = document.getElementById("msg"); // Single error message container
+    let msg = document.getElementById("msg"); 
 
-    msg.innerText = ""; // Clear previous messages
+    msg.innerText = ""; 
     msg.classList.add('hidden');
 
-    // Validate email with regex
+    
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         isValid=false;
@@ -17,8 +17,6 @@ document.getElementById("signup-form").addEventListener("submit", function (even
         msg.classList.remove('hidden');
         return;
     }
-    if(isValid){
-        window.location.href = "/hobbies/";
-    }
+    
 });
 

@@ -1,82 +1,50 @@
-/*const hobbies = [
-    "Photography", "Crafting", "Technology", "Music", "Cooking",
-    "Writing", "Gardening", "Dance", "Outdoor Adventure", "Crafting", "Sports"
-];
 
-const hobbyList = document.getElementById('hobby-list');
-const skipButton = document.querySelector('.skip-btn');
-const continueButton = document.querySelector('.continue-btn');
 
-hobbies.forEach(hobby => {
-    const btn = document.createElement('button');
-    btn.classList.add('hobby-btn');
-    btn.innerText = hobby;
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-    });
-    hobbyList.appendChild(btn);
-});
+document.addEventListener("DOMContentLoaded", function () {
+    const selectElement = document.getElementById("hobbies");
 
-skipButton.addEventListener('click', () => {
-    window.location.href = "/sign_in/"; 
-});
-continueButton.addEventListener('click', () => {
-    window.location.href = "/sign_in/"; 
-});*/
-
-const hobbies = [
-    "Photography", "Crafting", "Technology", "Music", "Cooking",
-    "Writing", "Gardening", "Dance", "Outdoor Adventure", "Sports"
-];
-
-const hobbyList = document.getElementById('hobby-list');
-const continueButton = document.getElementById('continue-btn');
-
-hobbies.forEach(hobby => {
-    const btn = document.createElement('button');
-    btn.classList.add('hobby-btn');
-    btn.innerText = hobby;
-    btn.dataset.hobby = hobby;
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-    });
-    hobbyList.appendChild(btn);
-});
-
-continueButton.addEventListener('click', () => {
-    const selectedHobbies = Array.from(document.querySelectorAll('.hobby-btn.selected'))
-        .map(btn => btn.dataset.hobby);
-
-    fetch('/save-hobbies/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')  // CSRF token for Django
-        },
-        body: JSON.stringify({ hobbies: selectedHobbies })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            window.location.href = "/user_profile/";
-        } else {
-            window.location.href = "/user_profile/";
-        }
-    });
-});
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+    // Set already selected hobbies
+    if (userHobbies && selectElement) {
+        userHobbies.forEach((hobbyId) => {
+            const option = selectElement.querySelector(`option[value="${hobbyId}"]`);
+            if (option) {
+                option.selected = true;
             }
-        }
+        });
     }
-    return cookieValue;
-}
+
+    // Form submission handler
+    const hobbyForm = document.getElementById("hobby-form");
+    if (hobbyForm) {
+        hobbyForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+
+            fetch("{% url 'save_hobbies' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+                },
+            })
+            .then(response => {
+                console.log("Response:", response); // Log the response
+                return response.json();
+            })
+            .then(data => {
+                console.log("Data:", data); // Log the data
+                if (data.status === "success") {
+                    window.location.href = "{% url 'sign_in' %}"; // Redirect to sign-in page
+                } else {
+                    alert("Error: " + (data.message || "Unknown error occurred"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while saving hobbies. Please try again.");
+            });
+        });
+    }
+});
+

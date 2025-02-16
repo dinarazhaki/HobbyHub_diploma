@@ -135,7 +135,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media/')
 
 AUTH_USER_MODEL = "events.Company"
 LOGIN_URL = "/sign_in/"
-LOGIN_REDIRECT_URL = "/organizer_profile/"
-LOGOUT_REDIRECT_URL = "/sign_in/"
-SESSION_ENGINE = "django.contrib.sessions.backends.db"
-SESSION_COOKIE_AGE = 1209600 
+LOGOUT_REDIRECT_URL = '/'
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Использование БД
+SESSION_COOKIE_AGE = 1209600  # Две недели
+SESSION_SAVE_EVERY_REQUEST = True  # Обновление сессии при каждом запросе
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
