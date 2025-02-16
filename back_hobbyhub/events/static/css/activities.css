@@ -28,6 +28,26 @@
     margin-bottom: 5px;
 }
 
+
+
+/* Style checkboxes */
+input[type="checkbox"] {
+    appearance: none; /* Removes default styling */
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+/* Gradient Background when Checked */
+input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    border: none;
+}
+
 .event-card {
     display: flex;
     align-items: center;
