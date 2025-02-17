@@ -57,7 +57,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('../images/cooking.png') no-repeat center center/cover;
+   /* background: url('../images/cooking.png') no-repeat center center/cover;*/
     padding: 80px 0 80px 0;
     margin-top: 50px;
 }
