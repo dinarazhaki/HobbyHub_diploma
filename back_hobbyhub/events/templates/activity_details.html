@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HobbyHub</title>
+    <title>HobbyHub - {{ event.title }}</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/activity_details.css' %}">
@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 </head>
 <body>
 
@@ -37,63 +36,53 @@
         </nav>
     </section>
 
-
     <!-- Main Content -->
-        <div class="activity-bg">
-            <div class="challenge-container">
-                <div class="challenge-info">
-                    <h2 class="gradient-text">Cooking Challenge</h2>
-                    <p>Cook a dish using surprise ingredients and compete for the best recipe!</p>
-                    <div class="tags">
-                        <span class="tag food">Food</span>
-                        <span class="tag cooking">Cooking</span>
-                        <span class="points">&#128176; 25</span>
-                    </div>
-                    <button class="apply-btn" onclick="toggleDivs()">Apply</button>
+    <div class="activity-bg">
+        <div class="challenge-container">
+            <div class="challenge-info">
+                <h2 class="gradient-text">{{ event.title }}</h2>
+                <p>{{ event.description }}</p>
+                <div class="tags">
+                    <span class="tag food">{{ event.hobby_type }}</span>
+                    <span class="points">&#128176; 25</span>
                 </div>
-
-                <div class="secondContainer hidden">
-                    <h2 class="gradient-text">Cooking Challenge</h2>
-                    <p>Cook a dish using surprise ingredients and compete for the best recipe!</p>
-                    <div class="game-code-container">
-                        <h2>Live Game Code</h2>
-                        <div class="code-box" id="gameCode"></div>
-                    </div>
-                    <p class="applied">Congradulations! You are participant of Cooking Challenge. Take Live Game code for more rewards at <a href="#">Live Game</a></p>
-                </div>
+                <button class="apply-btn" onclick="toggleDivs()">Apply</button>
             </div>
-         </div>
 
-        <div class="info_section">
-            <div class="timing-location">
-                <h3>Timing and location</h3>
-                <div class="details">
-                    <div class="detail-box">
-                        <span class="icon"><img src="{% static 'images/dateicon.jpg' %}" alt="icon" class="custom-icon"></span>
-                        <div>
-                            <p class="label">DATE AND TIME</p>
-                            <p>Wednesday, May 28<br>06:00 PM</p>
-                        </div>
-                    </div>
-                    <div class="detail-box">
-                        <span class="icon"><img src="{% static 'images/locicon.jpg' %}" alt="icon" class="custom-icon"></span>
-                        <div>
-                            <p class="label">PLACE</p>
-                            <p>Office Kitchen</p>
-                        </div>
-                    </div>
-                    <div class="detail-box">
-                        <span class="icon"><img src="{% static 'images/timeicon.jpg' %}" alt="icon" class="custom-icon"></span>
-                        <div>
-                            <p class="label">DURATION</p>
-                            <p>5 hours</p>
-                        </div>
-                    </div>
+            <div class="secondContainer hidden">
+                <h2 class="gradient-text">{{ event.title }}</h2>
+                <p>{{ event.description }}</p>
+                <div class="game-code-container">
+                    <h2>Live Game Code</h2>
+                    <div class="code-box" id="gameCode"></div>
                 </div>
-                <div id="map"></div>
+                <p class="applied">Congratulations! You are a participant of {{ event.title }}. Take Live Game code for more rewards at <a href="#">Live Game</a></p>
             </div>
         </div>
+    </div>
 
+    <div class="info_section">
+        <div class="timing-location">
+            <h3>Timing and location</h3>
+            <div class="details">
+                <div class="detail-box">
+                    <span class="icon"><img src="{% static 'images/dateicon.jpg' %}" alt="icon" class="custom-icon"></span>
+                    <div>
+                        <p class="label">DATE AND TIME</p>
+                        <p>{{ event.date }} at {{ event.time }}</p>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <span class="icon"><img src="{% static 'images/locicon.jpg' %}" alt="icon" class="custom-icon"></span>
+                    <div>
+                        <p class="label">PLACE</p>
+                        <p>{{ event.location }}</p>
+                    </div>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -133,8 +122,6 @@
         </div>
     </footer>
 
-
-
+    <script src="{% static 'js/activity_details.js' %}"></script>
 </body>
-<script src="{% static 'js/activity_details.js' %}"></script>
 </html>

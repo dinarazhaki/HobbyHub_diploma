@@ -1,10 +1,9 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,  get_object_or_404
 from .models import *
 from django.core.serializers import serialize
 import json
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password, make_password
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
@@ -17,7 +16,46 @@ from functools import wraps
 
 
 
+#!!!! need to update 
 
+
+def activity_details(request, event_id):
+    event = get_object_or_404(Event, id=event_id)  # Получаем событие по ID или возвращаем 404
+    return render(request, 'activity_details.html', {'event': event})
+
+
+
+def user_activities(request):
+    today = timezone.now().date()  # Получаем текущую дату
+    events = Event.objects.all()
+
+    # Разделяем события на сегодняшние и остальные
+    today_events = []
+    other_events = []
+
+    for event in events:
+        event_data = {
+            'id': event.id,  # Убедитесь, что передаете id события
+            'title': event.title,
+            'description': event.description,
+            'location': event.location,
+            'date': event.date.strftime('%Y-%m-%d'),
+            'time': event.time.strftime('%H:%M'),
+            'hobby_type': event.hobby_type,
+            'image': event.image.url if event.image else None,  # Используйте .url для ImageField
+        }
+
+        if event.date == today:
+            today_events.append(event_data)
+        else:
+            other_events.append(event_data)
+
+    return render(request, 'user_activities.html', {
+        'today_events': today_events,
+        'other_events': other_events,
+    })
+    
+    
 def role_required(role):
     def decorator(view_func):
         @wraps(view_func)
@@ -395,14 +433,4 @@ def sign_in(request):
 
     return render(request, "sign_in.html")
 
-
-
-
-#!!!! need to update 
-
-def user_activities(request):
-    return render(request, 'user_activities.html')
-
-def activity_details(request):
-    return render(request, 'activity_details.html')
 

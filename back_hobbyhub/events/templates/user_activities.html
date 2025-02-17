@@ -70,43 +70,67 @@
     
             <main class="event-list" style="padding-left: 50px;">
                 <h2>Today</h2>
-                <p id="no-events">No matches found for */today's date*/.</p>
-                <div id="events " >
-                    <h3 style="margin-top: 10px">May 10, 2025</h3>
-                    <div class=" event event-card" data-date="2025-05-10" data-type="Outdoor" data-hobby="Photography">
-                        <div class="event-image">
-                            <img src="{% static 'images/photo_walk.jpg' %}" alt="Photography Walk">
-                        </div>
-                        <div class="event-details">
-                            <h3>Photography Walk</h3>
-                            <p>
-                                <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                May 10, 2025
-                            </p>
-                            <p>
-                                <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                Botanical Garden
-                            </p>
-                        </div>
-                    </div>
-                    <h3 style="margin-top: 10px">June 09, 2025</h3>
-                    <div class="event event-card" data-date="2025-06-09" data-type="Indoor" data-hobby="Crafting">
-                        <div class="event-image">
-                            <img src="{% static 'images/origami.jpg' %}" alt="Photography Walk">
-                        </div>
-                        <div class="event-details">
-                            <h3>Origami Workshop</h3>
-                            <p>
-                                <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                June 9, 2025
-                            </p>
-                            <p>
-                                <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                Art Studio
-                            </p>
-                        </div>
-                        
-                    </div>
+                <div id="today-events">
+                    {% if today_events %}
+                        {% for event in today_events %}
+                        <a href="{% url 'activity_details' event.id %}" class="event-link">
+                            <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}">
+                                <div class="event-image">
+                                    {% if event.image %}
+                                    <img src="{{ event.image }}" alt="{{ event.title }}">
+                                    {% else %}
+                                    <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
+                                    {% endif %}
+                                </div>
+                                <div class="event-details">
+                                    <h3>{{ event.title }}</h3>
+                                    <p>
+                                        <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                        {{ event.date }} at {{ event.time }}
+                                    </p>
+                                    <p>
+                                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                        {{ event.location }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                        <p id="no-events-today">No events for today.</p>
+                    {% endif %}
+                </div>
+            
+                <h2>Other Dates</h2>
+                <div id="other-events">
+                    {% if other_events %}
+                        {% for event in other_events %}
+                        <a href="{% url 'activity_details' event.id %}" class="event-link">
+                            <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}">
+                                <div class="event-image">
+                                    {% if event.image %}
+                                    <img src="{{ event.image }}" alt="{{ event.title }}">
+                                    {% else %}
+                                    <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
+                                    {% endif %}
+                                </div>
+                                <div class="event-details">
+                                    <h3>{{ event.title }}</h3>
+                                    <p>
+                                        <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                        {{ event.date }} at {{ event.time }}
+                                    </p>
+                                    <p>
+                                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                        {{ event.location }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                        <p id="no-events-other">No events for other dates.</p>
+                    {% endif %}
                 </div>
             </main>
         </div>

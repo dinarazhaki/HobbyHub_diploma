@@ -43,6 +43,5 @@ urlpatterns = [
     
     #!!!!! need to update
     path('user_activities/', user_activities, name='user_activities'),
-    path('activity_details/', activity_details, name='activity_details'),
-
+    path('activity/<int:event_id>/', activity_details, name='activity_details'),
 ]
