@@ -76,11 +76,11 @@
                         <a href="{% url 'activity_details' event.id %}" class="event-link">
                             <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}">
                                 <div class="event-image">
-                                    {% if event.image %}
+                                    {% comment %} {% if event.image %} {% endcomment %}
                                     <img src="{{ event.image }}" alt="{{ event.title }}">
-                                    {% else %}
+                                    {% comment %} {% else %}
                                     <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
-                                    {% endif %}
+                                    {% endif %} {% endcomment %}
                                 </div>
                                 <div class="event-details">
                                     <h3>{{ event.title }}</h3>
@@ -108,11 +108,11 @@
                         <a href="{% url 'activity_details' event.id %}" class="event-link">
                             <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}">
                                 <div class="event-image">
-                                    {% if event.image %}
+                                    {% comment %} {% if event.image %} {% endcomment %}
                                     <img src="{{ event.image }}" alt="{{ event.title }}">
-                                    {% else %}
+                                    {% comment %} {% else %}
                                     <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
-                                    {% endif %}
+                                    {% endif %} {% endcomment %}
                                 </div>
                                 <div class="event-details">
                                     <h3>{{ event.title }}</h3>
