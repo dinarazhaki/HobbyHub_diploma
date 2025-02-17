@@ -8,17 +8,21 @@ L.marker([43.2389, 76.8897]).addTo(map)
     .bindPopup('office, Almaty')
     .openPopup();
 
-let gameCode = "123456";  // This value will be taken dynamically later
+ let gameCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+// Get the container element
+let codeBox = document.getElementById("gameCode");
+
+// Clear any previous content (if needed)
+codeBox.innerHTML = "";
 
 // Splitting the code into separate spans
-let codeBox = document.getElementById("gameCode");
- gameCode.split("").forEach(num => {
+gameCode.split("").forEach(num => {
     let span = document.createElement("span");
     span.innerText = num;
     span.classList.add("digit");
     codeBox.appendChild(span);
- });
-
+});
 
 function toggleDivs() {
     let firstDivs = document.getElementsByClassName("challenge-info");
