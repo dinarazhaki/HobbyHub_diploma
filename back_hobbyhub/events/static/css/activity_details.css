@@ -158,14 +158,15 @@ body {
 }
 
 .icon {
+    
     background-color: #FFC300; 
-    padding: 15px; 
+    padding: 10px; 
     border-radius: 8px;
 }
 
 .custom-icon {
-    width:40px;
-    height: 40px;
+    width:30px;
+    height: 30px;
 }
 
 .label {
