@@ -323,3 +323,119 @@ input, select, textarea {
     color: white;
     border: 1px solid #E65C00;
 }
+
+
+
+/*Responsive Design for Creation Part*/
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .container-act {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        padding-top: 20px;
+    }
+
+    .filter-panel {
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+    }
+
+    .event-list {
+        width: 90%;
+        margin: 0 auto;
+        padding-left: 0;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .event-image {
+        width: 100%;
+    }
+
+    .event-details {
+        padding-left: 0;
+        margin-top: 15px;
+    }
+
+    .event-details p {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .filter-panel {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .event-list {
+        width: 95%;
+    }
+
+    .event-card {
+        padding: 15px;
+    }
+
+    .create-event-btn {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-height: 75vh;
+    }
+
+    #eventForm {
+        flex-direction: column;
+    }
+
+    #eventForm label,
+    #eventForm input,
+    #eventForm select,
+    #eventForm textarea {
+        width: 100%;
+    }
+
+    .confirmation-box {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .filter-panel {
+        padding: 15px;
+    }
+
+    .event-card {
+        padding: 10px;
+    }
+
+    .event-details h3 {
+        font-size: 18px;
+    }
+
+    .event-details p {
+        font-size: 14px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .create-event-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .confirmation-box {
+        width: 90%;
+    }
+}
