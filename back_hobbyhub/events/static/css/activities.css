@@ -1,36 +1,32 @@
 .container-act {
-    display: flex;
     width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+    display: flex;
     margin-top: 100px;
+    padding-top: 40px;
 }
-
 
 .filter-panel {
-    
-    width: 25%;
+    max-width: 36%;
+    margin-left: 50px;
+    padding: 30px;
     background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.filter-panel h3, .filter-panel h4 {
-    margin-bottom: 10px;
+.filter-panel h4, .filter-panel h5 {
+    margin-bottom: 15px;
 }
 
 .filter-panel ul {
     list-style: none;
     padding: 0;
+    padding-bottom: 10px;
 }
 
 .filter-panel li {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
-
-
 
 /* Style checkboxes */
 input[type="checkbox"] {
@@ -50,36 +46,33 @@ input[type="checkbox"]:checked {
     border: none;
 }
 
+
+.event-list {
+    width: 58%;
+    margin-left: 30px;
+    padding-left: 30px;
+}
+
 .event-card {
     display: flex;
     align-items: center;
     background: #ffffff;
-    border-radius: 16px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+    padding: 30px;
     border: 1px solid #e0e0e0;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
 }
 
-/* Hover effect */
 .event-card:hover {
     border-color: #ff007f;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 20px;
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Image container */
 .event-image {
-    width: 120px;
-    height: 120px;
     border-radius: 14px;
     overflow: hidden;
-    flex-shrink: 0;
-    position: relative;
 }
 
 .event-image img {
@@ -87,14 +80,8 @@ input[type="checkbox"]:checked {
     height: 100%;
     object-fit: cover;
     border-radius: 14px;
-    transition: transform 0.3s ease-in-out;
 }
 
-.event-card:hover .event-image img {
-    transform: scale(1.05);
-}
-
-/* Event details */
 .event-details {
     padding-left: 20px;
     flex: 1;
@@ -116,15 +103,223 @@ input[type="checkbox"]:checked {
     font-weight: 500;
 }
 
-/* Icons */
 .icon {
     width: 20px;
     height: 20px;
     margin-right: 10px;
     opacity: 0.8;
-    transition: opacity 0.3s ease-in-out;
 }
 
 .event-card:hover .icon {
     opacity: 1;
+}
+
+/*Symbats section*/
+ /* Button */
+ .create-event-btn {
+    background-color: #FF6A00; /* Vibrant orange */
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.create-event-btn:hover {
+    background-color: #E65C00;
+    transform: scale(1.05);
+}
+
+.create-event-btn:active {
+    background-color: #CC5200;
+    transform: scale(0.98);
+}
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Two-Column Form */
+#eventForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#eventForm label,
+#eventForm input,
+#eventForm select,
+#eventForm textarea {
+    width: 48%;
+}
+
+textarea {
+    width: 100%;
+}
+
+/* Input Fields */
+input, select, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #FF6A00;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #E65C00;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Confirmation Popup */
+.confirmation-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Fancy Checkmark */
+.checkmark {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #28a745;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    position: relative;
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    border: 3px solid #28a745;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    opacity: 0;
+    animation: drawCheck 0.4s ease-in-out forwards 0.3s;
+}
+
+/* Checkmark Animation */
+@keyframes drawCheck {
+    from { opacity: 0; transform: scale(0.5) rotate(-45deg); }
+    to { opacity: 1; transform: scale(1) rotate(-45deg); }
+}
+
+/* Fade-in effect */
+.show-confirmation {
+    display: block;
+    opacity: 1;
+    position: fixed;
+}
+
+/* Buttons */
+.confirmation-box button {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.confirmation-box button:hover {
+    background: darkorange;
+}
+
+
+
+#hobby-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.hobby-option {
+    background: #f2f2f2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+
+.hobby-option:hover {
+    background: #ddd;
+}
+
+.hobby-option.selected {
+    background-color: #FF6A00; /* Orange when selected */
+    color: white;
+    border: 1px solid #E65C00;
 }
