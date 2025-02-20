@@ -48,7 +48,7 @@
 }
 /* Main Section Fixes */
 body {
-    font-family: 'Girloy-Medium', sans-serif;
+    font-family: 'Girloy-Medium', sans-serif !important;
     margin: auto;
     background-color: #f8f9fa;
 }

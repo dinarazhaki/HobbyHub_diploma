@@ -1,10 +1,20 @@
-@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
 html {
     scroll-behavior: smooth;
 }
+
+
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Gilroy-bold', sans-serif;
-    background-color: #F5F5F5;
+    font-family: 'Girloy-Medium', sans-serif !important;
+    margin: auto;
+    background-color: #f5f5f5;
 }
 p{
     color: #000000;
