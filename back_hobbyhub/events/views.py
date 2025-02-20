@@ -434,3 +434,33 @@ def sign_in(request):
     return render(request, "sign_in.html")
 
 
+#Activity list for organizers
+def organizer_activities(request):
+    today = timezone.now().date()  # Получаем текущую дату
+    events = Event.objects.all()
+
+    # Разделяем события на сегодняшние и остальные
+    today_events = []
+    other_events = []
+
+    for event in events:
+        event_data = {
+            'id': event.id,  # Убедитесь, что передаете id события
+            'title': event.title,
+            'description': event.description,
+            'location': event.location,
+            'date': event.date.strftime('%Y-%m-%d'),
+            'time': event.time.strftime('%H:%M'),
+            'hobby_type': event.hobby_type,
+            'image': event.image.url if event.image else None,  # Используйте .url для ImageField
+        }
+
+        if event.date == today:
+            today_events.append(event_data)
+        else:
+            other_events.append(event_data)
+
+    return render(request, 'organizer_activities.html', {
+        'today_events': today_events,
+        'other_events': other_events,
+    })

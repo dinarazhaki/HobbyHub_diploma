@@ -25,6 +25,7 @@ urlpatterns = [
     path('organizer_profile/settings/', organizer_settings, name='organizer_settings'),
     path("organizer/update-settings/", update_organizer_profile, name="update_organizer_profile"),
     path("organizer/remove_profile_photo/", remove_organizer_profile_photo, name="remove_organizer_profile_photo"),
+    path('activities/', organizer_activities, name='activities'),
 
     # Аутентификацияa
     path('sign_in/', sign_in, name='sign_in'),

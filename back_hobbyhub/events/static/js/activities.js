@@ -75,4 +75,96 @@ document.addEventListener("DOMContentLoaded", function () {
     hobbyFilters.forEach(input => input.addEventListener("change", filterEvents));
     typeFilters.forEach(input => input.addEventListener("change", filterEvents));
     dateFilter.addEventListener("input", filterEvents);
+
+
+
+//Another part for creation form
+    const hobbyOptions = document.querySelectorAll(".hobby-option");
+    const hiddenInput = document.getElementById("event-hobbies");
+
+    hobbyOptions.forEach(option => {
+        option.addEventListener("click", function () {
+            this.classList.toggle("selected"); // Toggle selection
+
+            // Collect selected hobbies
+            let selectedHobbies = Array.from(document.querySelectorAll(".hobby-option.selected"))
+                .map(el => el.dataset.value);
+
+            hiddenInput.value = selectedHobbies.join(","); // Update hidden input
+        });
+    });
 });
+
+
+
+//Symbat's part
+// Open Modal
+function openModal() {
+    document.getElementById("eventModal").style.display = "flex";
+}
+
+// Close Modal
+function closeModal() {
+    document.getElementById("eventModal").style.display = "none";
+}
+
+// Close Modal when Clicking Outside
+window.onclick = function(event) {
+    let modal = document.getElementById("eventModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
+// Handle Form Submission (For Now, Just Console Log Data)
+document.getElementById("eventForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let eventData = {
+        image: document.getElementById("event-image").files[0]?.name || "No image",
+        name: document.getElementById("event-name").value,
+        description: document.getElementById("event-description").value,
+        hobbies: Array.from(document.getElementById("event-hobbies").selectedOptions).map(option => option.value),
+        location: document.getElementById("event-location").value,
+        date: document.getElementById("event-date").value,
+        time: document.getElementById("event-time").value,
+        diamonds: document.getElementById("event-diamonds").value,
+        quota: document.getElementById("event-quota").value
+    };
+
+    console.log("Event Data:", eventData);
+    alert("Event Created Successfully!");
+    closeModal();
+});
+
+function showConfirmation(eventName) {
+    let confirmationBox = document.getElementById("confirmationBox");
+    let message = document.getElementById("confirmationMessage");
+
+    message.innerHTML = `Your event <strong>${eventName}</strong> was created successfully!`;
+    confirmationBox.classList.add("show-confirmation");
+}
+
+/* Close confirmation popup */
+function closeConfirmation() {
+    document.getElementById("confirmationBox").classList.remove("show-confirmation");
+}
+
+
+
+
+
+
+/* Reset form */
+function createAnotherEvent() {
+    closeConfirmation();
+    document.getElementById("eventForm").reset();
+}
+function openModal() { document.getElementById("eventModal").style.display = "flex"; }
+        function closeModal() { document.getElementById("eventModal").style.display = "none"; }
+        function submitForm(event) { event.preventDefault(); closeModal(); document.getElementById("confirmationBox").classList.add("show-confirmation"); }
+        function closeConfirmation() { document.getElementById("confirmationBox").classList.remove("show-confirmation"); 
+
+        }
+    
+        
