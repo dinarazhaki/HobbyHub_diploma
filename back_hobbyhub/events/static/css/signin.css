@@ -122,3 +122,51 @@ input{
     color: #ffbf00;
     text-decoration: underline;
 }
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel {
+        width: 100%;
+        height: 40vh;
+    }
+
+    .right-panel {
+        width: 100%;
+        padding: 30px;
+    }
+
+    form {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .left-panel {
+        height: 30vh;
+    }
+
+    form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-panel {
+        display: none;
+    }
+
+    .right-panel {
+        width: 100%;
+        padding: 20px;
+    }
+
+    form {
+        width: 90%;
+    }
+}

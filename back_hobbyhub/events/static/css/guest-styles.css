@@ -199,3 +199,142 @@ p{
     color: #000000;
 }
 
+
+/* Tablets and Small Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .about-text {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .image-container {
+        height: 400px;
+    }
+
+    .rounded-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .join-text {
+        padding-right: 50px;
+        padding-left: 30px;
+    }
+
+    .footer h2 {
+        font-size: 28px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .collapse.navbar-collapse {
+        text-align: center;
+    }
+
+    .signup {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .hero {
+        height: auto;
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .about-text {
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .image-container {
+        height: 300px;
+    }
+
+    .rounded-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .join-text {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .join-div {
+        padding: 30px;
+    }
+
+    .footer {
+        height: auto;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .footer h2 {
+        font-size: 24px;
+    }
+
+    .footer h5 {
+        padding-left: 0;
+    }
+
+    .footer ul {
+        padding-left: 0;
+        align-items: center;
+    }
+
+    .footer ul li {
+        text-align: center;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .hero {
+        padding-top: 40px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .image-container {
+        height: 250px;
+    }
+
+    .rounded-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .footer h2 {
+        font-size: 22px;
+    }
+
+    .footer ul li a {
+        padding-left: 0;
+    }
+
+    .btn-gradient {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+}

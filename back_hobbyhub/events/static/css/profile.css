@@ -770,3 +770,156 @@ a:hover{
     color: #666;
 }
 
+@media screen and (max-width: 1024px) {
+    .user_det {
+        padding: 0 40px;
+    }
+
+    .form-container, .hobbies, .hobbies-section {
+        width: 100%;
+        margin-left: 15px;
+    }
+
+    .profile-section, .profile-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-picture img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .upload-btn, .remove-btn {
+        width: 100%;
+    }
+
+    .settings-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .settings-nav button {
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mainpartpro {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .sidebar {
+        margin-left: 0;
+        padding: 12px;
+        height: auto;
+    }
+
+    .user_det {
+        padding: 0 25px;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab, .pro-act-set-tab {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: 100%;
+    }
+
+    .notification-container, .account-container {
+        padding: 12px;
+    }
+
+    .earned-activity-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 18px;
+    }
+
+    .earned-activity-box {
+        width: 100%;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100%;
+        height: 140px;
+    }
+
+    .event-details {
+        padding: 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user_det {
+        padding: 8px;
+    }
+
+    .tab, .pro-act-set-tab {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .form-container, .hobbies, .hobbies-section {
+        padding: 8px;
+    }
+
+    .notification-option {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .notification-container label {
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .profile-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .update-btn-container {
+        text-align: center;
+    }
+
+    .update-profile-btn {
+        width: 100%;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100%;
+        height: 120px;
+    }
+
+    .event-details {
+        padding: 8px 0;
+    }
+}

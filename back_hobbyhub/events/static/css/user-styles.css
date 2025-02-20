@@ -227,3 +227,228 @@ body{
     overflow-x: hidden;
 }
 
+
+/* Responsive Design for Tablets and Mobile */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .activities h2 {
+        padding: 100px 10px 20px 10px;
+        font-size: 24px;
+    }
+
+    .swiper-container {
+        padding: 0px 20px;
+        height: 400px;
+    }
+
+    .swiper-slide {
+        margin-left: 0;
+        width: 250px;
+    }
+
+    .actphoto {
+        width: 250px;
+        height: 230px;
+    }
+
+    .ptitle {
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+    .plocat {
+        font-size: 12px;
+    }
+
+    .swiper-pagination {
+        bottom: 5px;
+        margin-left: 0px;
+    }
+
+    .your-act {
+        padding-left: 0px;
+        text-align: center;
+    }
+
+    .activities-your h2 {
+        margin-top: -30px;
+        font-size: 22px;
+    }
+
+    /* Calendar */
+    .calendar-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    .calendar-header {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .calendar-weekdays,
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+    }
+
+    .calendar-grid div {
+        height: 50px;
+        width: 50px;
+        font-size: 16px;
+    }
+
+    .activity-details {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .activity-details h3 {
+        font-size: 20px;
+    }
+
+    .activity-details p {
+        font-size: 14px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .activities h2 {
+        font-size: 20px;
+        padding: 80px 10px 20px;
+    }
+
+    .swiper-container {
+        height: 350px;
+        padding: 0px 10px;
+    }
+
+    .swiper-slide {
+        width: 200px;
+    }
+
+    .actphoto {
+        width: 200px;
+        height: 180px;
+    }
+
+    .ptitle {
+        font-size: 12px;
+    }
+
+    .location-part img {
+        width: 10px;
+        height: 12px;
+    }
+
+    .plocat {
+        font-size: 10px;
+    }
+
+    /* Swiper Pagination */
+    .swiper-pagination {
+        bottom: 0px;
+    }
+
+    /* Calendar */
+    .calendar-header {
+        font-size: 20px;
+    }
+
+    .calendar-weekdays {
+        font-size: 14px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
+
+    .calendar-grid div {
+        height: 40px;
+        width: 40px;
+        font-size: 14px;
+    }
+
+    .activity-details {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .activity-details h3 {
+        font-size: 18px;
+    }
+
+    .activity-details p {
+        font-size: 12px;
+    }
+
+    .calendar-nav button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .activities h2 {
+        font-size: 18px;
+        padding: 60px 10px 20px;
+    }
+
+    .swiper-container {
+        height: 320px;
+    }
+
+    .swiper-slide {
+        width: 180px;
+    }
+
+    .actphoto {
+        width: 180px;
+        height: 160px;
+    }
+
+    .ptitle {
+        font-size: 11px;
+    }
+
+    .plocat {
+        font-size: 9px;
+    }
+
+    /* Calendar */
+    .calendar-header {
+        font-size: 18px;
+    }
+
+    .calendar-grid div {
+        height: 35px;
+        width: 35px;
+        font-size: 12px;
+    }
+
+    .activity-details {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .activity-details h3 {
+        font-size: 16px;
+    }
+
+    .activity-details p {
+        font-size: 10px;
+    }
+
+    .calendar-nav button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+

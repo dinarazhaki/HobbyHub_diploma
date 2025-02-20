@@ -69,3 +69,56 @@ main {
     color: white;
     display: none;
 }
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .employees-table {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .employees-table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .employees-table th, .employees-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    #action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #action-buttons button {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .buttons button {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .employees-table th, .employees-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #action-buttons button {
+        width: 100%;
+    }
+}

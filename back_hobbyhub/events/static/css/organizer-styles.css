@@ -223,3 +223,144 @@ p{
 .event-card:hover .icon {
     opacity: 1;
 }
+
+
+/* Tablets and Small Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .activity-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .activity-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.5rem;
+        padding-left: 20px;
+    }
+
+    .notifications img {
+        width: 25px;
+        height: 25px;
+        margin-right: 15px;
+    }
+
+    .activity-card {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+
+    .activity-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .event-card {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .event-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .event-details h3 {
+        font-size: 18px;
+    }
+
+    .event-details p {
+        font-size: 14px;
+    }
+
+    .footer {
+        height: auto;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .footer h2 {
+        font-size: 24px;
+    }
+
+    .footer h5 {
+        padding-left: 0;
+    }
+
+    .footer ul {
+        padding-left: 0;
+        align-items: center;
+    }
+
+    .footer ul li {
+        text-align: center;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .activity-card {
+        padding: 10px;
+    }
+
+    .activity-info h5 {
+        font-size: 16px;
+    }
+
+    .activity-info p {
+        font-size: 12px;
+    }
+
+    .event-details h3 {
+        font-size: 16px;
+    }
+
+    .event-details p {
+        font-size: 12px;
+    }
+
+    .btn-gradient {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .footer h2 {
+        font-size: 20px;
+    }
+
+    .footer ul li a {
+        padding-left: 0;
+    }
+}
