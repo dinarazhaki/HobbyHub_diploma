@@ -1,50 +1,53 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
+    // Получаем данные из data-атрибутов
+    const scriptTag = document.querySelector('script[data-save-url]');
+    const saveHobbiesUrl = scriptTag ? scriptTag.dataset.saveUrl : null;
+    const userHobbies = scriptTag ? JSON.parse(scriptTag.dataset.userHobbies || "[]") : [];
+
     const selectElement = document.getElementById("hobbies");
-
-    // Set already selected hobbies
-    if (userHobbies && selectElement) {
-        userHobbies.forEach((hobbyId) => {
-            const option = selectElement.querySelector(`option[value="${hobbyId}"]`);
-            if (option) {
-                option.selected = true;
-            }
-        });
-    }
-
-    // Form submission handler
     const hobbyForm = document.getElementById("hobby-form");
-    if (hobbyForm) {
-        hobbyForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
 
-            const formData = new FormData(this);
-
-            fetch("{% url 'save_hobbies' %}", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
-                },
-            })
-            .then(response => {
-                console.log("Response:", response); // Log the response
-                return response.json();
-            })
-            .then(data => {
-                console.log("Data:", data); // Log the data
-                if (data.status === "success") {
-                    window.location.href = "{% url 'sign_in' %}"; // Redirect to sign-in page
-                } else {
-                    alert("Error: " + (data.message || "Unknown error occurred"));
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while saving hobbies. Please try again.");
-            });
-        });
+    if (!selectElement || !hobbyForm || !saveHobbiesUrl) {
+        console.error("Required elements not found or saveHobbiesUrl is missing.");
+        return;
     }
-});
 
+    // Устанавливаем уже выбранные хобби
+    userHobbies.forEach(hobbyId => {
+        const option = selectElement.querySelector(`option[value="${hobbyId}"]`);
+        if (option) option.selected = true;
+    });
+
+    // Обработчик отправки формы
+    hobbyForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const selectedOptions = Array.from(selectElement.selectedOptions);
+        if (selectedOptions.length === 0) {
+            alert("Please select at least one hobby.");
+            return;
+        }
+
+        const formData = new FormData(this);
+
+        fetch(saveHobbiesUrl, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                window.location.href = data.redirect_url || "{% url 'sign_in' %}";
+            } else {
+                alert("Error: " + (data.message || "Unknown error occurred"));
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            alert("An error occurred while saving hobbies. Please check your internet connection and try again.");
+        });
+    });
+});

@@ -86,7 +86,11 @@
                     <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
                     <td>{{ employee.number }}</td>
                     <td>{{ employee.join_date }}</td>
-                    <td>{{ employee.hobbies }}</td>
+                    <td>
+                        {% for hobby in employee.hobbies.all %}
+                            {{ hobby.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

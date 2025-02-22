@@ -1,13 +1,15 @@
 <!DOCTYPE html> 
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | HobbyHub</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <script src="{% static 'js/signup.js' %}"></script>
+
 </head>
 <body>
     <div class="container">
@@ -77,6 +79,5 @@
             <p class="switch-page">Already have an account? <a href="{% url 'sign_in' %}">Sign in</a></p>
         </div>
     </div>
-    <script src="{% static 'js/signup.js' %}"></script>
 </body>
 </html>

@@ -12,19 +12,42 @@ from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from functools import wraps
 
+    
+def role_required(role):
+    def decorator(view_func):
+        @wraps(view_func)
+        def wrapper(request, *args, **kwargs):
+            if role == "employee" and not request.session.get("nickname"):
+                return redirect(f"/sign_in/?next={request.get_full_path()}")
+            if role == "organizer" and not request.session.get("company_id"):
+                return redirect(f"/sign_in/?next={request.get_full_path()}")
+            return view_func(request, *args, **kwargs)
+        return wrapper
+    return decorator
 
 
+def approval_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        nickname = request.session.get("nickname")
+        if not nickname:
+            return redirect("sign_in")  # Если нет сессии, отправляем на вход
 
+        user = Employee.objects.filter(nickname=nickname).first()
+        if not user or not user.is_approved:  
+            return redirect("")  # Если нет пользователя или он не подтвержден
 
-#!!!! need to update 
+        return view_func(request, *args, **kwargs)  # Выполняем целевую вьюху
+
+    return _wrapped_view
 
 
 def activity_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)  # Получаем событие по ID или возвращаем 404
     return render(request, 'activity_details.html', {'event': event})
 
-
-
+@role_required("employee")
+@approval_required
 def user_activities(request):
     today = timezone.now().date()  # Получаем текущую дату
     events = Event.objects.all()
@@ -55,19 +78,6 @@ def user_activities(request):
         'other_events': other_events,
     })
     
-    
-def role_required(role):
-    def decorator(view_func):
-        @wraps(view_func)
-        def wrapper(request, *args, **kwargs):
-            if role == "employee" and not request.session.get("nickname"):
-                return redirect(f"/sign_in/?next={request.get_full_path()}")
-            if role == "organizer" and not request.session.get("company_id"):
-                return redirect(f"/sign_in/?next={request.get_full_path()}")
-            return view_func(request, *args, **kwargs)
-        return wrapper
-    return decorator
-
     
 
 @csrf_exempt
@@ -154,7 +164,7 @@ def hobbies(request):
     )
 
 
-@csrf_exempt
+
 def save_hobbies(request):
     if request.method == 'POST':
         nickname = request.session.get('nickname')
@@ -177,6 +187,7 @@ def save_hobbies(request):
 
 
 @role_required("employee")
+@approval_required
 def user_profile(request):
     nickname = request.session.get("nickname")
     if not nickname:
@@ -249,6 +260,7 @@ def organizer_view(request):
     return render(request, 'organizer.html', {'events': events})
 
 @role_required("employee")
+@approval_required
 def user_view(request):
     events = Event.objects.all()
     events_json = serialize('json', events, fields=('title', 'date', 'location', 'image'))
@@ -275,6 +287,7 @@ def user_privacy(request):
 
 
 @role_required("employee")
+@approval_required
 def update_user_profile(request):
     nickname = request.session.get("nickname")
     if not nickname:
@@ -312,6 +325,7 @@ def update_user_profile(request):
     return redirect("user_setting")
 
 @role_required("employee")
+@approval_required
 def user_setting(request):
     nickname=request.session.get("nickname")
     all_hobbies = Hobby.objects.all()

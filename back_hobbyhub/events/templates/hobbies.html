@@ -1,14 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Hobbies</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/hobbies.css' %}">
-    <script>
-        const userHobbies = {{ user_hobbies|default:"[]"|safe }};  // IDs of already selected hobbies
-    </script>
 </head>
 <body>
     <div class="container">
@@ -27,12 +24,16 @@
                 </select>
             </div>
             <div class="buttons">
-                <a href={% url 'sign_in' %}><button type="button" class="skip-btn" >Skip</button></a>
+                <a href="{% url 'sign_in' %}"><button type="button" class="skip-btn">Skip</button></a>
                 <button type="submit" class="continue-btn">Continue</button>
             </div>
         </form>
     </div>
 
-    <script src="{% static 'js/hobbies.js' %}"></script>
+    <!-- Передаем URL сохранения хобби в data-атрибуте -->
+    <script src="{% static 'js/hobbies.js' %}" 
+        data-save-url="{% url 'save_hobbies' %}" 
+        data-user-hobbies="{{ user_hobbies|default:'[]'|safe }}">
+    </script>
 </body>
 </html>
