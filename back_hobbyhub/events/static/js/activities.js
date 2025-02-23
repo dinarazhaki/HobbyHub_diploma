@@ -207,6 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 // Функции для работы с модальными окнами
+
+});
 function openModal() {
     document.getElementById("eventModal").style.display = "flex";
 }
@@ -255,5 +257,4 @@ document.getElementById("eventForm").addEventListener("submit", function(event) 
     .catch(error => {
         console.error('Error:', error);
     });
-});
 });
