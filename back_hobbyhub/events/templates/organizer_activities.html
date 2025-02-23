@@ -42,142 +42,171 @@
     </section>
 
        <section class="container-act">
-        <aside class="filter-panel">
-            <h4>Filter</h4>
-            <h5>Hobbies</h5>
-            <ul id="hobby-filters">
-                <li><input type="checkbox" value="Photography"> Photography</li>
-                <li><input type="checkbox" value="Technology"> Technology</li>
-                <li><input type="checkbox" value="Music"> Music</li>
-                <li><input type="checkbox" value="Cooking"> Cooking</li>
-                <li><input type="checkbox" value="Writing"> Writing</li>
-                <li><input type="checkbox" value="Crafting"> Crafting</li>
-                <li><input type="checkbox" value="Gardening"> Gardening</li>
-                <li><input type="checkbox" value="Dance"> Dance</li>
-                <li><input type="checkbox" value="Outdoor Adventure"> Outdoor Adventure</li>
-            </ul>
-            <h5>Activities from your groups</h5>
-            <input type="date" id="date-filter">
-            <h5>Type</h5>
-            <ul>
-                <li><input type="checkbox" value="Indoor"> Offline - Indoor</li>
-                <li><input type="checkbox" value="Outdoor"> Offline - Outdoor</li>
-            </ul>
-        </aside>
-        <main class="event-list">
-            <div class="creation">
-                <h3 style="padding-bottom: 10px;">Bring your community together—create an event!</h3>
-                <button class="create-event-btn" onclick="openModal()">Create Event</button>
-        
-                <!-- Popup Form Modal -->
-                <div id="eventModal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <h2>Create an Event</h2>
-                        <form id="eventForm" onsubmit="submitForm(event)">
-                            <label>Event Cover Image:</label>
-                            <input type="file" id="event-image" accept="image/*">
-        
-                            <label>Activity Name:</label>
-                            <input type="text" id="event-name" required>
-        
-                            <label>Description:</label>
-                            <textarea id="event-description" rows="3" required></textarea>
-        
-                            <label>Hobbies Related:</label>
-                            <div id="hobby-container">
-                                <span class="hobby-option" data-value="Photography">Photography</span>
-                                <span class="hobby-option" data-value="Technology">Technology</span>
-                                <span class="hobby-option" data-value="Music">Music</span>
-                                <span class="hobby-option" data-value="Cooking">Cooking</span>
-                                <span class="hobby-option" data-value="Writing">Writing</span>
-                                <span class="hobby-option" data-value="Crafting">Crafting</span>
-                                <span class="hobby-option" data-value="Gardening">Gardening</span>
-                                <span class="hobby-option" data-value="Dance">Dance</span>
-                                <span class="hobby-option" data-value="Outdoor Adventure">Outdoor Adventure</span>
-                            </div>
-                            <input type="hidden" id="event-hobbies" name="event-hobbies">
-
-        
-                            <label>Location:</label>
-                            <input type="text" id="event-location" required>
-        
-                            <label>Date:</label>
-                            <input type="date" id="event-date" required>
-        
-                            <label>Time:</label>
-                            <input type="time" id="event-time" required>
-        
-                            <label>Diamonds Earned:</label>
-                            <select id="event-diamonds">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="40">40</option>
-                                <option value="50">50</option>
-                            </select>
-        
-                            <label>Quota (Max Attendees):</label>
-                            <input type="number" id="event-quota" min="1" required>
-        
-                            <button type="submit" class="submit-btn">Create Event</button>
-                        </form>
+            <aside class="filter-panel">
+                <h4>Filter</h4>
+                <h5>Hobbies</h5>
+                <ul id="hobby-filters">
+                    {% for hobby in hobbies %}
+                        <li>
+                            <input type="checkbox" value="{{ hobby.name }}"> {{ hobby.name }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h5>Activities from your groups</h5>
+                <input type="date" id="date-filter">
+                <h5>Type</h5>
+                <ul>
+                    <li><input type="checkbox" value="Indoor"> Offline - Indoor</li>
+                    <li><input type="checkbox" value="Outdoor"> Offline - Outdoor</li>
+                </ul>
+            </aside>
+            <main class="event-list">
+                <div class="creation">
+                    <h3 style="padding-bottom: 10px;">Bring your community together—create an event!</h3>
+                    <button class="create-event-btn" onclick="openModal()">Create Event</button>
+            
+                    <!-- Popup Form Modal -->
+                    <div id="eventModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal()">&times;</span>
+                            <h2>Create an Event</h2>
+                            <form id="eventForm" action="{% url 'create_event' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <label>Event Cover Image:</label>
+                                <input type="file" id="event-image" name="event-image" accept="image/*">
+                    
+                                <label>Activity Name:</label>
+                                <input type="text" id="event-name" name="event-name" required>
+                    
+                                <label>Description:</label>
+                                <textarea id="event-description" name="event-description" rows="3" required></textarea>
+                    
+                                <label>Hobbies Related:</label>
+                                <div id="hobby-container">
+                                    {% for hobby in hobbies %}
+                                        <span class="hobby-option" data-value="{{ hobby.name }}">{{ hobby.name }}</span>
+                                    {% endfor %}
+                                </div>
+                                <input type="hidden" id="event-hobbies" name="event-hobbies">
+                    
+                                <label>Location:</label>
+                                <input type="text" id="event-location" name="event-location" required>
+                    
+                                <label>Date:</label>
+                                <input type="date" id="event-date" name="event-date" required>
+                    
+                                <label>Time:</label>
+                                <input type="time" id="event-time" name="event-time" required>
+                    
+                                <label>Diamonds Earned:</label>
+                                <select id="event-diamonds" name="event-diamonds">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                </select>
+                    
+                                <label>Quota (Max Attendees):</label>
+                                <input type="number" id="event-quota" name="event-quota" min="1" required>
+                    
+                                <button type="submit" class="submit-btn">Create Event</button>
+                            </form>
+                        </div>
+                    </div>
+            
+                    <!-- Confirmation Message -->
+                    <div id="confirmationBox" class="confirmation-box">
+                        <div class="checkmark"></div>
+                        <p>Event created successfully!</p>
+                        <button onclick="closeConfirmation()">OK</button>
                     </div>
                 </div>
-        
-                <!-- Confirmation Message -->
-                <div id="confirmationBox" class="confirmation-box">
-                    <div class="checkmark"></div>
-                    <p>Event created successfully!</p>
-                    <button onclick="closeConfirmation()">OK</button>
-                </div>
-            </div>
-            <h4>Today</h4>
-            <div id="today-events">
-                {% if today_events %}
+                <h4>Today</h4>
+                <div id="today-events">
                     {% for event in today_events %}
-                    <a href="{% url 'activity_details' event.id %}" class="event-link">
-                        <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}">
-                            <div class="event-image">
-                                <img src="{{ event.image }}" alt="{{ event.title }}">
-                            </div>
-                            <div class="event-details">
-                                <h3>{{ event.title }}</h3>
-                                <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
-                                <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
-                            </div>
+                        <div class="event-container">
+                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                    <div class="event-image">
+                                        <img src="{{ event.image }}" alt="{{ event.title }}">
+                                    </div>
+                                    <div class="event-details">
+                                        <h3>{{ event.title }}</h3>
+                                        <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
+                                        <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
+                                        <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
+                                    </div>
+                                </div>
                         </div>
-                    </a>
                     {% endfor %}
-                {% else %}
-                    <p>No events for today.</p>
-                {% endif %}
-            </div>
-            <h4>Other Dates</h4>
-            <div id="other-events">
-                {% if other_events %}
+                    <p id="no-events-today" style="display: none;">No events for today match the selected filters.</p>
+                </div>
+                <h4>Other Dates</h4>
+                <div id="other-events">
                     {% for event in other_events %}
-                    <a href="{% url 'activity_details' event.id %}" class="event-link">
-                        <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}">
-                            <div class="event-image">
-                                <img src="{{ event.image }}" alt="{{ event.title }}">
-                            </div>
-                            <div class="event-details">
-                                <h3>{{ event.title }}</h3>
-                                <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
-                                <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
-                            </div>
+                        <div class="event-container">
+                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                    <div class="event-image">
+                                        <img src="{{ event.image }}" alt="{{ event.title }}">
+                                    </div>
+                                    <div class="event-details">
+                                        <h3>{{ event.title }}</h3>
+                                        <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
+                                        <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
+                                        <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
+                                    </div>
+                                </div> 
                         </div>
-                    </a>
                     {% endfor %}
-                {% else %}
-                    <p>No events for other dates.</p>
-                {% endif %}
-            </div>
-        </main>
-</section>
-
-
+                    <p id="no-events-other" style="display: none;">No events for other dates match the selected filters.</p>
+                </div>
+                
+            </main>
+    </section>
+    <div id="editEventModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Event</h2>
+            <form id="editEventForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" id="edit-event-id" name="event-id">
+                <label>Activity Name:</label>
+                <input type="text" id="edit-event-name" name="title" required>
+                <label>Description:</label>
+                <textarea id="edit-event-description" name="description" rows="3" required></textarea>
+                <label>Hobbies Related:</label>
+                <div id="edit-hobby-container">
+                    {% for hobby in hobbies %}
+                        <span class="hobby-option" data-value="{{ hobby.name }}">{{ hobby.name }}</span>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="edit-event-hobbies" name="hobbies">
+                <label>Location:</label>
+                <input type="text" id="edit-event-location" name="location" required>
+                <label>Date:</label>
+                <input type="date" id="edit-event-date" name="date" required>
+                <label>Time:</label>
+                <input type="time" id="edit-event-time" name="time" required>
+                <label>Diamonds Earned:</label>
+                <select id="edit-event-diamonds" name="diamonds">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
+                <label>Quota (Max Attendees):</label>
+                <input type="number" id="edit-event-quota" name="quota" min="1" required>
+                <button type="submit" class="submit-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -217,6 +246,5 @@
     </footer>
 
 
-  
 </body>
 </html>

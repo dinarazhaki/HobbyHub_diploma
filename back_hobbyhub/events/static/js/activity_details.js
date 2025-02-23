@@ -30,3 +30,4 @@ function toggleDivs() {
         secondDivs[i].classList.remove("hidden");
     }
 }
+

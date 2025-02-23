@@ -19,6 +19,12 @@ urlpatterns = [
     path('user_profile/setting/language/', user_language, name='user_language'),
     path('user_profile/setting/notification_preferences/', user_notification, name='user_notification'),
     path('user_profile/setting/privacy/', user_privacy, name='user_privacy'),
+    
+    path('user_activities/', user_activities, name='user_activities'),
+    path('activity/<int:event_id>/', activity_details, name='activity_details'),
+    path('apply_to_event/<int:event_id>/', apply_to_event, name='apply_to_event'),
+    path('cancel_event_registration/<int:event_id>/', cancel_event_registration, name='cancel_event_registration'),
+    
 
     # Профиль организатора
     path('organizer_profile/', organizer_profile, name='organizer_profile'),
@@ -26,8 +32,19 @@ urlpatterns = [
     path("organizer/update-settings/", update_organizer_profile, name="update_organizer_profile"),
     path("organizer/remove_profile_photo/", remove_organizer_profile_photo, name="remove_organizer_profile_photo"),
     path('activities/', organizer_activities, name='activities'),
+    path('create_event/', create_event, name='create_event'),
+    path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
+    path('get_event_details/<int:event_id>/', get_event_details, name='get_event_details'),
+    path('edit_event/<int:event_id>/', edit_event, name='edit_event'),
+    
+    path('employees/', employees, name='employees'),
+    path('approve_employee/', approve_employee, name='approve_employee'),
+    path('deny_employee/', deny_employee, name='deny_employee'),
+    path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
 
-    # Аутентификацияa
+    
+    
+    # Аутентификация
     path('sign_in/', sign_in, name='sign_in'),
     path('sign_up/', sign_up, name='sign_up'),
     path('hobbies/', hobbies, name='hobbies'),
@@ -35,14 +52,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),  # Встроенный обработчик
 
     
-    # Дополнительные страницы
-    path('employees/', employees, name='employees'),
-    path('approve_employee/', approve_employee, name='approve_employee'),
-    path('deny_employee/', deny_employee, name='deny_employee'),
-    path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
 
     
-    #!!!!! need to update
-    path('user_activities/', user_activities, name='user_activities'),
-    path('activity/<int:event_id>/', activity_details, name='activity_details'),
+    
 ]

@@ -8,28 +8,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
-
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         var eventsData = {{ events_data|safe }};
     </script>
-    
     <script src="{% static 'js/user.js' %}"></script>
-    
 </head>
 <body>
 
     <!-- Header -->
     <section class="header">
-        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
             <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'user_activities'%}">Activities</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Challenges</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Leaderboard</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Profile Lookup</a></li>
@@ -40,128 +37,68 @@
                 <button class="btn btn-gradient">Profile</button>
             </div>
         </nav>
-        </section>
+    </section>
 
-        <div class="container mt-4">
-            <div class="row  mainpartpro">
-                <div class="col-md-2">
-                    <div class="sidebar p-4">
-                        {% if user.profile_photo %}
-                            <img src="{{ user.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% else %}
-                            <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% endif %}                 
-                        <h5>{{ user.name }}</h5>
-                        <p><i class="bi bi-gem"></i> 25</p>
-                            <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
-                            <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="{% url 'user_setting' %}" >   Settings</a></div>
-                    </div>
+    <div class="container mt-4">
+        <div class="row mainpartpro">
+            <div class="col-md-2">
+                <div class="sidebar p-4">
+                    {% if user.profile_photo %}
+                        <img src="{{ user.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80">
+                    {% else %}
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                    {% endif %}                 
+                    <h5>{{ user.name }}</h5>
+                    <p><i class="bi bi-gem"></i> 25</p>
+                    <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
+                    <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="{% url 'user_setting' %}">   Settings</a></div>
                 </div>
-                <div class="col-md-10 mainpartpro">
-                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
-                    <div class="navbar user_det">
-                        <div class="tab " ><a href="{% url 'user_profile' %}">Your Information</a></div> 
-                        <div class="tab act-active-tab" ><a href="{% url 'profile_user_act' %}">Your Activities</a></div> 
-                        <div class="tab" ><a href="{% url 'user_achievements' %}">Achievements</a></div>
-                    </div>
-                    
-                    <!-- Activities -->
-                    <div class="events-container">
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="{% static 'images/photo_walk.jpg' %}" alt="Photography Walk">
-                            </div>
-                            <div class="event-details">
-                                <h3>Photography Walk</h3>
-                                <p>
-                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                    May 10, 2025
-                                </p>
-                                <p>
-                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                    Botanical Garden
-                                </p>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-10 mainpartpro">
+                <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid mb-3" alt="Banner">
+                <div class="navbar user_det">
+                    <div class="tab"><a href="{% url 'user_profile' %}">Your Information</a></div> 
+                    <div class="tab act-active-tab"><a href="{% url 'profile_user_act' %}">Your Activities</a></div> 
+                    <div class="tab"><a href="{% url 'user_achievements' %}">Achievements</a></div>
+                </div>
                 
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="{% static 'images/origami.jpg' %}" alt="Origami Workshop">
-                            </div>
-                            <div class="event-details">
-                                <h3>Origami Workshop</h3>
-                                <p>
-                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                    June 9, 2025
-                                </p>
-                                <p>
-                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                    Art Studio
-                                </p>
-                            </div>
-                        </div>
-                
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="{% static 'images/code_for_fun.jpg' %}" alt="Coding for Fun">
-                            </div>
-                            <div class="event-details">
-                                <h3>Coding for Fun</h3>
-                                <p>
-                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                    May 15, 2025
-                                </p>
-                                <p>
-                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                    Tech Club
-                                </p>
-                            </div>
-                        </div>
-                
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="{% static 'images/cook_chal.png' %}" alt="Cooking Challenge">
-                            </div>
-                            <div class="event-details">
-                                <h3>Cooking Challenge</h3>
-                                <p>
-                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                    May 28, 2025
-                                </p>
-                                <p>
-                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                    Office Kitchen
-                                </p>
-                            </div>
-                        </div>
-                
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="{% static 'images/guitar_jam.jpg' %}" alt="Guitar Jam">
-                            </div>
-                            <div class="event-details">
-                                <h3>Guitar Jam</h3>
-                                <p>
-                                    <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                    May 25, 2025
-                                </p>
-                                <p>
-                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                    Art Studio
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Activities -->
+                <div class="events-container">
+                    {% if registered_events %}
+                        {% for event in registered_events %}
+                            <a href="{% url 'activity_details' event.id %}" class="event-link" >
 
-                    
-                    
-
+                                <div class="event-card">
+                                    <div class="event-image">
+                                        {% if event.image %}
+                                            <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                                        {% else %}
+                                            <img src="{% static 'images/default_event.jpg' %}" alt="{{ event.title }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="event-details">
+                                        <h3>{{ event.title }}</h3>
+                                        <p>
+                                            <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
+                                            {{ event.date }} at {{ event.time }}
+                                        </p>
+                                        <p>
+                                            <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
+                                            {{ event.location }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p>You have not registered for any events yet.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
+    </div>
 
-
-        <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -198,10 +135,5 @@
             </div>
         </div>
     </footer>
-
-
-  
 </body>
 </html>
-
-

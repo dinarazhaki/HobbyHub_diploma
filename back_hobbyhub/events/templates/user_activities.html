@@ -47,16 +47,13 @@
                 <h4 >Filter</h4>
                 <h5 style="margin-top: 20px">Hobbies</h5>
                 <ul id="hobby-filters">
-                    <li><input type="checkbox" value="Photography"> Photography</li>
-                    <li><input type="checkbox" value="Technology"> Technology</li>
-                    <li><input type="checkbox" value="Music"> Music</li>
-                    <li><input type="checkbox" value="Cooking"> Cooking</li>
-                    <li><input type="checkbox" value="Writing"> Writing</li>
-                    <li><input type="checkbox" value="Crafting"> Crafting</li>
-                    <li><input type="checkbox" value="Gardening"> Gardening</li>
-                    <li><input type="checkbox" value="Dance"> Dance</li>
-                    <li><input type="checkbox" value="Outdoor Adventure"> Outdoor Adventure</li>
+                    {% for hobby in hobbies %}
+                        <li>
+                            <input type="checkbox" value="{{ hobby.name }}"> {{ hobby.name }}
+                        </li>
+                    {% endfor %}
                 </ul>
+                
     
                 <h5 style="margin-top: 20px">Activities from your groups</h5>
                 <input type="date" id="date-filter">
@@ -71,66 +68,47 @@
             <main class="event-list" style="padding-left: 50px;">
                 <h2>Today</h2>
                 <div id="today-events">
-                    {% if today_events %}
-                        {% for event in today_events %}
-                        <a href="{% url 'activity_details' event.id %}" class="event-link" >
-                            <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}" >
-                                <div class="event-image">
-                                    {% comment %} {% if event.image %} {% endcomment %}
-                                    <img src="{{ event.image }}" alt="{{ event.title }}">
-                                    {% comment %} {% else %}
-                                    <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
-                                    {% endif %} {% endcomment %}
+                    {% for event in today_events %}
+                    <a href="{% url 'activity_details' event.id %}" class="event-link" >
+
+                        <div class="event-container">
+                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                    <div class="event-image">
+                                        <img src="{{ event.image }}" alt="{{ event.title }}">
+                                    </div>
+                                    <div class="event-details">
+                                        <h3>{{ event.title }}</h3>
+                                        <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
+                                        <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                    </div>
                                 </div>
-                                <div class="event-details">
-                                    <h3>{{ event.title }}</h3>
-                                    <p>
-                                        <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                        {{ event.date }} at {{ event.time }}
-                                    </p>
-                                    <p>
-                                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                        {{ event.location }}
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        {% endfor %}
-                    {% else %}
-                        <p id="no-events-today">No events for today.</p>
-                    {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+                    <p id="no-events-today" style="display: none;">No events for today match the selected filters.</p>
                 </div>
             
                 <h2>Other Dates</h2>
                 <div id="other-events">
-                    {% if other_events %}
-                        {% for event in other_events %}
+                    {% for event in other_events %}
                         <a href="{% url 'activity_details' event.id %}" class="event-link">
-                            <div class="event event-card" data-date="{{ event.date }}" data-type="{{ event.hobby_type }}" data-hobby="{{ event.hobby_type }}">
-                                <div class="event-image">
-                                    {% comment %} {% if event.image %} {% endcomment %}
-                                    <img src="{{ event.image }}" alt="{{ event.title }}">
-                                    {% comment %} {% else %}
-                                    <img src="{% static 'images/default_event_image.jpg' %}" alt="{{ event.title }}">
-                                    {% endif %} {% endcomment %}
-                                </div>
-                                <div class="event-details">
-                                    <h3>{{ event.title }}</h3>
-                                    <p>
-                                        <img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">
-                                        {{ event.date }} at {{ event.time }}
-                                    </p>
-                                    <p>
-                                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">
-                                        {{ event.location }}
-                                    </p>
-                                </div>
+
+                            <div class="event-container">
+                                    <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                        <div class="event-image">
+                                            <img src="{{ event.image }}" alt="{{ event.title }}">
+                                        </div>
+                                        <div class="event-details">
+                                            <h3>{{ event.title }}</h3>
+                                            <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
+                                            <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                        </div>
+                                        
+                                    </div> 
                             </div>
                         </a>
-                        {% endfor %}
-                    {% else %}
-                        <p id="no-events-other">No events for other dates.</p>
-                    {% endif %}
+                    {% endfor %}
+                    <p id="no-events-other" style="display: none;">No events for other dates match the selected filters.</p>
                 </div>
             </main>
         </div>

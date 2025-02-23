@@ -18,14 +18,14 @@
 
     <!-- Header -->
     <section class="header">
-        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
-            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'user_view'%}">HobbyHub</span></a>
+        <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'user_view' %}">HobbyHub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'user_activities'%}">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'user_activities' %}">Activities</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Challenges</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Leaderboard</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="#">Profile Lookup</a></li>
@@ -33,7 +33,7 @@
             </div>
             <div class="d-flex">
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
-                <button class="btn btn-gradient" ><a href="{% url 'user_profile'%}" style="text-decoration: none; color: #fff;">Profile</a></button>
+                <button class="btn btn-gradient"><a href="{% url 'user_profile' %}" style="text-decoration: none; color: #fff;">Profile</a></button>
             </div>
         </nav>
     </section>
@@ -45,10 +45,19 @@
                 <h2 class="gradient-text">{{ event.title }}</h2>
                 <p>{{ event.description }}</p>
                 <div class="tags">
-                    <span class="tag food">{{ event.hobby_type }}</span>
-                    <span class="points">&#128176; 25</span>
+                    <span class="tag food">{{ event.hobbies.all|join:", " }}</span>
+                    <span class="points">&#128176; {{ event.diamonds }}</span>
                 </div>
-                <button class="apply-btn" onclick="toggleDivs()">Apply</button>
+                <div class="tags">
+                    
+                    <span class="quota">&#128100; {{ event.spots_left }} spots left</span>
+                </div>
+                {% if user_is_registered %}
+                    <button class="cancel-btn" data-event-id="{{ event.id }}" onclick="cancelEventRegistration({{ event.id }})">Cancel Registration</button>
+                {% else %}
+                    <button class="apply-btn" data-event-id="{{ event.id }}" onclick="applyToEvent({{ event.id }})">Apply</button>
+                {% endif %}
+                <div id="status-message" class="status-message"></div>
             </div>
 
             <div class="secondContainer hidden">
@@ -123,7 +132,74 @@
             </div>
         </div>
     </footer>
-
     <script src="{% static 'js/activity_details.js' %}"></script>
+
+    <script>
+        function showStatusMessage(message, isSuccess) {
+            const statusMessage = document.getElementById("status-message");
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${isSuccess ? 'success' : 'error'}`;
+            statusMessage.style.display = 'block';
+
+            // Скрываем сообщение через 3 секунды
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 1500);
+        }
+
+        function applyToEvent(eventId) {
+            fetch(`/apply_to_event/${eventId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    showStatusMessage(data.message, true);
+                    // Обновляем страницу через 3 секунды
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showStatusMessage(data.message, false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showStatusMessage("An error occurred. Please try again.", false);
+            });
+        }
+
+        function cancelEventRegistration(eventId) {
+            fetch(`/cancel_event_registration/${eventId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    showStatusMessage(data.message, true);
+                    // Обновляем страницу через 3 секунды
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showStatusMessage(data.message, false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showStatusMessage("An error occurred. Please try again.", false);
+            });
+        }
+    </script>
 </body>
 </html>

@@ -55,7 +55,7 @@
                             <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
                         {% endif %}                 
                         <h5>{{ user.name }}</h5>
-                        <p><i class="bi bi-gem"></i> 25</p>
+                        <p><i class="bi bi-gem"></i> {{ user.diamonds }}</p>
                             <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="#">   Profile Info</a></div>
                             <div class="pro-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="{% url 'user_setting' %}" >   Settings</a></div>
                     </div>

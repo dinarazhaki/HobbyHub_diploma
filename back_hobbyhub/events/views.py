@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from functools import wraps
+from django.urls import reverse
 
     
 def role_required(role):
@@ -44,13 +45,110 @@ def approval_required(view_func):
 
 def activity_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)  # Получаем событие по ID или возвращаем 404
-    return render(request, 'activity_details.html', {'event': event})
+    nickname = request.session.get("nickname")
+    user_is_registered = False
+
+    if nickname:
+        try:
+            employee = Employee.objects.get(nickname=nickname)
+            user_is_registered = event.participants.filter(nickname=nickname).exists()
+        except Employee.DoesNotExist:
+            pass
+
+    return render(request, 'activity_details.html', {
+        'event': event,
+        'user_is_registered': user_is_registered,
+    })
+    
+@csrf_exempt
+def apply_to_event(request, event_id):
+    if request.method == 'POST':
+        nickname = request.session.get('nickname')
+        if not nickname:
+            return JsonResponse({"status": "error", "message": "User not authenticated"}, status=401)
+
+        try:
+            employee = Employee.objects.get(nickname=nickname)
+            event = get_object_or_404(Event, id=event_id)
+
+            # Проверяем, не записан ли уже сотрудник
+            if event.participants.filter(nickname=nickname).exists():
+                return JsonResponse({"status": "error", "message": "You are already registered for this event"}, status=400)
+
+            # Проверяем, есть ли свободные места
+            if event.spots_left <= 0:
+                return JsonResponse({"status": "error", "message": "No spots left"}, status=400)
+
+            # Записываем сотрудника на ивент
+            event.participants.add(employee)
+            event.save()
+
+            return JsonResponse({
+                "status": "success",
+                "message": "You have successfully registered for the event",
+                "spots_left": event.spots_left,
+            })
+        except Employee.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Employee not found"}, status=404)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+
+@csrf_exempt
+def cancel_event_registration(request, event_id):
+    if request.method == 'POST':
+        nickname = request.session.get('nickname')
+        if not nickname:
+            return JsonResponse({"status": "error", "message": "User not authenticated"}, status=401)
+
+        try:
+            employee = Employee.objects.get(nickname=nickname)
+            event = get_object_or_404(Event, id=event_id)
+
+            # Проверяем, записан ли сотрудник на ивент
+            if not event.participants.filter(nickname=nickname).exists():
+                return JsonResponse({"status": "error", "message": "You are not registered for this event"}, status=400)
+
+            # Отменяем запись сотрудника на ивент
+            event.participants.remove(employee)
+            event.save()
+
+            return JsonResponse({
+                "status": "success",
+                "message": "You have successfully canceled your registration for the event",
+                "spots_left": event.spots_left,
+            })
+        except Employee.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Employee not found"}, status=404)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
 
 @role_required("employee")
 @approval_required
 def user_activities(request):
     today = timezone.now().date()  # Получаем текущую дату
-    events = Event.objects.all()
+
+    # Получаем сотрудника из сессии
+    nickname = request.session.get("nickname")
+    if not nickname:
+        return redirect("sign_in")
+
+    try:
+        employee = Employee.objects.get(nickname=nickname)
+    except Employee.DoesNotExist:
+        return redirect("sign_in")
+
+    # Получаем компанию сотрудника
+    company = employee.company
+
+    # Получаем все события компании
+    events = Event.objects.filter(company=company)
+
+    # Получаем хобби сотрудника
+    hobbies = Hobby.objects.all()
 
     # Разделяем события на сегодняшние и остальные
     today_events = []
@@ -58,24 +156,30 @@ def user_activities(request):
 
     for event in events:
         event_data = {
-            'id': event.id,  # Убедитесь, что передаете id события
+            'id': event.id,
             'title': event.title,
             'description': event.description,
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
-            'hobby_type': event.hobby_type,
-            'image': event.image.url if event.image else None,  # Используйте .url для ImageField
+            'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
+            'image': event.image.url if event.image else None,
         }
 
         if event.date == today:
             today_events.append(event_data)
         else:
             other_events.append(event_data)
-
+            
+        events_data = json.dumps({
+                'today_events': today_events,
+                'other_events': other_events,
+        })
     return render(request, 'user_activities.html', {
         'today_events': today_events,
         'other_events': other_events,
+        'hobbies': hobbies,
+        'events_data': events_data,
     })
     
     
@@ -179,12 +283,11 @@ def save_hobbies(request):
             selected_hobbies = request.POST.getlist('hobbies[]')
             hobbies = Hobby.objects.filter(id__in=selected_hobbies)
             user.hobbies.set(hobbies)
-            return redirect("sign_in")
+            return JsonResponse({"status": "success", "redirect_url": reverse("sign_in")})
         except Exception as e:
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
     return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
-
 
 @role_required("employee")
 @approval_required
@@ -269,7 +372,20 @@ def user_view(request):
 
 
 def profile_user_act(request):
-    return render(request, 'profile_user_act.html')
+    nickname = request.session.get("nickname")
+    if not nickname:
+        return redirect("sign_in")
+
+    try:
+        employee = Employee.objects.get(nickname=nickname)
+        registered_events = employee.events.all()  # Получаем все ивенты, на которые записан сотрудник
+    except Employee.DoesNotExist:
+        return redirect("sign_in")
+
+    return render(request, 'profile_user_act.html', {
+        'user': employee,
+        'registered_events': registered_events,  # Передаем записанные ивенты в шаблон
+    })
 
 def user_achievements(request):
     return render(request, 'user_achievements.html')
@@ -449,24 +565,34 @@ def sign_in(request):
 
 
 #Activity list for organizers
-def organizer_activities(request):
-    today = timezone.now().date()  # Получаем текущую дату
-    events = Event.objects.all()
 
-    # Разделяем события на сегодняшние и остальные
+def organizer_activities(request):
+    today = timezone.now().date()
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return redirect("sign_in")
+
+    try:
+        current_company = Company.objects.get(id=company_id)
+    except Company.DoesNotExist:
+        return redirect("sign_in")
+
+    events = Event.objects.filter(company=current_company)
+    hobbies = Hobby.objects.all()
+
     today_events = []
     other_events = []
 
     for event in events:
         event_data = {
-            'id': event.id,  # Убедитесь, что передаете id события
+            'id': event.id,
             'title': event.title,
             'description': event.description,
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
-            'hobby_type': event.hobby_type,
-            'image': event.image.url if event.image else None,  # Используйте .url для ImageField
+            'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
+            'image': event.image.url if event.image else None,
         }
 
         if event.date == today:
@@ -477,4 +603,109 @@ def organizer_activities(request):
     return render(request, 'organizer_activities.html', {
         'today_events': today_events,
         'other_events': other_events,
+        'hobbies': hobbies,
     })
+
+def create_event(request):
+    if request.method == 'POST':
+        company_id = request.session.get("company_id")
+        if not company_id:
+            return redirect("sign_in")
+
+        try:
+            current_company = Company.objects.get(id=company_id)
+        except Company.DoesNotExist:
+            return redirect("sign_in")
+
+        event = Event(
+            title=request.POST.get('event-name'),
+            description=request.POST.get('event-description'),
+            location=request.POST.get('event-location'),
+            date=request.POST.get('event-date'),
+            time=request.POST.get('event-time'),
+            diamonds=request.POST.get('event-diamonds'),
+            quota=request.POST.get('event-quota'),
+            company=current_company,
+        )
+
+        if 'event-image' in request.FILES:
+            event.image = request.FILES['event-image']
+
+        event.save()
+
+        # Добавляем хобби к событию
+        selected_hobbies = request.POST.get('event-hobbies').split(',')
+        for hobby_name in selected_hobbies:
+            hobby, _ = Hobby.objects.get_or_create(name=hobby_name.strip())
+            event.hobbies.add(hobby)
+
+        return redirect('activities')
+
+    return render(request, 'organizer_activities.html')
+
+
+@csrf_exempt
+def delete_event(request, event_id):
+    if request.method == 'DELETE':
+        try:
+            event = Event.objects.get(id=event_id)
+            event.delete()
+            return JsonResponse({'success': True})
+        except Event.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+
+
+@csrf_exempt
+def get_event_details(request, event_id):
+    try:
+        event = Event.objects.get(id=event_id)
+        event_data = {
+            'id': event.id,
+            'title': event.title,
+            'description': event.description,
+            'location': event.location,
+            'date': event.date.strftime('%Y-%m-%d'),
+            'time': event.time.strftime('%H:%M'),
+            'diamonds': event.diamonds,
+            'quota': event.quota,
+            'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Список хобби
+        }
+        return JsonResponse({'success': True, 'event': event_data})
+    except Event.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
+
+@csrf_exempt
+def edit_event(request, event_id):
+    if request.method == 'POST':
+        try:
+            event = Event.objects.get(id=event_id)
+            event.title = request.POST.get('title', event.title)
+            event.description = request.POST.get('description', event.description)
+            event.location = request.POST.get('location', event.location)
+            event.date = request.POST.get('date', event.date)
+            event.time = request.POST.get('time', event.time)
+            event.diamonds = request.POST.get('diamonds', event.diamonds)
+            event.quota = request.POST.get('quota', event.quota)
+
+            if 'image' in request.FILES:
+                event.image = request.FILES['image']
+
+            # Обновляем хобби (только существующие)
+            selected_hobbies = request.POST.get('hobbies', '').split(',')
+            event.hobbies.clear()
+            for hobby_name in selected_hobbies:
+                hobby_name = hobby_name.strip()
+                if hobby_name:  # Проверяем, что название хобби не пустое
+                    try:
+                        hobby = Hobby.objects.get(name=hobby_name)  # Ищем существующее хобби
+                        event.hobbies.add(hobby)
+                    except Hobby.DoesNotExist:
+                        # Если хобби не существует, игнорируем его
+                        continue
+
+            event.save()
+            return JsonResponse({'success': True})
+        except Event.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)

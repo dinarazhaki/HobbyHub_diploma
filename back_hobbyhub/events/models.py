@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from django.utils import timezone
 
 class CompanyManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -67,6 +67,7 @@ class Employee(models.Model):
     is_approved = models.BooleanField(default=False, verbose_name="Approved")
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, verbose_name="Profile Photo")
     hobbies = models.ManyToManyField(Hobby, blank=True, related_name='employees')
+    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")  # Новое поле для валюты
 
     def save(self, *args, **kwargs):
         if not self.password.startswith('pbkdf2_sha256$'):
@@ -85,13 +86,23 @@ class Event(models.Model):
     location = models.CharField(max_length=250)
     date = models.DateField()
     time = models.TimeField()
-    hobby_type = models.CharField(max_length=150)
+    hobbies = models.ManyToManyField(Hobby, related_name='events')  # Связь многие ко многим
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
-
+    company = models.ForeignKey(
+        Company, 
+        to_field='company_id',  
+        on_delete=models.CASCADE, 
+        verbose_name="Company"
+    )
+    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")  # Новое поле
+    quota = models.IntegerField(default=10, verbose_name="Quota")      # Новое поле
+    participants = models.ManyToManyField(Employee, related_name='events', blank=True)
+    
     def __str__(self):
         return self.title
-
-
-
+    
+    @property
+    def spots_left(self):
+        return self.quota - self.participants.count()
 
 
