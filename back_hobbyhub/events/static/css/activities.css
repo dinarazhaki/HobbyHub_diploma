@@ -126,7 +126,7 @@ input[type="checkbox"]:checked {
 /*Symbats section*/
  /* Button */
  .create-event-btn {
-    background-color: #FF6A00; /* Vibrant orange */
+    background: linear-gradient(to right, red, yellow);
     color: #fff; /* White text */
     padding: 12px 24px;
     font-size: 16px;
@@ -144,7 +144,52 @@ input[type="checkbox"]:checked {
 }
 
 .create-event-btn:active {
-    background-color: #CC5200;
+    background-color: #E65C00;
+    transform: scale(0.98);
+}
+/* Button */
+.edit-event-btn {
+    background-color: cornflowerblue; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.edit-event-btn:hover {
+    background-color: cornflowerblue;
+    transform: scale(1.05);
+}
+
+.edit-event-btn:active {
+    background-color: cornflowerblue;
+    transform: scale(0.98);
+}
+.delete-event-btn {
+    background-color: red; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.delete-event-btn:hover {
+    background-color: red;
+    transform: scale(1.05);
+}
+
+.delete-event-btn:active {
+    background-color: red;
     transform: scale(0.98);
 }
 
@@ -182,6 +227,19 @@ input[type="checkbox"]:checked {
     top: 10px;
     font-size: 24px;
     cursor: pointer;
+}
+
+#editEventForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#editEventForm label,
+#editEventForm input,
+#editEventForm select,
+#editEventForm textarea {
+    width: 48%;
 }
 
 /* Two-Column Form */
@@ -306,6 +364,12 @@ input, select, textarea {
 
 
 #hobby-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+#edit-hobby-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
