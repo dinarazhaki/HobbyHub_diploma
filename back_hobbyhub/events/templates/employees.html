@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employees</title>
-    <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/employees.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<!-- Header -->
-<section class="header">
+    <!-- Header -->
     <section class="header">
         <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
             <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</a>
@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'activities' %}">Activities</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
                     
                 </ul>
@@ -30,117 +30,117 @@
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
                 <button class="btn btn-gradient" ><a href="{% url 'organizer_profile'%}" style="text-decoration: none; color: #fff;">Profile</a></button>
             </div>
-    </nav>
-</section>
+        </nav>
+    </section>
 
-<section>
-    <main style="margin-top:50px; background-color: #f0f0f0" >
-        <h2>Employees</h2>
-        <div class="buttons">
-            <button id="new-requests-btn">New Employee Request</button>
-            <button id="your-employees-btn">Your Employees</button>
+    <section>
+        <main style="margin-top:50px; background-color: #f0f0f0; padding-top: 70px;" >
+            <h2>Employees</h2>
+            <div class="buttons">
+                <button id="new-requests-btn">New Employee Request</button>
+                <button id="your-employees-btn">Your Employees</button>
+            </div>
+
+            <!-- New Employee Requests Table -->
+            <table id="new-requests-table" class="employees-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all-new"></th>
+                        <th>Full Name & Email</th>
+                        <th>Phone Number</th>
+                        <th>Join Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="new-requests-body">
+                    {% for employee in new_requests %}
+                    <tr>
+                        <td><input type="checkbox" class="employee-checkbox req"></td>
+                        <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
+                        <td>{{ employee.number }}</td>
+                        <td>{{ employee.join_date }}</td>
+                        <td>
+                            <button class="approve-btn" data-nickname="{{ employee.nickname }}">Approve</button>
+                            <button class="remove-btn" data-nickname="{{ employee.nickname }}">Remove</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Your Employees Table -->
+            <table id="your-employees-table" class="employees-table hidden">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all-approved"></th>
+                        <th>Full Name & Email</th>
+                        <th>Phone Number</th>
+                        <th>Join Date</th>
+                        <th>Hobbies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in approved_employees %}
+                    <tr>
+                        <td><input type="checkbox" class="employee-checkbox emp"></td>
+                        <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
+                        <td>{{ employee.number }}</td>
+                        <td>{{ employee.join_date }}</td>
+                        <td>
+                            {% for hobby in employee.hobbies.all %}
+                                {{ hobby.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="action-buttons hidden">
+                <button id="approve-btn">Approve Employee</button>
+                <button id="deny-btn">Deny Employee</button>
+                <button id="delete-btn" class="hidden">Delete Employee</button>
+            </div>
+        </main>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-        <!-- New Employee Requests Table -->
-        <table id="new-requests-table" class="employees-table">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="select-all-new"></th>
-                    <th>Full Name & Email</th>
-                    <th>Phone Number</th>
-                    <th>Join Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="new-requests-body">
-                {% for employee in new_requests %}
-                <tr>
-                    <td><input type="checkbox" class="employee-checkbox req"></td>
-                    <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
-                    <td>{{ employee.number }}</td>
-                    <td>{{ employee.join_date }}</td>
-                    <td>
-                        <button class="approve-btn" data-nickname="{{ employee.nickname }}">Approve</button>
-                        <button class="remove-btn" data-nickname="{{ employee.nickname }}">Remove</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <!-- Your Employees Table -->
-        <table id="your-employees-table" class="employees-table hidden">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="select-all-approved"></th>
-                    <th>Full Name & Email</th>
-                    <th>Phone Number</th>
-                    <th>Join Date</th>
-                    <th>Hobbies</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for employee in approved_employees %}
-                <tr>
-                    <td><input type="checkbox" class="employee-checkbox emp"></td>
-                    <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
-                    <td>{{ employee.number }}</td>
-                    <td>{{ employee.join_date }}</td>
-                    <td>
-                        {% for hobby in employee.hobbies.all %}
-                            {{ hobby.name }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class="action-buttons hidden">
-            <button id="approve-btn">Approve Employee</button>
-            <button id="deny-btn">Deny Employee</button>
-            <button id="delete-btn" class="hidden">Delete Employee</button>
-        </div>
-    </main>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h4 class="fw-bold gradient-text">HobbyHub</h4>
-                <p>© 2025 All Rights Reserved</p>
-            </div>
-            <div class="col-md-3">
-                <h5>Links</h5>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Activities</a></li>
-                    <li><a href="#">Challenges</a></li>
-                    <li><a href="#">Leaderboard</a></li>
-                    <li><a href="#">Profile Lookup</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Help</h5>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Support</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Your Account</h5>
-                <ul>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
     <script src="{% static 'js/employees.js' %}"></script>
 </body>
 </html>

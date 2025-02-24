@@ -1,7 +1,16 @@
-@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Gilroy-bold', sans-serif;
+    font-family: 'Gilroy-Medium', sans-serif;
     background-color: #F5F5F5;
+}
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
 }
 
 /*table*/
@@ -52,13 +61,13 @@ main {
     font-weight: bold;
 }
 
-#approve-btn {
+.approve-btn {
     background-color: green;
     color: white;
     display: none;
 }
 
-#deny-btn {
+.remove-btn {
     background-color: red;
     color: white;
     display: none;
