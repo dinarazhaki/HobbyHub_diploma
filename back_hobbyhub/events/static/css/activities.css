@@ -5,7 +5,13 @@
     font-style: normal;
 }
 
+body{
+    font-family: 'Gilroy-Medium', sans-serif;
+}
 
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
+}
 
 .container-act {
     width: 100%;
@@ -129,6 +135,7 @@ input[type="checkbox"]:checked {
  .create-event-btn {
     background: linear-gradient(to right, red, yellow);
     color: #fff; /* White text */
+    font-family: 'Gilroy-Bold', sans-serif;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: bold;
@@ -270,7 +277,7 @@ input, select, textarea {
 
 /* Submit Button */
 .submit-btn {
-    background-color: #FF6A00;
+    background-color: #ff69b4;
     color: white;
     border: none;
     padding: 10px;
@@ -282,7 +289,7 @@ input, select, textarea {
 }
 
 .submit-btn:hover {
-    background-color: #E65C00;
+    background-color:linear-gradient(to right, red, #ff69b4);
 }
 
 /* Fade In Animation */
@@ -393,9 +400,9 @@ input, select, textarea {
 }
 
 .hobby-option.selected {
-    background-color: #FF6A00; /* Orange when selected */
+    background-color: #ff69b4; /* Orange when selected */
     color: white;
-    border: 1px solid #E65C00;
+    border: 1px solid #ff69b4;
 }
 
 
