@@ -593,6 +593,8 @@ def organizer_activities(request):
             'time': event.time.strftime('%H:%M'),
             'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
             'image': event.image.url if event.image else None,
+            'quota': event.quota,  # Общая квота
+            'participants_count': event.participants.count()
         }
 
         if event.date == today:

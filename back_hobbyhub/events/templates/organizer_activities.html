@@ -134,6 +134,7 @@
                                         <h3>{{ event.title }}</h3>
                                         <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
                                         <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                        <p>Participants: {{ event.participants_count }}/{{ event.quota }}</p>
                                     </div>
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
@@ -156,6 +157,7 @@
                                         <h3>{{ event.title }}</h3>
                                         <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
                                         <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
+                                        <p>Participants: {{ event.participants_count }}/{{ event.quota }}</p>
                                     </div>
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
