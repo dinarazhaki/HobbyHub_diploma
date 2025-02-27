@@ -13,13 +13,13 @@
 <body>
     <section class="header">
         <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
-            <a class="navbar-brand fw-bold gradient-text logo" href="#">HobbyHub</a>
+            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'organizer_view' %}">HobbyHub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="#">Activities</a></li>
+                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'activities' %}">Activities</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
                 </ul>
             </div>

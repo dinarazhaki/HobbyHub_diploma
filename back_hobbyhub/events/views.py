@@ -711,3 +711,7 @@ def edit_event(request, event_id):
         except Event.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+
+
+def leaderboard(request):
+    return render(request, 'leaderboard.html')
