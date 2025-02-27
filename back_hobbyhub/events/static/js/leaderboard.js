@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
         { rank: 3, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 89 },
         { rank: 4, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 80 },
         { rank: 5, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 61 },
+        { rank: 6, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 98 },
+        { rank: 7, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 95 },
+        { rank: 8, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 89 },
+        { rank: 9, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 80 },
+        { rank: 10, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 61 },
     ];
     
     const tableBody = document.querySelector("#leaderboard-table tbody");

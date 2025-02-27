@@ -1,17 +1,18 @@
 
 .leaderboard{
     margin-top: 170px;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
     align-items: center;
     justify-content: center;
 }
 body {
     font-family: 'Gilroy-Medium', sans-serif;
     text-align: center;
+    background-color: white;
 }
 
 .leaderboard-container {
-    width: 70%;
+    width: 80%;
     margin: 50px auto;
     background: white;
     padding: 20px;
@@ -126,7 +127,6 @@ h2::after {
     background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     width: 200px;
     transition: transform 0.5s ease-in-out;
 }
