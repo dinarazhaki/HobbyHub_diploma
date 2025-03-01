@@ -534,6 +534,16 @@ def update_organizer_profile(request):
     return redirect("organizer_settings")
 
 
+def organizer_language(request):
+    return render(request, 'organizer_language_options.html')
+
+def organizer_notification(request):
+    return render(request, 'organizer_notif_preferences.html')
+
+def organizer_privacy(request):
+    return render(request, 'organizer_privacy_settings.html')
+
+
 def sign_in(request):
     if request.method == "POST":
         user_type = request.POST.get("user_type")

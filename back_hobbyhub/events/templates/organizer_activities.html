@@ -11,14 +11,17 @@
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script id="events-data" type="application/json">
         var eventsData = {{ events_data|safe }};
     </script>
     
     <script src="{% static 'js/activities.js' %}"></script>
+    <script src="{% static 'js/activity_details.js' %}"></script>
     
 </head>
 <body>
+
 
     <!-- Header -->
     <section class="header">
@@ -139,6 +142,7 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
+                                        <button class="participants-list-btn btn-info" data-event-id="{{ event.id }}" onclick="openQRModal()">QR code for attendance</button>
                                     </div>
                                 </div>
                         </div>
@@ -162,6 +166,7 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
+                                        <button class="participants-list-btn " data-event-id="{{ event.id }}" onclick="openQRModal()">QR code for attendance</button>
                                     </div>
                                 </div> 
                         </div>
@@ -209,6 +214,50 @@
             </form>
         </div>
     </div>
+
+
+    
+    <div id="QREventModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeQRModal()">&times;</span>
+            <h2>QR Code + Live Game Code</h2>
+            
+            <!-- QR Code Section -->
+            <h3>QR Code</h3>
+            <canvas id="qr-code"></canvas>
+            <p>QR Code: <span id="qr-text"></span></p>
+
+            <div class="game-code-container">
+                <h2>Live Game Code</h2>
+                <div class="code-box" id="gameCode"></div>
+            </div>
+
+            <table id="new-requests-table" class="employees-table">
+                <thead>
+                    <tr>
+                        <th>Full Name & Email</th>
+                        <th>Phone Number</th>
+                        <th>Attended</th>
+                        <th>Live game</th>
+                    </tr>
+                </thead>
+                <tbody id="new-requests-body">  <!--need o uodate to applied user data-->
+                    {% for employee in new_requests %}
+                    <tr>
+                        <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
+                        <td>{{ employee.number }}</td>
+                        <td>{{ employee.attendance }}</td>
+                        <td>
+                            <button class="live-game-btn" data-nickname="{{ employee.nickname }}">Live game</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -246,6 +295,49 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        let gameCodeInterval;
+
+        function openQRModal() {
+            document.getElementById("QREventModal").style.display = "block";
+            generateQRCode();
+            startRandomGameCode();
+        }
+
+        function closeQRModal() {
+            document.getElementById("QREventModal").style.display = "none";
+            clearInterval(gameCodeInterval); // Stop updating game code
+        }
+
+        function generateQRCode() {
+            const randomCode = "QR-" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById("qr-text").innerText = randomCode;
+
+            new QRious({
+                element: document.getElementById("qr-code"),
+                value: randomCode,
+                size: 200
+            });
+        }
+        
+        function generateGameCode() {
+            let gameCode = Math.floor(100000 + Math.random() * 900000).toString();
+            let codeBox = document.getElementById("gameCode");
+            codeBox.innerHTML = ""; // Clear previous content
+        
+            gameCode.split("").forEach(num => {
+                let span = document.createElement("span");
+                span.innerText = num;
+                span.classList.add("digit");
+                codeBox.appendChild(span);
+            });
+        }
+
+        
+
+       
+    </script>
 
 
 </body>

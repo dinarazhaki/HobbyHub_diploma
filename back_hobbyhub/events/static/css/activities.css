@@ -200,6 +200,29 @@ input[type="checkbox"]:checked {
     background-color: red;
     transform: scale(0.98);
 }
+.participants-list-btn {
+    background-color: #666; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.participants-list-btn:hover {
+    background-color: #666;
+    transform: scale(1.05);
+}
+
+.participants-list-btn:active {
+    background-color: #666;
+    transform: scale(0.98);
+}
+
 
 /* Modal Background */
 .modal {
@@ -243,11 +266,18 @@ input[type="checkbox"]:checked {
     gap: 15px;
 }
 
+
+
 #editEventForm label,
 #editEventForm input,
 #editEventForm select,
 #editEventForm textarea {
     width: 48%;
+}
+
+#QREventModal h2{
+    color: red;
+    margin-bottom: 10px;
 }
 
 /* Two-Column Form */
@@ -407,6 +437,8 @@ input, select, textarea {
 
 
 
+
+
 /*Responsive Design for Creation Part*/
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
@@ -519,4 +551,39 @@ input, select, textarea {
     .confirmation-box {
         width: 90%;
     }
+}
+
+
+
+
+.game-code-container {
+    border: 2px solid #ccc;
+    padding: 30px 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+.game-code-container h2 {
+    color: red;
+    margin-bottom: 10px;
+}
+.code-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.digit {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    color: red;
+}
+.applied{
+    margin-top:10px;
 }

@@ -23,6 +23,13 @@
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
                 </ul>
             </div>
+            <div class="d-flex">
+                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Sign Out</button>
+                </form>
+            </div>
         </nav>
     </section>
 
@@ -45,9 +52,9 @@
                 
                 <div class="navbar user_det">
                     <div class="tab active-tab"><a href="#">Account Setting</a></div>
-                    <div class="tab"><a href="{% url 'user_language' %}">Language Options</a></div>
-                    <div class="tab"><a href="{% url 'user_notification' %}">Notification Preferences</a></div>
-                    <div class="tab"><a href="{% url 'user_privacy' %}">Privacy Settings</a></div>
+                    <div class="tab"><a href="{% url 'organizer_language' %}">Language Options</a></div>
+                    <div class="tab"><a href="{% url 'organizer_notification' %}">Notification Preferences</a></div>
+                    <div class="tab"><a href="{% url 'organizer_privacy' %}">Privacy Settings</a></div>
                 </div>
                 
                 <form method="POST" action="{% url 'update_organizer_profile' %}" enctype="multipart/form-data">
