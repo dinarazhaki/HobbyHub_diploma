@@ -142,7 +142,7 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
-                                        <button class="participants-list-btn btn-info" data-event-id="{{ event.id }}" onclick="openQRModal()">QR code for attendance</button>
+                                        <button class="participants-list-btn btn-info" data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
                                     </div>
                                 </div>
                         </div>
@@ -166,7 +166,7 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
-                                        <button class="participants-list-btn " data-event-id="{{ event.id }}" onclick="openQRModal()">QR code for attendance</button>
+                                        <button class="participants-list-btn " data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
                                     </div>
                                 </div> 
                         </div>
@@ -217,22 +217,24 @@
 
 
     
-    <div id="QREventModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeQRModal()">&times;</span>
+    <div id="QREventModal" class="modal " style="display: none;">
+        <div class="modal-content qr-live">
+            <span class="close-btn " onclick="closeQRModal()">&times;</span>
             <h2>QR Code + Live Game Code</h2>
             
             <!-- QR Code Section -->
-            <h3>QR Code</h3>
-            <canvas id="qr-code"></canvas>
-            <p>QR Code: <span id="qr-text"></span></p>
+            <h4>QR Code to check attendance</h4>
+            <div class="qr-container">
+                <canvas id="qr-code"></canvas>
+                <p>QR Code: <span id="qr-text"></span></p>
+            </div>
 
             <div class="game-code-container">
-                <h2>Live Game Code</h2>
+                <h3>Live Game Code</h3>
                 <div class="code-box" id="gameCode"></div>
             </div>
 
-            <table id="new-requests-table" class="employees-table">
+            <table id="new-requests-table" class="attendance-table">
                 <thead>
                     <tr>
                         <th>Full Name & Email</th>
@@ -300,7 +302,7 @@
         let gameCodeInterval;
 
         function openQRModal() {
-            document.getElementById("QREventModal").style.display = "block";
+            document.getElementById("QREventModal").style.display = "flex";
             generateQRCode();
             startRandomGameCode();
         }
@@ -320,20 +322,32 @@
                 size: 200
             });
         }
-        
         function generateGameCode() {
             let gameCode = Math.floor(100000 + Math.random() * 900000).toString();
             let codeBox = document.getElementById("gameCode");
+            
+            if (!codeBox) {
+                console.error("Error: #gameCode element not found!");
+                return;
+            }
+            
             codeBox.innerHTML = ""; // Clear previous content
         
-            gameCode.split("").forEach(num => {
+            gameCode.split("").forEach((num, index) => {
                 let span = document.createElement("span");
                 span.innerText = num;
                 span.classList.add("digit");
-                codeBox.appendChild(span);
+        
+                // Delay for animation effect
+                setTimeout(() => {
+                    codeBox.appendChild(span);
+                }, index * 100);
             });
         }
-
+        
+        // Ensure the function runs when the page loads
+        document.addEventListener("DOMContentLoaded", generateGameCode);
+        
         
 
        

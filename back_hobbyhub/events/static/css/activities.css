@@ -133,7 +133,7 @@ input[type="checkbox"]:checked {
 /*Symbats section*/
  /* Button */
  .create-event-btn {
-    background: linear-gradient(to right, red, yellow);
+    background: #FF6A00;
     color: #fff; /* White text */
     font-family: 'Gilroy-Bold', sans-serif;
     padding: 12px 24px;
@@ -147,7 +147,7 @@ input[type="checkbox"]:checked {
 }
 
 .create-event-btn:hover {
-    background-color: #E65C00;
+    background-color: #FF6A00;
     transform: scale(1.05);
 }
 
@@ -236,6 +236,7 @@ input[type="checkbox"]:checked {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 /* Modal Content */
@@ -268,6 +269,7 @@ input[type="checkbox"]:checked {
 
 
 
+
 #editEventForm label,
 #editEventForm input,
 #editEventForm select,
@@ -275,10 +277,7 @@ input[type="checkbox"]:checked {
     width: 48%;
 }
 
-#QREventModal h2{
-    color: red;
-    margin-bottom: 10px;
-}
+
 
 /* Two-Column Form */
 #eventForm {
@@ -321,6 +320,33 @@ input, select, textarea {
 .submit-btn:hover {
     background-color:linear-gradient(to right, red, #ff69b4);
 }
+
+#QREventModal h2{
+    color: #FF6A00;
+    margin-bottom: 10px;
+}
+#QREventModal h4{
+    margin-top: 20px;
+}
+
+.qr-live{
+    text-align: center;
+}
+.qr-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+}
+
+#qr-code {
+    width: 75%; 
+    max-width: 200px; 
+}
+
+
+
 
 /* Fade In Animation */
 @keyframes fadeIn {
@@ -557,33 +583,45 @@ input, select, textarea {
 
 
 .game-code-container {
-    border: 2px solid #ccc;
+    margin-top: 20px;
+    border: 2px solid #FF6A00;
     padding: 30px 25px;
     border-radius: 20px;
     text-align: center;
 }
-.game-code-container h2 {
-    color: red;
+.game-code-container h3 {
+    color: black;
     margin-bottom: 10px;
-}
-.code-box {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
 }
 
 .digit {
     display: inline-block;
     width: 40px;
     height: 40px;
-    border: 2px solid black;
+    border: 2px solid #666;
     border-radius: 5px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
     line-height: 40px;
-    color: red;
+    background: white;  /* Ensure a visible background */
+    color: red; /* Make digits visible */
+    transition: transform 0.2s ease-in-out;
 }
-.applied{
-    margin-top:10px;
+
+.digit:hover {
+    transform: scale(1.2);
+}
+
+.code-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.attendance-table{
+    margin-top: 50px;
 }

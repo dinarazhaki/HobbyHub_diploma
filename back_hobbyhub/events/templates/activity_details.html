@@ -70,15 +70,18 @@
                 <div class="secondContainer ">
                     <div class="game-code-container">
                         <h2>Scan QR Codes</h2>
-                        <div class="section">
+                        <div class="section-qr">
                             <div id="my-qr-reader">
                             </div>
                         </div>
                     </div>
                     <div class="game-code-container">
                         <h2>Live Game Code</h2>
-                        
-                        <p class="applied">Congratulations! You are a participant of {{ event.title }}. Take Live Game code for more rewards at <a href="#">Live Game</a></p>
+                        <form method="post" id="userLiveGame">
+                            <input type="text" id="user_live_game" name="Live Game" required>
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                        <p class="applied">Congratulations! Your attendance at {{ event.title }} is verified. Take Live Game code for more rewards at <a href="#">Live Game</a></p>
                     </div>
                     
                 </div>

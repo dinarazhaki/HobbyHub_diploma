@@ -101,9 +101,27 @@ body {
 }
 
 
-.apply-btn {
+.cancel-btn {
     width:stretch;
     background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 17px;
+    transition: 0.3s;
+}
+
+    .cancel-btn:hover {
+        opacity: 0.7;
+    }
+
+    
+.apply-btn {
+    width:stretch;
+    background: #FF6A00;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -118,6 +136,9 @@ body {
         opacity: 0.7;
     }
 
+.timing-location h3{
+    margin-top: 50px;
+}
 .timing-location {
     width: 100%;
     text-align: left;
@@ -257,6 +278,50 @@ body {
                 }
 
 
+#userLiveGame {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.08);
+    width: fit-content;
+    margin: 15px auto;
+}
+
+#user_live_game {
+    padding: 10px;
+    border: 1.5px solid white;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    width: 150px;
+}
+
+#user_live_game:focus {
+    border-color: #FFC300;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(255, 80, 80, 0.3);
+}
+
+.submit-btn {
+    padding: 10px 15px;
+    background: #FFC300;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out, transform 0.1s;
+}
+
+.submit-btn:hover {
+    opacity: 0.7;
+}
+
 
 
 /* Responsive Design */
@@ -351,7 +416,7 @@ body {
 
 #my-qr-reader {
     padding: 20px !important;
-    border: 1.5px solid #b2b2b2 !important;
+    border: 1.5px solid white !important;
     border-radius: 8px;
 }
 
@@ -366,7 +431,30 @@ body {
 
 
 
+#my-qr-reader button  {
+    background-color: #9F9F9F; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 5px;
+}
+
+#my-qr-reader button:hover {
+    background-color: #FFC300;
+    transform: scale(1.05);
+}
+
+#my-qr-reader button:active {
+    background-color: #FFC300;
+    transform: scale(0.98);
+}
+
 #html5-qrcode-anchor-scan-type-change {
     text-decoration: none !important;
-    color: #1d9bf0;
+    color: #FFC300;
 }
