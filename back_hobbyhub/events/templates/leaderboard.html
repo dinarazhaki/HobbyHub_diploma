@@ -59,7 +59,7 @@
         <div class="rank-container" style="align-self: center;">
             <img src="{% static 'images/profile_photo.png' %}" alt="User Profile" class="rank-icon">
             <span class="rank-text">Your Current Rank</span>
-            <span class="rank-number">5</span>
+            <span class="rank-number">{{ current_user_rank }}</span>
         </div>
         <div class="leaderboard-container">
             <h2>Leaderboard</h2>
@@ -67,13 +67,20 @@
                 <thead>
                     <tr>
                         <th>Rank</th>
-                        <th>Name&Surname</th>
-                        <th>Company</th>
+                        <th>Name & Surname</th>
+                        {% comment %} <th>Company</th> {% endcomment %}
                         <th>Diamonds</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data will be inserted by JavaScript -->
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td> 
+                        <td>{{ employee.name }} {{ employee.last_name }}</td>
+                        {% comment %} <td>{{ employee.company.name }}</td> {% endcomment %}
+                        <td>{{ employee.diamonds }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

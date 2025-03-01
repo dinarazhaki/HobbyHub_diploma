@@ -54,7 +54,8 @@ class Employee(models.Model):
     number = models.CharField(max_length=20, verbose_name="Number")
     join_date = models.DateField(verbose_name="Join Date")
     date_of_birth = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
-
+    social_id = models.CharField(max_length=255, blank=True, null=True)  # ID из социальной сети
+    social_provider = models.CharField(max_length=50, blank=True, null=True)  # Провайдер (Google, Facebook и т.д.)
     company = models.ForeignKey(
         Company, 
         to_field='company_id',  # Указываем, что внешний ключ ссылается на company_id

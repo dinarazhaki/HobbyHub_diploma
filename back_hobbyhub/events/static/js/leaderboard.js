@@ -1,28 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const leaderboardData = [
-        { rank: 1, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 98 },
-        { rank: 2, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 95 },
-        { rank: 3, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 89 },
-        { rank: 4, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 80 },
-        { rank: 5, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 61 },
-        { rank: 6, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 98 },
-        { rank: 7, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 95 },
-        { rank: 8, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 89 },
-        { rank: 9, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 80 },
-        { rank: 10, name: "Ayaulym", surname: "Nurmukhambet", company: "123", score: 61 },
-    ];
-    
+    // Данные теперь поступают из Django, поэтому этот код больше не нужен
+    // const leaderboardData = [...];
+
+    // Если нужно добавить интерактивность, можно оставить этот код
     const tableBody = document.querySelector("#leaderboard-table tbody");
-    
-    leaderboardData.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${row.rank}</td>
-            <td>${row.name} ${row.surname}</td> <!-- Name and Surname combined -->
-            <td>${row.company}</td>
-            <td>${row.score}</td>
-        `;
-        tableBody.appendChild(tr);
+
+    // Пример: Добавление анимации или других эффектов
+    tableBody.querySelectorAll("tr").forEach((row, index) => {
+        row.style.opacity = 0;
+        setTimeout(() => {
+            row.style.transition = "opacity 0.5s";
+            row.style.opacity = 1;
+        }, index * 100);
     });
-    
 });

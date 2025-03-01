@@ -42,7 +42,45 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
+    'social_django',
 ]
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.microsoft.MicrosoftOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.apple.AppleIdAuth',
+    'django.contrib.auth.backends.ModelBackend',
+]
+# Настройки для Google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'ваш-client-id-google'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ваш-client-secret-google'
+
+# Настройки для Microsoft
+SOCIAL_AUTH_MICROSOFT_GRAPH_KEY = 'ваш-client-id-microsoft'
+SOCIAL_AUTH_MICROSOFT_GRAPH_SECRET = 'ваш-client-secret-microsoft'
+
+# Настройки для Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = 'ваш-app-id-facebook'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'ваш-app-secret-facebook'
+
+# Настройки для Apple
+SOCIAL_AUTH_APPLE_ID_CLIENT = 'ваш-client-id-apple'
+SOCIAL_AUTH_APPLE_ID_TEAM = 'ваш-team-id-apple'
+SOCIAL_AUTH_APPLE_ID_KEY = 'ваш-key-id-apple'
+SOCIAL_AUTH_APPLE_ID_SECRET = 'ваш-secret-key-apple'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'your_app.pipeline.save_profile', 
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +90,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'events.middleware.SessionControlMiddleware',
 ]
 
 ROOT_URLCONF = 'hobbyhub.urls'
@@ -134,7 +173,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media/')
 
 AUTH_USER_MODEL = "events.Company"
-LOGIN_URL = "/sign_in/"
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
 SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Использование БД
 SESSION_COOKIE_AGE = 1209600  # Две недели

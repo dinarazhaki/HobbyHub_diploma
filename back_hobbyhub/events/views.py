@@ -32,19 +32,19 @@ def approval_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
         nickname = request.session.get("nickname")
         if not nickname:
-            return redirect("sign_in")  # Если нет сессии, отправляем на вход
+            return redirect("sign_in") 
 
         user = Employee.objects.filter(nickname=nickname).first()
         if not user or not user.is_approved:  
-            return redirect("")  # Если нет пользователя или он не подтвержден
+            return redirect("") 
 
-        return view_func(request, *args, **kwargs)  # Выполняем целевую вьюху
+        return view_func(request, *args, **kwargs) 
 
     return _wrapped_view
 
 
 def activity_details(request, event_id):
-    event = get_object_or_404(Event, id=event_id)  # Получаем событие по ID или возвращаем 404
+    event = get_object_or_404(Event, id=event_id) 
     nickname = request.session.get("nickname")
     user_is_registered = False
 
@@ -539,15 +539,17 @@ def sign_in(request):
         user_type = request.POST.get("user_type")
         email = request.POST.get("email")
         password = request.POST.get("password")
-        next_url = request.POST.get("next")  # Get the next URL from the form
+        next_url = request.POST.get("next")  # Получаем URL для перенаправления
+
+        # Проверяем, есть ли активная сессия
+        if request.session.get("company_id") or request.session.get("nickname"):
+            request.session.flush()  # Завершаем текущую сессию
 
         # Авторизация компании
         if user_type == "company":
             company = Company.objects.filter(email=email).first()
             if company and check_password(password, company.password):
-                request.session.flush()  # Удаляем предыдущую сессию
                 request.session["company_id"] = company.id
-                # Redirect to the next URL or default to organizer_profile
                 return redirect(next_url or "organizer_profile")
         # Авторизация сотрудника
         elif user_type == "employee":
@@ -555,9 +557,7 @@ def sign_in(request):
             if employee and check_password(password, employee.password):
                 if not employee.is_approved:
                     return render(request, "guest.html", {"employee": employee})
-                request.session.flush()  # Удаляем предыдущую сессию
                 request.session["nickname"] = employee.nickname
-                # Redirect to the next URL or default to user_profile
                 return redirect(next_url or "user_profile")
         messages.error(request, "Invalid credentials. Please try again.")
 
@@ -712,6 +712,22 @@ def edit_event(request, event_id):
             return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
 
-
+@role_required("employee")
+@approval_required
 def leaderboard(request):
-    return render(request, 'leaderboard.html')
+    if request.session.get("nickname"):
+        current_user = Employee.objects.get(nickname=request.session["nickname"])
+        company = current_user.company
+
+        employees = Employee.objects.filter(company=company, is_approved=True).order_by('-diamonds')
+
+        current_user_rank = list(employees).index(current_user) + 1
+
+        return render(request, 'leaderboard.html', {
+            'employees': employees,
+            'current_user_rank': current_user_rank,
+            'current_user': current_user,
+        })
+    else:
+        return redirect('sign_in')
+    
