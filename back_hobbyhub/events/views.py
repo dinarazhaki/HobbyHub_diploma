@@ -730,6 +730,7 @@ def leaderboard(request):
         company = current_user.company
 
         employees = Employee.objects.filter(company=company, is_approved=True).order_by('-diamonds')
+        prizes = Prize.objects.filter(company=company).order_by('rank')
 
         current_user_rank = list(employees).index(current_user) + 1
 
@@ -737,13 +738,81 @@ def leaderboard(request):
             'employees': employees,
             'current_user_rank': current_user_rank,
             'current_user': current_user,
+            'prizes': prizes,
         })
     else:
         return redirect('sign_in')
     
-
-
+@role_required("organizer")
 def leaderboard_show(request):
+<<<<<<< Updated upstream
     employees = Employee.objects.filter(is_approved=True).order_by('-diamonds')
     return render(request, 'leaderboard_show.html', {'employees': employees})
 
+=======
+    if request.session.get("company_id"):
+        company_id = request.session["company_id"]
+        company = Company.objects.get(id=company_id)
+
+        # Получаем сотрудников компании, отсортированных по diamonds
+        employees = Employee.objects.filter(company=company, is_approved=True).order_by('-diamonds')
+
+        # Получаем призы для компании
+        prizes = Prize.objects.filter(company=company).order_by('rank')
+
+        return render(request, 'leaderboard_show.html', {
+            'employees': employees,
+            'prizes': prizes,
+        })
+    else:
+        return redirect('sign_in')
+    
+def add_prize(request):
+    if request.session.get("company_id"):
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            description = request.POST.get('description')
+            rank = request.POST.get('rank')
+            image = request.FILES.get('image')
+            company_id = request.session["company_id"]
+
+            # Проверяем, существует ли приз с таким рангом в этой компании
+            if Prize.objects.filter(rank=rank, company_id=company_id).exists():
+                messages.error(request, "A prize with this rank already exists for your company.")
+                return redirect('leaderboard_show')
+
+            # Создаем приз
+            Prize.objects.create(
+                name=name,
+                description=description,
+                rank=rank,
+                image=image,
+                company_id=company_id
+            )
+            messages.success(request, "Prize added successfully!")
+            return redirect('leaderboard_show')
+        return render(request, 'add_prize.html')
+    else:
+        return redirect('sign_in')
+        
+def edit_prize(request, prize_id):
+    if request.session.get("company_id"):
+        prize = get_object_or_404(Prize, id=prize_id, company_id=request.session["company_id"])
+        if request.method == 'POST':
+            prize.name = request.POST.get('name')
+            prize.description = request.POST.get('description')
+            prize.rank = request.POST.get('rank')
+            if 'image' in request.FILES:
+                prize.image = request.FILES['image']
+            prize.save()
+            return redirect('leaderboard_show')
+        return render(request, 'edit_prize.html', {'prize': prize})
+    else:
+        return redirect('sign_in')
+    
+def delete_prize(request, prize_id):
+    if request.session.get("company_id"):
+        prize = get_object_or_404(Prize, id=prize_id, company_id=request.session["company_id"])
+        prize.delete()
+    return redirect('leaderboard_show')
+>>>>>>> Stashed changes

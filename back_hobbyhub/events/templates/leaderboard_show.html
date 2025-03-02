@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     {% load static %}
@@ -11,9 +11,7 @@
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    
     <script src="{% static 'js/leaderboard.js' %}"></script>
-    
 </head>
 <body>
     <!-- Header -->
@@ -28,41 +26,58 @@
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'activities' %}">Activities</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
                     <li class="nav-item header-text"><a class="nav-link" href="{% url 'leaderboard_show' %}">Leaderboard</a></li>
-                    
                 </ul>
             </div>
             <div class="d-flex">
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
-                <button class="btn btn-gradient" ><a href="{% url 'organizer_profile'%}" style="text-decoration: none; color: #fff;">Profile</a></button>
+                <button class="btn btn-gradient"><a href="{% url 'organizer_profile' %}" style="text-decoration: none; color: #fff;">Profile</a></button>
             </div>
         </nav>
     </section>
 
+    <!-- Leaderboard Section -->
     <section class="leaderboard">
+<<<<<<< Updated upstream
 
         <div id="countdown">Loading..</div>
         <p id="countdown_text">left till the winner announcement and prize update</p>
 
+=======
+        <!-- Prize Pyramid -->
+>>>>>>> Stashed changes
         <div class="prize-pyramid">
-            <div class="prize prize-second">
-                <img src="{% static 'images/gift.jpg' %}" alt="Second Prize">
-                <h3>Gift Certificate</h3>
+            {% for prize in prizes %}
+            <div class="prize prize-{{ prize.rank }}">
+                <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
+                <h3>{{ prize.name }}</h3>
+                <button type="button" class="btn btn-gradient edit-prize-btn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editPrizeModal"
+                        data-prize-id="{{ prize.id }}"
+                        data-prize-name="{{ prize.name }}"
+                        data-prize-description="{{ prize.description }}"
+                        data-prize-rank="{{ prize.rank }}"
+                        data-prize-image="{{ prize.image.url }}">
+                    Edit Prize {{ prize.rank }}
+                </button>
+                <button type="button" class="btn btn-gradient delete-prize-btn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deletePrizeModal"
+                        data-prize-id="{{ prize.id }}">Delete Prize {{ prize.rank }}
+                </button>            
             </div>
-            
-            <div class="prize prize-first">
-                <img src="{% static 'images/phone.jpg' %}" alt="First Prize">
-                <h3>Smartphone</h3>
-            </div>
-            
-            <div class="prize prize-third">
-                <img src="{% static 'images/coffee.jpg' %}" alt="Third Prize">
-                <h3>Office Coffee Machine</h3>
-            </div>
+            {% endfor %}
         </div>
+        <!-- Buttons for Adding/Editing Prizes -->
         <div class="prize_buttons">
-            <button id="addprize">Set Prizes</button>
-            <button id="editprize">Edit Prizes</button>
-        </div>        
+            <!-- Кнопка для открытия модального окна добавления -->
+            <button type="button" class="btn btn-gradient" data-bs-toggle="modal" data-bs-target="#addPrizeModal">
+                Set Prizes
+            </button>
+            
+        </div>
+
+        <!-- Leaderboard Table -->
         <div class="leaderboard-container">
             <h2>Leaderboard</h2>
             <table id="leaderboard-table">
@@ -70,16 +85,14 @@
                     <tr>
                         <th>Rank</th>
                         <th>Name & Surname</th>
-                        {% comment %} <th>Company</th> {% endcomment %}
                         <th>Diamonds</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for employee in employees %}
                     <tr>
-                        <td>{{ forloop.counter }}</td> 
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ employee.name }} {{ employee.last_name }}</td>
-                        {% comment %} <td>{{ employee.company.name }}</td> {% endcomment %}
                         <td>{{ employee.diamonds }}</td>
                     </tr>
                     {% endfor %}
@@ -87,47 +100,142 @@
             </table>
         </div>
     </section>
-    
 
- <!-- Footer -->
- <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h4 class="fw-bold gradient-text">HobbyHub</h4>
-                <p>© 2025 All Rights Reserved</p>
-            </div>
-            <div class="col-md-3">
-                <h5>Links</h5>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Activities</a></li>
-                    <li><a href="#">Challenges</a></li>
-                    <li><a href="#">Leaderboard</a></li>
-                    <li><a href="#">Profile Lookup</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Help</h5>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Support</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Your Account</h5>
-                <ul>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                </ul>
+    <!-- Модальное окно для добавления приза -->
+    <div class="modal fade" id="addPrizeModal" tabindex="-1" aria-labelledby="addPrizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPrizeModalLabel">Add Prize</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'add_prize' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Prize Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rank" class="form-label">Rank</label>
+                            <input type="number" class="form-control" id="rank" name="rank" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
+                        <button type="submit" class="btn btn-gradient">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</footer>
 
 
+    <!-- Модальное окно для редактирования приза -->
+    <div class="modal fade" id="editPrizeModal" tabindex="-1" aria-labelledby="editPrizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPrizeModalLabel">Edit Prize</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPrizeForm" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="edit-name" class="form-label">Prize Name</label>
+                            <input type="text" class="form-control" id="edit-name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-description" class="form-label">Description</label>
+                            <textarea class="form-control" id="edit-description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-rank" class="form-label">Rank</label>
+                            <input type="number" class="form-control" id="edit-rank" name="rank" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="edit-image" name="image">
+                            <!-- Текущее изображение приза -->
+                            <img id="current-image" src="" alt="Current Image" style="max-width: 100px; margin-top: 10px;">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-gradient">Save Changes</button>
+                            <!-- Кнопка для удаления приза -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Модальное окно для подтверждения удаления приза -->
+    <div class="modal fade" id="deletePrizeModal" tabindex="-1" aria-labelledby="deletePrizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletePrizeModalLabel">Delete Prize</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this prize?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deletePrizeForm" method="post" action="">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-gradient">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="fw-bold gradient-text">HobbyHub</h4>
+                    <p>© 2025 All Rights Reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Activities</a></li>
+                        <li><a href="#">Challenges</a></li>
+                        <li><a href="#">Leaderboard</a></li>
+                        <li><a href="#">Profile Lookup</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Your Account</h5>
+                    <ul>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключение Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -43,7 +43,12 @@ urlpatterns = [
     path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
     path('get_event_details/<int:event_id>/', get_event_details, name='get_event_details'),
     path('edit_event/<int:event_id>/', edit_event, name='edit_event'),
-    
+    path('leaderboard_show/', leaderboard_show, name='leaderboard_show'),
+    path('add_prize/', add_prize, name='add_prize'),
+    path('edit_prize/<int:prize_id>/', edit_prize, name='edit_prize'),
+    path('delete_prize/<int:prize_id>/', delete_prize, name='delete_prize'),
+
+
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),
     path('deny_employee/', deny_employee, name='deny_employee'),

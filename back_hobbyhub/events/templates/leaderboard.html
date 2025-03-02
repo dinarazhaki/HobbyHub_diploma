@@ -42,21 +42,15 @@
         <div id="countdown">Loading..</div>
         <p id="countdown_text">left till the winner announcement and prize update</p>
         <div class="prize-pyramid">
-            <div class="prize prize-second">
-                <img src="{% static 'images/gift.jpg' %}" alt="Second Prize">
-                <h3>Gift Certificate</h3>
+            {% for prize in prizes %}
+            <div class="prize prize-{{ prize.rank }}">
+                <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
+                <h3>{{ prize.name }}</h3>
             </div>
-            
-            <div class="prize prize-first">
-                <img src="{% static 'images/phone.jpg' %}" alt="First Prize">
-                <h3>Smartphone</h3>
-            </div>
-            
-            <div class="prize prize-third">
-                <img src="{% static 'images/coffee.jpg' %}" alt="Third Prize">
-                <h3>Office Coffee Machine</h3>
-            </div>
+            {% endfor %}
         </div>
+
+        
         <div class="rank-container" style="align-self: center;">
             <img src="{% static 'images/profile_photo.png' %}" alt="User Profile" class="rank-icon">
             <span class="rank-text">Your Current Rank</span>

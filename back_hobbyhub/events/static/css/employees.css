@@ -55,11 +55,25 @@ main {
 .approve-btn {
     background-color: green;
     color: white;
+<<<<<<< Updated upstream
+=======
+    display: inline-block;
+>>>>>>> Stashed changes
 }
 
 .remove-btn {
     background-color: red;
     color: white;
+<<<<<<< Updated upstream
+=======
+    display: inline-block;
+}
+
+#delete-btn {
+    background-color: black;
+    color: white;
+    display: none;
+>>>>>>> Stashed changes
 }
 
 

@@ -79,8 +79,6 @@ class Employee(models.Model):
         return self.nickname
     
 
-    
-# Модель события
 class Event(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
@@ -107,3 +105,20 @@ class Event(models.Model):
         return self.quota - self.participants.count()
 
 
+class Prize(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Prize Name")
+    description = models.TextField(verbose_name="Prize Description")
+    image = models.ImageField(upload_to='prizes/', null=True, blank=True, verbose_name="Prize Image")
+    rank = models.IntegerField(verbose_name="Rank")  # Убрали unique=True
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name="Company")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['rank', 'company'],  # Составной индекс
+                name='unique_rank_per_company'
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.name} (Rank {self.rank})"
