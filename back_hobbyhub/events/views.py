@@ -745,11 +745,8 @@ def leaderboard(request):
     
 @role_required("organizer")
 def leaderboard_show(request):
-<<<<<<< Updated upstream
     employees = Employee.objects.filter(is_approved=True).order_by('-diamonds')
-    return render(request, 'leaderboard_show.html', {'employees': employees})
 
-=======
     if request.session.get("company_id"):
         company_id = request.session["company_id"]
         company = Company.objects.get(id=company_id)
@@ -815,4 +812,3 @@ def delete_prize(request, prize_id):
         prize = get_object_or_404(Prize, id=prize_id, company_id=request.session["company_id"])
         prize.delete()
     return redirect('leaderboard_show')
->>>>>>> Stashed changes

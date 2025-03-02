@@ -274,7 +274,6 @@ h2::after {
   border-width: 4px 0 0;
   background: none;
 }
-<<<<<<< Updated upstream
 #editprize:focus {
     user-select: auto;
 }
@@ -306,7 +305,7 @@ h2::after {
     justify-content: center;
     display: flex;
     font-size: 24px;
-=======
+}
 #editprize{
     background-color: tomato;
 }
@@ -336,5 +335,4 @@ h2::after {
 
 .prize .btn {
     margin: 5px;
->>>>>>> Stashed changes
 }
