@@ -51,15 +51,6 @@ main {
 .hidden{
     display: none;
 }
-#action-buttons button {
-    align-items: center;
-    margin-top: 20px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-}
 
 .approve-btn {
     background-color: green;
@@ -68,11 +59,6 @@ main {
 
 .remove-btn {
     background-color: red;
-    color: white;
-}
-
-#delete-btn {
-    background-color: black;
     color: white;
 }
 
