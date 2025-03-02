@@ -200,7 +200,6 @@ h2::after {
 }
 .prize_buttons button{
   appearance: button;
-  background-color: #1899D6;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -243,6 +242,20 @@ h2::after {
   top: 0;
   z-index: -1;
 }
+#editprize:after {
+    background-clip: padding-box;
+    background-color: tomato;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    bottom: -4px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
 
 #addprize:focus {
   user-select: auto;
@@ -261,6 +274,20 @@ h2::after {
   border-width: 4px 0 0;
   background: none;
 }
-#editprize{
-    background-color: tomato;
+#editprize:focus {
+    user-select: auto;
+}
+  
+#editprize:hover:not(:disabled) {
+    filter: brightness(1.1);
+    -webkit-filter: brightness(1.1);
+}
+  
+#editprize:disabled {
+    cursor: auto;
+}
+  
+#editprize:active {
+    border-width: 4px 0 0;
+    background: none;
 }

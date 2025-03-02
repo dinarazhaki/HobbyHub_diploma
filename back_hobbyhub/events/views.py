@@ -744,4 +744,6 @@ def leaderboard(request):
 
 
 def leaderboard_show(request):
-    return render(request, 'leaderboard_show.html')
+    employees = Employee.objects.filter(is_approved=True).order_by('-diamonds')
+    return render(request, 'leaderboard_show.html', {'employees': employees})
+

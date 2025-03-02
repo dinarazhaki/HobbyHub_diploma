@@ -58,7 +58,6 @@ urlpatterns = [
     path('save_hobbies/', save_hobbies, name='save_hobbies'),
     path('logout/', LogoutView.as_view(), name='logout'),  # Встроенный обработчик
 
-    
 
     
     
