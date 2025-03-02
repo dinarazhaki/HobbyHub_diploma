@@ -27,6 +27,7 @@ urlpatterns = [
     path('apply_to_event/<int:event_id>/', apply_to_event, name='apply_to_event'),
     path('cancel_event_registration/<int:event_id>/', cancel_event_registration, name='cancel_event_registration'),
     path('leaderboard/', leaderboard, name="leaderboard"),
+    path('leaderboard_show/', leaderboard_show, name="leaderboard_show"),
     
 
     # Профиль организатора

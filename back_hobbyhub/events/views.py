@@ -741,3 +741,7 @@ def leaderboard(request):
     else:
         return redirect('sign_in')
     
+
+
+def leaderboard_show(request):
+    return render(request, 'leaderboard_show.html')
