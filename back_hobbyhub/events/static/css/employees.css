@@ -26,9 +26,7 @@ main {
     font-weight: bold;
     cursor: pointer;
 }
-.hidden{
-    display: none;
-}
+
 #new-requests-btn {
     background-color: #FFA500;
     border: 1px solid #333;
@@ -50,7 +48,9 @@ main {
     padding: 10px;
     text-align: left;
 }
-
+.hidden{
+    display: none;
+}
 #action-buttons button {
     align-items: center;
     margin-top: 20px;
@@ -64,19 +64,16 @@ main {
 .approve-btn {
     background-color: green;
     color: white;
-    display: none;
 }
 
 .remove-btn {
     background-color: red;
     color: white;
-    display: none;
 }
 
 #delete-btn {
     background-color: black;
     color: white;
-    display: none;
 }
 
 

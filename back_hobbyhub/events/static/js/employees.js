@@ -20,16 +20,12 @@ document.getElementById('your-employees-btn').addEventListener('click', function
     document.getElementById('new-requests-table').classList.add('hidden');
     document.getElementById('your-employees-btn').classList.add('active');
     document.getElementById('new-requests-btn').classList.remove('active');
-    document.getElementById('approve-btn').classList.add('hidden');
-    document.getElementById('deny-btn').classList.add('hidden');
     document.getElementById('delete-btn').classList.remove('hidden');
 
     document.getElementById('your-employees-btn').style.backgroundColor = '#FFA500';
     document.getElementById('your-employees-btn').style.color = 'white';
     document.getElementById('new-requests-btn').style.backgroundColor = 'white';
     document.getElementById('new-requests-btn').style.color = '#333';
-    document.getElementById('approve-btn').style.display='none';
-    document.getElementById('deny-btn').style.display='none';
     
     document.querySelectorAll('#new-requests-table .employee-checkbox').forEach(checkbox => {
         checkbox.checked = false;
