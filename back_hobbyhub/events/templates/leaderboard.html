@@ -45,6 +45,7 @@
             {% for prize in prizes %}
             <div class="prize prize-{{ prize.rank }}">
                 <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
+                <h4>{{ prize.rank }}</h4>
                 <h3>{{ prize.name }}</h3>
             </div>
             {% endfor %}
