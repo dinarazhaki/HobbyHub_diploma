@@ -336,3 +336,170 @@ h2::after {
 .prize .btn {
     margin: 5px;
 }
+
+/*Prize Buttons*/
+
+.delete-prize-btn{
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+}
+.edit-prize-btn{
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+}
+.edit-prize-btn .edge{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+       to left,
+       hsl(220deg 100% 16%) 0%,
+       hsl(220deg 100% 32%) 8%,
+       hsl(220deg 100% 32%) 92%,
+       hsl(220deg 100% 16%) 100%
+     );
+}
+.edit-prize-btn .shadow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(220deg 100% 20% / 0.25); /* Dark blue shadow */
+    will-change: transform;
+    transform: translateY(1.5px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(1.5px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+   }
+   
+   .edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+       to left,
+       hsl(340deg 100% 16%) 0%,
+       hsl(340deg 100% 32%) 8%,
+       hsl(340deg 100% 32%) 92%,
+       hsl(340deg 100% 16%) 100%
+     );
+   }
+   
+   .front {
+    display: block;
+    position: relative;
+    padding: 8px 9px;
+    border-radius: 12px;
+    font-size: 0.6rem;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+   }
+
+.edit-prize-btn .front {
+    display: block;
+    position: relative;
+    padding: 8px 9px;
+    border-radius: 12px;
+    font-size: 0.6rem;
+    color: white;
+    background: hsl(220deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    
+ }
+
+.delete-prize-btn:hover{
+    filter: brightness(110%);
+}   
+.delete-prize-btn:hover .front{
+    transform: translateY(-6px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+}   
+.delete-prize-btn:active .front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+.delete-prize-btn:hover .shadow {
+    transform: translateY(4px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+}
+.delete-prize-btn:active .shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+.delete-prize-btn:focus:not(:focus-visible) {
+    outline: none;
+}   
+.edit-prize-btn:hover {
+    filter: brightness(110%);
+}   
+
+.edit-prize-btn:hover .front {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}   
+
+.edit-prize-btn:active .front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+
+.edit-prize-btn:hover .shadow {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+    background: hsl(220deg 100% 20% / 0.25); /* Blue-tinted shadow */
+}
+
+.edit-prize-btn:active .shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+
+.edit-prize-btn:focus:not(:focus-visible) {
+    outline: none;
+}    

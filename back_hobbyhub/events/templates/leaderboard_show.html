@@ -47,7 +47,7 @@
             <div class="prize prize-{{ prize.rank }}">
                 <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
                 <h3>{{ prize.name }}</h3>
-                <button type="button" class="btn btn-gradient edit-prize-btn" 
+                <button type="button" class="btn edit-prize-btn" 
                         data-bs-toggle="modal" 
                         data-bs-target="#editPrizeModal"
                         data-prize-id="{{ prize.id }}"
@@ -55,12 +55,17 @@
                         data-prize-description="{{ prize.description }}"
                         data-prize-rank="{{ prize.rank }}"
                         data-prize-image="{{ prize.image.url }}">
-                    Edit Prize {{ prize.rank }}
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front text"> Edit Prize {{ prize.rank }}</span> 
                 </button>
-                <button type="button" class="btn btn-gradient delete-prize-btn" 
+                <button type="button" class="btn delete-prize-btn" 
                         data-bs-toggle="modal" 
                         data-bs-target="#deletePrizeModal"
-                        data-prize-id="{{ prize.id }}">Delete Prize {{ prize.rank }}
+                        data-prize-id="{{ prize.id }}">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front text">Delete Prize {{ prize.rank }}</span>
                 </button>            
             </div>
             {% endfor %}
@@ -88,7 +93,7 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ employee.name }} {{ employee.last_name }}</td>
-                        <td>{{ employee.diamonds }}</td>
+                        <td>{{ employee.diamonds }} </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -204,7 +209,7 @@
                     <h5>Links</h5>
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Activities</a></li>
+                        <li><a href="{% url 'activities' %}">Activities</a></li>
                         <li><a href="#">Challenges</a></li>
                         <li><a href="#">Leaderboard</a></li>
                         <li><a href="#">Profile Lookup</a></li>
