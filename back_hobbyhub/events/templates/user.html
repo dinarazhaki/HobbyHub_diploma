@@ -65,17 +65,24 @@
         <h2 class="title text-center">Your Activities</h2>
         <div class="swiper-container your-act">
             <div class="swiper-wrapper">
-                {% for event in events|slice:":3" %}  
-                <div class="swiper-slide">
-                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }}">
-                    <p class="ptitle">{{ event.title }}</p>
-                    <p class="plocat">{{ event.hobby_type }}</p>
-                    <div class="location-part">
-                        <img src="{% static 'images/locationpoint.jpg' %}" alt="Location">
-                        <p class="plocat"> {{ event.location }}</p>
+                {% if registered_events %}  <!-- Проверяем, есть ли зарегистрированные события -->
+                    {% for event in registered_events %}
+                    <div class="swiper-slide">
+                        <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }}">
+                        <p class="ptitle">{{ event.title }}</p>
+                        <p class="plocat">{{ event.hobby_type }}</p>
+                        <div class="location-part">
+                            <img src="{% static 'images/locationpoint.jpg' %}" alt="Location">
+                            <p class="plocat"> {{ event.location }}</p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                    {% endfor %}
+                {% else %}  <!-- Если зарегистрированных событий нет -->
+                    <div class="no-events-message text-center">
+                        <p>You haven't booked any activities yet.</p>
+                        <a href="{% url 'user_activities' %}" class="btn btn-gradient">Book Now</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>
