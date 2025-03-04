@@ -560,7 +560,7 @@ def sign_in(request):
             company = Company.objects.filter(email=email).first()
             if company and check_password(password, company.password):
                 request.session["company_id"] = company.id
-                return redirect(next_url or "organizer_profile")
+                return redirect(next_url or "organizer_view")
         # Авторизация сотрудника
         elif user_type == "employee":
             employee = Employee.objects.filter(mail=email).first()
@@ -568,7 +568,7 @@ def sign_in(request):
                 if not employee.is_approved:
                     return render(request, "guest.html", {"employee": employee})
                 request.session["nickname"] = employee.nickname
-                return redirect(next_url or "user_profile")
+                return redirect(next_url or "user_view")
         messages.error(request, "Invalid credentials. Please try again.")
 
     return render(request, "sign_in.html")
