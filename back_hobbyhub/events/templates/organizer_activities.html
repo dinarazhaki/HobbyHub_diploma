@@ -244,7 +244,7 @@
                         <th>Live game</th>
                     </tr>
                 </thead>
-                <tbody id="new-requests-body">  <!--need o uodate to applied user data-->
+                <tbody id="new-requests-body">  <!--need to update to applied user data-->
                     {% for employee in new_requests %}
                     <tr>
                         <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
@@ -316,10 +316,10 @@
         function generateQRCode() {
             const randomCode = "QR-" + Math.floor(100000 + Math.random() * 900000);
             document.getElementById("qr-text").innerText = randomCode;
-
-            new QRious({
+            
+            let qr = new QRious({
                 element: document.getElementById("qr-code"),
-                value: randomCode,
+                value: "https://yourwebsite.com/attendance?code=" + randomCode,
                 size: 200
             });
         }
