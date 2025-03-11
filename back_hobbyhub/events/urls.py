@@ -47,7 +47,8 @@ urlpatterns = [
     path('add_prize/', add_prize, name='add_prize'),
     path('edit_prize/<int:prize_id>/', edit_prize, name='edit_prize'),
     path('delete_prize/<int:prize_id>/', delete_prize, name='delete_prize'),
-
+    path('profile_lookup/', profile_lookup, name='profile_lookup'),
+    path('challenges/', challenges, name='challenges'),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),

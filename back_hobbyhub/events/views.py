@@ -832,3 +832,27 @@ def delete_prize(request, prize_id):
         prize = get_object_or_404(Prize, id=prize_id, company_id=request.session["company_id"])
         prize.delete()
     return redirect('leaderboard_show')
+
+
+#Profile_Lookup view
+def profile_lookup(request):
+    employees = Employee.objects.filter(is_approved=True)
+    nickname = request.session.get("nickname")
+
+    if not nickname:
+        return render(request, 'profile_lookup.html', {'employees': employees, 'error': "User not found."})
+
+    try:
+        user = Employee.objects.filter(nickname=nickname).first()
+        hobbies = user.hobbies.all()
+    except Employee.DoesNotExist:
+        hobbies = None  # Handle missing user gracefully
+
+    return render(request, 'profile_lookup.html', {
+        'employees': employees,
+        'hobbies': hobbies
+    })
+
+
+def challenges(request):
+    return render(request, 'challenges.html')
