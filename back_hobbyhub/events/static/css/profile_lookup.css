@@ -145,7 +145,7 @@ p {
 
 
 ::-webkit-scrollbar {
-	height: 20px;
+	height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -155,10 +155,88 @@ p {
 
 ::-webkit-scrollbar-thumb {
 	background: #ccc;
-	width: 70px;
-	border-radius: 30px;
+	width: 50px;
+	border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
 	background: white;
+}
+
+.col-sm-4 {
+    text-align: center;
+    justify-content: center;
+}
+.img_diamond{
+    padding: 9px 0;
+}
+
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 992px) {
+    .card {
+        width: 95%;
+    }
+
+    .profile_lookup {
+        margin-top: 80px;
+    }
+
+    .main-header {
+        font-size: 1.8rem;
+        height: 3.5rem;
+        line-height: 3.5rem;
+    }
+
+    .img-radius {
+        width: 100px;
+        height: 100px;
+    }
+
+    .user-card-full .user-profile {
+        border-radius: 5px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .profile_lookup {
+        margin-top: 50px;
+    }
+
+    .main-header {
+        font-size: 1.5rem;
+        height: 3rem;
+        line-height: 3rem;
+    }
+
+    .img-radius {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .profile_lookup {
+        margin-top: 30px;
+    }
+
+    .main-header {
+        font-size: 1.2rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+    }
+
+    .img-radius {
+        width: 80px;
+        height: 80px;
+    }
+
+    .user-card-full .social-link li a {
+        font-size: 16px;
+    }
 }
