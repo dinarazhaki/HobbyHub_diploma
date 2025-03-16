@@ -365,7 +365,6 @@ def organizer_view(request):
 @role_required("employee")
 @approval_required
 def user_view(request):
-    # Получаем текущего сотрудника
     nickname = request.session.get("nickname")
     if not nickname:
         return redirect("sign_in")
@@ -375,13 +374,10 @@ def user_view(request):
     except Employee.DoesNotExist:
         return redirect("sign_in")
 
-    # Получаем все события компании сотрудника
     company_events = Event.objects.filter(company=employee.company)
 
-    # Получаем события, на которые сотрудник зарегистрировался
     registered_events = employee.events.all()
 
-    # Сериализуем события для передачи в шаблон
     events_json = serialize('json', company_events, fields=('title', 'date', 'location', 'image'))
     events_data = json.loads(events_json)
 
