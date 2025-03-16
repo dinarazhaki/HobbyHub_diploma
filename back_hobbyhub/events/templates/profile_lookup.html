@@ -28,7 +28,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item header-text"><a class="nav-link" href="{% url 'user_activities' %}">Activities</a></li>
                 <li class="nav-item header-text"><a class="nav-link" href="{% url 'challenges' %}">Challenges</a></li>
-                <li class="nav-item header-text"><a class="nav-link" href="{% url 'leaderboard' %}">Leaderboard</a></li>
+                <li class="nav-item header-text"><a class="nav-link" href="{% url 'leaderboard_show' %}">Leaderboard</a></li>
                 <li class="nav-item header-text"><a class="nav-link" href="{% url 'profile_lookup' %}">Profile Lookup</a></li>
             </ul>
         </div>
@@ -83,15 +83,15 @@
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Hobbies and Engagement</h6>
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <p class="m-b-10 f-w-600">Hobbies</p>  <!--Fix here hobbies-->
+                                    <div class="col-sm-5">
+                                        <p class="m-b-10 f-w-600" style="padding-bottom: 4px;">Hobbies</p>  <!--Fix here hobbies-->
                                         <ul class="listed">
-                                            {% for hobby in user.hobbies.all %}
+                                            {% for hobby in employee.hobbies.all %}
                                                 <li>{{ hobby.name }}</li>
                                             {% endfor %}
                                         </ul>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <p class="m-b-10 f-w-600">Diamonds</p>
                                         <img src="{% static 'images/sp_diamond.png' %}" class="img_diamond">
                                         <h6 class="text-muted f-w-400">{{ employee.diamonds }}</h6>
