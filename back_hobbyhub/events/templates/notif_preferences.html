@@ -1,6 +1,9 @@
-{% extends "user_base.html" %}
+{% extends 'user_profile_base.html' %}
 {% load static %}
+
+
 {% block title %}HobbyHub{% endblock %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -10,91 +13,81 @@
 
 {% endblock %}
 
-{% block content %}
-        <div class="container mt-4">
-            <div class="row  mainpartpro">
-                <div class="col-md-2">
-                    <div class="sidebar p-4">
-                        {% if user.profile_photo %}
-                            <img src="{{ user.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% else %}
-                            <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% endif %}                 
-                        <h5>{{ user.name }}</h5>
-                        <p><i class="bi bi-gem"></i> {{ user.diamonds }}</p>
-                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="{% url 'user_profile' %}">   Profile Info</a></div> <!--need to update-->
-                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i>   Settings</div>
-                    </div>
-                </div>
-                <div class="col-md-10 mainpartpro">
-                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
-                    <div class="navbar user_det">
-                        <div class="tab " ><a href="{% url 'user_setting' %}">Account Setting</a></div>  <!--need to update-->
-
-                    <div class="tab"><a href="{% url 'user_language' %}">Language Options</a></div>
-                    <div class="tab active-tab"><a href="{% url 'user_notification' %}">Notification Preferences</a></div>
-                    <div class="tab"><a href="{% url 'user_privacy' %}">Privacy Settings</a></div>
-                    </div>
-    
-                
-    
-                    <div class="notification-container">
-                        <h2>Notification preferences</h2>
-                        <p class="description">
-                            Get emails to find out what is going on when you are not online. You can turn them off anytime.
-                        </p>
-                
-                        <h3>Notify me when</h3>
-                        <p class="sub-description">
-                            Receive the latest news, updates, and industry tutorials from us.
-                        </p>
-                
-                        <div class="notification-option">
-                            <input type="checkbox" id="sms" checked>
-                            <label for="sms">
-                                <span class="custom-checkbox"></span>
-                                <div class="notification-text">
-                                    <strong>SMS Notifications</strong>
-                                <p>News about product and feature updates.</p>
-                                </div>
-                            </label>
-                        </div>
-                
-                        <div class="notification-option">
-                            <input type="checkbox" id="reminders">
-                            <label for="reminders">
-                                <span class="custom-checkbox"></span>
-                                <div class="notification-text">
-                                    <strong>Reminders and Activities</strong>
-                                <p>Tips on getting more out of Courier.</p>
-                                </div>
-                                
-                            </label>
-                        </div>
-                
-                        <div class="notification-option">
-                            <input type="checkbox" id="email">
-                            <label for="email">
-                                <span class="custom-checkbox"></span>
-                                <div class="notification-text">
-                                    <strong>Email Notifications</strong>
-                                    <p>Data results to help you better understand your users.</p>
-                                </div>
-                            </label>
-                        </div>
-                
-                        <button class="save-btn">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
 {% block extra_js %}
+    <script src="{% static 'js/profile_lookup.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         var eventsData = {{ events_data|safe }};
     </script>
     <script src="{% static 'js/user.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row mainpartpro">
+            <div class="col-md-2">
+                <div class="sidebar p-4">
+                    {% if user.profile_photo %}
+                        <img src="{{ user.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80">
+                    {% else %}
+                        <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80">
+                    {% endif %}                 
+                    <h5>{{ user.name }}</h5>
+                    <p><i class="bi bi-gem"></i> {{ user.diamonds }}</p>
+                    <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="{% url 'user_profile' %}"> Profile Info</a></div>
+                    <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i> Settings</div>
+                </div>
+            </div>
+            <div class="col-md-10 mainpartpro">
+                <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid mb-3" alt="Banner">
+                <div class="navbar user_det">
+                    <div class="tab"><a href="{% url 'user_setting' %}">Account Setting</a></div>
+                    <div class="tab"><a href="{% url 'user_language' %}">Language Options</a></div>
+                    <div class="tab active-tab"><a href="{% url 'user_notification' %}">Notification Preferences</a></div>
+                    <div class="tab"><a href="{% url 'user_privacy' %}">Privacy Settings</a></div>
+                </div>
+                <div class="notification-container">
+                    <h2>Notification preferences</h2>
+                    <p class="description">
+                        Get emails to find out what is going on when you are not online. You can turn them off anytime.
+                    </p>
+                    <h3>Notify me when</h3>
+                    <p class="sub-description">
+                        Receive the latest news, updates, and industry tutorials from us.
+                    </p>
+                    <div class="notification-option">
+                        <input type="checkbox" id="sms" checked>
+                        <label for="sms">
+                            <span class="custom-checkbox"></span>
+                            <div class="notification-text">
+                                <strong>SMS Notifications</strong>
+                                <p>News about product and feature updates.</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="notification-option">
+                        <input type="checkbox" id="reminders">
+                        <label for="reminders">
+                            <span class="custom-checkbox"></span>
+                            <div class="notification-text">
+                                <strong>Reminders and Activities</strong>
+                                <p>Tips on getting more out of Courier.</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="notification-option">
+                        <input type="checkbox" id="email">
+                        <label for="email">
+                            <span class="custom-checkbox"></span>
+                            <div class="notification-text">
+                                <strong>Email Notifications</strong>
+                                <p>Data results to help you better understand your users.</p>
+                            </div>
+                        </label>
+                    </div>
+                    <button class="save-btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

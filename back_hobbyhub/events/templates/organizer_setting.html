@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HobbyHub - Settings</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/all.css' %}">
-    <script src="{% static 'js/user.js' %}"></script>
-</head>
-<body>
-    <section class="header">
-        <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
-            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'organizer_view' %}">HobbyHub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'activities' %}">Activities</a></li>
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'profile_lookup' %}">Profile Lookup</a></li>
-                </ul>
-            </div>
-            <div class="d-flex">
-                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Sign Out</button>
-                </form>
-            </div>
-        </nav>
-    </section>
+{% extends 'organizer_profile_base.html' %}
+{% load static %}
+
+{% block content %}
+    
 
     <div class="container mt-4">
         <div class="row mainpartpro">
@@ -113,5 +83,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+    {% endblock %}
