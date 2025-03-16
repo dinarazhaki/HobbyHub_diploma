@@ -240,3 +240,15 @@ p {
         font-size: 16px;
     }
 }
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#searchBar {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+}
