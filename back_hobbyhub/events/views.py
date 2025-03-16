@@ -407,19 +407,58 @@ def profile_user_act(request):
         'registered_events': registered_events,  # Передаем записанные ивенты в шаблон
     })
 
+@role_required("employee")
+@approval_required
 def user_achievements(request):
-    return render(request, 'user_achievements.html')
+    nickname=request.session.get("nickname")
+
+    if not nickname:
+        return redirect("sign_in")
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return redirect("sign_in")
+    return render(request, 'user_achievements.html', {"user":user})
 
 
-
+@role_required("employee")
+@approval_required
 def user_language(request):
-    return render(request, 'language_options.html')
+    nickname=request.session.get("nickname")
 
+    if not nickname:
+        return redirect("sign_in")
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return redirect("sign_in")
+    return render(request, 'language_options.html', {"user":user})
+
+@role_required("employee")
+@approval_required
 def user_notification(request):
-    return render(request, 'notif_preferences.html')
+    nickname=request.session.get("nickname")
 
+    if not nickname:
+        return redirect("sign_in")
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return redirect("sign_in")
+    return render(request, 'notif_preferences.html', {"user":user})
+
+@role_required("employee")
+@approval_required
 def user_privacy(request):
-    return render(request, 'privacy_settings.html')
+    nickname=request.session.get("nickname")
+
+    if not nickname:
+        return redirect("sign_in")
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return redirect("sign_in")
+    return render(request, 'privacy_settings.html', {"user":user})
 
 
 @role_required("employee")
@@ -553,15 +592,38 @@ def update_organizer_profile(request):
 
     return redirect("organizer_settings")
 
-
+@role_required("organizer")
 def organizer_language(request):
-    return render(request, 'organizer_language_options.html')
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return redirect("sign_in")
 
+    company = Company.objects.filter(id=company_id).first()
+    if not company:
+        return redirect("sign_in")
+    return render(request, 'organizer_language_options.html', {"company": company})
+
+@role_required("organizer")
 def organizer_notification(request):
-    return render(request, 'organizer_notif_preferences.html')
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return redirect("sign_in")
 
+    company = Company.objects.filter(id=company_id).first()
+    if not company:
+        return redirect("sign_in")
+    return render(request, 'organizer_notif_preferences.html', {"company": company})
+
+@role_required("organizer")
 def organizer_privacy(request):
-    return render(request, 'organizer_privacy_settings.html')
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return redirect("sign_in")
+
+    company = Company.objects.filter(id=company_id).first()
+    if not company:
+        return redirect("sign_in")
+    return render(request, 'organizer_privacy_settings.html', {"company": company})
 
 
 def sign_in(request):
