@@ -12,6 +12,7 @@ from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from functools import wraps
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
     
 def role_required(role):
@@ -910,6 +911,47 @@ def profile_lookup(request):
         'employees': employees,
         'hobbies': hobbies
     })
+
+@role_required("employee")
+@approval_required
+@require_http_methods(["GET", "POST"])
+def user_notification(request):
+    nickname = request.session.get("nickname")
+
+    if not nickname:
+        return redirect("sign_in")
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return redirect("sign_in")
+
+    if request.method == "POST":
+        user.receive_sms_notifications = request.POST.get("sms") == "on"
+        user.receive_email_notifications = request.POST.get("email") == "on"
+        user.receive_reminders = request.POST.get("reminders") == "on"
+        user.save()
+        return redirect("user_notification")
+
+    return render(request, 'notif_preferences.html', {"user": user})
+
+
+@require_http_methods(["GET"])
+def get_notifications(request):
+    nickname = request.session.get("nickname")
+    if not nickname:
+        return JsonResponse({"error": "User not authenticated"}, status=401)
+
+    user = Employee.objects.filter(nickname=nickname).first()
+    if not user:
+        return JsonResponse({"error": "User not found"}, status=404)
+
+    notifications = Notification.objects.filter(employee=user).order_by("-timestamp")
+    notifications_data = [
+        {"message": notif.message, "timestamp": notif.timestamp.strftime("%Y-%m-%d %H:%M")}
+        for notif in notifications
+    ]
+
+    return JsonResponse({"notifications": notifications_data})
 
 
 def challenges(request):

@@ -21,7 +21,8 @@ urlpatterns = [
     path('user_profile/setting/language/', user_language, name='user_language'),
     path('user_profile/setting/notification_preferences/', user_notification, name='user_notification'),
     path('user_profile/setting/privacy/', user_privacy, name='user_privacy'),
-    
+    path("get_notifications/", get_notifications, name="get_notifications"),
+
     path('user_activities/', user_activities, name='user_activities'),
     path('activity/<int:event_id>/', activity_details, name='activity_details'),
     path('apply_to_event/<int:event_id>/', apply_to_event, name='apply_to_event'),

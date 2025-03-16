@@ -10,8 +10,8 @@
 <body>
     <!-- Header -->
     <section class="header">
-        <nav class="navbar navbar-expand-lg navbar-bold px-4  bg-white fixed-top">
-            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'user_view'%}">HobbyHub</span></a>
+        <nav class="navbar navbar-expand-lg navbar-bold px-4 bg-white fixed-top">
+            <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'user_view' %}">HobbyHub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,19 +26,19 @@
             <div class="d-flex">
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
                 <!-- Notification Popup -->
-        <div id="notifPopup" class="more-ot-alert">
-            <span class="close-ot-alert">&times;</span>
-            <p>You have new notifications!</p>
-        </div>
+                <div id="notifPopup" class="more-ot-alert">
+                    <span class="close-ot-alert">&times;</span>
+                    <!-- Уведомления будут добавлены сюда динамически -->
+                </div>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-danger">Sign Out</button>
                 </form>
             </div>
         </nav>
-        </section>
+    </section>
 
-         <!-- Main Content -->
+    <!-- Main Content -->
     <div class="container">
         {% block content %}{% endblock %}
     </div>
@@ -80,6 +80,8 @@
             </div>
         </div>
     </footer>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+        <script src="{% static 'js/notifications.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

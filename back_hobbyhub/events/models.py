@@ -54,11 +54,14 @@ class Employee(models.Model):
     number = models.CharField(max_length=20, verbose_name="Number")
     join_date = models.DateField(verbose_name="Join Date")
     date_of_birth = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
+    receive_sms_notifications = models.BooleanField(default=True, verbose_name="Receive SMS Notifications")
+    receive_email_notifications = models.BooleanField(default=True, verbose_name="Receive Email Notifications")
+    receive_reminders = models.BooleanField(default=True, verbose_name="Receive Reminders")
     social_id = models.CharField(max_length=255, blank=True, null=True)  # ID из социальной сети
     social_provider = models.CharField(max_length=50, blank=True, null=True)  # Провайдер (Google, Facebook и т.д.)
     company = models.ForeignKey(
         Company, 
-        to_field='company_id',  # Указываем, что внешний ключ ссылается на company_id
+        to_field='company_id',
         on_delete=models.CASCADE, 
         verbose_name="Company"
     )
@@ -68,7 +71,7 @@ class Employee(models.Model):
     is_approved = models.BooleanField(default=False, verbose_name="Approved")
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, verbose_name="Profile Photo")
     hobbies = models.ManyToManyField(Hobby, blank=True, related_name='employees')
-    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")  # Новое поле для валюты
+    diamonds = models.IntegerField(default=0, verbose_name="Diamonds") 
 
     def save(self, *args, **kwargs):
         if not self.password.startswith('pbkdf2_sha256$'):
@@ -85,7 +88,7 @@ class Event(models.Model):
     location = models.CharField(max_length=250)
     date = models.DateField()
     time = models.TimeField()
-    hobbies = models.ManyToManyField(Hobby, related_name='events')  # Связь многие ко многим
+    hobbies = models.ManyToManyField(Hobby, related_name='events')  
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     company = models.ForeignKey(
         Company, 
@@ -93,8 +96,8 @@ class Event(models.Model):
         on_delete=models.CASCADE, 
         verbose_name="Company"
     )
-    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")  # Новое поле
-    quota = models.IntegerField(default=10, verbose_name="Quota")      # Новое поле
+    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")
+    quota = models.IntegerField(default=10, verbose_name="Quota")     
     participants = models.ManyToManyField(Employee, related_name='events', blank=True)
     
     def __str__(self):
@@ -109,16 +112,27 @@ class Prize(models.Model):
     name = models.CharField(max_length=255, verbose_name="Prize Name")
     description = models.TextField(verbose_name="Prize Description")
     image = models.ImageField(upload_to='prizes/', null=True, blank=True, verbose_name="Prize Image")
-    rank = models.IntegerField(verbose_name="Rank")  # Убрали unique=True
+    rank = models.IntegerField(verbose_name="Rank") 
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name="Company")
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['rank', 'company'],  # Составной индекс
+                fields=['rank', 'company'],  
                 name='unique_rank_per_company'
             )
         ]
 
     def __str__(self):
         return f"{self.name} (Rank {self.rank})"
+    
+    
+    
+class Notification(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="notifications")
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.employee.nickname}: {self.message}"

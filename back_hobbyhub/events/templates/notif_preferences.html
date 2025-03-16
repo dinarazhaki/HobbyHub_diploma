@@ -1,7 +1,6 @@
 {% extends 'user_profile_base.html' %}
 {% load static %}
 
-
 {% block title %}HobbyHub{% endblock %}
 
 {% block extra_css %}
@@ -10,11 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/sass_styles.css' %}">
-
 {% endblock %}
 
 {% block extra_js %}
     <script src="{% static 'js/profile_lookup.js' %}"></script>
+    <script src="{% static 'js/notifications.js' %}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         var eventsData = {{ events_data|safe }};
@@ -55,37 +55,40 @@
                     <p class="sub-description">
                         Receive the latest news, updates, and industry tutorials from us.
                     </p>
-                    <div class="notification-option">
-                        <input type="checkbox" id="sms" checked>
-                        <label for="sms">
-                            <span class="custom-checkbox"></span>
-                            <div class="notification-text">
-                                <strong>SMS Notifications</strong>
-                                <p>News about product and feature updates.</p>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="notification-option">
-                        <input type="checkbox" id="reminders">
-                        <label for="reminders">
-                            <span class="custom-checkbox"></span>
-                            <div class="notification-text">
-                                <strong>Reminders and Activities</strong>
-                                <p>Tips on getting more out of Courier.</p>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="notification-option">
-                        <input type="checkbox" id="email">
-                        <label for="email">
-                            <span class="custom-checkbox"></span>
-                            <div class="notification-text">
-                                <strong>Email Notifications</strong>
-                                <p>Data results to help you better understand your users.</p>
-                            </div>
-                        </label>
-                    </div>
-                    <button class="save-btn">Save</button>
+                    <form method="post" action="{% url 'user_notification' %}">
+                        {% csrf_token %}
+                        <div class="notification-option">
+                            <input type="checkbox" id="sms" name="sms" {% if user.receive_sms_notifications %}checked{% endif %}>
+                            <label for="sms">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>SMS Notifications</strong>
+                                    <p>News about product and feature updates.</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <input type="checkbox" id="reminders" name="reminders" {% if user.receive_reminders %}checked{% endif %}>
+                            <label for="reminders">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>Reminders and Activities</strong>
+                                    <p>Tips on getting more out of Courier.</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <input type="checkbox" id="email" name="email" {% if user.receive_email_notifications %}checked{% endif %}>
+                            <label for="email">
+                                <span class="custom-checkbox"></span>
+                                <div class="notification-text">
+                                    <strong>Email Notifications</strong>
+                                    <p>Data results to help you better understand your users.</p>
+                                </div>
+                            </label>
+                        </div>
+                        <button type="submit" class="save-btn">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
