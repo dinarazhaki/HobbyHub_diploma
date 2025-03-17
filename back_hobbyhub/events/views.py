@@ -1007,9 +1007,6 @@ def update_activity_progress(employee, activities):
             employee.diamonds += challenge.reward_diamonds
             employee.save()
 
-            # Отправляем уведомление
-            message = f"Challenge completed: {challenge.name}! You earned {challenge.reward_diamonds} diamonds."
-            Notification.objects.create(employee=employee, message=message)
         else:
             progress.save(update_fields=["progress"])  # Сохраняем прогресс, если вызов не завершен                                
             
