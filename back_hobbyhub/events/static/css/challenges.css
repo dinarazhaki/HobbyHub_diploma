@@ -110,3 +110,21 @@ h2 {
     border-radius: 6px;
     cursor: pointer;
 }
+.not-completed {
+    background-color: #2e2e2e; /* Darker background */
+    color: #aaa; /* Light gray text */
+    opacity: 0.7; /* Slight transparency */
+}
+
+.not-completed .progress-fill {
+    background-color: #555; /* Darker progress bar */
+}
+.no-progress {
+    background-color: #1c1c1c; /* Even darker background */
+    color: #777; /* Faded text */
+    opacity: 0.6; /* More transparency */
+}
+
+.no-progress .progress-fill {
+    background-color: #444; /* Darker progress bar */
+}

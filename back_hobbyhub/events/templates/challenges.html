@@ -26,7 +26,7 @@
     <h2>Challenges</h2>
     <div class="all_challenges">
         {% for challenge in challenges %}
-        <div class="challenge-card">
+        <div class="challenge-card {% if challenge.progress == 0 %}no-progress{% endif %}">
             <h3><span class="emoji">🏅</span> {{ challenge.name }}</h3>
             <p>{{ challenge.description }}</p>
             <div class="progress-bar">
