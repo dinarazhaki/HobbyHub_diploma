@@ -1,23 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
     const addScoreBtn = document.getElementById("addScore");
-    const progressFill = document.querySelector(".progress-fill");
-    const progressText = document.querySelector(".progress-text");
-
-    let currentScore = 20;
-
-    addScoreBtn.addEventListener("click", function () {
-        if (currentScore < 200) {
-            currentScore += 20;
-            progressFill.style.width = `${(currentScore / 200) * 100}%`;
-            progressText.textContent = `${currentScore}/200`;
-        }
-    });
-
-    document.querySelectorAll('.connect-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const url = this.getAttribute("data-url"); // Get the URL from data-url
-            window.location.href = url;
+    if (addScoreBtn) {
+        addScoreBtn.addEventListener("click", function () {
+            fetch("/update_xp/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({ xp: 20 }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Обновить страницу
+                    }
+                });
         });
-    });
-
+    }
 });
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

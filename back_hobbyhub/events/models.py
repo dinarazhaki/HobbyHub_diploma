@@ -136,3 +136,43 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.employee.nickname}: {self.message}"
+    
+    
+    
+class Challenge(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Challenge Name")
+    description = models.TextField(verbose_name="Challenge Description")
+    type = models.CharField(
+        max_length=50,
+        choices=[
+            ("activity", "Activity Participation"),
+            ("skill", "Skill Development"),
+            ("competition", "Competition & Challenges"),
+            ("xp", "Achievement Points"),
+            ("consistency", "Consistency Challenges"),
+        ],
+        verbose_name="Challenge Type",
+    )
+    goal = models.IntegerField(verbose_name="Goal (e.g., number of activities, XP, etc.)")
+    reward_diamonds = models.IntegerField(default=0, verbose_name="Reward Diamonds")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name="Company")
+
+    def __str__(self):
+        return self.name
+
+
+class EmployeeChallengeProgress(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="challenge_progress")
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name="progress")
+    progress = models.IntegerField(default=0, verbose_name="Progress")
+    is_completed = models.BooleanField(default=False, verbose_name="Completed")
+
+    def __str__(self):
+        return f"{self.employee.nickname} - {self.challenge.name}"
+
+    def save(self, *args, **kwargs):
+        if self.progress >= self.challenge.goal:
+            self.is_completed = True
+
+        super().save(*args, **kwargs)
+        

@@ -1,7 +1,7 @@
 {% extends "user_base.html" %}
 {% load static %}
 {% block title %}Challenges{% endblock %}
-    {% block extra_css %}
+{% block extra_css %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
@@ -20,46 +20,24 @@
             --bg-image: url("{% static 'images/image.png' %}");
         }
     </style>
-    {% endblock %}
-    {% block content %}
-
-    <section class="challenges">
-        <h2>Challenges</h2>
-        <div class="all_challenges">
-        <div class="challenge-card activities">
-            <h3><span class="emoji">🏅</span> Complete 10 Activities</h3>
-            <ul>
-                <li><input type="checkbox"> Activity 1</li>
-                <li><input type="checkbox"> Activity 2</li>
-                <li><input type="checkbox"> Activity 3</li>
-                <li><input type="checkbox"> Activity 4</li>
-                <li><input type="checkbox"> Activity 5</li>
-                <li><input type="checkbox"> Activity 6</li>
-                <li><input type="checkbox"> Activity 7</li>
-                <li><input type="checkbox"> Activity 8</li>
-                <li><input type="checkbox"> Activity 9</li>
-                <li><input type="checkbox"> Activity 10</li>
-            </ul>
-        </div>
-        <div class="right_challenges">
-        <div class="challenge-card score">
-            <h3><span class="emoji">🏆</span> Reach 200 Score</h3>
+{% endblock %}
+{% block content %}
+<section class="challenges">
+    <h2>Challenges</h2>
+    <div class="all_challenges">
+        {% for challenge in challenges %}
+        <div class="challenge-card">
+            <h3><span class="emoji">🏅</span> {{ challenge.name }}</h3>
+            <p>{{ challenge.description }}</p>
             <div class="progress-bar">
-                <div class="progress-fill"></div>
+                <div class="progress-fill" style="width: {{ challenge.progress_percentage }}%;"></div>
             </div>
-            <p class="progress-text">20/200</p>
-            <button id="addScore">+20 Score</button>
+            <p class="progress-text">{{ challenge.progress }}/{{ challenge.goal }}</p>
+            {% if challenge.is_completed %}
+            <p class="completed">Completed! 🎉</p>
+            {% endif %}
         </div>
-
-        <div class="challenge-card connect">
-            <h3><span class="emoji">👥</span> Connect with 3 Coworkers</h3>
-            <div class="connect-buttons">
-                <button class="connect-btn" data-url="{% url 'profile_lookup' %}">Connect</button>
-                <button class="connect-btn" data-url="{% url 'profile_lookup' %}">Connect</button>
-                <button class="connect-btn" data-url="{% url 'profile_lookup' %}">Connect</button>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-    </div>
-    </section>
-    {% endblock %}
+</section>
+{% endblock %}

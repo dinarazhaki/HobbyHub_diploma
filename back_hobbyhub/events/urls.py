@@ -29,7 +29,8 @@ urlpatterns = [
     path('cancel_event_registration/<int:event_id>/', cancel_event_registration, name='cancel_event_registration'),
     path('leaderboard/', leaderboard, name="leaderboard"),
     path('leaderboard_show/', leaderboard_show, name="leaderboard_show"),
-    
+    path('challenges/', challenges, name='challenges'),
+
 
     # Профиль организатора
     path('organizer_profile/', organizer_profile, name='organizer_profile'),
@@ -49,7 +50,6 @@ urlpatterns = [
     path('edit_prize/<int:prize_id>/', edit_prize, name='edit_prize'),
     path('delete_prize/<int:prize_id>/', delete_prize, name='delete_prize'),
     path('profile_lookup/', profile_lookup, name='profile_lookup'),
-    path('challenges/', challenges, name='challenges'),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),

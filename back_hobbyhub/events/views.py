@@ -84,6 +84,9 @@ def apply_to_event(request, event_id):
             event.participants.add(employee)
             event.save()
 
+            # Обновляем прогресс в вызовах
+            update_activity_progress(employee, 1)  # Убедитесь, что эта строка выполняется
+
             return JsonResponse({
                 "status": "success",
                 "message": "You have successfully registered for the event",
@@ -114,6 +117,7 @@ def cancel_event_registration(request, event_id):
             # Отменяем запись сотрудника на ивент
             event.participants.remove(employee)
             event.save()
+            update_activity_progress(employee, -1)
 
             return JsonResponse({
                 "status": "success",
@@ -954,5 +958,112 @@ def get_notifications(request):
     return JsonResponse({"notifications": notifications_data})
 
 
+def update_competition_progress(employee, wins):
+    challenges = Challenge.objects.filter(type="competition", company=employee.company)
+    for challenge in challenges:
+        progress, created = EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee, challenge=challenge
+        )
+        progress.progress += wins
+        progress.save()
+
+
+def update_skill_progress(employee, sessions):
+    challenges = Challenge.objects.filter(type="skill", company=employee.company)
+    for challenge in challenges:
+        progress, created = EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee, challenge=challenge
+        )
+        progress.progress += sessions
+        progress.save()
+
+        if progress.progress >= challenge.goal and not progress.is_completed:
+            progress.is_completed = True
+            progress.save()
+
+            # Добавляем diamonds сотруднику
+            employee.diamonds += challenge.reward_diamonds
+            employee.save()
+
+            # Отправляем уведомление
+            message = f"Challenge completed: {challenge.name}! You earned {challenge.reward_diamonds} diamonds."
+            Notification.objects.create(employee=employee, message=message)
+
+def update_activity_progress(employee, activities):
+    challenges = Challenge.objects.filter(type="activity", company=employee.company)
+    for challenge in challenges:
+        progress, created = EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee, challenge=challenge
+        )
+        if progress.is_completed:
+            continue  # Пропустить, если вызов уже завершен
+
+        progress.progress += activities
+        if progress.progress >= challenge.goal:
+            progress.is_completed = True
+            progress.save(update_fields=["progress", "is_completed"])  # Сохраняем только нужные поля
+
+            # Добавляем награду (diamonds) сотруднику
+            employee.diamonds += challenge.reward_diamonds
+            employee.save()
+
+            # Отправляем уведомление
+            message = f"Challenge completed: {challenge.name}! You earned {challenge.reward_diamonds} diamonds."
+            Notification.objects.create(employee=employee, message=message)
+        else:
+            progress.save(update_fields=["progress"])  # Сохраняем прогресс, если вызов не завершен                                
+            
+def update_xp_progress(employee, xp_earned):
+    challenges = Challenge.objects.filter(type="xp", company=employee.company)
+    for challenge in challenges:
+        progress, created = EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee, challenge=challenge
+        )
+        progress.progress += xp_earned
+        progress.save()
+        
+@csrf_exempt
+def update_xp(request):
+    if request.method == "POST":
+        nickname = request.session.get("nickname")
+        if not nickname:
+            return JsonResponse({"success": False, "error": "User not authenticated"})
+
+        employee = Employee.objects.filter(nickname=nickname).first()
+        if not employee:
+            return JsonResponse({"success": False, "error": "User not found"})
+
+        data = json.loads(request.body)
+        xp_earned = data.get("xp", 0)
+        update_xp_progress(employee, xp_earned)
+        return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False, "error": "Invalid request method"})
+
+
 def challenges(request):
-    return render(request, 'challenges.html')
+    nickname = request.session.get("nickname")
+    if not nickname:
+        return redirect("sign_in")
+
+    employee = Employee.objects.filter(nickname=nickname).first()
+    if not employee:
+        return redirect("sign_in")
+
+    challenges_data = []
+    challenges = Challenge.objects.filter(company=employee.company)
+    for challenge in challenges:
+        progress, created = EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee, challenge=challenge
+        )
+        challenges_data.append({
+            "name": challenge.name,
+            "description": challenge.description,
+            "progress": progress.progress,
+            "goal": challenge.goal,
+            "progress_percentage": (progress.progress / challenge.goal) * 100,
+            "is_completed": progress.is_completed,
+        })
+
+    return render(request, "challenges.html", {"challenges": challenges_data})
+

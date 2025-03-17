@@ -26,9 +26,10 @@
             </div>
             <div class="d-flex">
                 <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <!-- Notification Popup -->
                 <div id="notifPopup" class="more-ot-alert">
                     <span class="close-ot-alert">&times;</span>
-                    <p>You have new notifications!</p>
+                    <!-- Уведомления будут добавлены сюда динамически -->
                 </div>
                 <button class="btn btn-gradient">
                     <a href="{% url 'user_profile' %}" style="text-decoration: none; color: #fff;">Profile</a>
