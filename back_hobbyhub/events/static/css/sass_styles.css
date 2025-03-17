@@ -47,3 +47,13 @@
 
 
 
+.notif-dot {
+  position: absolute;
+  top: 32px;
+  right: 150px;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+  display: none; /* Initially hidden */
+}

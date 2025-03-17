@@ -73,9 +73,6 @@ class Employee(models.Model):
     hobbies = models.ManyToManyField(Hobby, blank=True, related_name='employees')
     diamonds = models.IntegerField(default=0, verbose_name="Diamonds") 
 
-    def completed_challenges_count(self):
-        return self.challenge_progress.filter(is_completed=True).count()
-    
     def save(self, *args, **kwargs):
         if not self.password.startswith('pbkdf2_sha256$'):
             self.password = make_password(self.password)

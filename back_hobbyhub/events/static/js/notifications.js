@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notifBell = document.querySelector(".notifications");
     const notifPopup = document.getElementById("notifPopup");
     const closeBtn = document.querySelector(".close-ot-alert");
-
+    const notifDot = document.getElementById("notifDot");
     // Функция для загрузки уведомлений
     function loadNotifications() {
         fetch("/get_notifications/")
@@ -18,12 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Добавление новых уведомлений
                 if (data.notifications.length > 0) {
+                    notifDot.style.display = "block";
                     data.notifications.forEach(notif => {
                         const notifElement = document.createElement("p");
                         notifElement.textContent = `${notif.message}`;
                         notifPopup.appendChild(notifElement);
                     });
                 } else {
+                    notifDot.style.display = "none";
                     const noNotifElement = document.createElement("p");
                     noNotifElement.textContent = "You have no new notifications.";
                     notifPopup.appendChild(noNotifElement);
@@ -43,11 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         if (!notifPopup.contains(event.target)) {
             notifPopup.style.display = "none";
+            notifDot.style.display = "none";
         }
     });
 
     // Закрыть попап при клике на "X"
     closeBtn.addEventListener("click", function () {
         notifPopup.style.display = "none";
+        notifDot.style.display = "none";
     });
+    loadNotifications();
 });
