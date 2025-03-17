@@ -916,6 +916,26 @@ def profile_lookup(request):
         'hobbies': hobbies
     })
 
+
+#Profile_Lookup view
+def organizer_profile_lookup(request):
+    employees = Employee.objects.filter(is_approved=True)
+    nickname = request.session.get("nickname")
+
+    if not nickname:
+        return render(request, 'organizer_profile_lookup.html', {'employees': employees, 'error': "User not found."})
+
+    try:
+        user = Employee.objects.filter(nickname=nickname).first()
+        hobbies = user.hobbies.all()
+    except Employee.DoesNotExist:
+        hobbies = None  # Handle missing user gracefully
+
+    return render(request, 'organizer_profile_lookup.html', {
+        'employees': employees,
+        'hobbies': hobbies
+    })
+    
 @role_required("employee")
 @approval_required
 @require_http_methods(["GET", "POST"])
