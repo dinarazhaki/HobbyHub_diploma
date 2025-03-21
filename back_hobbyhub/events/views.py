@@ -898,12 +898,41 @@ def delete_prize(request, prize_id):
 
 
 #Profile_Lookup view
+@role_required("employee")
+@approval_required
 def profile_lookup(request):
+
+    nickname = request.session.get("nickname")
+
+    if not nickname:
+        return render(request, 'profile_lookup.html', {'employees': [], 'error': "User not found."})
+
+    try:
+        current_user = Employee.objects.filter(nickname=nickname).first()
+        
+        if not current_user:
+            return render(request, 'profile_lookup.html', {'employees': [], 'error': "User not found."})
+
+        # Исключаем текущего сотрудника из списка
+        employees = Employee.objects.filter(company=current_user.company, is_approved=True)
+        
+        hobbies = current_user.hobbies.all()
+    except Employee.DoesNotExist:
+        employees = []
+        hobbies = []
+
+    return render(request, 'profile_lookup.html', {
+        'employees': employees,
+        'hobbies': hobbies
+    })
+    
+    
+def organizer_profile_lookup(request):
     employees = Employee.objects.filter(is_approved=True)
     nickname = request.session.get("nickname")
 
     if not nickname:
-        return render(request, 'profile_lookup.html', {'employees': employees, 'error': "User not found."})
+        return render(request, 'organizer_profile_lookup.html', {'employees': employees, 'error': "User not found."})
 
     try:
         user = Employee.objects.filter(nickname=nickname).first()
@@ -911,11 +940,11 @@ def profile_lookup(request):
     except Employee.DoesNotExist:
         hobbies = None  # Handle missing user gracefully
 
-    return render(request, 'profile_lookup.html', {
+    return render(request, 'organizer_profile_lookup.html', {
         'employees': employees,
         'hobbies': hobbies
     })
-
+     
 @role_required("employee")
 @approval_required
 @require_http_methods(["GET", "POST"])
