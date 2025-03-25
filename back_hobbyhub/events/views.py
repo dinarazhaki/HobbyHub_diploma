@@ -1093,3 +1093,5 @@ def challenges(request):
 
     return render(request, "challenges.html", {"challenges": challenges_data})
 
+def organizer_activity_details(request):
+    return render(request, "organizer_activity_details.html")

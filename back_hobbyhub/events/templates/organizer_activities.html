@@ -14,6 +14,7 @@
     
     <script src="{% static 'js/activities.js' %}"></script>
     <script src="{% static 'js/activity_details.js' %}"></script>
+
     {% endblock %}
 
     {% block content %}
@@ -107,7 +108,7 @@
                                         <img src="{{ event.image }}" alt="{{ event.title }}">
                                     </div>
                                     <div class="event-details">
-                                        <h3>{{ event.title }}</h3>
+                                        <a href="{% url 'organizer_activity_details' %}"><h3>{{ event.title }}</h3></a>
                                         <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
                                         <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
                                         <p>Participants: {{ event.participants_count }}/{{ event.quota }}</p>
@@ -116,6 +117,7 @@
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
                                         <button class="participants-list-btn btn-info" data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
+                                        <button onclick="openLiveModal()" class="live_game_btn px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition" >Live Game</button>
                                     </div>
                                 </div>
                         </div>
@@ -131,7 +133,7 @@
                                         <img src="{{ event.image }}" alt="{{ event.title }}">
                                     </div>
                                     <div class="event-details">
-                                        <h3>{{ event.title }}</h3>
+                                        <a href="{% url 'organizer_activity_details' %}"><h3>{{ event.title }}</h3></a>
                                         <p><img src="{% static 'images/your_act_calendar.png' %}" alt="Date" class="icon">{{ event.date }} at {{ event.time }}</p>
                                         <p><img src="{% static 'images/your_act_location.png' %}" alt="Location" class="icon">{{ event.location }}</p>
                                         <p>Participants: {{ event.participants_count }}/{{ event.quota }}</p>
@@ -140,6 +142,7 @@
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
                                         <button class="participants-list-btn " data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
+                                        <button onclick="openLiveModal()" class="live_game_btn px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition" >Live Game</button>
                                     </div>
                                 </div> 
                         </div>
@@ -149,6 +152,27 @@
                 
             </main>
     </section>
+       <!-- Modal Live Game -->
+        <div id="live_game_modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeLiveModal()">&times;</span>
+                
+                <h2>Create Live Game</h2>
+                <label>Game Name</label>
+                <input type="text" placeholder="Enter game name">
+                <label>Description</label>
+                <textarea placeholder="Enter game description"></textarea>
+                <label>Max Point</label>
+                <select id="playerCount"></select>
+
+                <!-- Create Button -->
+                <button class="create-btn">Create Game</button>
+            </div>
+        </div>
+        
+
+        <!--Edit EventModal-->
+
     <div id="editEventModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeEditModal()">&times;</span>
@@ -285,7 +309,24 @@
         // Ensure the function runs when the page loads
         document.addEventListener("DOMContentLoaded", generateGameCode);
         
-        
+        function openLiveModal() {
+            document.getElementById("live_game_modal").style.display = "flex";
+        }
+
+        function closeLiveModal() {
+            document.getElementById("live_game_modal").style.display = "none";
+        }   
+        const select = document.getElementById("playerCount");
+        for (let i = 10; i <= 100; i += 10) {
+            let option = document.createElement("option");
+            option.textContent = i;
+            select.appendChild(option);
+        }
+        document.getElementById("live_game_modal").addEventListener("click", function(event) {
+            if (event.target === this) {
+                closeLiveModal();
+            }
+        });
 
        
     </script>
