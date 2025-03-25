@@ -169,8 +169,8 @@
                     <label>Description</label>
                     <textarea placeholder="Enter game description"></textarea>
     
-                    <label>Max Points</label>
-                    <select class="playerCount"></select>
+                    <label for="maxPoints">Max Points</label>
+                    <input type="number" id="maxPoints" class="playerCount" min="10">
                 </div>
             </div>
     
@@ -328,51 +328,31 @@
         function closeLiveModal() {
             document.getElementById("live_game_modal").style.display = "none";
         }   
-        const select = document.getElementById("playerCount");
-        for (let i = 10; i <= 100; i += 10) {
-            let option = document.createElement("option");
-            option.textContent = i;
-            select.appendChild(option);
-        }
-
-        function addGame() {
-            const gameForms = document.getElementById("gameForms");
-            const gameIndex = gameForms.children.length + 1; // Get next game number
-
-            // Create new game form
-            const newGameForm = document.createElement("div");
-            newGameForm.classList.add("game-form");
-            newGameForm.innerHTML = `
-                <label>Game Name ${gameIndex}</label>
-                <input type="text" placeholder="Enter game name ${gameIndex}">
-
-                <label>Description ${gameIndex}</label>
-                <textarea placeholder="Enter game description ${gameIndex}"></textarea>
-
-                <label>Max Players</label>
-                <select class="playerCount"></select>
-            `;
-
-            gameForms.appendChild(newGameForm);
-
-            // Populate dropdown dynamically for new form
-            populateDropdown(newGameForm.querySelector(".playerCount"));
-        }
-
-        // Populate player dropdown for all instances
-        function populateDropdown(selectElement) {
-            selectElement.innerHTML = ""; // Clear previous options
-            for (let i = 10; i <= 100; i += 10) {
-                let option = document.createElement("option");
-                option.textContent = i;
-                selectElement.appendChild(option);
-            }
-        }
-
-        // Initialize first dropdown on page load
         document.addEventListener("DOMContentLoaded", () => {
-            populateDropdown(document.querySelector(".playerCount"));
-        });
+    // Set default value for the initial max points input field
+    document.querySelector(".playerCount").value = 10;
+});
+
+function addGame() {
+    const gameForms = document.getElementById("gameForms");
+    const gameIndex = gameForms.children.length + 1; // Get next game number
+
+    // Create new game form
+    const newGameForm = document.createElement("div");
+    newGameForm.classList.add("game-form");
+    newGameForm.innerHTML = `
+        <label>Game Name ${gameIndex}</label>
+        <input type="text" placeholder="Enter game name ${gameIndex}">
+
+        <label>Description ${gameIndex}</label>
+        <textarea placeholder="Enter game description ${gameIndex}"></textarea>
+
+        <label for="maxPoints${gameIndex}">Max Points</label>
+        <input type="number" id="maxPoints${gameIndex}" class="playerCount" min="1" value="10">
+    `;
+
+    gameForms.appendChild(newGameForm);
+}
         document.getElementById("live_game_modal").addEventListener("click", function(event) {
             if (event.target === this) {
                 closeLiveModal();
