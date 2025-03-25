@@ -643,24 +643,26 @@ input, select, textarea {
 
 /* Modal Background */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Modal Content Box */
+/* Modal Content */
 .modal-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 350px;
+    width: 500px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     animation: fadeIn 0.3s ease-in-out;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 /* Close Button */
@@ -680,24 +682,41 @@ input, select, textarea {
 input, textarea, select {
     width: 100%;
     padding: 8px;
-    margin: 5px 0 15px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* Button */
-.create-btn {
+/* Game Form Spacing */
+.game-form {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Button Styles */
+.create-btn, .add-game-btn {
     width: 100%;
     padding: 10px;
-    background: #28a745;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
+.create-btn {
+    background: #28a745;
+    color: white;
+    margin-top: 10px;
+}
 .create-btn:hover {
     background: #218838;
+}
+.add-game-btn {
+    background: #007bff;
+    color: white;
+}
+.add-game-btn:hover {
+    background: #0056b3;
 }
 
 /* Fade-in Animation */

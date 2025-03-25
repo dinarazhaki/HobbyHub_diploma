@@ -153,22 +153,34 @@
             </main>
     </section>
        <!-- Modal Live Game -->
-        <div id="live_game_modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeLiveModal()">&times;</span>
-                
-                <h2>Create Live Game</h2>
-                <label>Game Name</label>
-                <input type="text" placeholder="Enter game name">
-                <label>Description</label>
-                <textarea placeholder="Enter game description"></textarea>
-                <label>Max Point</label>
-                <select id="playerCount"></select>
-
-                <!-- Create Button -->
-                <button class="create-btn">Create Game</button>
+       <div id="live_game_modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <!-- Close Button -->
+            <span class="close-btn" onclick="closeLiveModal()">&times;</span>
+            
+            <h2>Create Live Games</h2>
+    
+            <!-- Game Forms Container -->
+            <div id="gameForms">
+                <div class="game-form">
+                    <label>Game Name</label>
+                    <input type="text" placeholder="Enter game name">
+    
+                    <label>Description</label>
+                    <textarea placeholder="Enter game description"></textarea>
+    
+                    <label>Max Points</label>
+                    <select class="playerCount"></select>
+                </div>
             </div>
+    
+            <!-- Add Game Button -->
+            <button class="add-game-btn" onclick="addGame()">➕ Add Another Game</button>
+    
+            <!-- Create Button -->
+            <button class="create-btn">Create Games</button>
         </div>
+    </div>
         
 
         <!--Edit EventModal-->
@@ -322,13 +334,50 @@
             option.textContent = i;
             select.appendChild(option);
         }
+
+        function addGame() {
+            const gameForms = document.getElementById("gameForms");
+            const gameIndex = gameForms.children.length + 1; // Get next game number
+
+            // Create new game form
+            const newGameForm = document.createElement("div");
+            newGameForm.classList.add("game-form");
+            newGameForm.innerHTML = `
+                <label>Game Name ${gameIndex}</label>
+                <input type="text" placeholder="Enter game name ${gameIndex}">
+
+                <label>Description ${gameIndex}</label>
+                <textarea placeholder="Enter game description ${gameIndex}"></textarea>
+
+                <label>Max Players</label>
+                <select class="playerCount"></select>
+            `;
+
+            gameForms.appendChild(newGameForm);
+
+            // Populate dropdown dynamically for new form
+            populateDropdown(newGameForm.querySelector(".playerCount"));
+        }
+
+        // Populate player dropdown for all instances
+        function populateDropdown(selectElement) {
+            selectElement.innerHTML = ""; // Clear previous options
+            for (let i = 10; i <= 100; i += 10) {
+                let option = document.createElement("option");
+                option.textContent = i;
+                selectElement.appendChild(option);
+            }
+        }
+
+        // Initialize first dropdown on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            populateDropdown(document.querySelector(".playerCount"));
+        });
         document.getElementById("live_game_modal").addEventListener("click", function(event) {
             if (event.target === this) {
                 closeLiveModal();
             }
         });
-
-       
     </script>
 {% endblock %}
 
