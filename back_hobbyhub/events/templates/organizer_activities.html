@@ -238,33 +238,7 @@
                 <p>QR Code: <span id="qr-text"></span></p>
             </div>
 
-            <div class="game-code-container">
-                <h3>Live Game Code</h3>
-                <div class="code-box" id="gameCode"></div>
-            </div>
-
-            <table id="new-requests-table" class="attendance-table">
-                <thead>
-                    <tr>
-                        <th>Full Name & Email</th>
-                        <th>Phone Number</th>
-                        <th>Attended</th>
-                        <th>Live game</th>
-                    </tr>
-                </thead>
-                <tbody id="new-requests-body">  <!--need to update to applied user data-->
-                    {% for employee in new_requests %}
-                    <tr>
-                        <td>{{ employee.name }} {{ employee.last_name }} ({{ employee.mail }})</td>
-                        <td>{{ employee.number }}</td>
-                        <td>{{ employee.attendance }}</td>
-                        <td>
-                            <button class="live-game-btn" data-nickname="{{ employee.nickname }}">Live game</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            
         </div>
     </div>
 {%  endblock %}
@@ -293,28 +267,6 @@
                 element: document.getElementById("qr-code"),
                 value: "https://yourwebsite.com/attendance?code=" + randomCode,
                 size: 200
-            });
-        }
-        function generateGameCode() {
-            let gameCode = Math.floor(100000 + Math.random() * 900000).toString();
-            let codeBox = document.getElementById("gameCode");
-            
-            if (!codeBox) {
-                console.error("Error: #gameCode element not found!");
-                return;
-            }
-            
-            codeBox.innerHTML = ""; // Clear previous content
-        
-            gameCode.split("").forEach((num, index) => {
-                let span = document.createElement("span");
-                span.innerText = num;
-                span.classList.add("digit");
-        
-                // Delay for animation effect
-                setTimeout(() => {
-                    codeBox.appendChild(span);
-                }, index * 100);
             });
         }
         
