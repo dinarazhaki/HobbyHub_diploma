@@ -1095,3 +1095,6 @@ def challenges(request):
 
 def organizer_activity_details(request):
     return render(request, "organizer_activity_details.html")
+
+def faq(request):
+    return render(request, "faq.html")

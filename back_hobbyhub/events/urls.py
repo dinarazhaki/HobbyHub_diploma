@@ -52,6 +52,7 @@ urlpatterns = [
     path('profile_lookup/', profile_lookup, name='profile_lookup'),
     path('organizer_profile_lookup/', organizer_profile_lookup, name='organizer_profile_lookup'),
     path('organizer_activity_details/', organizer_activity_details, name='organizer_activity_details'),
+    path('faq/', faq, name='faq'),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),
