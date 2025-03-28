@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Hobbies</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/hobbies.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hobbies.css' %}"
+    <script src="{% static 'js/hobbiescss.js' %}" ></script>
 </head>
 <body>
     <div class="container">
@@ -16,21 +17,25 @@
         <form id="hobby-form" method="POST" action="{% url 'save_hobbies' %}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="hobbies">Select Your Hobbies:</label>
-                <select name="hobbies[]" id="hobbies" multiple class="form-control">
+                <label>Select Your Hobbies:</label>
+                <div id="hobbies-container">
                     {% for hobby in hobbies %}
-                        <option value="{{ hobby.id }}">{{ hobby.name }}</option>
+                        <button type="button" class="hobby-btn" data-hobby-id="{{ hobby.id }}">
+                            {{ hobby.name }}
+                        </button>
                     {% endfor %}
-                </select>
+                </div>
+                <input type="hidden" name="hobbies" id="selected-hobbies">
             </div>
             <div class="buttons">
                 <a href="{% url 'sign_in' %}"><button type="button" class="skip-btn">Skip</button></a>
                 <button type="submit" class="continue-btn">Continue</button>
             </div>
         </form>
+        
     </div>
 
-    <!-- Передаем URL сохранения хобби в data-атрибуте -->
+     <!-- Передаем URL сохранения хобби в data-атрибуте -->
     <script src="{% static 'js/hobbies.js' %}" 
         data-save-url="{% url 'save_hobbies' %}" 
         data-user-hobbies="{{ user_hobbies|default:'[]'|safe }}">

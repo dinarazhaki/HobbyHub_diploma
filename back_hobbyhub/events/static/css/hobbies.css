@@ -37,7 +37,7 @@ body {
     color: #555;
 }
 
-.hobbies-container {
+#hobbies-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -54,11 +54,17 @@ body {
     transition: 0.3s;
 }
 
+.hobby-btn:hover {
+    background: #f0f0f0;
+}
+
 .hobby-btn.selected {
     background: linear-gradient(90deg, #ff1493, #FFA500);
     color: white;
-    border: none;
+    border-color: #007bff;
 }
+
+
 
 .buttons {
     margin-top: 20px;
@@ -81,6 +87,7 @@ body {
     background: linear-gradient(90deg, #ff1493, #FFA500);
     color: white;
 }
+
 
 
 /* Tablets and Small Screens (max-width: 1024px) */

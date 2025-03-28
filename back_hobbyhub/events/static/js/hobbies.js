@@ -1,34 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Получаем данные из data-атрибутов
     const scriptTag = document.querySelector('script[data-save-url]');
     const saveHobbiesUrl = scriptTag ? scriptTag.dataset.saveUrl : null;
     const userHobbies = scriptTag ? JSON.parse(scriptTag.dataset.userHobbies || "[]") : [];
 
-    const selectElement = document.getElementById("hobbies");
     const hobbyForm = document.getElementById("hobby-form");
+    const hobbyButtons = document.querySelectorAll(".hobby-btn");
 
-    if (!selectElement || !hobbyForm || !saveHobbiesUrl) {
+    if (!hobbyButtons.length || !hobbyForm || !saveHobbiesUrl) {
         console.error("Required elements not found or saveHobbiesUrl is missing.");
         return;
     }
 
-    // Устанавливаем уже выбранные хобби
-    userHobbies.forEach(hobbyId => {
-        const option = selectElement.querySelector(`option[value="${hobbyId}"]`);
-        if (option) option.selected = true;
+    let selectedHobbies = new Set(userHobbies);
+
+    // **Mark pre-selected hobbies**
+    hobbyButtons.forEach(button => {
+        const hobbyId = button.dataset.hobbyId;
+        if (selectedHobbies.has(hobbyId)) {
+            button.classList.add("selected");
+        }
+
+        button.addEventListener("click", function () {
+            if (selectedHobbies.has(hobbyId)) {
+                selectedHobbies.delete(hobbyId);
+                this.classList.remove("selected");
+            } else {
+                selectedHobbies.add(hobbyId);
+                this.classList.add("selected");
+            }
+        });
     });
 
-    // Обработчик отправки формы
+    // **Handle form submission**
     hobbyForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const selectedOptions = Array.from(selectElement.selectedOptions);
-        if (selectedOptions.length === 0) {
+        if (selectedHobbies.size === 0) {
             alert("Please select at least one hobby.");
             return;
         }
 
         const formData = new FormData(this);
+        selectedHobbies.forEach(hobbyId => {
+            formData.append("hobbies[]", hobbyId);
+        });
 
         fetch(saveHobbiesUrl, {
             method: "POST",
@@ -51,3 +66,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
