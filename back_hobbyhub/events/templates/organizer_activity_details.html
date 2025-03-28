@@ -4,6 +4,7 @@
 <title>Activity Details</title>
     <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/organizer-details.css' %}">
+    <script src="{% static 'js/organizer-details.js' %}"></script>
 {% endblock %}
 {% block content %}
 <div class="ag-format-container">
@@ -15,15 +16,9 @@
           <div class="ag-courses-item_title">
             Live Game&#160;name
           </div>
-          <div class="ag-courses-item_date-box description">
-            Kahoot game
-          </div>
   
           <div class="ag-courses-item_date-box">
-            Start:
-            <span class="ag-courses-item_date">
-              04.11.2022
-            </span>
+            description:
           </div>
         </a>
       </div>
@@ -33,17 +28,136 @@
           <div class="ag-courses-item_bg"></div>
   
           <div class="ag-courses-item_title">
-            UX/UI Web-Design&#160;+ Mobile Design
+           Live Game&#160;2
           </div>
   
           <div class="ag-courses-item_date-box">
-            Start:
-            <span class="ag-courses-item_date">
-              04.11.2022
-            </span>
+            description:
+          </div>
+        </a>
+      </div>
+
+      <div class="ag-courses_item">
+        <a href="#" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+           Live Game&#160;3
+          </div>
+  
+          <div class="ag-courses-item_date-box">
+            description:
           </div>
         </a>
       </div>
     </div>
     </div>
+
+
+    <div class="table-container">
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Email</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Alice</td>
+                  <td>Johnson</td>
+                  <td>alice@example.com</td>
+                  <td>
+                      <div class="dropdown">
+                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
+                          <div class="dropdown-content">
+                              <a href="#">Live Game 1</a>
+                              <a href="#">Live Game 2</a>
+                          </div>
+                      </div>
+                      <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
+                        <div class="dropdown-content">
+                            <a href="#">1st Place</a>
+                            <a href="#">2nd Place</a>
+                            <a href="#">3rd Place</a>
+                            <a href="#">Bonus</a>
+                        </div>
+                    </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>Bob</td>
+                  <td>Smith</td>
+                  <td>bob@example.com</td>
+                  <td>
+                      <div class="dropdown">
+                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
+                          <div class="dropdown-content">
+                              <a href="#">Live Game 1</a>
+                              <a href="#">Live Game 2</a>
+                          </div>
+                      </div>
+                      <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
+                        <div class="dropdown-content">
+                            <a href="#">1st Place</a>
+                            <a href="#">2nd Place</a>
+                            <a href="#">3rd Place</a>
+                            <a href="#">Bonus</a>
+                        </div>
+                    </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>Charlie</td>
+                  <td>Brown</td>
+                  <td>charlie@example.com</td>
+                  <td>
+                      <div class="dropdown">
+                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
+                          <div class="dropdown-content">
+                              <a href="#">Live Game 1</a>
+                              <a href="#">Live Game 2</a>
+                          </div>
+                      </div>
+                      <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
+                        <div class="dropdown-content">
+                            <a href="#">1st Place</a>
+                            <a href="#">2nd Place</a>
+                            <a href="#">3rd Place</a>
+                            <a href="#">Bonus</a>
+                        </div>
+                    </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>David</td>
+                  <td>Lee</td>
+                  <td>david@example.com</td>
+                  <td>
+                      <div class="dropdown">
+                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
+                          <div class="dropdown-content">
+                              <a href="#">Live Game 1</a>
+                              <a href="#">Live Game 2</a>
+                          </div>
+                      </div>
+                      <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
+                        <div class="dropdown-content">
+                            <a href="#">1st Place</a>
+                            <a href="#">2nd Place</a>
+                            <a href="#">3rd Place</a>
+                            <a href="#">Bonus</a>
+                        </div>
+                    </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 {% endblock %}
