@@ -1,6 +1,6 @@
 {% extends "organizer_base.html" %}
-{% load static %}
-{% block extra_css %}
+    {% load static %}
+    {% block extra_css %}
     <title>Employees</title>
     <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/employees.css' %}">
@@ -16,12 +16,12 @@
         <main style="margin-top:50px; padding-top: 70px;" >
             <h2>Employees</h2>
             <div class="buttons">
-                <button id="new-requests-btn" class="btn active">New Employee Request</button>
+                <button id="new-requests-btn" class="btn activeh">New Employee Request</button>
                 <button id="your-employees-btn" class="btn">Your Employees</button>
             </div>
 
             <!-- New Employee Requests Table -->
-            <table id="new-requests-table" class="employees-table">
+            <table id="new-requests-table" class="employees-table ">
                 <thead>
                     <tr>
                         <th>Full Name & Email</th>

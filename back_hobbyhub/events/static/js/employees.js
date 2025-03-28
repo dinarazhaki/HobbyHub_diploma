@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const yourEmployeesBtn = document.getElementById("your-employees-btn");
 
     function activateButton(activeBtn, inactiveBtn) {
-        activeBtn.classList.add("active");
-        inactiveBtn.classList.remove("active");
+        activeBtn.classList.add("activeh");
+        inactiveBtn.classList.remove("activeh");
     }
 
     newRequestsBtn.addEventListener("click", function () {
