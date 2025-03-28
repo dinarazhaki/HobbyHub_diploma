@@ -20,22 +20,20 @@ main {
 }
 
 .buttons button {
-    padding: 10px 20px;
+    padding: 15px 25px;
     border: none;
     border-radius: 20px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-}
-
-#new-requests-btn {
-    background-color: #FFA500;
-    border: 1px solid #333;
-}
-
-#your-employees-btn {
     background-color: white;
     border: 1px solid #333;
 }
+
+.active {
+    background-color: #FFA500 !important;
+}
+
 
 .employees-table {
     width: 80%;
@@ -55,27 +53,31 @@ main {
 .approve-btn {
     background-color: green;
     color: white;
-<<<<<<< Updated upstream
-=======
-    display: inline-block;
->>>>>>> Stashed changes
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 7px;
 }
 
 .remove-btn {
     background-color: red;
     color: white;
-<<<<<<< Updated upstream
-=======
-    display: inline-block;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 7px;
 }
-
-#delete-btn {
-    background-color: black;
+.delete-btn{
+    padding: 7px;
+    background-color: red;
     color: white;
-    display: none;
->>>>>>> Stashed changes
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
-
 
 /* Responsive Design */
 @media (max-width: 1024px) {
