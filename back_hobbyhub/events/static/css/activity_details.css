@@ -321,6 +321,30 @@ body {
     display: inline-block;
 }
 
+#qr-file-input {
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#qr-file-input:hover {
+    border-color: #007bff;
+}
+
+#qr-file-input:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+
+}
+
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

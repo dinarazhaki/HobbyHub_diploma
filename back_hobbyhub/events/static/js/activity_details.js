@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const stopScanBtn = document.getElementById('stop-scan-btn');
     const qrResults = document.getElementById('qr-reader-results');
     const attendanceStatus = document.getElementById('attendance-status');
+    const qrFileInput = document.getElementById('qr-file-input');
     let html5QrCode = null;
     let hasScanned = false; // Track if we've already scanned successfully
 
@@ -172,4 +173,20 @@ document.addEventListener('DOMContentLoaded', function() {
     startScanBtn.addEventListener('click', startScanner);
     stopScanBtn.addEventListener('click', stopScanner);
     window.addEventListener('beforeunload', stopScanner);
+
+    qrFileInput.addEventListener('change', function(event) {
+        if (event.target.files.length === 0) return;
+
+        const file = event.target.files[0];
+        const html5QrCode = new Html5Qrcode("qr-reader");
+
+        html5QrCode.scanFile(file, true)
+            .then(decodedText => qrCodeSuccessCallback(decodedText))
+            .catch(err => showErrorMessage("QR code could not be read."));
+    });
+
+    startScanBtn.addEventListener('click', startScanner);
+    stopScanBtn.addEventListener('click', stopScanner);
+    window.addEventListener('beforeunload', stopScanner);
 });
+
