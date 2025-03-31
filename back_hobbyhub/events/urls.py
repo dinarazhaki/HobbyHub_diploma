@@ -2,6 +2,7 @@ from django.urls import path, include
 from .views import *
 from django.contrib.auth.views import LogoutView
 
+
 urlpatterns = [
     path('social-auth/', include('social_django.urls')),
 
@@ -58,9 +59,8 @@ urlpatterns = [
     path('approve_employee/', approve_employee, name='approve_employee'),
     path('deny_employee/', deny_employee, name='deny_employee'),
     path('get_employee_requests/', get_employee_requests, name='get_employee_requests'),
-
-    
-    
+    path('events/<int:event_id>/mark_attendance/', mark_attendance, name='mark_attendance'),
+    path('events/<int:event_id>/generate_qr/', generate_qr_code, name='generate_qr'),    
     # Аутентификация
     path('sign_in/', sign_in, name='sign_in'),
     path('sign_up/', sign_up, name='sign_up'),

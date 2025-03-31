@@ -26,11 +26,11 @@ SECRET_KEY = 'django-insecure-nub2-er(f#0ty4030vj2$$&ocl!mcs$nlu)f24mka0k&70yod#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =["127.0.0.1", "localhost"]
+ALLOWED_HOSTS =["127.0.0.1", "localhost", '192.168.3.73']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000', 'http://192.168.3.73:8000']
 
-# CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30']
+# CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
 
 # Application definition
 

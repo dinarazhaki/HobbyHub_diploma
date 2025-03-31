@@ -47,6 +47,11 @@ class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'company_id', 'email', 'created_at')  # Поля в списке
     search_fields = ('name', 'company_id', 'email')  # Поля для поиска
 
+class AttendanceRecordAdmin(admin.ModelAdmin):
+    list_display = ('event', 'employee', 'first_name', 'last_name', 'timestamp')
+    list_filter = ('event', 'timestamp')
+    search_fields = ('employee__nickname', 'first_name', 'last_name')
+    
 # Регистрация моделей с кастомизацией
 admin.site.register(Event, EventAdmin)
 admin.site.register(Company, CompanyAdmin)
@@ -56,3 +61,4 @@ admin.site.register(Prize)
 admin.site.register(EmployeeChallengeProgress)
 admin.site.register(Challenge)
 admin.site.register(Notification)
+admin.site.register(AttendanceRecord)

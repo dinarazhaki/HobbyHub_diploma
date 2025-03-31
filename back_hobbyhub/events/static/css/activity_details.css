@@ -1,83 +1,84 @@
-
-
+/* ===== Base Styles ===== */
 @font-face {
     font-family: 'Gilroy-Medium';
-    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
-    font-weight: normal;
+    src: local('Gilroy Medium'), local('Gilroy-Medium'),
+         url('/static/fonts/Gilroy-Medium.woff2') format('woff2'), 
+         url('/static/fonts/Gilroy-Medium.woff') format('woff'), 
+         url('/static/fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
-.hidden{
-    display:none;
+:root {
+    --primary-gradient: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    --accent-color: #FFC300;
+    --success-color: #4CAF50;
+    --danger-color: #f44336;
+    --text-dark: #333;
+    --text-light: #9F9F9F;
+    --bg-light: #f8f9fa;
+    --border-radius: 20px;
+    --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
-/*Header*/
+body {
+    font-family: 'Gilroy-Medium', sans-serif;
+    margin: 0;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== Utility Classes ===== */
 .gradient-text {
-    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    background: var(--primary-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
 
-.nav-item a {
-    margin-right: 15px;
-}
-
-.signup {
-    padding-left: 50px;
-}
-
 .btn-gradient {
-    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    background: var(--primary-gradient);
     color: white;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     padding: 10px 25px;
     font-size: 18px;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--transition);
 }
 
-    .btn-gradient:hover {
-        opacity: 0.8;
-    }
-
-.logo {
-    font-size: 2rem;
-    font-weight: bold;
-}
-/* Main Section Fixes */
-body {
-    font-family: 'Girloy-Medium', sans-serif !important;
-    margin: auto;
-    background-color: #f8f9fa;
+.btn-gradient:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
 }
 
+/* ===== Main Content Styles ===== */
 .activity-bg {
     display: flex;
     align-items: center;
     justify-content: center;
-   /* background: url('../images/cooking.png') no-repeat center center/cover;*/
-    padding: 80px 0 80px 0;
+    padding: 80px 0;
     margin-top: 50px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .challenge-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 50%;
     background: white;
     padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     text-align: center;
-    margin-top:20px;
-    margin-bottom:20px;
-}
-
-.highlight {
-    color: red;
+    margin: 20px auto;
 }
 
 .tags {
@@ -85,255 +86,260 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 5px;
 }
 
 .tag {
-    background: #FFC300;
+    background: var(--accent-color);
     color: white;
     padding: 3px 25px;
-    border-radius: 20px;
-    margin: 5px;
+    border-radius: var(--border-radius);
 }
 
 .points {
     font-weight: bold;
-    padding-top:5px;
+    padding-top: 5px;
 }
 
+/* Button Styles */
+.cancel-btn, 
+.apply-btn {
+    width: 100%;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 17px;
+    transition: var(--transition);
+}
 
 .cancel-btn {
-    width:stretch;
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 17px;
-    transition: 0.3s;
+    background: var(--danger-color);
 }
 
-    .cancel-btn:hover {
-        opacity: 0.7;
-    }
-
-    
 .apply-btn {
-    width:stretch;
     background: #FF6A00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 17px;
-    transition: 0.3s;
 }
 
-    .apply-btn:hover {
-        opacity: 0.7;
-    }
-
-.timing-location h3{
-    margin-top: 50px;
+.cancel-btn:hover, 
+.apply-btn:hover {
+    opacity: 0.7;
 }
+
+/* Event Details Section */
 .timing-location {
     width: 100%;
-    text-align: left;
     background: white;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
-.timing-location h3{
-    padding-left:100px;
-    margin-bottom:40px;
+
+.timing-location h3 {
+    padding-left: 100px;
+    margin-bottom: 40px;
 }
 
 .details {
-    justify-content:center;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #f5f5f5;
     padding: 20px;
     border-radius: 10px;
-}
-
-@media (min-width: 768px) {
-    .details {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+    gap: 20px;
 }
 
 .detail-box {
-    justify-content:center;
     display: flex;
     align-items: center;
-    gap:10px;
+    gap: 10px;
     width: 100%;
     max-width: 400px;
 }
 
 .icon {
-    
-    background-color: #FFC300; 
-    padding: 10px; 
+    background-color: var(--accent-color);
+    padding: 10px;
     border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .custom-icon {
-    width:30px;
+    width: 30px;
     height: 30px;
 }
 
 .label {
-    margin-bottom:0;
-    margin-top:5px;
-    padding-top:5px;
+    margin: 5px 0 0;
     font-weight: bold;
-    color: gray;
+    color: var(--text-light);
 }
 
+/* Map Styles */
 #map {
     height: 400px;
-    width: 100%;
-    justify-content:center;
-    padding:50px;
-    margin-top:50px;
+    width: calc(100% - 100px);
+    margin: 50px auto 0;
+    border-radius: 10px;
 }
 
-/*After applied*/
-.game-code-container {
-    border: 2px solid #ccc;
-    padding: 30px 25px;
-    border-radius: 20px;
-    text-align: center;
+/* QR Code Scanner Styles */
+.qr-section {
+    margin-bottom: 30px;
 }
-.game-code-container h2 {
-    color: red;
-    margin-bottom: 10px;
-}
-.code-box {
+
+.qr-controls {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
+    margin: 20px 0;
 }
 
-.digit {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 2px solid black;
+.scan-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.start-scan {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.stop-scan {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.scan-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.scan-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#qr-reader {
+    width: 100%;
+    border: 1.5px solid #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#qr-reader-results {
+    margin-top: 15px;
+    padding: 10px;
     border-radius: 5px;
-    font-size: 24px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+/* Attendance Status */
+.attendance-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background-color: rgba(76, 175, 80, 0.1);
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
     font-weight: bold;
     text-align: center;
-    line-height: 40px;
-    color: red;
-}
-.applied{
-    margin-top:10px;
-}
-/*Footer*/
-
-.footer {
-    height: 450px;
-    background: #f5f5f5;
-    color: black;
-    padding: 100px 0;
 }
 
-    .footer h2 {
-        font-size: 30px;
-    }
-
-    .footer h5 {
-        padding-left: 80px;
-        color: #FFC300;
-    }
-
-    .footer ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        padding-left: 50px;
-    }
-
-        .footer ul li {
-            margin-bottom: 13px;
-        }
-
-            .footer ul li a {
-                color: #9F9F9F;
-                text-decoration: none;
-                padding-left: 30px;
-            }
-
-                .footer ul li a:hover {
-                    color: #000000;
-                }
-
-
-#userLiveGame {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Status Messages */
+.status-message {
+    display: none;
     padding: 10px;
-    background: #fafafa;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.08);
-    width: fit-content;
-    margin: 15px auto;
-}
-
-#user_live_game {
-    padding: 10px;
-    border: 1.5px solid white;
-    border-radius: 6px;
-    font-size: 14px;
+    margin-top: 15px;
+    border-radius: 5px;
     text-align: center;
-    transition: all 0.2s ease-in-out;
-    width: 150px;
 }
 
-#user_live_game:focus {
-    border-color: #FFC300;
-    outline: none;
-    box-shadow: 0px 0px 5px rgba(255, 80, 80, 0.3);
+.status-message.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
 }
 
-.submit-btn {
-    padding: 10px 15px;
-    background: #FFC300;
-    color: white;
+.status-message.error {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+
+
+.qr-scanner-container {
+    width: 100%;
+    min-height: 300px;
+    background: #000;
+    margin: 15px 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.qr-scanner-container video {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.qr-results {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.05);
+    text-align: center;
+    min-height: 20px;
     font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease-in-out, transform 0.1s;
 }
 
-.submit-btn:hover {
-    opacity: 0.7;
+.scan-btn .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
+.scan-btn.loading .spinner {
+    display: inline-block;
+}
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
-/* Responsive Design */
+/* ===== Responsive Design ===== */
+@media (min-width: 768px) {
+    .details {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
 
-/* Large Screens (Desktops, Laptops) */
 @media screen and (min-width: 1200px) {
     .challenge-container {
         width: 40%;
     }
 }
 
-/* Medium Screens (Tablets, Small Laptops) */
 @media screen and (max-width: 1024px) {
     .challenge-container {
         width: 60%;
@@ -344,7 +350,6 @@ body {
     }
 }
 
-/* Small Screens (Tablets, Large Phones) */
 @media screen and (max-width: 768px) {
     .activity-bg {
         padding: 50px 0;
@@ -359,35 +364,18 @@ body {
     .timing-location h3 {
         padding-left: 20px;
         font-size: 20px;
-    }
-    .details {
-        flex-direction: column;
-        align-items: center;
-    }
-    .detail-box {
-        max-width: 100%;
         text-align: center;
-    }
-    .icon {
-        padding: 8px;
-    }
-    .custom-icon {
-        width: 25px;
-        height: 25px;
     }
     #map {
         height: 300px;
+        width: calc(100% - 40px);
     }
-    .footer {
-        padding: 50px 0;
-        height: auto;
-    }
-    .footer h5, .footer ul {
-        padding-left: 30px;
+    .qr-controls {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-/* Extra Small Screens (Mobile Phones) */
 @media screen and (max-width: 480px) {
     .challenge-container {
         width: 90%;
@@ -399,62 +387,11 @@ body {
     .timing-location h3 {
         padding-left: 10px;
         font-size: 18px;
-        text-align: center;
     }
-    .apply-btn {
+    .apply-btn, .cancel-btn {
         font-size: 14px;
         padding: 8px 15px;
     }
-    .footer {
-        padding: 30px 0;
-    }
-    .footer h5, .footer ul {
-        padding-left: 15px;
-    }
 }
 
 
-#my-qr-reader {
-    padding: 20px !important;
-    border: 1.5px solid white !important;
-    border-radius: 8px;
-}
-
-#my-qr-reader img[alt="Info icon"] {
-    display: none;
-}
-
-#my-qr-reader img[alt="Camera based scan"] {
-    width: 100px !important;
-    height: 100px !important;
-}
-
-
-
-#my-qr-reader button  {
-    background-color: #9F9F9F; 
-    color: #fff; /* White text */
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.2s;
-    margin-bottom: 5px;
-}
-
-#my-qr-reader button:hover {
-    background-color: #FFC300;
-    transform: scale(1.05);
-}
-
-#my-qr-reader button:active {
-    background-color: #FFC300;
-    transform: scale(0.98);
-}
-
-#html5-qrcode-anchor-scan-type-change {
-    text-decoration: none !important;
-    color: #FFC300;
-}

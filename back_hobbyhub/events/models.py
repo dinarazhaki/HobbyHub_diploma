@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+from datetime import timedelta
 
 class CompanyManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -106,8 +107,29 @@ class Event(models.Model):
     @property
     def spots_left(self):
         return self.quota - self.participants.count()
-
-
+    
+class AttendanceRecord(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='attendance_records')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='attendance_records')
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
+    timestamp = models.DateTimeField(default=timezone.now)  # Changed from auto_now_add
+    
+    class Meta:
+        unique_together = ('event', 'employee')
+    
+    def save(self, *args, **kwargs):
+        # Set names automatically
+        if self.employee:
+            if not self.first_name:
+                self.first_name = self.employee.name
+            if not self.last_name:
+                self.last_name = self.employee.last_name
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.employee.nickname} at {self.event.title} ({self.timestamp})"
+    
 class Prize(models.Model):
     name = models.CharField(max_length=255, verbose_name="Prize Name")
     description = models.TextField(verbose_name="Prize Description")

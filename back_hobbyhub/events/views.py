@@ -1,3 +1,6 @@
+from datetime import time
+import logging
+from venv import logger
 from django.http import JsonResponse
 from django.shortcuts import render, redirect,  get_object_or_404
 from .models import *
@@ -45,7 +48,7 @@ def approval_required(view_func):
 
 
 def activity_details(request, event_id):
-    event = get_object_or_404(Event, id=event_id) 
+    event = get_object_or_404(Event, id=event_id)
     nickname = request.session.get("nickname")
     user_is_registered = False
 
@@ -700,7 +703,63 @@ def organizer_activities(request):
         'other_events': other_events,
         'hobbies': hobbies,
     })
+    
+    
+@role_required("employee")
+@approval_required
+@csrf_exempt
+def mark_attendance(request, event_id):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Only POST method allowed'}, status=405)
 
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        employee_nickname = data.get('employee_nickname')
+        
+        if not employee_nickname:
+            return JsonResponse({'success': False, 'error': 'employee_nickname is required'}, status=400)
+
+        event = Event.objects.get(id=event_id)
+        employee = Employee.objects.get(nickname=employee_nickname)
+
+        if AttendanceRecord.objects.filter(event=event, employee=employee).exists():
+            return JsonResponse({'success': False, 'error': 'Attendance already recorded'}, status=400)
+
+        record = AttendanceRecord.objects.create(
+            event=event,
+            employee=employee,
+            first_name=employee.name,
+            last_name=employee.last_name
+        )
+
+        return JsonResponse({
+            'success': True,
+            'record': {
+                'first_name': record.first_name,
+                'last_name': record.last_name,
+                'timestamp': record.timestamp.isoformat()
+            }
+        })
+
+    except Event.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
+    except Employee.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Employee not found'}, status=404)
+    except Exception as e:
+        logger.error(f"Error in mark_attendance: {str(e)}", exc_info=True)
+        return JsonResponse({'success': False, 'error': 'Internal server error'}, status=500)
+
+        
+def generate_qr_code(request, event_id):
+        try:
+            event = Event.objects.get(id=event_id)
+            # Generate token that changes every 15 seconds
+            time_segment = int(time.time() // 15)
+            qr_data = f"event:{event.id}|token:{time_segment}"
+            return JsonResponse({"qr_data": qr_data})
+        except Event.DoesNotExist:
+            return JsonResponse({"error": "Event not found"}, status=404)
+      
 def create_event(request):
     if request.method == 'POST':
         company_id = request.session.get("company_id")

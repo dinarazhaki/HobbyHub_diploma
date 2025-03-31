@@ -116,10 +116,8 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
-                                        <button class="participants-list-btn btn-info" data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
-                                        <button onclick="openLiveModal()" class="live_game_btn px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition" >Live Game</button>
-                                    </div>
-                                </div>
+<!-- Change this line in both event sections -->
+                                        <button class="participants-list-btn" data-event-id="{{ event.id }}" onclick="openQRModal('{{ event.id }}')">QR</button>                                </div>
                         </div>
                     {% endfor %}
                     <p id="no-events-today" style="display: none;">No events for today match the selected filters.</p>
@@ -141,8 +139,8 @@
                                     <div class="event-actions">
                                         <button class="edit-event-btn" data-event-id="{{ event.id }}">Edit</button>
                                         <button class="delete-event-btn" data-event-id="{{ event.id }}">Delete</button>
-                                        <button class="participants-list-btn " data-event-id="{{ event.id }}" onclick="openQRModal()">QR</button>
-                                        <button onclick="openLiveModal()" class="live_game_btn px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition" >Live Game</button>
+<!-- Change this line in both event sections -->
+                                        <button class="participants-list-btn" data-event-id="{{ event.id }}" onclick="openQRModal('{{ event.id }}')">QR</button>                                        <button onclick="openLiveModal()" class="live_game_btn px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition" >Live Game</button>
                                     </div>
                                 </div> 
                         </div>
@@ -226,19 +224,30 @@
 
 
     
-    <div id="QREventModal" class="modal " style="display: none;">
+    <div id="QREventModal" class="modal" style="display: none;">
         <div class="modal-content qr-live">
-            <span class="close-btn " onclick="closeQRModal()">&times;</span>
-            <h2>QR Code + Live Game Code</h2>
+            <span class="close-btn" onclick="closeQRModal()">&times;</span>
+            <h2>Attendance QR Code</h2>
             
-            <!-- QR Code Section -->
-            <h4>QR Code to check attendance</h4>
+            <div class="qr-instructions">
+                <p>Participants should scan this code to mark their attendance.</p>
+                <p>The code refreshes automatically every 15 seconds for security.</p>
+            </div>
+            
             <div class="qr-container">
                 <canvas id="qr-code"></canvas>
-                <p>QR Code: <span id="qr-text"></span></p>
+                <p id="qr-timer">Time until refresh: 15s</p>
             </div>
-
             
+            <div class="qr-usage">
+                <h4>How to use:</h4>
+                <ol>
+                    <li>Display this QR code at your event entrance</li>
+                    <li>Participants open the event page in the app</li>
+                    <li>They tap "Start Scanning" and point their camera at this code</li>
+                    <li>Attendance will be automatically recorded</li>
+                </ol>
+            </div>
         </div>
     </div>
 {%  endblock %}
@@ -247,29 +256,67 @@
 
     <script>
         let gameCodeInterval;
+        let currentEventId = null;
+        let qrRefreshInterval = null;
+        let timerInterval = null;
+        let secondsLeft = 15;
 
-        function openQRModal() {
-            document.getElementById("QREventModal").style.display = "flex";
-            generateQRCode();
-            startRandomGameCode();
+        function openQRModal(eventId) {
+            currentEventId = eventId;
+            document.getElementById('QREventModal').style.display = 'block';
+            generateQRCode(eventId);
+            startQRRefreshTimer(eventId);
         }
 
         function closeQRModal() {
-            document.getElementById("QREventModal").style.display = "none";
-            clearInterval(gameCodeInterval); // Stop updating game code
+            document.getElementById('QREventModal').style.display = 'none';
+            clearInterval(qrRefreshInterval);
+            clearInterval(timerInterval);
+            currentEventId = null;
         }
 
-        function generateQRCode() {
-            const randomCode = "QR-" + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById("qr-text").innerText = randomCode;
+        function generateQRCode(eventId) {
+            const timeSegment = Math.floor(Date.now() / 15000);
+            const qrData = `event:${eventId}|token:${timeSegment}`;
             
-            let qr = new QRious({
-                element: document.getElementById("qr-code"),
-                value: "https://yourwebsite.com/attendance?code=" + randomCode,
-                size: 200
+            const qr = new QRious({
+                element: document.getElementById('qr-code'),
+                value: qrData,
+                size: 300, // Increased size
+                level: 'H', // High error correction
+                background: '#ffffff', // White background
+                foreground: '#000000'  // Black foreground
             });
+            
+            console.log("Generated QR for event:", eventId, "Data:", qrData);
         }
+
         
+        function startQRRefreshTimer(eventId) {
+            secondsLeft = 15;
+            updateTimerDisplay();
+            
+            // Refresh QR every 15 seconds
+            qrRefreshInterval = setInterval(() => {
+                generateQRCode(eventId);
+                secondsLeft = 15;
+            }, 15000);
+            
+            // Update timer display every second
+            timerInterval = setInterval(() => {
+                secondsLeft--;
+                updateTimerDisplay();
+                if (secondsLeft <= 0) {
+                    secondsLeft = 15;
+                }
+            }, 1000);
+        }
+    
+        function updateTimerDisplay() {
+            document.getElementById('qr-timer').textContent = `Time until refresh: ${secondsLeft}s`;
+        }
+
+
         // Ensure the function runs when the page loads
         document.addEventListener("DOMContentLoaded", generateGameCode);
         

@@ -1,8 +1,30 @@
 @font-face {
     font-family: 'Gilroy-Medium';
-    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
-    font-weight: normal;
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), 
+         url('fonts/Gilroy-Medium.woff') format('woff'), 
+         url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url('fonts/Gilroy-Bold.woff2') format('woff2');
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #FF6A00;
+    --secondary-color: #FFC300;
+    --accent-color: #E10098;
+    --dark-color: #333333;
+    --light-color: #F5F5F5;
+    --white: #FFFFFF;
+    --gray: #9F9F9F;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
 body{
@@ -44,24 +66,40 @@ body h1, h2, h3, h4,h5,h6, header{
     margin-bottom: 7px;
 }
 
-/* Style checkboxes */
-input[type="checkbox"] {
-    appearance: none; /* Removes default styling */
+
+.filter-panel input[type="checkbox"] {
+    appearance: none;
     width: 20px;
     height: 20px;
+    border: 2px solid var(--gray);
     border-radius: 4px;
-    border: 2px solid #ccc;
+    margin-right: 0.75rem;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    background-color: #fff;
+    transition: var(--transition);
+    position: relative;
 }
 
-/* Gradient Background when Checked */
-input[type="checkbox"]:checked {
-    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
-    border: none;
+.filter-panel input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+    border-color: transparent;
+}
+.filter-panel input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
+.filter-panel input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: 'Gilroy-Medium', sans-serif;
+}
 
 .event-list {
     width: 58%;
@@ -321,30 +359,29 @@ input, select, textarea {
     background-color:linear-gradient(to right, red, #ff69b4);
 }
 
-#QREventModal h2{
-    color: #FF6A00;
-    margin-bottom: 10px;
-}
-#QREventModal h4{
-    margin-top: 20px;
-}
-
-.qr-live{
+/* ===== QR Modal Specific Styles ===== */
+.qr-live {
     text-align: center;
 }
+
 .qr-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    width: 100%;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    display: inline-block;
 }
 
 #qr-code {
-    width: 75%; 
-    max-width: 200px; 
+    width: 200px;
+    height: 200px;
 }
 
+#qr-timer {
+    margin-top: 0.5rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
 
 
 
@@ -723,4 +760,71 @@ input, textarea, select {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+    .container-act {
+        flex-direction: column;
+    }
+    
+    .filter-panel {
+        position: static;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-act {
+        padding: 1rem;
+        margin-top: 5rem;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-image {
+        flex: 0 0 auto;
+        height: 200px;
+        width: 100%;
+    }
+    
+    .event-actions {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .form-group label,
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+    }
+    
+    .event-details h3 {
+        font-size: 1.1rem;
+    }
+    
+    .event-details p {
+        font-size: 0.8rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
 }
