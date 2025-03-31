@@ -51,8 +51,9 @@
             </div>
     
             <!-- Hidden data elements -->
-            <div id="user-data" data-nickname="{{ request.user.employee.nickname }}" style="display: none;"></div>
-            <div id="event-data" data-event-id="{{ event.id }}" style="display: none;"></div>
+            <div id="user-data" data-nickname="{{ nickname }}"></div>
+            <div id="event-data" data-event-id="{{ event.id }}"></div>
+                        <div id="event-data" data-event-id="{{ event.id }}" style="display: none;"></div>
             {% csrf_token %}
         </div>
     </div>

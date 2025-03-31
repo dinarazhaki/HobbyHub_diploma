@@ -46,7 +46,6 @@ def approval_required(view_func):
 
     return _wrapped_view
 
-
 def activity_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     nickname = request.session.get("nickname")
@@ -62,6 +61,7 @@ def activity_details(request, event_id):
     return render(request, 'activity_details.html', {
         'event': event,
         'user_is_registered': user_is_registered,
+        'nickname': nickname,  # Ensure nickname is passed to the template
     })
     
 @csrf_exempt
@@ -705,26 +705,30 @@ def organizer_activities(request):
     })
     
     
+logger = logging.getLogger(__name__)
+
 @role_required("employee")
 @approval_required
 @csrf_exempt
 def mark_attendance(request, event_id):
     if request.method != 'POST':
-        return JsonResponse({'success': False, 'error': 'Only POST method allowed'}, status=405)
+        return JsonResponse({'success': False, 'error': 'Only POST allowed'}, status=405)
 
     try:
-        data = json.loads(request.body.decode('utf-8'))
+        data = json.loads(request.body)
         employee_nickname = data.get('employee_nickname')
         
         if not employee_nickname:
-            return JsonResponse({'success': False, 'error': 'employee_nickname is required'}, status=400)
+            return JsonResponse({'success': False, 'error': 'Nickname required'}, status=400)
 
         event = Event.objects.get(id=event_id)
         employee = Employee.objects.get(nickname=employee_nickname)
 
+        # Check for existing attendance
         if AttendanceRecord.objects.filter(event=event, employee=employee).exists():
-            return JsonResponse({'success': False, 'error': 'Attendance already recorded'}, status=400)
+            return JsonResponse({'success': False, 'error': 'Already attended'}, status=400)
 
+        # Create record with all employee data
         record = AttendanceRecord.objects.create(
             event=event,
             employee=employee,
@@ -734,6 +738,7 @@ def mark_attendance(request, event_id):
 
         return JsonResponse({
             'success': True,
+            'employee_name': f"{employee.name} {employee.last_name}",
             'record': {
                 'first_name': record.first_name,
                 'last_name': record.last_name,
@@ -746,10 +751,8 @@ def mark_attendance(request, event_id):
     except Employee.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Employee not found'}, status=404)
     except Exception as e:
-        logger.error(f"Error in mark_attendance: {str(e)}", exc_info=True)
-        return JsonResponse({'success': False, 'error': 'Internal server error'}, status=500)
-
-        
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+              
 def generate_qr_code(request, event_id):
         try:
             event = Event.objects.get(id=event_id)
