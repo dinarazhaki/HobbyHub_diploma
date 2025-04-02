@@ -227,7 +227,7 @@
     <div id="QREventModal" class="modal" style="display: none;">
         <div class="modal-content qr-live">
             <span class="close-btn" onclick="closeQRModal()">&times;</span>
-            <h2>Attendance QR Code</h2>
+            <h2  style="color:#FF6A00;">Attendance QR Code</h2>
             
             <div class="qr-instructions">
                 <p>Participants should scan this code to mark their attendance.</p>
@@ -263,7 +263,7 @@
 
         function openQRModal(eventId) {
             currentEventId = eventId;
-            document.getElementById('QREventModal').style.display = 'block';
+            document.getElementById('QREventModal').style.display = 'flex';
             generateQRCode(eventId);
             startQRRefreshTimer(eventId);
         }
