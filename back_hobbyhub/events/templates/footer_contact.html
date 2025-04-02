@@ -1,0 +1,80 @@
+{% extends 'organizer_base.html' %}
+{% load static %}
+
+{% block title %}Contact Support - HobbyHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
+<style>
+body {
+            background-color: #f8f9fa;
+        }
+        .contact-container {
+            justify-content: center;
+            margin-top:150px;
+            margin-bottom: 60px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-send {
+            background: linear-gradient(90deg, #ff7eb3, #ff758c);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .btn-send:hover {
+            background: linear-gradient(90deg, #ff758c, #ff7eb3);
+        }
+        .message-popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="contact-container">
+            <h2 class="text-center">Contact Support</h2>
+            <form id="contactForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-send w-100">Send Message</button>
+            </form>
+        </div>
+    <div id="messagePopup" class="message-popup">Your message has been sent to support!</div>
+    </div>
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let popup = document.getElementById("messagePopup");
+        popup.style.display = "block";
+        
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 6000);
+        
+        this.reset();
+    });
+</script>
+{% endblock %}

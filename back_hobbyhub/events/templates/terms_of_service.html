@@ -1,0 +1,56 @@
+{% extends 'organizer_base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service | HobbyHub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .terms-container {
+        margin: 150px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    h4 {
+        color: #343a40;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container terms-container" >
+    <h2 class="mb-4">Terms of Service</h2>
+        <p>Welcome to HobbyHub! By using our services, you agree to the following terms.</p>
+        
+        <h4>1. Acceptance of Terms</h4>
+        <p>By accessing and using HobbyHub, you acknowledge and agree to be bound by these terms. If you do not agree, please do not use our platform.</p>
+        
+        <h4>2. User Responsibilities</h4>
+        <p>Users are expected to act responsibly, ethically, and respectfully while using HobbyHub. Misuse of services, including spamming, harassment, or illegal activities, may result in account suspension.</p>
+        
+        <h4>3. Privacy Policy</h4>
+        <p>Your privacy is important to us. We collect necessary data to improve our services and ensure a better user experience. For details on how we manage your data, please refer to our Privacy Policy.</p>
+        
+        <h4>4. Changes to Terms</h4>
+        <p>We reserve the right to modify these terms at any time. Updated terms will be posted on this page. Continued use of the platform signifies acceptance of any changes.</p>
+        
+        <h4>5. Limitation of Liability</h4>
+        <p>We do our best to maintain a secure and functional platform, but we are not liable for any data loss, service interruptions, or security breaches that may occur.</p>
+        
+        <h4>6. Termination of Service</h4>
+        <p>We reserve the right to terminate accounts that violate our terms, engage in fraudulent activities, or disrupt the platform's operation.</p>
+        
+        <h4>7. Contact Us</h4>
+        <p>If you have any questions, feel free to <a href="{% url 'contact_support' %}">Contact Support</a>.</p></div>
+{% endblock %}

@@ -217,3 +217,8 @@ h2 {
     top: 3px;
     left: 3px;
 }
+.rank-icon{
+    width: 70px;
+    gap:10px;
+    margin-bottom: 20px;
+}

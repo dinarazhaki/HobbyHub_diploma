@@ -1160,3 +1160,9 @@ def organizer_activity_details(request):
 
 def faq(request):
     return render(request, "faq.html")
+
+def contact_support(request):
+    return render(request, "footer_contact.html")
+
+def terms_of_service(request):
+    return render(request, "terms_of_service.html")

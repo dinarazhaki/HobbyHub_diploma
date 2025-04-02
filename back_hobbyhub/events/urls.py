@@ -54,6 +54,8 @@ urlpatterns = [
     path('organizer_profile_lookup/', organizer_profile_lookup, name='organizer_profile_lookup'),
     path('organizer_activity_details/', organizer_activity_details, name='organizer_activity_details'),
     path('faq/', faq, name='faq'),
+    path('contact_support/', contact_support, name='contact_support'),
+    path('terms_of_service/', terms_of_service, name="terms_of_service"),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),
