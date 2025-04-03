@@ -16,7 +16,7 @@ body {
 .rank-container {
     align-items: center;
     justify-content: center;
-    background: white;
+    background: linear-gradient(to right, #e01a1a, #eed324);
     padding: 20px 30px;
     border-radius: 10%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
@@ -31,16 +31,13 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 5px;
-    background: linear-gradient(to right, #e01a1a, #eed324);
-    -webkit-background-clip: text;
 }
 
 .rank-number {
     margin-left: 4px;
     font-size: 22px;
     font-weight: bold;
-    color: #dc3545;
-    -webkit-background-clip: text;
+    color: white;
 }
 .leaderboard-container {
     margin-top: 30px;
