@@ -54,27 +54,27 @@
                 <div class="col-md-3">
                     <h5>Links</h5>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Activities</a></li>
-                        <li><a href="#">Challenges</a></li>
-                        <li><a href="#">Leaderboard</a></li>
-                        <li><a href="#">Profile Lookup</a></li>
+                        <li><a href="{% url 'user_view' %}">Home</a></li>
+                        <li><a href="{% url 'user_activities' %}">Activities</a></li>
+                        <li><a href="{% url 'challenges' %}">Challenges</a></li>
+                        <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+                        <li><a href="{% url 'profile_lookup' %}">Profile Lookup</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h5>Help</h5>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="{% url 'faq' %}">FAQ</a></li>
+                        <li><a href="{% url 'contact_support' %}">Contact Support</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="{% url 'terms_of_service' %}">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h5>Your Account</h5>
                     <ul>
-                        <li><a href="#">Log In</a></li>
-                        <li><a href="#">Sign Up</a></li>
+                        <li><a href="{% url 'user_profile' %}">Profile</a></li>
+                        <li><a href="{% url 'user_setting' %}">Settings</a></li>
                     </ul>
                 </div>
             </div>

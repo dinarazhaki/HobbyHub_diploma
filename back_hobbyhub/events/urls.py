@@ -56,6 +56,9 @@ urlpatterns = [
     path('faq/', faq, name='faq'),
     path('contact_support/', contact_support, name='contact_support'),
     path('terms_of_service/', terms_of_service, name="terms_of_service"),
+    path('org_faq/', org_faq, name='org_faq'),
+    path('org_contact_support/', org_contact_support, name='org_contact_support'),
+    path('org_terms_of_service/', org_terms_of_service, name="org_terms_of_service"),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),

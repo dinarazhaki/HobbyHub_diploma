@@ -1,4 +1,4 @@
-{% extends 'user_base.html' %}
+{% extends 'organizer_base.html' %}
 {% load static %}
 
 {% block title %}Terms of Service | HobbyHub{% endblock %}
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f8f9fa;
     }
     .terms-container {
@@ -21,12 +20,12 @@
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h2 {
+    .terms-container h2 {
         color: #007bff;
         text-align: center;
         margin-bottom: 20px;
     }
-    h4 {
+    .terms-container h4 {
         color: #343a40;
         margin-top: 20px;
     }

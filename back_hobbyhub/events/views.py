@@ -1166,3 +1166,12 @@ def contact_support(request):
 
 def terms_of_service(request):
     return render(request, "terms_of_service.html")
+
+def org_faq(request):
+    return render(request, "org_faq.html")
+
+def org_contact_support(request):
+    return render(request, "org_contact_support.html")
+
+def org_terms_of_service(request):
+    return render(request, "org_terms_of_service.html")

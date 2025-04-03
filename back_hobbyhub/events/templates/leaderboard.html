@@ -10,6 +10,74 @@
     <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <style>
+        .prize {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f6d365, #fda085); /* Warm gradient */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 300px;
+            margin: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prize img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10%;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+.prize h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #fff, #fbc2eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 10px;
+}
+
+.prize h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
+
+/* Hover Effects */
+.prize:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.prize:hover img {
+    transform: scale(1.1);
+}
+
+/* Rank-Specific Colors */
+.prize-1 {
+    background: linear-gradient(135deg, #ffd700, #ffaf00); /* Gold */
+}
+
+.prize-2 {
+    background: linear-gradient(135deg, #c0c0c0, #a9a9a9); /* Silver */
+}
+
+.prize-3 {
+    background: linear-gradient(135deg, #cd7f32, #b87333); /* Bronze */
+}
+
+    </style>
 {% endblock %}
 
 {% block extra_js %}
@@ -33,7 +101,6 @@
         </div>
 
         <div class="rank-container" style="align-self: center;">
-            <img src="{% static 'images/profile_photo.png' %}" alt="User Profile" class="rank-icon">
             <span class="rank-text">Your Current Rank</span>
             <span class="rank-number">{{ current_user_rank }}</span>
         </div>
