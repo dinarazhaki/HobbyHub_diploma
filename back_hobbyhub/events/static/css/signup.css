@@ -86,27 +86,40 @@ h2 span {
 }
 
 /* Form */
-form{
+form {
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
     justify-content: center;
+    width: 60%;
 }
 
+/* Ensures input fields and selects take full width in flex row */
 .name-fields {
     display: flex;
-    gap:5px;
-    width: 100%;
-    width: max-content;
+    gap: 10px;
+    width: 100%; /* Remove max-content to allow full-width alignment */
 }
 
-input, select{
-    padding: 10px;
+/* Make inputs and selects equal in size */
+input, select {
+    flex: 1; /* Ensures equal width */
+    padding: 12px 15px; /* Adjust padding for uniformity */
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
+    width: 100%; /* Ensures they expand properly */
 }
+
+/* Ensure Selects match input styling */
+select {
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+}
+
 
 .btn-gradient {
     background: linear-gradient(to right, #ff007f, #ffbf00);
