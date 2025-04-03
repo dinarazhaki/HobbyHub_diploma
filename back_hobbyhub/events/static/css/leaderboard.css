@@ -33,7 +33,6 @@ body {
     margin-bottom: 5px;
     background: linear-gradient(to right, #e01a1a, #eed324);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .rank-number {
@@ -293,18 +292,23 @@ h2 {
     gap:10px;
     margin-bottom: 20px;
 }
+/* First place - Gold */
 tbody tr:nth-child(1) {
-    color: #FFAF00;  
-    box-shadow: 0px 5px 15px rgba(192, 192, 192, 0.4);
+    color: #FFD700; /* Brighter gold */
     font-weight: bold;
-  }
-  
- tbody tr:nth-child(2) {
-    color: rgb(235, 180, 140); 
+    text-shadow: 1px 1px 5px rgba(215, 213, 58, 0.682); /* Glowing effect */
+}
+
+/* Second place - Silver */
+tbody tr:nth-child(2) {
+    color: #181818; /* True silver */
     font-weight: bold;
-  }
-  
-  tbody tr:nth-child(3) {
-    color: #B87333; 
+    text-shadow: 1px 1px 5px rgba(250, 107, 107, 0.7); /* Soft glow */
+}
+
+/* Third place - Bronze */
+tbody tr:nth-child(3) {
+    color: #CD7F32; /* Warmer, richer bronze */
     font-weight: bold;
-  }
+    text-shadow: 1px 1px 5px rgba(205, 50, 50, 0.7); /* Subtle glow */
+}
