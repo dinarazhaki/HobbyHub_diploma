@@ -1,81 +1,80 @@
 .activities h2 {
     padding: 150px 0px 20px 30px;
     text-align: center;
+}
+
+.swiper-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
     
 }
-.swiper-container {
-    text-align: center;
-    padding: 0px 50px 0px 50px;
-    width: 100%;
-    height: 500px;
-    overflow: hidden ;
+
+.swiper-slide {
+    padding: 0 15px; /* Adds spacing on both sides */
+    box-sizing: border-box;
+}
+
+.swiper-slide a{
+    text-decoration: none;
 }
 
 .swiper-wrapper {
-    display: flex;
-    flex-direction: row; /* Horizontal layout */
-    padding-bottom: 5px;
+    margin-left: -15px; /* Cancel out first padding */
+    margin-right: -15px; /* Cancel out last padding */
 }
 
-.swiper-slide{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    margin-left: -20px;
-    overflow: hidden; 
-    border-radius: 10px; 
-    
+/* Optional: keep everything aligned nicely */
+.activities {
+    padding: 0 30px;
 }
 
 
 .actphoto {
-    width: 304px;
-    height: 283px;
+    width: 100%;
+    max-width: 280px;
+    height: 250px;
     object-fit: cover;
     border-radius: 10px;
-    display: block; 
+    display: block;
 }
+
 .ptitle {
     font-size: 16px;
-    margin-top: 20px ;
-    color:#333;
-
+    margin-top: 15px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
 }
 
 .location-part {
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
-    
+    margin-top: -5px;
 }
-.location-part img{
-    width: 12px; 
+
+.location-part img {
+    width: 12px;
     height: 14.5px;
-    margin-top: -18px;
-
-
+    margin-right: 5px;
+    margin-top: -10px;
 }
-.plocat{
-    margin-left: -20px;
+
+.plocat {
     font-size: 14px;
+    margin-top: 5px;
     color: #666;
     text-align: center;
-    
-
-}
-.location-part p{
-    margin-left: 10px;
 }
 
-/* Pagination dots below */
+/* Pagination styling */
 .swiper-pagination {
-    
     position: absolute;
-    bottom: 10px;
-    margin-left: 300px;
-    transform: translateX(-50%);
-    display: flex;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
 }
 
 .swiper-pagination-bullet {
@@ -84,6 +83,7 @@
     height: 10px;
     opacity: 0.6;
     margin: 0 5px;
+    border-radius: 50%;
 }
 
 .swiper-pagination-bullet-active {

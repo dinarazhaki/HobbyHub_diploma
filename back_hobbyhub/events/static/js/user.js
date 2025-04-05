@@ -1,16 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
     new Swiper('.swiper-container', {
-        direction: 'horizontal',  
-        slidesPerView: 4,  
-        spaceBetween: 20,
-        loop: true,  
+        direction: 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
         autoplay: {
-            delay: 5000,  
+            delay: 5000,
             disableOnInteraction: false
         },
         pagination: {
             el: '.swiper-pagination',
             clickable: true
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            }
         }
     });
 
