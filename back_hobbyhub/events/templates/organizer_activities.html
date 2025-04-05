@@ -189,6 +189,8 @@
             <h2>Edit Event</h2>
             <form id="editEventForm" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                <label>Event Cover Image:</label>
+                <input type="file" id="edit-event-image" name="image" accept="image/*">
                 <input type="hidden" id="edit-event-id" name="event-id">
                 <label>Activity Name:</label>
                 <input type="text" id="edit-event-name" name="title" required>
@@ -359,4 +361,3 @@ function addGame() {
         });
     </script>
 {% endblock %}
-

@@ -694,7 +694,7 @@ input, select, textarea {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 500px;
+    width: 700px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     animation: fadeIn 0.3s ease-in-out;

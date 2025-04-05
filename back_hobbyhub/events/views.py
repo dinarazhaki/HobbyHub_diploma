@@ -773,7 +773,9 @@ def create_event(request):
             current_company = Company.objects.get(id=company_id)
         except Company.DoesNotExist:
             return redirect("sign_in")
-
+        
+    
+        
         event = Event(
             title=request.POST.get('event-name'),
             description=request.POST.get('event-description'),
