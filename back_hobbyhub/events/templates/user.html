@@ -15,18 +15,22 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 {% for event in events %}
+                
 
-                <div class="swiper-slide">
-                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }}">
+                <div class="swiper-slide" >
+                    <a href="{% url 'activity_details' event.id %}" class="event-link">
+                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }} ">
                     <p class="ptitle">{{ event.title }}</p>
                     <p class="plocat">{{ event.hobby_type }}</p>
                     <div class="location-part">
                         <img src="{% static 'images/locationpoint.jpg' %}" alt="Location">
                         <p class="plocat"> {{ event.location }}</p>
                     </div>
+                </a>
                 </div>
             {% endfor %}
             </div>
+            
         </div>
     </section>
 
