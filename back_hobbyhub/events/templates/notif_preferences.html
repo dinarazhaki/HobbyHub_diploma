@@ -58,16 +58,6 @@
                     <form method="post" action="{% url 'user_notification' %}">
                         {% csrf_token %}
                         <div class="notification-option">
-                            <input type="checkbox" id="sms" name="sms" {% if user.receive_sms_notifications %}checked{% endif %}>
-                            <label for="sms">
-                                <span class="custom-checkbox"></span>
-                                <div class="notification-text">
-                                    <strong>SMS Notifications</strong>
-                                    <p>News about product and feature updates.</p>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="notification-option">
                             <input type="checkbox" id="reminders" name="reminders" {% if user.receive_reminders %}checked{% endif %}>
                             <label for="reminders">
                                 <span class="custom-checkbox"></span>
