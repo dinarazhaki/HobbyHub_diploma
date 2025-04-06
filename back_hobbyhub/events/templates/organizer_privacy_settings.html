@@ -26,30 +26,86 @@
                     <div class="tab act-active-tab"><a href="{% url 'organizer_privacy' %}">Privacy Settings</a></div>
                     </div>
                     
-                    <div class="account-container">
-                        <h3>Account Details</h3>
-                        <div class="account-item">
-                            <span>Verify Email Address</span>
-                            <button class="account-btn verified">Verified</button>
-                        </div>
-                        <div class="account-item">
-                            <span>Update Password</span>
-                            <button class="account-btn">Change Password</button>
-                        </div>
-                    
-                        <h3>Recovery Settings</h3>
-                        <div class="account-item">
-                            <span>Recovery Email Address</span>
-                            <button class="account-btn">Save</button>
-                        </div>
-                        <div class="account-item">
-                            <span>Recovery Phone Number</span>
-                            <button class="account-btn">Setup</button>
-                        </div>
+                    <!-- Account Details -->
+                <div class="account-container">
+                    <h3>Account Details</h3>
+                    <div class="account-item">
+                        <span>Verify Email Address</span>
+                        <button class="account-btn verified">Verified</button>
                     </div>
-                    
-                    
+                    <div class="account-item">
+                        <span>Update Password</span>
+                        <button class="account-btn" onclick="openModal()">Change Password</button>
+                    </div>
+                
+                    <h3>Recovery Settings</h3>
+                    <div class="account-item">
+                        <span>Recovery Email Address</span>
+                        <button class="account-btn" onclick="openRecoveryEmailModal()">Save</button>
+                    </div>
+                    <div class="account-item">
+                        <span>Recovery Phone Number</span>
+                        <button class="account-btn" onclick="openRecoveryPhoneModal()">Setup</button>
+                    </div>
                 </div>
+                
+                <!-- Password Change Modal -->
+                <div id="passwordModal" class="modall">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <h2>Change Password</h2>
+                        <form method="POST"  onsubmit="return validateModalPassword()">
+                            {% csrf_token %}
+                            <div class="input-field">
+                                <label>Last Password</label>
+                                <input type="password" name="last_password" placeholder="Enter current password" required>
+                            </div>
+                            <div class="input-field">
+                                <label>New Password</label>
+                                <input type="password" name="new_password" id="modal_new_password" placeholder="Enter new password" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Confirm New Password</label>
+                                <input type="password" name="confirm_new_password" id="modal_confirm_password" placeholder="Confirm new password" required>
+                            </div>
+                            <button type="submit" class="modal-submit">Save Password</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Recovery Email Modal -->
+                <div id="recoveryEmailModal" class="modall">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeRecoveryEmailModal()">&times;</span>
+                        <h2>Update Recovery Email</h2>
+                        <form method="POST" >
+                            {% csrf_token %}
+                            <div class="input-field">
+                                <label>Recovery Email</label>
+                                <input type="email" name="recovery_email" placeholder="Enter your new recovery email" required>
+                            </div>
+                            <button type="submit" class="modal-submit">Send Verification Link</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Recovery Phone Modal -->
+                <div id="recoveryPhoneModal" class="modall">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeRecoveryPhoneModal()">&times;</span>
+                        <h2>Update Recovery Phone</h2>
+                        <form method="POST" >
+                            {% csrf_token %}
+                            <div class="input-field">
+                                <label>Recovery Phone Number</label>
+                                <input type="tel" name="recovery_phone" placeholder="Enter your new recovery phone number" required>
+                            </div>
+                            <button type="submit" class="modal-submit">Send Verification Code</button>
+                        </form>
+                    </div>
+                </div>
+                    
+                    
+            
                 
             </div>
         </div>

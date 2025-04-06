@@ -60,12 +60,12 @@
                     
                     <form method="POST" action="{% url 'remove_user_profile_photo' %}">
                         {% csrf_token %}
-                        <button type="submit" class="remove-btn btn btn-danger btn-sm " style="margin-top:0px; margin-left: 580px; width: 200px; height: 50px;">Remove Profile Picture</button>
+                        <button type="submit" class="removee-btn btn btn-danger btn-sm " style="margin-top:-93px; margin-left: 610px; width: 200px; height: 50px; ">Remove Profile Picture</button>
                     </form>
 
                     <form method="POST" action="{% url 'update_user_profile' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-
+                    
                         <div class="form-container">
                             <div class="form-group">
                                 <div class="input-field">
@@ -82,42 +82,13 @@
                     
                             <div class="form-group">
                                 <div class="input-field">
-                                    <label>Nickname</label>
-                                    <input type="text" value="{{ user.nickname }}" readonly>
-                                    <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
-                                </div>
-                                <div class="input-field">
-                                    <label>Company_ID</label>
-                                    <input type="text" value="{{ user.company_id }}" readonly>
-                                    <i><img src="{% static 'images/imput_profile_icon.png' %}" width="17"></i>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-field">
                                     <label>Email</label>
                                     <input type="email" name="mail" value="{{ user.mail }}">
                                     <i><img src="{% static 'images/mail_icon.png' %}" width="17"></i>
                                 </div>
-                                <div class="input-field">
-                                    <label>Password</label>
-                                    <input type="password" name="password" placeholder="Enter new password">
-                                    <i><img src="{% static 'images/hide_icon.png' %}" width="22"></i>
-                                </div>
                             </div>
                     
-                            <div class="form-group">
-                                <div class="input-field">
-                                    <label>Date of Birth</label>
-                                    <input type="date" name="date_of_birth" value="{{ user.date_of_birth|date:'Y-m-d' }}" readonly>
-                                    
-                                </div>
-                                <div class="input-field">
-                                    <label>Gender</label>
-                                    <input type="gender" name="gender" value="{{ user.gender }}">
-
-                                </div>
-                            </div>
-                            
+                    
                         </div>
                         <div class="form-group">
                             <label for="hobbies">Select Your Hobbies:</label>
@@ -132,7 +103,7 @@
                     
                         <!-- Update Profile Button -->
                         <div class="update-btn-container text-center mt-3">
-                            <button type="submit" class="update-profile-btn">Update Profile</button>
+                            <button type="submit" class="update-profile-btn" onclick="return validatePassword()">Update Profile</button>
                         </div>
                     </form>
                 </div>
