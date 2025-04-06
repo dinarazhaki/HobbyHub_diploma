@@ -176,3 +176,107 @@ function makeEditable() {
     input.readOnly = false;  // Allow editing
     input.focus();  // Focus on input
 }
+
+
+function openModal() {
+    document.getElementById("passwordModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("passwordModal").style.display = "none";
+}
+
+function validateModalPassword() {
+    const newPassword = document.getElementById("modal_new_password").value;
+    const confirmPassword = document.getElementById("modal_confirm_password").value;
+
+    if (newPassword !== confirmPassword) {
+        alert("New password and confirm password do not match.");
+        return false;
+    }
+    return true;
+}
+
+// Optional: close modal when clicking outside
+const modal = document.getElementById("passwordModal");
+const openBtn = document.getElementById("openPasswordModal");
+const closeBtn = document.getElementById("closeModal");
+
+// Open modal when clicking the button
+openBtn.onclick = function () {
+    modal.style.display = "flex";
+}
+
+// Close modal when clicking the close icon
+closeBtn.onclick = function () {
+    modal.style.display = "none";
+}
+
+// Close modal when clicking outside the modal content
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function validateModalPassword() {
+    const newPassword = document.getElementById("modal_new_password").value;
+    const confirmPassword = document.getElementById("modal_confirm_password").value;
+
+    if (newPassword !== confirmPassword) {
+        alert("New password and confirm password do not match.");
+        return false;
+    }
+    return true;
+}
+
+
+
+
+function openRecoveryEmailModal() {
+    document.getElementById("recoveryEmailModal").style.display = "flex";
+}
+
+function closeRecoveryEmailModal() {
+    document.getElementById("recoveryEmailModal").style.display = "none";
+}
+
+function openRecoveryPhoneModal() {
+    document.getElementById("recoveryPhoneModal").style.display = "flex";
+}
+
+function closeRecoveryPhoneModal() {
+    document.getElementById("recoveryPhoneModal").style.display = "none";
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Recovery Email
+    const recoveryEmailModal = document.getElementById("recoveryEmailModal");
+    window.openRecoveryEmailModal = function () {
+        recoveryEmailModal.style.display = "flex";
+    }
+    window.closeRecoveryEmailModal = function () {
+        recoveryEmailModal.style.display = "none";
+    }
+
+    // Recovery Phone
+    const recoveryPhoneModal = document.getElementById("recoveryPhoneModal");
+    window.openRecoveryPhoneModal = function () {
+        recoveryPhoneModal.style.display = "flex";
+    }
+    window.closeRecoveryPhoneModal = function () {
+        recoveryPhoneModal.style.display = "none";
+    }
+
+    // Close when clicking outside
+    window.onclick = function (event) {
+        if (event.target === recoveryEmailModal) {
+            recoveryEmailModal.style.display = "none";
+        }
+        if (event.target === recoveryPhoneModal) {
+            recoveryPhoneModal.style.display = "none";
+        }
+    }
+});
