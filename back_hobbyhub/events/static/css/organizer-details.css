@@ -2,9 +2,11 @@
  .details{
   width: 100%;
   height: 100%;
-  animation: rotate-bg-color 10s infinite;
   padding-bottom: 60px;
+  background: floralwhite;
+  overflow: hidden;
  }
+ 
  .ag-format-container {
   width: 100%;
   margin-top: 100px;
@@ -12,41 +14,7 @@
 
 
 
-@keyframes rotate-bg-color {
-  0% {
-    background-color: steelblue;
-  }
-  10% {
-    background-color: red;
-  }
-  20% {
-    background-color: orange;
-  }
-  30% {
-    background-color: yellow;
-  }
-  40% {
-    background-color: green;
-  }
-  50% {
-    background-color: blue;
-  }
-  60% {
-    background-color: indigo;
-  }
-  70% {
-    background-color: violet;
-  }
-  80% {
-    background-color: pink;
-  }
-  90% {
-    background-color: brown;
-  }
-  100% {
-    background-color: black;
-  }
-}
+ 
 
   .ag-courses_box {
     display: -webkit-box;
@@ -278,6 +246,7 @@ tr:hover td {
 
 .delete-game-btn:hover {
   background-color: #ff1a1a;
+
 }
 
 .delete-game-btn i {
@@ -288,4 +257,13 @@ tr:hover td {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.award-btn{
+  background-color: greenyellow;
+  border-radius: 10%;
+  padding: 5px;
+  margin-left: 7px;
+}
+.award-btn:hover{
+  background-color: #3ecd5e;
 }

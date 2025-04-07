@@ -10,6 +10,9 @@
 {% block content %}
 {% csrf_token %}
 <section class="details">
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
 <div class="ag-format-container">
     <div class="ag-courses_box">
       {% for game in live_games %}
@@ -25,12 +28,12 @@
           </div>
           <div class="ag-courses-item_date-box">
             {{ game.description|default:"No description" }}
+            <button style="margin-left: 360px;" class="delete-game-btn" data-game-id="{{ game.id }}" onclick="deleteLiveGame(event, this)">
+              Delete
+           </button>
           </div>
           
         </a>
-        <button class="delete-game-btn" data-game-id="{{ game.id }}" onclick="deleteLiveGame(event, this)">
-           Delete
-        </button>
       </div>
       {% empty %}
       <div class="ag-courses_item">
@@ -75,7 +78,7 @@
                         </option>
                         {% endfor %}
                     </select>
-                    <input type="number" class="points-input" min="0" placeholder="Points" disabled>
+                    <input style="width: 130px; margin-left: 7px;" type="number" class="points-input" min="0" placeholder="Points" disabled>
                     <button class="award-btn" disabled onclick="awardPoints(this)">
                         <i class="fas fa-trophy"></i> Award
                     </button>
