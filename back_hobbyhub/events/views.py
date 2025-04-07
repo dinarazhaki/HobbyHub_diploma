@@ -15,7 +15,7 @@ from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from functools import wraps
 from django.urls import reverse
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 
     
 def role_required(role):
@@ -661,7 +661,7 @@ def sign_in(request):
 
 
 #Activity list for organizers
-
+@role_required("organizer")
 def organizer_activities(request):
     today = timezone.now().date()
     company_id = request.session.get("company_id")
@@ -703,7 +703,46 @@ def organizer_activities(request):
         'other_events': other_events,
         'hobbies': hobbies,
     })
-    
+
+@csrf_exempt  # Temporarily disable CSRF for testing - remove in production!
+@require_http_methods(["POST"])
+def create_live_games(request):
+    try:
+        data = json.loads(request.body)
+        event_id = data.get("event_id")
+        games = data.get("games", [])
+
+        if not event_id:
+            return JsonResponse({"success": False, "error": "Event ID is required"}, status=400)
+
+        try:
+            event = Event.objects.get(id=event_id)
+        except Event.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Event not found"}, status=404)
+
+        created_games = []
+        for game_data in games:
+            game = LiveGame.objects.create(
+                event=event,
+                title=game_data.get("title"),
+                description=game_data.get("description", ""),
+                max_points=game_data.get("max_points", 10)
+            )
+            created_games.append({
+                "id": game.id,
+                "title": game.title
+            })
+
+        return JsonResponse({
+            "success": True,
+            "games": created_games
+        })
+
+    except json.JSONDecodeError:
+        return JsonResponse({"success": False, "error": "Invalid JSON"}, status=400)
+    except Exception as e:
+        return JsonResponse({"success": False, "error": str(e)}, status=500)
+
     
 logger = logging.getLogger(__name__)
 
@@ -1158,8 +1197,93 @@ def challenges(request):
     return render(request, "challenges.html", {"challenges": challenges_data})
 
 def organizer_activity_details(request):
-    return render(request, "organizer_activity_details.html")
+    event_id = request.GET.get('event_id')  # Get event_id from URL parameter
+    if not event_id:
+        return render(request, "organizer_activity_details.html", {'error': 'Event ID is required'})
+    
+    try:
+        event = Event.objects.get(id=event_id)
+        live_games = event.live_games.all()  # Get all live games for this event
+        participants = event.participants.all().select_related('company')  # Optimize query
+    except Event.DoesNotExist:
+        return render(request, "organizer_activity_details.html", {'error': 'Event not found'})
+    
+    return render(request, "organizer_activity_details.html", {
+        'event': event,
+        'live_games': live_games,
+        'participants': participants,
+    })
+  
+@require_POST
+@csrf_exempt
+def award_points(request):
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        print("Received data:", data)  # Логирование
 
+        # Проверка обязательных полей
+        required_fields = ['participant_id', 'game_id', 'points']
+        if not all(field in data for field in required_fields):
+            return JsonResponse({'success': False, 'error': 'Missing required fields'}, status=400)
+
+        # Получаем сотрудника
+        try:
+            employee = Employee.objects.get(nickname=data['participant_id'])
+            game = LiveGame.objects.get(id=data['game_id'])
+        except Employee.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Employee not found'}, status=404)
+        except LiveGame.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Game not found'}, status=404)
+
+        # Проверка максимальных баллов
+        points = int(data['points'])
+        if points > game.max_points:
+            return JsonResponse({'success': False, 'error': 'Points exceed game maximum'}, status=400)
+
+        # Обновляем баланс
+        employee.diamonds += points
+        employee.save()
+
+        # Создаем запись о начислении
+        PointsAward.objects.create(
+            employee=employee,
+            game=game,
+            points=points,
+            awarded_by=request.user if request.user.is_authenticated else None
+        )
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Points awarded successfully',
+            'new_balance': employee.diamonds
+        })
+
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'error': 'Invalid JSON format'}, status=400)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    
+    
+
+@require_POST
+def delete_live_game(request):
+    if not request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+    
+    game_id = request.POST.get('game_id')
+    if not game_id:
+        return JsonResponse({'success': False, 'error': 'Game ID is required'}, status=400)
+    
+    try:
+        game = LiveGame.objects.get(id=game_id)
+        game.delete()
+        return JsonResponse({'success': True})
+    except LiveGame.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Game not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    
+    
 def faq(request):
     return render(request, "faq.html")
 

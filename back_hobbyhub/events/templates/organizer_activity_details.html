@@ -5,159 +5,98 @@
     <link rel="stylesheet" href="{% static 'css/organizer-styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/organizer-details.css' %}">
     <script src="{% static 'js/organizer-details.js' %}"></script>
+
 {% endblock %}
 {% block content %}
+{% csrf_token %}
 <div class="ag-format-container">
     <div class="ag-courses_box">
+      {% for game in live_games %}
       <div class="ag-courses_item">
         <a href="#" class="ag-courses-item_link">
           <div class="ag-courses-item_bg"></div>
-  
           <div class="ag-courses-item_title">
-            Live Game&#160;name
+            {{ game.title }}
+            
           </div>
-  
           <div class="ag-courses-item_date-box">
-            description:
+            Prize: {{ game.max_points }} pts
           </div>
+          <div class="ag-courses-item_date-box">
+            {{ game.description|default:"No description" }}
+          </div>
+          
         </a>
+        <button class="delete-game-btn" data-game-id="{{ game.id }}" onclick="deleteLiveGame(event, this)">
+           Delete
+        </button>
       </div>
-  
+      {% empty %}
       <div class="ag-courses_item">
         <a href="#" class="ag-courses-item_link">
           <div class="ag-courses-item_bg"></div>
-  
           <div class="ag-courses-item_title">
-           Live Game&#160;2
+            No live games yet
           </div>
-  
           <div class="ag-courses-item_date-box">
-            description:
+            Add games using the "Live Games" modal
           </div>
         </a>
       </div>
+      {% endfor %}
+    </div>
+</div>
 
-      <div class="ag-courses_item">
-        <a href="#" class="ag-courses-item_link">
-          <div class="ag-courses-item_bg"></div>
-  
-          <div class="ag-courses-item_title">
-           Live Game&#160;3
-          </div>
-  
-          <div class="ag-courses-item_date-box">
-            description:
-          </div>
-        </a>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Diamonds</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr data-participant-id="{{ participant.nickname }}">
+                <td>{{ participant.name }}</td>
+                <td>{{ participant.last_name }}</td>
+                <td>{{ participant.mail }}</td>
+                <td>{{ participant.diamonds }}</td>
+                <td>
+                    <select class="game-select">
+                        <option value="">Select Game</option>
+                        {% for game in live_games %}
+                        <option value="{{ game.id }}" data-max-points="{{ game.max_points }}">
+                            {{ game.title }} (Max: {{ game.max_points }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input type="number" class="points-input" min="0" placeholder="Points" disabled>
+                    <button class="award-btn" disabled onclick="awardPoints(this)">
+                        <i class="fas fa-trophy"></i> Award
+                    </button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No participants yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Points Award Confirmation Modal -->
+<div id="confirmationModal" class="modal" style="display:none;">
+  <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3>Confirm Points Award</h3>
+      <p id="confirmationText"></p>
+      <div class="modal-actions">
+          <button class="confirm-btn" onclick="confirmAward()">Confirm</button>
+          <button class="cancel-btn" onclick="closeModal()">Cancel</button>
       </div>
     </div>
-    </div>
-
-
-    <div class="table-container">
-      <table>
-          <thead>
-              <tr>
-                  <th>Name</th>
-                  <th>Surname</th>
-                  <th>Email</th>
-                  <th>Action</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Alice</td>
-                  <td>Johnson</td>
-                  <td>alice@example.com</td>
-                  <td>
-                      <div class="dropdown">
-                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
-                          <div class="dropdown-content">
-                              <a href="#">Live Game 1</a>
-                              <a href="#">Live Game 2</a>
-                          </div>
-                      </div>
-                      <div class="dropdown">
-                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
-                        <div class="dropdown-content">
-                            <a href="#">1st Place</a>
-                            <a href="#">2nd Place</a>
-                            <a href="#">3rd Place</a>
-                            <a href="#">Bonus</a>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Bob</td>
-                  <td>Smith</td>
-                  <td>bob@example.com</td>
-                  <td>
-                      <div class="dropdown">
-                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
-                          <div class="dropdown-content">
-                              <a href="#">Live Game 1</a>
-                              <a href="#">Live Game 2</a>
-                          </div>
-                      </div>
-                      <div class="dropdown">
-                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
-                        <div class="dropdown-content">
-                            <a href="#">1st Place</a>
-                            <a href="#">2nd Place</a>
-                            <a href="#">3rd Place</a>
-                            <a href="#">Bonus</a>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>Charlie</td>
-                  <td>Brown</td>
-                  <td>charlie@example.com</td>
-                  <td>
-                      <div class="dropdown">
-                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
-                          <div class="dropdown-content">
-                              <a href="#">Live Game 1</a>
-                              <a href="#">Live Game 2</a>
-                          </div>
-                      </div>
-                      <div class="dropdown">
-                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
-                        <div class="dropdown-content">
-                            <a href="#">1st Place</a>
-                            <a href="#">2nd Place</a>
-                            <a href="#">3rd Place</a>
-                            <a href="#">Bonus</a>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>David</td>
-                  <td>Lee</td>
-                  <td>david@example.com</td>
-                  <td>
-                      <div class="dropdown">
-                          <button class="dropbtn game" onclick="toggleDropdown(this)">Live Game</button>
-                          <div class="dropdown-content">
-                              <a href="#">Live Game 1</a>
-                              <a href="#">Live Game 2</a>
-                          </div>
-                      </div>
-                      <div class="dropdown">
-                        <button class="dropbtn" onclick="toggleDropdown(this)">Winner</button>
-                        <div class="dropdown-content">
-                            <a href="#">1st Place</a>
-                            <a href="#">2nd Place</a>
-                            <a href="#">3rd Place</a>
-                            <a href="#">Bonus</a>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+</div>
 {% endblock %}

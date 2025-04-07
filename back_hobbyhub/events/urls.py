@@ -59,6 +59,9 @@ urlpatterns = [
     path('org_faq/', org_faq, name='org_faq'),
     path('org_contact_support/', org_contact_support, name='org_contact_support'),
     path('org_terms_of_service/', org_terms_of_service, name="org_terms_of_service"),
+    path("create_live_games/", create_live_games, name="create_live_games"),
+    path('delete_live_game/', delete_live_game, name='delete_live_game'),
+    path('award_points/', award_points, name='award_points'),
 
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),
