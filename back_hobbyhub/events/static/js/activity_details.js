@@ -1,3 +1,82 @@
+function showStatusMessage(message, isSuccess) {
+    const statusMessage = document.getElementById("status-message");
+    statusMessage.textContent = message;
+    statusMessage.className = `status-message ${isSuccess ? 'success' : 'error'}`;
+    statusMessage.style.display = 'block';
+
+    // Скрываем сообщение через 3 секунды
+    setTimeout(() => {
+        statusMessage.style.display = 'none';
+    }, 1500);
+}
+
+function applyToEvent(eventId) {
+    fetch(`/apply_to_event/${eventId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            showStatusMessage(data.message, true);
+            // Обновляем страницу через 3 секунды
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            showStatusMessage(data.message, false);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showStatusMessage("An error occurred. Please try again.", false);
+    });
+}
+
+function cancelEventRegistration(eventId) {
+    fetch(`/cancel_event_registration/${eventId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            showStatusMessage(data.message, true);
+            // Обновляем страницу через 3 секунды
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            showStatusMessage(data.message, false);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showStatusMessage("An error occurred. Please try again.", false);
+    });
+}
+function domReady(fn) {
+if (
+document.readyState === "complete" ||
+document.readyState === "interactive"
+) {
+setTimeout(fn, 1000);
+} else {
+document.addEventListener("DOMContentLoaded", fn);
+}
+}
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const qrReaderElement = document.getElementById('qr-reader');
     const startScanBtn = document.getElementById('start-scan-btn');
