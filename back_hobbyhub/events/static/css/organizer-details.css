@@ -259,11 +259,11 @@ tr:hover td {
   align-items: center;
 }
 .award-btn{
-  background-color: greenyellow;
+  background-color: #3ecd5e;
   border-radius: 10%;
   padding: 5px;
   margin-left: 7px;
 }
 .award-btn:hover{
-  background-color: #3ecd5e;
+  background-color: greenyellow;
 }
