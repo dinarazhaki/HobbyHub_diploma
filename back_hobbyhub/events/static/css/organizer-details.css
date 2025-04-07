@@ -223,3 +223,29 @@ tr:hover td {
 .game{
   background-color: #e55faf;
 }
+
+.delete-game-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+
+.delete-game-btn:hover {
+  background-color: #ff1a1a;
+}
+
+.delete-game-btn i {
+  margin-right: 5px;
+}
+
+.ag-courses-item_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

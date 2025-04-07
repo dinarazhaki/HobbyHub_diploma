@@ -95,6 +95,7 @@ class Event(models.Model):
         Company, 
         to_field='company_id',  
         on_delete=models.CASCADE, 
+        related_name='events',
         verbose_name="Company"
     )
     diamonds = models.IntegerField(default=0, verbose_name="Diamonds")
@@ -107,6 +108,32 @@ class Event(models.Model):
     @property
     def spots_left(self):
         return self.quota - self.participants.count()
+
+
+class LiveGame(models.Model):
+    event = models.ForeignKey(
+            Event,
+            on_delete=models.CASCADE,
+            related_name='live_games',
+            verbose_name="Event"
+        )
+    title = models.CharField(max_length=255, verbose_name="Game Title")
+    description = models.TextField(blank=True, null=True, verbose_name="Game Description")
+    max_points = models.PositiveIntegerField(default=10)
+
+    def __str__(self):
+        return f"{self.title} - {self.event.title}"
+    
+class PointsAward(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    game = models.ForeignKey(LiveGame, on_delete=models.CASCADE)
+    points = models.PositiveIntegerField()
+    awarded_at = models.DateTimeField(auto_now_add=True)
+    awarded_by = models.ForeignKey(Company, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.points} points to {self.employee} for {self.game}"
+
     
 class AttendanceRecord(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='attendance_records')

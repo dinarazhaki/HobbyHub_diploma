@@ -91,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'events.middleware.SessionControlMiddleware',
+
 ]
 
 ROOT_URLCONF = 'hobbyhub.urls'
