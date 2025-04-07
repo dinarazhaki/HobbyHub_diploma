@@ -50,7 +50,6 @@ def activity_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     nickname = request.session.get("nickname")
     user_is_registered = False
-
     if nickname:
         try:
             employee = Employee.objects.get(nickname=nickname)

@@ -64,8 +64,9 @@
     </div>
     
 
-        <h3>Timing and Location</h3>
+    <h3 style="margin-top: 50px;">Timing and Location</h3>
         <div class="details">
+            
             <div class="detail-box">
                 <span class="icon">
                     <img src="{% static 'images/dateicon.jpg' %}" alt="Date icon" class="custom-icon">
@@ -85,8 +86,42 @@
                 </div>
             </div>
         </div>
-        <div id="map">
-
+        <div class="ag-format-container">
+            <div class="ag-courses_box">
+              {% for game in live_games %}
+              <div class="ag-courses_item">
+                <a href="#" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    {{ game.title }}
+                    
+                  </div>
+                  <div class="ag-courses-item_date-box">
+                    Prize: {{ game.max_points }} pts
+                  </div>
+                  <div class="ag-courses-item_date-box">
+                    {{ game.description|default:"No description" }}
+                  </div>
+                  
+                </a>
+                <button class="delete-game-btn" data-game-id="{{ game.id }}" onclick="deleteLiveGame(event, this)">
+                   Delete
+                </button>
+              </div>
+              {% empty %}
+              <div class="ag-courses_item">
+                <a href="#" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    No live games yet
+                  </div>
+                  <div class="ag-courses-item_date-box">
+                    Wait for an organizer to add "Live Game"
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

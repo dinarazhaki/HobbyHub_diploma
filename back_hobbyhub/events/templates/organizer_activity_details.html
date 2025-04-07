@@ -9,6 +9,7 @@
 {% endblock %}
 {% block content %}
 {% csrf_token %}
+<section class="details">
 <div class="ag-format-container">
     <div class="ag-courses_box">
       {% for game in live_games %}
@@ -87,6 +88,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <div>
     <!-- Points Award Confirmation Modal -->
 <div id="confirmationModal" class="modal" style="display:none;">
   <div class="modal-content">
@@ -99,4 +101,5 @@
       </div>
     </div>
 </div>
+</section>
 {% endblock %}
