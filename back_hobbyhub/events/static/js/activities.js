@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Фильтрация событий
     const hobbyFilters = document.querySelectorAll("#hobby-filters input");
     const dateFilter = document.getElementById("date-filter");
-    const typeFilters = document.querySelectorAll("input[value='Indoor'], input[value='Outdoor']");
     const todayEvents = document.querySelectorAll("#today-events .event");
     const otherEvents = document.querySelectorAll("#other-events .event");
     const noEventsTodayMessage = document.getElementById("no-events-today");
     const noEventsOtherMessage = document.getElementById("no-events-other");
+    const typeFilters = document.querySelectorAll("input[value='offline-outdoor'], input[value='offline-indoor'], input[value='online']");
 
     function filterEvents() {
         const selectedHobbies = getSelectedValues(hobbyFilters);
@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("edit-event-location").value = data.event.location;
                     document.getElementById("edit-event-date").value = data.event.date;
                     document.getElementById("edit-event-time").value = data.event.time;
+                    document.getElementById("edit-event-type").value = data.event.event_type;
                     document.getElementById("edit-event-diamonds").value = data.event.diamonds;
                     document.getElementById("edit-event-quota").value = data.event.quota;
 

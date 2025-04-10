@@ -11,7 +11,7 @@
     <script id="events-data" type="application/json">
         var eventsData = {{ events_data|safe }};
     </script>
-    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %} 
     <script src="{% static 'js/activities.js' %}"></script>
     <script src="{% static 'js/activity_details.js' %}"></script>
 
@@ -33,9 +33,11 @@
                 <input type="date" id="date-filter">
                 <h5>Type</h5>
                 <ul>
-                    <li><input type="checkbox" value="Indoor"> Offline - Indoor</li>
-                    <li><input type="checkbox" value="Outdoor"> Offline - Outdoor</li>
+                    <li><input type="checkbox" value="offline-outdoor"> Offline - Outdoor</li>
+                    <li><input type="checkbox" value="offline-indoor"> Offline - Indoor</li>
+                    <li><input type="checkbox" value="online"> Online</li>
                 </ul>
+                
             </aside>
             <main class="event-list" style="margin-bottom: 30px;">
                 <div class="creation">
@@ -74,7 +76,12 @@
                     
                                 <label>Time:</label>
                                 <input type="time" id="event-time" name="event-time" required>
-                    
+                                <label>Event Type:</label>
+                                    <select id="event-type" name="event-type" required>
+                                        <option value="offline-indoor">Offline - Indoor</option>
+                                        <option value="offline-outdoor">Offline - Outdoor</option>
+                                        <option value="online">Online</option>
+                                    </select>
                                 <label>Diamonds Earned:</label>
                                 <select id="event-diamonds" name="event-diamonds">
                                     <option value="10">10</option>
@@ -103,7 +110,7 @@
                 <div id="today-events">
                     {% for event in today_events %}
                         <div class="event-container">
-                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}" data-type="{{ event.event_type }}" >
                                     <div class="event-image">
                                         <img src="{{ event.image }}" alt="{{ event.title }}">
                                     </div>
@@ -133,7 +140,7 @@
                 <div id="other-events">
                     {% for event in other_events %}
                         <div class="event-container">
-                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}">
+                                <div class="event event-card" data-date="{{ event.date }}" data-hobbies="{{ event.hobbies|join:',' }}" data-type="{{ event.event_type }}" >
                                     <div class="event-image">
                                         <img src="{{ event.image }}" alt="{{ event.title }}">
                                     </div>
@@ -217,6 +224,12 @@
                 <input type="date" id="edit-event-date" name="date" required>
                 <label>Time:</label>
                 <input type="time" id="edit-event-time" name="time" required>
+                <label>Event Type:</label>
+                <select id="edit-event-type" name="event-type" required>
+                    <option value="offline-indoor">Offline - Indoor</option>
+                    <option value="offline-outdoor">Offline - Outdoor</option>
+                    <option value="online">Online</option>
+                </select>
                 <label>Diamonds Earned:</label>
                 <select id="edit-event-diamonds" name="diamonds">
                     <option value="10">10</option>

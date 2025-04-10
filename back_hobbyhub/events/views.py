@@ -686,6 +686,7 @@ def organizer_activities(request):
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
+            'event_type': event.event_type,  # Add event_type
             'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
             'image': event.image.url if event.image else None,
             'quota': event.quota,  # Общая квота
@@ -820,6 +821,7 @@ def create_event(request):
             location=request.POST.get('event-location'),
             date=request.POST.get('event-date'),
             time=request.POST.get('event-time'),
+            event_type = request.POST.get('event-type'),
             diamonds=request.POST.get('event-diamonds'),
             quota=request.POST.get('event-quota'),
             company=current_company,
@@ -864,6 +866,7 @@ def get_event_details(request, event_id):
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
+            'event_type': event.event_type,  # Add event_type
             'diamonds': event.diamonds,
             'quota': event.quota,
             'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Список хобби
@@ -882,6 +885,7 @@ def edit_event(request, event_id):
             event.location = request.POST.get('location', event.location)
             event.date = request.POST.get('date', event.date)
             event.time = request.POST.get('time', event.time)
+            event.event_type = request.POST.get('event-type', event.event_type)  # Add event_type
             event.diamonds = request.POST.get('diamonds', event.diamonds)
             event.quota = request.POST.get('quota', event.quota)
 

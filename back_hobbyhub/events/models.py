@@ -84,11 +84,17 @@ class Employee(models.Model):
     
 
 class Event(models.Model):
+    EVENT_TYPES = [
+        ('offline-outdoor', 'Offline - Outdoor'),
+        ('offline-indoor', 'Offline - Indoor'),
+        ('online', 'Online'),
+    ]
     title = models.CharField(max_length=150)
     description = models.TextField()
     location = models.CharField(max_length=250)
     date = models.DateField()
     time = models.TimeField()
+    event_type = models.CharField(max_length=15, choices=EVENT_TYPES, default='offline-indoor')
     hobbies = models.ManyToManyField(Hobby, related_name='events')  
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     company = models.ForeignKey(
