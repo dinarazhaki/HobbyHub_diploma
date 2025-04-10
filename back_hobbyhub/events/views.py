@@ -169,6 +169,8 @@ def user_activities(request):
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
+            'event_type': event.event_type,  # Add event_type
+
             'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
             'image': event.image.url if event.image else None,
         }
