@@ -36,6 +36,33 @@ function applyToEvent(eventId) {
         showStatusMessage("An error occurred. Please try again.", false);
     });
 }
+
+function cancelEventRegistration(eventId) {
+    fetch(`/cancel_event_registration/${eventId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            showStatusMessage(data.message, true);
+            // Обновляем страницу через 3 секунды
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            showStatusMessage(data.message, false);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showStatusMessage("An error occurred. Please try again.", false);
+    });
+}
 function domReady(fn) {
     if (
     document.readyState === "complete" ||
