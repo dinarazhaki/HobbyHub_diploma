@@ -46,6 +46,9 @@ def approval_required(view_func):
 
     return _wrapped_view
 
+
+@role_required("employee")
+@approval_required
 def activity_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     nickname = request.session.get("nickname")
@@ -62,7 +65,9 @@ def activity_details(request, event_id):
         'user_is_registered': user_is_registered,
         'nickname': nickname,  # Ensure nickname is passed to the template
     })
-    
+  
+@role_required("employee")
+@approval_required  
 @csrf_exempt
 def apply_to_event(request, event_id):
     if request.method == 'POST':
@@ -365,12 +370,35 @@ def sign_up(request):
 def guest_page(request):
     return render(request, 'guest.html')
 
-
 @role_required("organizer")
 def organizer_view(request):
-    events = Event.objects.all()
-    return render(request, 'organizer.html', {'events': events})
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return redirect("sign_in")
 
+    try:
+        current_company = Company.objects.get(id=company_id)
+    except Company.DoesNotExist:
+        return redirect("sign_in")
+
+    # Обновляем статусы перед получением событий
+    events_to_update = Event.objects.filter(company=current_company)
+    for event in events_to_update:
+        event.update_status()
+
+    # Получаем события с актуальными статусами
+    events = {
+        'upcoming': Event.objects.filter(company=current_company, status='upcoming'),
+        'in_progress': Event.objects.filter(company=current_company, status='in_progress'),
+        'completed': Event.objects.filter(company=current_company, status='completed')
+    }
+    
+    return render(request, 'organizer.html', {
+        'events': events,
+        'company': current_company
+    })
+    
+        
 @role_required("employee")
 @approval_required
 def user_view(request):
@@ -661,10 +689,16 @@ def sign_in(request):
     return render(request, "sign_in.html")
 
 
-#Activity list for organizers
+from django.utils import timezone
+from datetime import datetime, timedelta
+
 @role_required("organizer")
 def organizer_activities(request):
-    today = timezone.now().date()
+    # Получаем текущее время с учетом часового пояса
+    now = timezone.localtime(timezone.now())
+    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    today_end = today_start + timedelta(days=1)
+    
     company_id = request.session.get("company_id")
     if not company_id:
         return redirect("sign_in")
@@ -674,13 +708,18 @@ def organizer_activities(request):
     except Company.DoesNotExist:
         return redirect("sign_in")
 
-    events = Event.objects.filter(company=current_company)
+    events = Event.objects.filter(company=current_company).exclude(status='completed')
     hobbies = Hobby.objects.all()
 
     today_events = []
     other_events = []
 
     for event in events:
+        # Создаем datetime объекта события с учетом времени
+        event_datetime = timezone.make_aware(
+            datetime.combine(event.date, event.time)
+        )
+        
         event_data = {
             'id': event.id,
             'title': event.title,
@@ -688,14 +727,17 @@ def organizer_activities(request):
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
-            'event_type': event.event_type,  # Add event_type
-            'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
+            'datetime': event_datetime.isoformat(),
+            'event_type': event.event_type,
+            'status': event.status,
+            'hobbies': [hobby.name for hobby in event.hobbies.all()],
             'image': event.image.url if event.image else None,
-            'quota': event.quota,  # Общая квота
+            'quota': event.quota,
             'participants_count': event.participants.count()
         }
 
-        if event.date == today:
+        # Проверяем, попадает ли событие в сегодняшний день (00:00 - 23:59)
+        if today_start <= event_datetime < today_end:
             today_events.append(event_data)
         else:
             other_events.append(event_data)
@@ -704,8 +746,21 @@ def organizer_activities(request):
         'today_events': today_events,
         'other_events': other_events,
         'hobbies': hobbies,
+        'current_datetime': now.isoformat(),
     })
 
+@csrf_exempt
+@require_POST
+def finish_event(request, event_id):
+    try:
+        event = Event.objects.get(id=event_id)
+        event.status = 'completed'
+        event.save()
+        return JsonResponse({'success': True})
+    except Event.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Event not found'}, status=404)
+    
+    
 @csrf_exempt  # Temporarily disable CSRF for testing - remove in production!
 @require_http_methods(["POST"])
 def create_live_games(request):

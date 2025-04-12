@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 class CompanyManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -93,12 +93,18 @@ class Event(models.Model):
         ('offline-indoor', 'Offline - Indoor'),
         ('online', 'Online'),
     ]
+    EVENT_STATUS = [
+        ('upcoming', 'Upcoming'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+    ]
     title = models.CharField(max_length=150)
     description = models.TextField()
     location = models.CharField(max_length=250)
     date = models.DateField()
     time = models.TimeField()
     event_type = models.CharField(max_length=15, choices=EVENT_TYPES, default='offline-indoor')
+    status = models.CharField(max_length=12, choices=EVENT_STATUS, default='upcoming')
     hobbies = models.ManyToManyField(Hobby, related_name='events')  
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     company = models.ForeignKey(
@@ -114,7 +120,20 @@ class Event(models.Model):
     
     def __str__(self):
         return self.title
-    
+    def update_status(self):
+        now = timezone.now()
+        event_datetime = timezone.make_aware(
+            timezone.datetime.combine(self.date, self.time)
+        )
+        if self.status == 'completed':
+            return
+            
+        if now >= event_datetime:
+            self.status = 'in_progress'
+            self.save()
+        else:
+            self.status = 'upcoming'
+            self.save()
     @property
     def spots_left(self):
         return self.quota - self.participants.count()

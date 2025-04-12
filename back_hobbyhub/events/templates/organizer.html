@@ -1,48 +1,159 @@
 {% extends "organizer_base.html" %}
-    {% load static %}
-    {% block extra_css %}
-    <title>HobbyHub</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/all.css' %}">
-
-    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
-    <style>
-        .button-link {
-            display: inline-block;
-            padding: 7px 12px;
-            background: linear-gradient(to right, #FF6EC7, #FFD166);
-            color: black;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-            font-size: 12px;
-        }
-
-        .button-link:hover {
-            background-color: #1abc9c;
-            transform: scale(1.05);
-        }
-    </style>
-    {% endblock %}
+{% load static %}
+{% block extra_css %}
+<title>HobbyHub</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+<link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+<style>
+    .button-link {
+        display: inline-block;
+        padding: 7px 12px;
+        background: linear-gradient(to right, #FF6EC7, #FFD166);
+        color: black;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        font-size: 12px;
+    }
+    .button-link:hover {
+        background-color: #1abc9c;
+        transform: scale(1.05);
+    }
+    .status-section {
+        margin-bottom: 40px;
+    }
+    .status-title {
+        padding-bottom: 10px;
+        border-bottom: 2px solid #FF6A00;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-    <section class="your-activities">
-        <div class="container mt-5">
-            <h2 class="title text-center">Created activities by you</h2>
+<section class="your-activities">
+    <div class="container mt-5">
+        <h2 class="title text-center">Activities for {{ company.name }}</h2>
+        
+        <!-- Upcoming Events -->
+        <div class="status-section">
+            <h3 class="status-title">Upcoming Events</h3>
             <div class="row mt-4">
-                {% for event in events %}
-                <div class="col-md-6 mb-4" id="activities">
+                {% for event in events.upcoming %}
+                <div class="col-md-6 mb-4">
                     <div class="activity-card">
-                            <img src="{{ event.image.url }}" class="activity-img" alt="{{ event.title }}" width="200">
-                            <div class="activity-info">
-                                <h5>{{ event.title }}</h5>
-                                <p>Date: {{ event.date }}</p>
-                                <a href="{% url 'activities' %}" class="button-link">See More</a>
-                            </div>
+                        <img src="{{ event.image.url }}" class="activity-img" alt="{{ event.title }}" width="200">
+                        <div class="activity-info">
+                            <h5>{{ event.title }}</h5>
+                            <p>Date: {{ event.date }}</p>
+                            <p>Type: {{ event.get_event_type_display }}</p>
+                            <a href="{% url 'activity_details' event.id %}" class="button-link">See More</a>
                         </div>
                     </div>
+                </div>
+                {% empty %}
+                <p>No upcoming events</p>
                 {% endfor %}
             </div>
         </div>
-    </section>
-    {% endblock %}
-   
+        
+        <!-- In Progress Events -->
+        <div class="status-section">
+            <h3 class="status-title">In Progress</h3>
+            <div class="row mt-4">
+                {% for event in events.in_progress %}
+                <div class="col-md-6 mb-4">
+                    <div class="activity-card">
+                        <img src="{{ event.image.url }}" class="activity-img" alt="{{ event.title }}" width="200">
+                        <div class="activity-info">
+                            <h5>{{ event.title }}</h5>
+                            <p>Date: {{ event.date }}</p>
+                            <p>Type: {{ event.get_event_type_display }}</p>
+                            <a href="{% url 'activity_details' event.id %}" class="button-link">See More</a>
+                            <button class="btn btn-success btn-sm mt-2 finish-btn" data-event-id="{{ event.id }}">
+                                Finish Event
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No events in progress</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Completed Events -->
+        <div class="status-section">
+            <h3 class="status-title">Completed Events</h3>
+            <div class="row mt-4">
+                {% for event in events.completed %}
+                <div class="col-md-6 mb-4">
+                    <div class="activity-card">
+                        <img src="{{ event.image.url }}" class="activity-img" alt="{{ event.title }}" width="200">
+                        <div class="activity-info">
+                            <h5>{{ event.title }}</h5>
+                            <p>Date: {{ event.date }}</p>
+                            <p>Type: {{ event.get_event_type_display }}</p>
+                            <a href="{% url 'activity_details' event.id %}" class="button-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No completed events</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Обновление статуса событий каждую минуту
+    function checkEventsStatus() {
+        fetch(window.location.href, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const newDocument = parser.parseFromString(html, 'text/html');
+            const newContent = newDocument.querySelector('.your-activities').innerHTML;
+            document.querySelector('.your-activities').innerHTML = newContent;
+        });
+    }
+
+    // Проверяем каждую минуту
+    setInterval(checkEventsStatus, 60000);
+    
+    document.querySelectorAll('.finish-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const eventId = this.getAttribute('data-event-id');
+            if (confirm('Are you sure you want to mark this event as completed?')) {
+                fetch(`/finish_event/${eventId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error: ' + (data.error || 'Failed to complete event'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to complete event');
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

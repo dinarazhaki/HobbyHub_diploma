@@ -207,9 +207,39 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     
-// Функции для работы с модальными окнами
-
+    document.querySelectorAll('.finish-event-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const eventId = this.getAttribute('data-event-id');
+            if (confirm('Are you sure you want to mark this event as completed?')) {
+                finishEvent(eventId);
+            }
+        });
+    });
 });
+
+function finishEvent(eventId) {
+    fetch(`/finish_event/${eventId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Event marked as completed!');
+            location.reload();
+        } else {
+            alert('Error: ' + (data.error || 'Failed to complete event'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to complete event');
+    });
+}
+
 function openModal() {
     document.getElementById("eventModal").style.display = "flex";
 }
@@ -258,6 +288,9 @@ document.getElementById("eventForm").addEventListener("submit", function(event) 
     .catch(error => {
         console.error('Error:', error);
     });
+
+
+    
 });
 
 
