@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="{% static 'css/sass_styles.css' %}">
 {% endblock %}
 {% block content %}
-    <section class="activities">
-        <h2 class="title text-center">Upcoming Activities</h2>
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                {% for event in events %}
-                
-
-                <div class="swiper-slide" >
-                    <a href="{% url 'activity_details' event.id %}" class="event-link">
-                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }} ">
+<section class="activities">
+    <h2 class="title text-center">Activities In Progress</h2>
+    {% if in_progress_events %}
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for event in in_progress_events %}
+            <div class="swiper-slide">
+                <span class="status-badge in-progress-badge">Happening Now</span>
+                <a href="{% url 'activity_details' event.id %}" class="event-link">
+                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }}">
                     <p class="ptitle">{{ event.title }}</p>
                     <p class="plocat">{{ event.hobby_type }}</p>
                     <div class="location-part">
@@ -27,12 +27,45 @@
                         <p class="plocat"> {{ event.location }}</p>
                     </div>
                 </a>
-                </div>
-            {% endfor %}
             </div>
-            
+            {% endfor %}
         </div>
-    </section>
+    </div>
+    {% else %}
+    <div class="text-center no-events">
+        <p>No activities are currently in progress</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- Upcoming Activities Section -->
+<section class="activities">
+    <h2 class="title text-center">Upcoming Activities</h2>
+    {% if upcoming_events %}
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for event in upcoming_events %}
+            <div class="swiper-slide">
+                <a href="{% url 'activity_details' event.id %}" class="event-link">
+                    <img class="actphoto" src="{{ event.image.url }}" alt="{{ event.title }}">
+                    <p class="ptitle">{{ event.title }}</p>
+                    <p class="plocat">{{ event.hobby_type }}</p>
+                    <div class="location-part">
+                        <img src="{% static 'images/locationpoint.jpg' %}" alt="Location">
+                        <p class="plocat"> {{ event.location }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center no-events">
+        <p>No upcoming activities scheduled</p>
+    </div>
+    {% endif %}
+</section>
+
 
     <section class="activities-your activities">
         <h2 class="title text-center">Your Activities</h2>

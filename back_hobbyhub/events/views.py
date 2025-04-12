@@ -138,35 +138,38 @@ def cancel_event_registration(request, event_id):
 
     return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
 
+
+
 @role_required("employee")
 @approval_required
 def user_activities(request):
-    today = timezone.now().date()  # Получаем текущую дату
-
-    # Получаем сотрудника из сессии
+    # Получаем текущее время с учетом часового пояса
+    now = timezone.localtime(timezone.now())
+    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    today_end = today_start + timedelta(days=1)
+    
     nickname = request.session.get("nickname")
     if not nickname:
         return redirect("sign_in")
 
     try:
         employee = Employee.objects.get(nickname=nickname)
+        company = employee.company
     except Employee.DoesNotExist:
         return redirect("sign_in")
 
-    # Получаем компанию сотрудника
-    company = employee.company
-
-    # Получаем все события компании
-    events = Event.objects.filter(company=company)
-
-    # Получаем хобби сотрудника
+    events = Event.objects.filter(company=company).exclude(status='completed')
     hobbies = Hobby.objects.all()
 
-    # Разделяем события на сегодняшние и остальные
     today_events = []
     other_events = []
 
     for event in events:
+        # Создаем datetime объекта события с учетом времени
+        event_datetime = timezone.make_aware(
+            datetime.combine(event.date, event.time)
+        )
+        
         event_data = {
             'id': event.id,
             'title': event.title,
@@ -174,28 +177,30 @@ def user_activities(request):
             'location': event.location,
             'date': event.date.strftime('%Y-%m-%d'),
             'time': event.time.strftime('%H:%M'),
-            'event_type': event.event_type,  # Add event_type
-
-            'hobbies': [hobby.name for hobby in event.hobbies.all()],  # Все хобби события
+            'datetime': event_datetime.isoformat(),
+            'event_type': event.event_type,
+            'hobbies': [hobby.name for hobby in event.hobbies.all()],
             'image': event.image.url if event.image else None,
         }
 
-        if event.date == today:
+        # Проверяем, попадает ли событие в сегодняшний день (00:00 - 23:59)
+        if today_start <= event_datetime < today_end:
             today_events.append(event_data)
         else:
             other_events.append(event_data)
-            
-        events_data = json.dumps({
-                'today_events': today_events,
-                'other_events': other_events,
-        })
+
+    events_data = json.dumps({
+        'today_events': today_events,
+        'other_events': other_events,
+    })
+    
     return render(request, 'user_activities.html', {
         'today_events': today_events,
         'other_events': other_events,
         'hobbies': hobbies,
         'events_data': events_data,
+        'current_datetime': now.isoformat(),
     })
-    
     
 
 @csrf_exempt
@@ -398,7 +403,6 @@ def organizer_view(request):
         'company': current_company
     })
     
-        
 @role_required("employee")
 @approval_required
 def user_view(request):
@@ -411,19 +415,41 @@ def user_view(request):
     except Employee.DoesNotExist:
         return redirect("sign_in")
 
-    company_events = Event.objects.filter(company=employee.company)
+    now = timezone.now()
+    current_date = now.date()
+    current_time = now.time()
 
-    registered_events = employee.events.all()
+    # Получаем все события компании (включая завершённые для календаря)
+    all_company_events = Event.objects.filter(company=employee.company)
+    
+    # Обновляем статусы для всех событий
+    for event in all_company_events:
+        event.update_status()
+    
+    # Фильтруем для основных секций (исключая завершённые)
+    company_events = all_company_events.exclude(status='completed')
+    upcoming_events = company_events.filter(status='upcoming')
+    in_progress_events = company_events.filter(status='in_progress')
+    
+    # Для зарегистрированных событий также исключаем завершённые
+    registered_events = employee.events.exclude(status='completed')
 
-    events_json = serialize('json', company_events, fields=('title', 'date', 'location', 'image'))
+    # Для календаря включаем все события (включая завершённые)
+    events_json = serialize('json', all_company_events, fields=(
+        'title', 'date', 'time', 'location', 'image', 'status', 'event_type'
+    ))
     events_data = json.loads(events_json)
 
     return render(request, 'user.html', {
-        'events': company_events,  # Все события компании
-        'registered_events': registered_events,  # События, на которые сотрудник зарегистрировался
+        'upcoming_events': upcoming_events,
+        'in_progress_events': in_progress_events,
+        'registered_events': registered_events,
+        'all_events': all_company_events,  # Для календаря
         'events_data': events_data,
+        'current_date': current_date,
+        'current_time': current_time,
     })
-
+    
 def profile_user_act(request):
     nickname = request.session.get("nickname")
     if not nickname:
