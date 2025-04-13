@@ -31,7 +31,7 @@
                                 <div class="m-b-25"> <!--Fix here image-->
                                     <img src="{% if employee.profile_photo %}{{ employee.profile_photo.url }}{% else %}{% static 'images/profile_photo.png' %}{% endif %}" class="img-radius" alt="User-Profile-Image">
                                 </div>
-                                <h6 class="f-w-600">{{ employee.name }}<span> {{ employee.surname }}</span></h6>
+                                <h6 class="f-w-600">{{ employee.name }}<span> {{ employee.last_name }}</span></h6>
                                 <p>{{ employee.nickname }}</p>
                                 <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                             </div>
@@ -44,10 +44,7 @@
                                         <p class="m-b-10 f-w-600">Email</p>
                                         <h6 class="text-muted f-w-400">{{ employee.mail }}</h6>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <p class="m-b-10 f-w-600">Phone</p>
-                                        <h6 class="text-muted f-w-400">{{ employee.number }}</h6>
-                                    </div>
+                                    
                                     <div class="col-sm-4">
                                         <p class="m-b-10 f-w-600">Birthday</p>
                                         <h6 class="text-muted f-w-400">{{ employee.date_of_birth }}</h6>

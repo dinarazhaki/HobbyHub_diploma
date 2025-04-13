@@ -22,6 +22,8 @@
             <input type="text" id="searchBar" placeholder="Search by name or nickname..." class="form-control">
         </div>
         <div class="cards">
+            {% if employees %}
+
             {% for employee in employees %}
             <div class="card user-card-full">
                 <div class="row m-l-0 m-r-0">
@@ -30,7 +32,7 @@
                             <div class="m-b-25"> <!--Fix here image-->
                                 <img src="{% if employee.profile_photo %}{{ employee.profile_photo.url }}{% else %}{% static 'images/profile_photo.png' %}{% endif %}" class="img-radius" alt="User-Profile-Image">
                             </div>
-                            <h6 class="f-w-600">{{ employee.name }}<span> {{ employee.surname }}</span></h6>
+                            <h6 class="f-w-600">{{ employee.name }}<span> {{ employee.last_name }}</span></h6>
                             <p>{{ employee.nickname }}</p>
                             <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                         </div>
@@ -82,6 +84,9 @@
                 </div>
         </div>
             {% endfor %}
+            {% else %}
+    <p>No employees found in your company.</p>
+{% endif %}
         </div>
     </div>
 </section>

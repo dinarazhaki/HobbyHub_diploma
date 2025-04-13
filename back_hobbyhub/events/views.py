@@ -1109,7 +1109,7 @@ def profile_lookup(request):
             return render(request, 'profile_lookup.html', {'employees': [], 'error': "User not found."})
 
         # Исключаем текущего сотрудника из списка
-        employees = Employee.objects.filter(company=current_user.company, is_approved=True)
+        employees = Employee.objects.filter(company=current_user.company, is_approved=True).exclude(nickname=nickname)
         
         hobbies = current_user.hobbies.all()
     except Employee.DoesNotExist:
@@ -1121,25 +1121,33 @@ def profile_lookup(request):
         'hobbies': hobbies
     })
     
-    
+@role_required("organizer")
 def organizer_profile_lookup(request):
-    employees = Employee.objects.filter(is_approved=True)
-    nickname = request.session.get("nickname")
-
-    if not nickname:
-        return render(request, 'organizer_profile_lookup.html', {'employees': employees, 'error': "User not found."})
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return render(request, 'organizer_profile_lookup.html', {'employees': [], 'error': "Organizer not authenticated."})
 
     try:
-        user = Employee.objects.filter(nickname=nickname).first()
-        hobbies = user.hobbies.all()
-    except Employee.DoesNotExist:
-        hobbies = None  # Handle missing user gracefully
+        # Get the current organizer's company
+        company = Company.objects.get(id=company_id)
+        
+        # Get approved employees from the same company
+        employees = Employee.objects.filter(company=company, is_approved=True)
+        
+        # Get hobbies for the template (if needed)
+        hobbies = Hobby.objects.all()  # Or filter as needed
+
+    except Company.DoesNotExist:
+        # If company not found, return empty employees list
+        employees = []
+        hobbies = []
+        error = "Company not found."
 
     return render(request, 'organizer_profile_lookup.html', {
         'employees': employees,
         'hobbies': hobbies
-    })
-     
+    })  
+    
 @role_required("employee")
 @approval_required
 @require_http_methods(["GET", "POST"])
