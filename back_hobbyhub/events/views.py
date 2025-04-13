@@ -15,8 +15,8 @@ from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from functools import wraps
 from django.urls import reverse
-from django.views.decorators.http import require_http_methods, require_POST
-
+from django.views.decorators.http import require_http_methods, require_POST,require_GET
+import pytz
     
 def role_required(role):
     def decorator(view_func):
@@ -1162,24 +1162,145 @@ def user_notification(request):
 
     return render(request, 'notif_preferences.html', {"user": user})
 
-
 @require_http_methods(["GET"])
 def get_notifications(request):
     nickname = request.session.get("nickname")
     if not nickname:
         return JsonResponse({"error": "User not authenticated"}, status=401)
 
-    user = Employee.objects.filter(nickname=nickname).first()
-    if not user:
+    try:
+        user = Employee.objects.get(nickname=nickname)
+    except Employee.DoesNotExist:
         return JsonResponse({"error": "User not found"}, status=404)
 
-    notifications = Notification.objects.filter(employee=user).order_by("-timestamp")
+    # Конвертируем время в часовой пояс Алматы
+    almaty_tz = pytz.timezone('Asia/Almaty')
+    
+    notifications = Notification.objects.filter(employee=user).order_by("-timestamp")[:10]
     notifications_data = [
-        {"message": notif.message, "timestamp": notif.timestamp.strftime("%Y-%m-%d %H:%M")}
+        {
+            "id": notif.id,
+            "message": notif.message,
+            "timestamp": notif.timestamp.astimezone(almaty_tz).strftime("%Y-%m-%d %H:%M"),
+            "is_read": notif.is_read
+        }
         for notif in notifications
     ]
 
     return JsonResponse({"notifications": notifications_data})
+
+@require_POST
+def mark_notification_as_read(request):
+    try:
+        data = json.loads(request.body)
+        notification_id = data.get('notification_id')
+        mark_all = data.get('mark_all', False)
+        
+        nickname = request.session.get("nickname")
+        if not nickname:
+            return JsonResponse({"error": "User not authenticated"}, status=401)
+
+        user = Employee.objects.get(nickname=nickname)
+        
+        if mark_all:
+            # Помечаем все уведомления как прочитанные
+            updated = Notification.objects.filter(
+                employee=user,
+                is_read=False
+            ).update(is_read=True)
+            
+            return JsonResponse({
+                'status': 'success',
+                'message': f'Marked {updated} notifications as read'
+            })
+        
+        if not notification_id:
+            return JsonResponse({'status': 'error', 'message': 'Notification ID is required'}, status=400)
+        
+        notification = Notification.objects.get(
+            id=notification_id,
+            employee=user
+        )
+        
+        notification.is_read = True
+        notification.save()
+        
+        return JsonResponse({'status': 'success'})
+    
+    except Notification.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Notification not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    
+    
+@require_GET
+def get_organizer_notifications(request):
+    # Получаем company_id из сессии (как у вас реализовано в других views)
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return JsonResponse({"error": "Company not authenticated"}, status=401)
+    
+    try:
+        company = Company.objects.get(id=company_id)
+    except Company.DoesNotExist:
+        return JsonResponse({"error": "Company not found"}, status=404)
+    
+    # Получаем последние 10 непрочитанных уведомлений
+    notifications = OrganizerNotification.objects.filter(
+        company=company,
+    ).order_by('-timestamp')[:10]
+    
+    almaty_tz = pytz.timezone('Asia/Almaty')
+
+    # Сериализуем данные
+    notifications_data = [{
+        'id': notification.id,
+        'message': notification.message,
+        'timestamp': notification.timestamp.astimezone(almaty_tz).strftime("%Y-%m-%d %H:%M"),
+        'is_read': notification.is_read
+    } for notification in notifications]
+    
+    return JsonResponse({'notifications': notifications_data})
+
+@require_POST
+def mark_organizer_notification_as_read(request):
+    try:
+        data = json.loads(request.body)
+        notification_id = data.get('notification_id')
+        mark_all = data.get('mark_all', False)
+        
+        # Проверяем, что уведомление принадлежит компании организатора
+        company_id = request.session.get("company_id")
+        
+        if mark_all:
+            # Помечаем все уведомления как прочитанные
+            updated = OrganizerNotification.objects.filter(
+                company_id=company_id,
+                is_read=False
+            ).update(is_read=True)
+            
+            return JsonResponse({
+                'status': 'success',
+                'message': f'Marked {updated} notifications as read'
+            })
+        
+        if not notification_id:
+            return JsonResponse({'status': 'error', 'message': 'Notification ID is required'}, status=400)
+        
+        notification = OrganizerNotification.objects.get(
+            id=notification_id,
+            company_id=company_id
+        )
+        
+        notification.is_read = True
+        notification.save()
+        
+        return JsonResponse({'status': 'success'})
+    
+    except OrganizerNotification.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Notification not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)    
 
 
 def update_competition_progress(employee, wins):

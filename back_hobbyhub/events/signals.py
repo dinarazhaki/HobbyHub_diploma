@@ -24,3 +24,10 @@ def notify_on_challenge_completion(sender, instance, **kwargs):
         message = f"Challenge completed: {instance.challenge.name}! You earned {instance.challenge.reward_diamonds} diamonds."
         Notification.objects.create(employee=employee, message=message)
     
+    
+@receiver(post_save, sender=Employee)
+def notify_organizer_on_employee_signup(sender, instance, created, **kwargs):
+    if created:
+        company = instance.company
+        message = f"New employee registered: {instance.nickname} ({instance.name} {instance.last_name})"
+        OrganizerNotification.objects.create(company=company, message=message)

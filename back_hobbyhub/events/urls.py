@@ -31,7 +31,9 @@ urlpatterns = [
     path('leaderboard/', leaderboard, name="leaderboard"),
     path('leaderboard_show/', leaderboard_show, name="leaderboard_show"),
     path('challenges/', challenges, name='challenges'),
-
+    
+    path('get_notifications/', get_notifications, name='get_notifications'),
+    path('mark_notification_as_read/', mark_notification_as_read, name='mark_notification_as_read'),
 
     # Профиль организатора
     path('organizer_profile/', organizer_profile, name='organizer_profile'),
@@ -63,7 +65,10 @@ urlpatterns = [
     path('delete_live_game/', delete_live_game, name='delete_live_game'),
     path('award_points/', award_points, name='award_points'),
     path('finish_event/<int:event_id>/', finish_event, name='finish_event'),
-
+    
+    path('get_organizer_notifications/', get_organizer_notifications, name='get_organizer_notifications'),
+    path('mark_organizer_notification_as_read/', mark_organizer_notification_as_read, name='mark_organizer_notification_as_read'),
+    
     path('employees/', employees, name='employees'),
     path('approve_employee/', approve_employee, name='approve_employee'),
     path('deny_employee/', deny_employee, name='deny_employee'),

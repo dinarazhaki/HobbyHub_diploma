@@ -235,6 +235,15 @@ class Notification(models.Model):
         return f"{self.employee.nickname}: {self.message}"
     
     
+class OrganizerNotification(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="organizer_notifications")
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.company.company_id}: {self.message}"    
+   
     
 class Challenge(models.Model):
     name = models.CharField(max_length=255, verbose_name="Challenge Name")
