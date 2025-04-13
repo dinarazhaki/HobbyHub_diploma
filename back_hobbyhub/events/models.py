@@ -72,12 +72,11 @@ class Employee(models.Model):
     is_approved = models.BooleanField(default=False, verbose_name="Approved")
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, verbose_name="Profile Photo")
     hobbies = models.ManyToManyField(Hobby, blank=True, related_name='employees')
-    diamonds = models.IntegerField(default=0, verbose_name="Diamonds") 
+    diamonds = models.IntegerField(default=0, verbose_name="Diamonds")
 
     def completed_challenges_count(self):
         return self.challenge_progress.filter(is_completed=True).count()
-    
-    
+
     def save(self, *args, **kwargs):
         if not self.password.startswith('pbkdf2_sha256$'):
             self.password = make_password(self.password)
@@ -85,6 +84,7 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.nickname
+
     
 
 class Event(models.Model):
@@ -186,24 +186,43 @@ class AttendanceRecord(models.Model):
     def __str__(self):
         return f"{self.employee.nickname} at {self.event.title} ({self.timestamp})"
     
+#class Prize(models.Model):
+   # name = models.CharField(max_length=255, verbose_name="Prize Name")
+   # description = models.TextField(verbose_name="Prize Description")
+   # image = models.ImageField(upload_to='prizes/', null=True, blank=True, verbose_name="Prize Image")
+   # rank = models.IntegerField(verbose_name="Rank") 
+ #   company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name="Company")
+
+   # class Meta:
+       # constraints = [
+       #     models.UniqueConstraint(
+        #        fields=['rank', 'company'],  
+      #          name='unique_rank_per_company'
+      #      )
+      #  ]
+
+   # def __str__(self):
+        #return f"{self.name} (Rank {self.rank})"
+    
+
 class Prize(models.Model):
     name = models.CharField(max_length=255, verbose_name="Prize Name")
     description = models.TextField(verbose_name="Prize Description")
     image = models.ImageField(upload_to='prizes/', null=True, blank=True, verbose_name="Prize Image")
     rank = models.IntegerField(verbose_name="Rank") 
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name="Company")
+    deadline = models.DateField(null=True, blank=True)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['rank', 'company'],  
+                fields=['rank', 'company'],
                 name='unique_rank_per_company'
             )
         ]
 
     def __str__(self):
         return f"{self.name} (Rank {self.rank})"
-    
     
     
 class Notification(models.Model):

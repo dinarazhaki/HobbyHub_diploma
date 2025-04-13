@@ -18,10 +18,11 @@
     {% endblock %}
 
     {% block content %}
-        <div class="container-act" style="margin-top: 100px">
+    <section class="container-act">
+        <div class="container-act">
             <aside class="filter-panel">
                 <h4>Filter</h4>
-                <h5 style="margin-top: 20px">Hobbies</h5>
+                <h5 >Hobbies</h5>
                 <ul id="hobby-filters">
                     {% for hobby in hobbies %}
                         <li>
@@ -29,9 +30,9 @@
                         </li>
                     {% endfor %}
                 </ul>
-                <h5 style="margin-top: 20px">Activities from your groups</h5>
+                <h5 >Activities from your groups</h5>
                 <input type="date" id="date-filter">
-                <h5 style="margin-top: 20px">Type</h5>
+                <h5 >Type</h5>
                 <ul>
                     <li><input type="checkbox" value="offline-outdoor"> Offline - Outdoor</li>
                     <li><input type="checkbox" value="offline-indoor"> Offline - Indoor</li>
@@ -67,7 +68,14 @@
                                     {% endfor %}
                                 </div>
                                 <input type="hidden" id="event-hobbies" name="event-hobbies">
-                    
+                                
+                                <label>Event Type:</label>
+                                    <select id="event-type" name="event-type" required>
+                                        <option value="offline-indoor">Offline - Indoor</option>
+                                        <option value="offline-outdoor">Offline - Outdoor</option>
+                                        <option value="online">Online</option>
+                                    </select>
+
                                 <label>Location:</label>
                                 <input type="text" id="event-location" name="event-location" required>
                     
@@ -76,12 +84,7 @@
                     
                                 <label>Time:</label>
                                 <input type="time" id="event-time" name="event-time" required>
-                                <label>Event Type:</label>
-                                    <select id="event-type" name="event-type" required>
-                                        <option value="offline-indoor">Offline - Indoor</option>
-                                        <option value="offline-outdoor">Offline - Outdoor</option>
-                                        <option value="online">Online</option>
-                                    </select>
+
                                 <label>Diamonds Earned:</label>
                                 <select id="event-diamonds" name="event-diamonds">
                                     <option value="10">10</option>

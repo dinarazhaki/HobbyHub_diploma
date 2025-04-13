@@ -105,7 +105,31 @@ input{
     background: linear-gradient(to right, #e60073, #e6ac00);
     transform: scale(1.05);
 }
-
+.google-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #444;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+  
+  .google-login-btn:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .google-login-btn .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
 /* Terms & Switch Links */
 .terms-text, .switch-page {
     font-size: 12px;

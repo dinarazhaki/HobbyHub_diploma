@@ -16,15 +16,19 @@
     <!-- Leaderboard Section -->
     <section class="leaderboard">
 
-        <div id="countdown">Loading..</div>
-        <p id="countdown_text">left till the winner announcement and prize update</p>
 
         <!-- Prize Pyramid -->
         <div class="prize-pyramid">
             {% for prize in prizes %}
-            <div class="prize prize-{{ prize.rank }}">
+            <div class="prize prize-{{ prize.rank }}" data-deadline="{{ prize.deadline|date:'Y-m-d' }}">
                 <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
                 <h3>{{ prize.name }}</h3>
+                <!-- Display Deadline -->
+        {% if prize.deadline %}
+        <p class="prize-deadline">Deadline: {{ prize.deadline|date:"Y-m-d" }}</p>
+    {% else %}
+        <p class="prize-deadline">No deadline set</p>
+    {% endif %}
             <button type="button" class="edit-prize-custom" 
                     data-bs-toggle="modal" 
                     data-bs-target="#editPrizeModal"
@@ -32,6 +36,7 @@
                     data-prize-name="{{ prize.name }}"
                     data-prize-description="{{ prize.description }}"
                     data-prize-rank="{{ prize.rank }}"
+                    data-prize-deadline="{{ prize.deadline|date:'Y-m-d' }}"
                     data-prize-image="{{ prize.image.url }}">
                     <span class="edit-prize-shadow"></span>
                     <span class="edit-prize-edge"></span>
@@ -105,6 +110,10 @@
                             <input type="number" class="form-control" id="rank" name="rank" required>
                         </div>
                         <div class="mb-3">
+                            <label for="deadline" class="form-label">Deadline</label>
+                            <input type="date" class="form-control" id="deadline" name="deadline">
+                        </div>
+                        <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
@@ -138,6 +147,10 @@
                         <div class="mb-3">
                             <label for="edit-rank" class="form-label">Rank</label>
                             <input type="number" class="form-control" id="edit-rank" name="rank" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadline" class="form-label">Deadline</label>
+                            <input type="date" class="form-control" id="edit-deadline" name="deadline">
                         </div>
                         <div class="mb-3">
                             <label for="edit-image" class="form-label">Image</label>

@@ -88,14 +88,19 @@
 
 {% block content %}
     <section class="leaderboard">
-        <div id="countdown">Loading..</div>
-        <p id="countdown_text">left till the winner announcement and prize update</p>
+        
         <div class="prize-pyramid">
             {% for prize in prizes %}
             <div class="prize prize-{{ prize.rank }}">
                 <img src="{{ prize.image.url }}" alt="{{ prize.name }}">
                 <h4>{{ prize.rank }}</h4>
                 <h3>{{ prize.name }}</h3>
+                <!-- Display Deadline -->
+        {% if prize.deadline %}
+        <p class="prize-deadline">Deadline: {{ prize.deadline|date:"Y-m-d" }}</p>
+    {% else %}
+        <p class="prize-deadline">No deadline set</p>
+    {% endif %}
             </div>
             {% endfor %}
         </div>

@@ -759,7 +759,8 @@ def organizer_activities(request):
             'hobbies': [hobby.name for hobby in event.hobbies.all()],
             'image': event.image.url if event.image else None,
             'quota': event.quota,
-            'participants_count': event.participants.count()
+            'participants_count': event.participants.count(),
+            'event_types': event.EVENT_TYPES,
         }
 
         # Проверяем, попадает ли событие в сегодняшний день (00:00 - 23:59)
@@ -773,6 +774,7 @@ def organizer_activities(request):
         'other_events': other_events,
         'hobbies': hobbies,
         'current_datetime': now.isoformat(),
+        'event':event_data
     })
 
 @csrf_exempt
@@ -1071,6 +1073,10 @@ def edit_prize(request, prize_id):
             prize.name = request.POST.get('name')
             prize.description = request.POST.get('description')
             prize.rank = request.POST.get('rank')
+            
+            deadline_str = request.POST.get('deadline')
+            if deadline_str:
+                prize.deadline = deadline_str 
             if 'image' in request.FILES:
                 prize.image = request.FILES['image']
             prize.save()

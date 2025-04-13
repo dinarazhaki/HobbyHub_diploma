@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const prizeName = button.getAttribute("data-prize-name");
                 const prizeDescription = button.getAttribute("data-prize-description");
                 const prizeRank = button.getAttribute("data-prize-rank");
+                const prizeDeadline = button.getAttribute("data-prize-deadline");
                 const prizeImage = button.getAttribute("data-prize-image");
 
                 document.getElementById("edit-name").value = prizeName;
                 document.getElementById("edit-description").value = prizeDescription;
                 document.getElementById("edit-rank").value = prizeRank;
+                document.getElementById("edit-deadline").value = prizeDeadline || "";
                 document.getElementById("current-image").src = prizeImage;
                 editPrizeForm.action = `/edit_prize/${prizeId}/`;
             });
@@ -85,4 +87,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("countdown")) {
         updateCountdown();
     }
+
+    const today = new Date();
+
+    document.querySelectorAll(".prize").forEach(prize => {
+        const deadlineStr = prize.dataset.deadline;
+        if (deadlineStr) {
+            const deadline = new Date(deadlineStr);
+            // Hide the prize if the deadline is in the past
+            if (deadline < today.setHours(0, 0, 0, 0)) {
+                prize.style.display = "none";
+            }
+        }
+    });
+
+
 });

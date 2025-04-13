@@ -33,6 +33,7 @@ CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000', 'http:
 # CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
 
 # Application definition
+SITE_ID=2
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,14 +44,33 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'social_django',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SOCIALACCOUNT_PROVIDERS= {
+    "google": {
+        "SCOPE":[
+            "email",
+            "profile"
+        ],
+        "AUTH_PARAMS":{"access_type": "online"}
+    }
+}
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.microsoft.MicrosoftOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.apple.AppleIdAuth',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+
+
 # Настройки для Google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'ваш-client-id-google'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ваш-client-secret-google'
@@ -91,6 +111,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'events.middleware.SessionControlMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 
 ]
 
@@ -180,3 +201,8 @@ SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Использован
 SESSION_COOKIE_AGE = 1209600  # Две недели
 SESSION_SAVE_EVERY_REQUEST = True  # Обновление сессии при каждом запросе
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+
+ACCOUNT_LOGIN_METHODS = {"email"}

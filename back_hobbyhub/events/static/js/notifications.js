@@ -12,13 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error(data.error);
                     return;
                 }
-
-                // Очистка предыдущих уведомлений
+    
                 notifPopup.innerHTML = '<span class="close-ot-alert">&times;</span>';
-
-                // Добавление новых уведомлений
+    
                 if (data.notifications.length > 0) {
-                    notifDot.style.display = "block";
+                    notifDot.style.display = "none"; // hide red dot after loading
                     data.notifications.forEach(notif => {
                         const notifElement = document.createElement("p");
                         notifElement.textContent = `${notif.message}`;
