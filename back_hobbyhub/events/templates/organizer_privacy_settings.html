@@ -1,113 +1,309 @@
 {% extends 'organizer_profile_base.html' %}
 {% load static %}
 
-{% block content %}
-        <div class="container mt-4">
-            <div class="row  mainpartpro">
-                <div class="col-md-2">
-                    <div class="sidebar p-4 text-center">
-                        {% if company.profile_photo %}
-                            <img src="{{ company.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% else %}
-                            <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
-                        {% endif %}    
-                        <h5>{{ company.name }}</h5>
-                        <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="{% url 'organizer_profile' %}"> Profile Info</a></div>
-                        <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="#"> Settings</a></div>
-                    </div>
-                </div>
-                <div class="col-md-10 mainpartpro">
-                    <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid  mb-3" alt="Banner">
-                    <div class="navbar user_det">
-                        <div class="tab " ><a href="{% url 'organizer_settings' %}">Account Setting</a></div>  <!--need to update-->
+{% block extra_css %}
+<style>
+.modall {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-                    <div class="tab"><a href="{% url 'organizer_language' %}">Language Options</a></div>
-                    <div class="tab"><a href="{% url 'organizer_notification' %}">Notification Preferences</a></div>
-                    <div class="tab act-active-tab"><a href="{% url 'organizer_privacy' %}">Privacy Settings</a></div>
-                    </div>
-                    
-                    <!-- Account Details -->
-                <div class="account-container">
-                    <h3>Account Details</h3>
-                    <div class="account-item">
-                        <span>Verify Email Address</span>
-                        <button class="account-btn verified">Verified</button>
-                    </div>
-                    <div class="account-item">
-                        <span>Update Password</span>
-                        <button class="account-btn" onclick="openModal()">Change Password</button>
-                    </div>
-                
-                    <h3>Recovery Settings</h3>
-                    <div class="account-item">
-                        <span>Recovery Email Address</span>
-                        <button class="account-btn" onclick="openRecoveryEmailModal()">Save</button>
-                    </div>
-                    <div class="account-item">
-                        <span>Recovery Phone Number</span>
-                        <button class="account-btn" onclick="openRecoveryPhoneModal()">Setup</button>
-                    </div>
-                </div>
-                
-                <!-- Password Change Modal -->
-                <div id="passwordModal" class="modall">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <h2>Change Password</h2>
-                        <form method="POST"  onsubmit="return validateModalPassword()">
-                            {% csrf_token %}
-                            <div class="input-field">
-                                <label>Last Password</label>
-                                <input type="password" name="last_password" placeholder="Enter current password" required>
-                            </div>
-                            <div class="input-field">
-                                <label>New Password</label>
-                                <input type="password" name="new_password" id="modal_new_password" placeholder="Enter new password" required>
-                            </div>
-                            <div class="input-field">
-                                <label>Confirm New Password</label>
-                                <input type="password" name="confirm_new_password" id="modal_confirm_password" placeholder="Confirm new password" required>
-                            </div>
-                            <button type="submit" class="modal-submit">Save Password</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- Recovery Email Modal -->
-                <div id="recoveryEmailModal" class="modall">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeRecoveryEmailModal()">&times;</span>
-                        <h2>Update Recovery Email</h2>
-                        <form method="POST" >
-                            {% csrf_token %}
-                            <div class="input-field">
-                                <label>Recovery Email</label>
-                                <input type="email" name="recovery_email" placeholder="Enter your new recovery email" required>
-                            </div>
-                            <button type="submit" class="modal-submit">Send Verification Link</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <!-- Recovery Phone Modal -->
-                <div id="recoveryPhoneModal" class="modall">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeRecoveryPhoneModal()">&times;</span>
-                        <h2>Update Recovery Phone</h2>
-                        <form method="POST" >
-                            {% csrf_token %}
-                            <div class="input-field">
-                                <label>Recovery Phone Number</label>
-                                <input type="tel" name="recovery_phone" placeholder="Enter your new recovery phone number" required>
-                            </div>
-                            <button type="submit" class="modal-submit">Send Verification Code</button>
-                        </form>
-                    </div>
-                </div>
-                    
-                    
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.input-field {
+    margin-bottom: 15px;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-submit:hover {
+    background-color: #45a049;
+}
+
+/* Toast Notification Styles */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    max-width: 300px;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.error {
+    background-color: #F44336;
+}
+
+.toast.warning {
+    background-color: #FF9800;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mainpartpro">
+        <div class="col-md-2">
+            <div class="sidebar p-4 text-center">
+                {% if company.profile_photo %}
+                    <img src="{{ company.profile_photo.url }}" alt="Profile" class="rounded-circle mb-3" width="80" alt="Profile">
+                {% else %}
+                    <img src="{% static 'images/profile_photo.png' %}" class="rounded-circle mb-3" width="80" alt="Profile">
+                {% endif %}    
+                <h5>{{ company.name }}</h5>
+                <div class="pro-set-tab w-100 mb-2"><i class="bi bi-info-circle"></i><a href="{% url 'organizer_profile' %}"> Profile Info</a></div>
+                <div class="pro-act-set-tab w-100 mb-2"><i class="bi bi-gear"></i><a href="#"> Settings</a></div>
+            </div>
+        </div>
+        <div class="col-md-10 mainpartpro">
+            <img src="{% static 'images/profile_banner.jpg' %}" class="img-fluid mb-3" alt="Banner">
+            <div class="navbar user_det">
+                <div class="tab"><a href="{% url 'organizer_settings' %}">Account Setting</a></div>
+                <div class="tab"><a href="{% url 'organizer_language' %}">Language Options</a></div>
+                <div class="tab"><a href="{% url 'organizer_notification' %}">Notification Preferences</a></div>
+                <div class="tab act-active-tab"><a href="{% url 'organizer_privacy' %}">Privacy Settings</a></div>
+            </div>
             
-                
+            <!-- Account Details -->
+            <div class="account-container">
+                <h3>Account Details</h3>
+                <div class="account-item">
+                    <span>Verify Email Address</span>
+                    <button class="account-btn verified">Verified</button>
+                </div>
+                <div class="account-item">
+                    <span>Update Password</span>
+                    <button class="account-btn" onclick="openModal()">Change Password</button>
+                </div>
+            
+                <h3>Recovery Settings</h3>
+                <div class="account-item">
+                    <span>Recovery Email Address</span>
+                    <button class="account-btn" onclick="openRecoveryEmailModal()">Save</button>
+                </div>
+                <div class="account-item">
+                    <span>Recovery Phone Number</span>
+                    <button class="account-btn" onclick="openRecoveryPhoneModal()">Setup</button>
+                </div>
+            </div>
+            
+            <!-- Password Change Modal -->
+            <div id="passwordModal" class="modall">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Change Password</h2>
+                    <form method="POST" action="{% url 'organizer_update_password' %}" id="passwordChangeForm">
+                        {% csrf_token %}
+                        <div class="input-field">
+                            <label>Current Password</label>
+                            <input type="password" name="last_password" placeholder="Enter current password" required>
+                        </div>
+                        <div class="input-field">
+                            <label>New Password</label>
+                            <input type="password" name="new_password" id="modal_new_password" placeholder="Enter new password" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Confirm New Password</label>
+                            <input type="password" name="confirm_new_password" id="modal_confirm_password" placeholder="Confirm new password" required>
+                        </div>
+                        <button type="submit" class="modal-submit">Save Password</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Recovery Email Modal -->
+            <div id="recoveryEmailModal" class="modall">
+                <div class="modal-content">
+                    <span class="close" onclick="closeRecoveryEmailModal()">&times;</span>
+                    <h2>Update Recovery Email</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-field">
+                            <label>Recovery Email</label>
+                            <input type="email" name="recovery_email" placeholder="Enter your new recovery email" required>
+                        </div>
+                        <button type="submit" class="modal-submit">Send Verification Link</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Recovery Phone Modal -->
+            <div id="recoveryPhoneModal" class="modall">
+                <div class="modal-content">
+                    <span class="close" onclick="closeRecoveryPhoneModal()">&times;</span>
+                    <h2>Update Recovery Phone</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-field">
+                            <label>Recovery Phone Number</label>
+                            <input type="tel" name="recovery_phone" placeholder="Enter your new recovery phone number" required>
+                        </div>
+                        <button type="submit" class="modal-submit">Send Verification Code</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    // Показываем уведомление
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    // Убираем через 5 секунд
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 500);
+    }, 5000);
+}
+
+// Модифицируем обработчик формы
+document.querySelector('#passwordChangeForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!validateModalPassword()) return;
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+            showToast(result.message, 'success');
+            closeModal();
+            form.reset();
+        } else {
+            showToast(result.message, 'error');
+        }
+    } catch (error) {
+        showToast('An error occurred. Please try again.', 'error');
+        console.error('Error:', error);
+    }
+});
+
+function validateModalPassword() {
+    const newPassword = document.getElementById('modal_new_password').value;
+    const confirmPassword = document.getElementById('modal_confirm_password').value;
+    
+    if (newPassword !== confirmPassword) {
+        showToast("New passwords don't match!", 'error');
+        return false;
+    }
+    
+    if (newPassword.length < 8) {
+        showToast("Password must be at least 8 characters long!", 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function openModal() {
+    document.getElementById('passwordModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('passwordModal').style.display = 'none';
+}
+
+function openRecoveryEmailModal() {
+    document.getElementById('recoveryEmailModal').style.display = 'block';
+}
+
+function closeRecoveryEmailModal() {
+    document.getElementById('recoveryEmailModal').style.display = 'none';
+}
+
+function openRecoveryPhoneModal() {
+    document.getElementById('recoveryPhoneModal').style.display = 'block';
+}
+
+function closeRecoveryPhoneModal() {
+    document.getElementById('recoveryPhoneModal').style.display = 'none';
+}
+
+// Close modals when clicking outside
+window.onclick = function(event) {
+    if (event.target.className === 'modall') {
+        event.target.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

@@ -574,6 +574,68 @@ def update_user_profile(request):
 
     return redirect("user_setting")
 
+
+@role_required("employee")
+@approval_required
+def update_user_password(request):
+    nickname = request.session.get("nickname")
+    if not nickname:
+        return JsonResponse({"status": "error", "message": "User not authenticated"}, status=401)
+
+    if request.method == "POST":
+        try:
+            user = Employee.objects.get(nickname=nickname)
+            last_password = request.POST.get("last_password")
+            new_password = request.POST.get("new_password")
+            confirm_new_password = request.POST.get("confirm_new_password")
+
+            # Validate current password
+            if not check_password(last_password, user.password):
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "Current password is incorrect"
+                }, status=400)
+
+            # Validate new password
+            if new_password != confirm_new_password:
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "New passwords don't match"
+                }, status=400)
+
+            # Validate password strength
+            if len(new_password) < 8:
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "Password must be at least 8 characters"
+                }, status=400)
+
+            # Update password
+            user.password=new_password
+            user.save()
+
+            return JsonResponse({
+                "status": "success", 
+                "message": "Password updated successfully!"
+            })
+        
+        except Employee.DoesNotExist:
+            return JsonResponse({
+                "status": "error", 
+                "message": "User not found"
+            }, status=404)
+        except Exception as e:
+            return JsonResponse({
+                "status": "error", 
+                "message": "An error occurred. Please try again."
+            }, status=500)
+
+    return JsonResponse({
+        "status": "error", 
+        "message": "Invalid request method"
+    }, status=405)
+        
+        
 @role_required("employee")
 @approval_required
 def user_setting(request):
@@ -667,6 +729,66 @@ def update_organizer_profile(request):
 
     return redirect("organizer_settings")
 
+@role_required("organizer")
+def update_organizer_password(request):
+    company_id = request.session.get("company_id")
+    if not company_id:
+        return JsonResponse({"status": "error", "message": "Company not authenticated"}, status=401)
+
+    if request.method == "POST":
+        try:
+            company = Company.objects.get(id=company_id)
+            last_password = request.POST.get("last_password")
+            new_password = request.POST.get("new_password")
+            confirm_new_password = request.POST.get("confirm_new_password")
+
+            # Validate current password
+            if not check_password(last_password, company.password):
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "Current password is incorrect"
+                }, status=400)
+
+            # Validate new password
+            if new_password != confirm_new_password:
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "New passwords don't match"
+                }, status=400)
+
+            # Validate password strength
+            if len(new_password) < 8:
+                return JsonResponse({
+                    "status": "error", 
+                    "message": "Password must be at least 8 characters"
+                }, status=400)
+
+            # Update password
+            company.set_password(new_password)
+            company.save()
+
+            return JsonResponse({
+                "status": "success", 
+                "message": "Password updated successfully!"
+            })
+        
+        except Company.DoesNotExist:
+            return JsonResponse({
+                "status": "error", 
+                "message": "Company not found"
+            }, status=404)
+        except Exception as e:
+            return JsonResponse({
+                "status": "error", 
+                "message": "An error occurred. Please try again."
+            }, status=500)
+
+    return JsonResponse({
+        "status": "error", 
+        "message": "Invalid request method"
+    }, status=405)
+    
+    
 @role_required("organizer")
 def organizer_language(request):
     company_id = request.session.get("company_id")

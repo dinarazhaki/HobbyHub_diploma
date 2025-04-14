@@ -21,9 +21,11 @@ urlpatterns = [
     path('user_profile/achievements/', user_achievements, name='user_achievements'),
     path('user_profile/setting/language/', user_language, name='user_language'),
     path('user_profile/setting/notification_preferences/', user_notification, name='user_notification'),
+    
     path('user_profile/setting/privacy/', user_privacy, name='user_privacy'),
+    path('user_profile/setting/privacy/update_password/', update_user_password, name='update_user_password'),
+    
     path("get_notifications/", get_notifications, name="get_notifications"),
-
     path('user_activities/', user_activities, name='user_activities'),
     path('activity/<int:event_id>/', activity_details, name='activity_details'),
     path('apply_to_event/<int:event_id>/', apply_to_event, name='apply_to_event'),
@@ -42,7 +44,11 @@ urlpatterns = [
     path("organizer/remove_profile_photo/", remove_organizer_profile_photo, name="remove_organizer_profile_photo"),
     path('organizer_profile/setting/language/', organizer_language, name='organizer_language'),
     path('organizer_profile/setting/notification_preferences/', organizer_notification, name='organizer_notification'),
+    
     path('organizer_profile/setting/privacy/', organizer_privacy, name='organizer_privacy'),
+    path('organizer_profile/setting/privacy/change-password/', update_organizer_password, name='organizer_update_password'),
+
+
     path('activities/', organizer_activities, name='activities'),
     path('create_event/', create_event, name='create_event'),
     path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
