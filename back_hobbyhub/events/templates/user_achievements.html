@@ -11,15 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/sass_styles.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'js/notifications.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var eventsData = {{ events_data|safe }};
-    </script>
-    <script src="{% static 'js/user.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <div class="container mt-4">
     <div class="row mainpartpro">
@@ -43,39 +34,64 @@
                 <div class="tab tab_act_ach"><a href="{% url 'profile_user_act' %}">Your Activities</a></div>
                 <div class="tab active-tab"><a href="{% url 'user_achievements' %}">Achievements</a></div>
             </div>
-            <div class="earned-activity-container">
-                <!-- Activity 1 -->
-                <div class="earned-activity-box">
-                    <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 7</p>
-                    <img src="{% static 'images/cook_chal.png' %}" alt="Cooking Challenge" class="earned-activity-image">
-                    <h3>Cooking Challenge</h3>
-                    <p class="earned-activity-category">Cooking</p>
-                    <p class="earned-activity-location">
-                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Office Kitchen
-                    </p>
+            
+            <!-- Completed Challenges Section -->
+            <div class="mb-5">
+                <h3 class="mb-4">Completed Challenges</h3>
+                {% if completed_challenges %}
+                    <div class="earned-activity-container">
+                        {% for progress in completed_challenges %}
+                        <div class="earned-activity-box">
+                            <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> {{ progress.challenge.reward_diamonds }}</p>
+                            <div class="earned-activity-icon">
+                                <i class="bi bi-trophy-fill"></i>
+                            </div>
+                            <h3>{{ progress.challenge.name }}</h3>
+                            <p class="earned-activity-category">{{ progress.challenge.get_type_display }}</p>
+                            <p class="earned-activity-description">{{ progress.challenge.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                <div class="alert alert-info">
+                    You haven't completed any challenges yet.                    
                 </div>
-        
-                <!-- Activity 2 -->
-                <div class="earned-activity-box">
-                    <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 8</p>
-                    <img src="{% static 'images/creative_writing.jpg' %}" alt="Creative Writing Club" class="earned-activity-image">
-                    <h3>Creative Writing Club</h3>
-                    <p class="earned-activity-category">Writing</p>
-                    <p class="earned-activity-location">
-                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Library Lounge
-                    </p>
-                </div>
-        
-                <!-- Activity 3 -->
-                <div class="earned-activity-box">
-                    <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> 10</p>
-                    <img src="{% static 'images/origami.jpg' %}" alt="Origami Workshop" class="earned-activity-image">
-                    <h3>Origami Workshop</h3>
-                    <p class="earned-activity-category">Crafting</p>
-                    <p class="earned-activity-location">
-                        <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> Art Studio
-                    </p>
-                </div>
+
+                {% endif %}
+            </div>
+            
+            
+            <!-- Attended Events Section -->
+            <div class="mb-5">
+                <h3 class="mb-4">Events You Attended</h3>
+                {% if user.attendance_records.all %}
+                    <div class="earned-activity-container">
+                        {% for record in user.attendance_records.all %}
+                            <div class="earned-activity-box">
+                                <p class="earned-reward-text">Earned <img src="{% static 'images/diamond.png' %}" alt="Diamond" class="earned-reward-icon"> {{ record.event.diamonds }}</p>
+                                {% if record.event.image %}
+                                    <img src="{{ record.event.image.url }}" alt="{{ record.event.title }}" class="earned-activity-image">
+                                {% else %}
+                                    <div class="earned-activity-icon">
+                                        <i class="bi bi-calendar-event" style="font-size: 2rem;"></i>
+                                    </div>
+                                {% endif %}
+                                <h3>{{ record.event.title }}</h3>
+                                <p class="earned-activity-category">{{ record.event.get_event_type_display }}</p>
+                                <p class="earned-activity-location">
+                                    <img src="{% static 'images/your_act_location.png' %}" alt="Location" class="earned-location-icon"> {{ record.event.location }}
+                                </p>
+                                <p class="earned-activity-date">
+                                    <i class="bi bi-calendar"></i> {{ record.event.date }} at {{ record.event.time }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        You haven't attended any events yet.
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

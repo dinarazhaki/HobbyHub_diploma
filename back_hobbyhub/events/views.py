@@ -469,7 +469,7 @@ def profile_user_act(request):
 @role_required("employee")
 @approval_required
 def user_achievements(request):
-    nickname=request.session.get("nickname")
+    nickname = request.session.get("nickname")
 
     if not nickname:
         return redirect("sign_in")
@@ -477,9 +477,25 @@ def user_achievements(request):
     user = Employee.objects.filter(nickname=nickname).first()
     if not user:
         return redirect("sign_in")
-    return render(request, 'user_achievements.html', {"user":user})
-
-
+    
+    # Get completed challenges
+    completed_challenges = EmployeeChallengeProgress.objects.filter(
+        employee=user,
+        is_completed=True
+    ).select_related('challenge')
+    
+    # Get events where employee attended (has attendance record)
+    attended_events = Event.objects.filter(
+        attendance_records__employee=user,
+        status='completed'
+    ).distinct()
+    
+    return render(request, 'user_achievements.html', {
+        "user": user,
+        "completed_challenges": completed_challenges,
+        "attended_events": attended_events,
+    })
+    
 @role_required("employee")
 @approval_required
 def user_language(request):
@@ -852,6 +868,11 @@ def mark_attendance(request, event_id):
         if AttendanceRecord.objects.filter(event=event, employee=employee).exists():
             return JsonResponse({'success': False, 'error': 'Already attended'}, status=400)
 
+        # Award diamonds to the employee
+        if event.diamonds > 0:
+            employee.diamonds += event.diamonds
+            employee.save()
+            
         # Create record with all employee data
         record = AttendanceRecord.objects.create(
             event=event,
@@ -864,6 +885,8 @@ def mark_attendance(request, event_id):
         return JsonResponse({
             'success': True,
             'employee_name': f"{employee.name} {employee.last_name}",
+            'diamonds_awarded': event.diamonds,
+            'total_diamonds': employee.diamonds,
             'record': {
                 'first_name': record.first_name,
                 'last_name': record.last_name,

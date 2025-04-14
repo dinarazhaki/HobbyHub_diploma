@@ -43,6 +43,7 @@
 
     <div class="timing-location">
         <div class="info_section">
+            {% if user_is_registered %}
             <div class="qr-section">
                 <h2>Scan QR Code</h2>
                 <div class="qr-controls">
@@ -54,6 +55,7 @@
                 <div id="qr-reader-results" class="qr-results"></div>
                 <div id="attendance-status" class="attendance-status hidden"></div>
             </div>
+            {% endif %}
     
             <!-- Hidden data elements -->
             <div id="user-data" data-nickname="{{ nickname }}"></div>

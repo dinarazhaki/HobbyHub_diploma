@@ -186,24 +186,6 @@ class AttendanceRecord(models.Model):
     def __str__(self):
         return f"{self.employee.nickname} at {self.event.title} ({self.timestamp})"
     
-#class Prize(models.Model):
-   # name = models.CharField(max_length=255, verbose_name="Prize Name")
-   # description = models.TextField(verbose_name="Prize Description")
-   # image = models.ImageField(upload_to='prizes/', null=True, blank=True, verbose_name="Prize Image")
-   # rank = models.IntegerField(verbose_name="Rank") 
- #   company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name="Company")
-
-   # class Meta:
-       # constraints = [
-       #     models.UniqueConstraint(
-        #        fields=['rank', 'company'],  
-      #          name='unique_rank_per_company'
-      #      )
-      #  ]
-
-   # def __str__(self):
-        #return f"{self.name} (Rank {self.rank})"
-    
 
 class Prize(models.Model):
     name = models.CharField(max_length=255, verbose_name="Prize Name")

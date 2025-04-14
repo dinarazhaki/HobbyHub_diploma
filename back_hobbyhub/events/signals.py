@@ -31,3 +31,24 @@ def notify_organizer_on_employee_signup(sender, instance, created, **kwargs):
         company = instance.company
         message = f"New employee registered: {instance.nickname} ({instance.name} {instance.last_name})"
         OrganizerNotification.objects.create(company=company, message=message)
+        
+@receiver(post_save, sender=AttendanceRecord)
+def notify_on_diamond_reward(sender, instance, created, **kwargs):
+    if created:  # Only for new attendance records
+        event = instance.event
+        employee = instance.employee
+        
+        # Check if the event has diamonds to award
+        if event.diamonds > 0:
+            # Create notification
+            message = f"You attended {event.title} and received {event.diamonds} diamonds!"
+            Notification.objects.create(
+                employee=employee,
+                message=message
+            )
+            
+            organizer_message = f"{employee.nickname} attended {event.title}"
+            OrganizerNotification.objects.create(
+                company=event.company,
+                message=organizer_message
+            )
