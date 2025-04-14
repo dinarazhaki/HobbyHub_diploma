@@ -47,7 +47,7 @@ def notify_on_diamond_reward(sender, instance, created, **kwargs):
                 message=message
             )
             
-            organizer_message = f"{employee.nickname} attended {event.title}"
+            organizer_message = f"{employee.name} {employee.last_name} attended {event.title}"
             OrganizerNotification.objects.create(
                 company=event.company,
                 message=organizer_message
