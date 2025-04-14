@@ -1759,3 +1759,6 @@ def guest_support(request):
 
 def guest_service(request):
     return render(request, 'guest_service.html')
+
+def become_partner(request):
+    return render(request, 'become_partner.html')
