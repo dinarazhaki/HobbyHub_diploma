@@ -11,7 +11,7 @@ def notify_employees_on_event_creation(sender, instance, created, **kwargs):
         employees = Employee.objects.filter(company=company)
 
         for employee in employees:
-            message = f"New event: {instance.title} on {instance.date} at {instance.time}"
+            message = f"A new activity is live! Join now and explore something exciting! New event: {instance.title} on {instance.date} at {instance.time}"
             Notification.objects.create(employee=employee, message=message)
             
 @receiver(post_save, sender=EmployeeChallengeProgress)
@@ -21,7 +21,7 @@ def notify_on_challenge_completion(sender, instance, **kwargs):
         employee.diamonds += instance.challenge.reward_diamonds
         employee.save()
 
-        message = f"Challenge completed: {instance.challenge.name}! You earned {instance.challenge.reward_diamonds} diamonds."
+        message = f"You nailed it! Challenge complete—claim your well-earned points! Challenge completed: {instance.challenge.name}! You earned {instance.challenge.reward_diamonds} diamonds."
         Notification.objects.create(employee=employee, message=message)
     
     
