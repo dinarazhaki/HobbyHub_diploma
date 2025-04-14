@@ -47,7 +47,7 @@
                             <h5>{{ event.title }}</h5>
                             <p>Date: {{ event.date }}</p>
                             <p>Type: {{ event.get_event_type_display }}</p>
-                            <a href="{% url 'activity_details' event.id %}" class="button-link">See More</a>
+                            <a href="{% url 'organizer_activity_details' %}?event_id={{ event.id }}" class="button-link">See More</a>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <h5>{{ event.title }}</h5>
                             <p>Date: {{ event.date }}</p>
                             <p>Type: {{ event.get_event_type_display }}</p>
-                            <a href="{% url 'activity_details' event.id %}" class="button-link">See More</a>
+                            <a href="{% url 'organizer_activity_details' %}?event_id={{ event.id }}" class="button-link">See More</a>
                             <button class="btn btn-success btn-sm mt-2 finish-btn" data-event-id="{{ event.id }}">
                                 Finish Event
                             </button>
@@ -94,7 +94,7 @@
                             <h5>{{ event.title }}</h5>
                             <p>Date: {{ event.date }}</p>
                             <p>Type: {{ event.get_event_type_display }}</p>
-                            <a href="{% url 'activity_details' event.id %}" class="button-link">View Details</a>
+                            <a href="{% url 'organizer_activity_details' %}?event_id={{ event.id }}" class="button-link">View Details</a>
                         </div>
                     </div>
                 </div>
