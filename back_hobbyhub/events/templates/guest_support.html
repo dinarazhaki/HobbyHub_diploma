@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Support</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #f8b500;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      background-color: #f8b500;
+      color: white;
+      padding: 15px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e89c00;
+    }
+
+    .faq-item {
+      margin-top: 30px;
+      border-top: 1px solid #eee;
+      padding-top: 30px;
+    }
+
+    .faq-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .faq-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    input[type="checkbox"]:checked + .faq-label .arrow {
+      transform: rotate(90deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      font-size: 0.95em;
+      color: #555;
+      transition: max-height 0.4s ease;
+    }
+
+    input[type="checkbox"]:checked ~ .faq-answer {
+      max-height: 300px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <h1>Contact Support</h1>
+    {% if messages %}
+  <ul>
+    {% for message in messages %}
+      <li style="color: green;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="How can we help you?" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <!-- Optional: Support FAQ under the form -->
+    <div class="faq-item">
+      <input type="checkbox" id="faq1">
+      <label class="faq-label" for="faq1">
+        <span>Need help with registration?</span>
+        <span class="arrow">▶</span>
+      </label>
+      <div class="faq-answer">
+        Try using another email or check if your internet connection is stable. You can also reach us by filling the form above.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq2">
+      <label class="faq-label" for="faq2">
+        <span>Didn't receive confirmation email?</span>
+        <span class="arrow">▶</span>
+      </label>
+      <div class="faq-answer">
+        Check your spam or junk folder. If it's not there, write to support@hobbyhub.com.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

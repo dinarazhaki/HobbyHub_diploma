@@ -1687,3 +1687,75 @@ def org_contact_support(request):
 
 def org_terms_of_service(request):
     return render(request, "org_terms_of_service.html")
+
+
+#views password
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from .forms import ForgotPasswordForm, ResetPasswordForm
+from django.conf import settings
+
+def forgot_password(request):
+    if request.method == "POST":
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                user = User.objects.get(email=email)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                token = default_token_generator.make_token(user)
+                link = request.build_absolute_uri(f"/reset/{uid}/{token}/")
+                subject = "Reset Your Password"
+                message = render_to_string("accounts/reset_email.txt", {"link": link, "user": user})
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+                return render(request, "accounts/forgot_done.html")
+            except User.DoesNotExist:
+                form.add_error('email', "User with this email does not exist.")
+    else:
+        form = ForgotPasswordForm()
+    return render(request, "accounts/forgot_password.html", {'form': form})
+
+def reset_password(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (User.DoesNotExist, ValueError, TypeError):
+        user = None
+
+    if user and default_token_generator.check_token(user, token):
+        if request.method == "POST":
+            form = ResetPasswordForm(request.POST)
+            if form.is_valid():
+                user.set_password(form.cleaned_data['new_password'])
+                user.save()
+                return render(request, "accounts/reset_done.html")
+        else:
+            form = ResetPasswordForm()
+        return render(request, "accounts/reset_password.html", {"form": form})
+    else:
+        return render(request, "accounts/reset_invalid.html")
+
+
+def guest_faq(request):
+    return render(request, 'faq_guest.html')
+
+def guest_support(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        print(f"Support request from {name} ({email}): {message}")
+
+        messages.success(request, "Your message has been sent!")
+        
+
+    return render(request, 'guest_support.html')
+
+def guest_service(request):
+    return render(request, 'guest_service.html')

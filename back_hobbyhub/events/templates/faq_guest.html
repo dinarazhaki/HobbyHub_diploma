@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guest FAQ - HobbyHub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      padding: 40px;
+      margin: 0;
+    }
+  
+    .faq-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+  
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 40px;
+    }
+  
+    .faq-item {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+    }
+  
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+  
+    input[type="checkbox"] {
+      display: none;
+    }
+  
+    .faq-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #2a2a2a;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+  
+    .arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.2em;
+    }
+  
+    input[type="checkbox"]:checked + .faq-label .arrow {
+      transform: rotate(90deg);
+    }
+  
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      color: #555;
+      font-size: 0.95em;
+      transition: max-height 0.4s ease;
+      padding-left: 5px;
+    }
+  
+    input[type="checkbox"]:checked ~ .faq-answer {
+      max-height: 300px;
+      margin-top: 10px;
+    }
+  </style>
+  
+</head>
+<body>
+    <div class="faq-container">
+      <h1>Frequently Asked Questions</h1>
+  
+      <div class="faq-item">
+        <input type="checkbox" id="faq1">
+        <label class="faq-label" for="faq1">
+          <span>1. What is HobbyHub?</span>
+          <span class="arrow">▶</span>
+        </label>
+        <div class="faq-answer">HobbyHub is a platform where users can explore, share, and join different hobby-related activities.</div>
+      </div>
+  
+      <div class="faq-item">
+        <input type="checkbox" id="faq2">
+        <label class="faq-label" for="faq2">
+          <span>2. Do I need to register to view hobbies?</span>
+          <span class="arrow">▶</span>
+        </label>
+        <div class="faq-answer">No, guests can browse public events and FAQs, but registration is required to join or create events.</div>
+      </div>
+  
+      <div class="faq-item">
+        <input type="checkbox" id="faq3">
+        <label class="faq-label" for="faq3">
+          <span>3. How can I join a hobby group?</span>
+          <span class="arrow">▶</span>
+        </label>
+        <div class="faq-answer">Register or log in, then go to the event page and click "Join".</div>
+      </div>
+  
+      <div class="faq-item">
+        <input type="checkbox" id="faq4">
+        <label class="faq-label" for="faq4">
+          <span>4. Is HobbyHub free to use?</span>
+          <span class="arrow">▶</span>
+        </label>
+        <div class="faq-answer">Yes, all core features are free for users.</div>
+      </div>
+  
+      <div class="faq-item">
+        <input type="checkbox" id="faq5">
+        <label class="faq-label" for="faq5">
+          <span>5. Who can I contact for help?</span>
+          <span class="arrow">▶</span>
+        </label>
+        <div class="faq-answer">Use the contact form or email us at support@hobbyhub.com.</div>
+      </div>
+    </div>
+  </body>
+</html>

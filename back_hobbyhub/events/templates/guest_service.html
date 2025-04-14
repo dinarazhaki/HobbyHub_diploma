@@ -1,0 +1,108 @@
+<!-- templates/guest_service.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Terms of Service</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .accordion {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .accordion input {
+            display: none;
+        }
+        .accordion label {
+            display: block;
+            padding: 1rem;
+            background-color: #1e90ff;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            position: relative;
+        }
+        .accordion label::after {
+            content: "➤";
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s ease;
+        }
+        .accordion input:checked + label::after {
+            transform: rotate(90deg);
+        }
+        .accordion .content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 1rem;
+        }
+        .accordion input:checked ~ .content {
+            max-height: 300px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Terms of Service</h1>
+
+    <div class="accordion">
+        <input type="checkbox" id="section1">
+        <label for="section1">1. Acceptance of Terms</label>
+        <div class="content">
+            <p>By using our services, you agree to be bound by these terms. Please read them carefully.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <input type="checkbox" id="section2">
+        <label for="section2">2. User Responsibilities</label>
+        <div class="content">
+            <p>You are responsible for your activity on the platform and must comply with all applicable laws.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <input type="checkbox" id="section3">
+        <label for="section3">3. Account Suspension</label>
+        <div class="content">
+            <p>We reserve the right to suspend or terminate your access if you violate our terms.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <input type="checkbox" id="section4">
+        <label for="section4">4. Privacy</label>
+        <div class="content">
+            <p>Your privacy is important to us. Please refer to our privacy policy for details.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <input type="checkbox" id="section5">
+        <label for="section5">5. Changes to Terms</label>
+        <div class="content">
+            <p>We may update these terms from time to time. Continued use of our services constitutes acceptance of changes.</p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

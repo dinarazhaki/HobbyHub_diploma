@@ -10,6 +10,11 @@ urlpatterns = [
     path('', guest_page, name=''),
     path('organizer/', organizer_view, name='organizer_view'),
     path('user/', user_view, name='user_view'),
+    path('guest_faq/',guest_faq, name='guest_faq'),
+    path('guest_support/', guest_support, name='guest_support'),
+    path('guest_service/', guest_service, name='guest_service'),
+    path('forgot-password/', forgot_password, name='forgot_password'),
+    path('reset/<uidb64>/<token>/', reset_password, name='reset_password'),
 
     # Профиль пользователя
     path('user_profile/', user_profile, name='user_profile'),
