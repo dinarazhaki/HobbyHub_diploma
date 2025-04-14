@@ -251,11 +251,12 @@ class Challenge(models.Model):
     type = models.CharField(
         max_length=50,
         choices=[
-            ("activity", "Activity Participation"),
+            ("activity", "Booking Challenges"),
             ("skill", "Skill Development"),
             ("competition", "Competition & Challenges"),
             ("xp", "Achievement Points"),
             ("consistency", "Consistency Challenges"),
+            ("attendance", "Attendance Challenges"),
         ],
         verbose_name="Challenge Type",
     )

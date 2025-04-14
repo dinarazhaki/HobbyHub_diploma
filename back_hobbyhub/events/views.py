@@ -859,6 +859,7 @@ def mark_attendance(request, event_id):
             first_name=employee.name,
             last_name=employee.last_name
         )
+        update_attendance_progress(employee, 1)  # Убедитесь, что эта строка выполняется
 
         return JsonResponse({
             'success': True,
@@ -1320,7 +1321,26 @@ def update_competition_progress(employee, wins):
         progress.progress += wins
         progress.save()
 
+def update_attendance_progress(employee, attendance):
+    challenges=Challenge.objects.filter(type="attendance",company=employee.company)
+    for challenge in challenges:
+        progress,created=EmployeeChallengeProgress.objects.get_or_create(
+            employee=employee,challenge=challenge
+        )
+        if progress.is_completed:
+            continue
+        progress.progress+=attendance
+        if progress.progress>=challenge.goal:
+            progress.is_completed = True
+            progress.save(update_fields=["progress", "is_completed"])  # Сохраняем только нужные поля
 
+            # Добавляем награду (diamonds) сотруднику
+            employee.diamonds += challenge.reward_diamonds
+            employee.save()
+        else:
+            progress.save(update_fields=["progress"])  # Сохраняем прогресс, если вызов не завершен                                
+          
+    
 def update_skill_progress(employee, sessions):
     challenges = Challenge.objects.filter(type="skill", company=employee.company)
     for challenge in challenges:
