@@ -8,13 +8,65 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <script src="{% static 'js/user.js' %}"></script>
-    {% block extra_css %}{% endblock %}
+    <style>.navbar-nav .nav-link.active {
+        font-weight: bold;
+       color: #ed883c !important; 
+        border-bottom: 2px solid #f0960f; 
+}
+/* Стили для уведомлений */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-container {
+    position: relative;
+}
+
+.dropdown-notifications {
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-item.unread {
+    background-color: #f8f9fa;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.mark-all-read {
+    font-size: 14px;
+    cursor: pointer;
+    color: #0d6efd;
+}
+</style>
+{% block extra_css %}{% endblock %}
+
 </head>
 <body>
+    <!-- Header -->
     <section class="header">
         <nav class="navbar navbar-expand-lg navbar-bold bg-white  px-4 fixed-top">
             <a class="navbar-brand fw-bold gradient-text logo" href="{% url 'organizer_view' %}">HobbyHub</span></a>
@@ -38,10 +90,24 @@
                 </ul>
             </div>
             <div class="d-flex">
-                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
+                <div class="notification-container me-3">
+                    <a class="notifications position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% static 'images/bell.jpg' %}" alt="Notification">
+                        <span class="notification-badge d-none">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-notifications dropdown-menu-end p-2">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Notifications</h6>
+                            <span class="mark-all-read">Mark all as read</span>
+                        </div>
+                        <div class="notifications-list">
+                            <!-- Уведомления будут загружаться здесь -->
+                        </div>
+                    </ul>
+                </div>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Sign Out</button>
+                    <button type="submit" class="btn btn-gradient">Sign Out</button>
                 </form>
             </div>
         </nav>
@@ -88,6 +154,131 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {% block extra_js %}{% endblock %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Функция для загрузки уведомлений
+            function loadNotifications() {
+                fetch('/get_organizer_notifications/')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.notifications) {
+                            updateNotificationsUI(data.notifications);
+                        }
+                    })
+                    .catch(error => console.error('Error loading notifications:', error));
+            }
+            
+            // Функция для обновления интерфейса уведомлений
+            function updateNotificationsUI(notifications) {
+                const notificationsList = document.querySelector('.notifications-list');
+                const badge = document.querySelector('.notification-badge');
+                
+                // Обновляем бейдж с количеством непрочитанных
+                const unreadCount = notifications.filter(n => !n.is_read).length;
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.classList.remove('d-none');
+                } else {
+                    badge.classList.add('d-none');
+                }
+                
+                // Очищаем список уведомлений
+                notificationsList.innerHTML = '';
+                
+                // Добавляем каждое уведомление в список
+                if (notifications.length === 0) {
+                    notificationsList.innerHTML = '<div class="text-center py-3">No notifications</div>';
+                    return;
+                }
+                
+                notifications.forEach(notification => {
+                    const notificationItem = document.createElement('div');
+                    notificationItem.className = `notification-item ${notification.is_read ? '' : 'unread'}`;
+                    notificationItem.innerHTML = `
+                        <div class="d-flex justify-content-between">
+                            <div class="notification-message">${notification.message}</div>
+                            <button class="btn btn-sm btn-link mark-as-read" data-id="${notification.id}" style="display: ${notification.is_read ? 'none' : 'block'}">
+                                <small>Mark as read</small>
+                            </button>
+                        </div>
+                        <div class="notification-time">${notification.timestamp}</div>
+                    `;
+                    notificationsList.appendChild(notificationItem);
+                });
+            }
+            
+            // Обработчик для пометки уведомления как прочитанного
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.mark-as-read')) {
+                    const notificationId = e.target.closest('.mark-as-read').getAttribute('data-id');
+                    markNotificationAsRead(notificationId);
+                }
+                
+                if (e.target.closest('.mark-all-read')) {
+                    markAllNotificationsAsRead();
+                }
+            });
+            
+            // Функция для пометки уведомления как прочитанного
+            function markNotificationAsRead(notificationId) {
+                fetch('/mark_organizer_notification_as_read/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                    body: JSON.stringify({ notification_id: notificationId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        loadNotifications(); // Перезагружаем уведомления
+                    }
+                })
+                .catch(error => console.error('Error marking notification as read:', error));
+            }
+            
+            // Функция для пометки всех уведомлений как прочитанных
+            function markAllNotificationsAsRead() {
+                fetch('/mark_organizer_notification_as_read/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                    body: JSON.stringify({ mark_all: true })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        loadNotifications(); // Перезагружаем уведомления
+                    }
+                })
+                .catch(error => console.error('Error marking all notifications as read:', error));
+            }
+            
+            // Вспомогательная функция для получения CSRF токена
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            
+            // Загружаем уведомления при загрузке страницы
+            loadNotifications();
+            
+            // Обновляем уведомления каждые 30 секунд
+            setInterval(loadNotifications, 30000);
+        });
+    </script>    {% block extra_js %}{% endblock %}
 </body>
 </html>

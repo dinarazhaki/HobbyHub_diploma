@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}HobbyHub{% endblock %}</title>
@@ -8,9 +10,60 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    {% load static %}
     {% block extra_css %}{% endblock %}
-    
+    <style>
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            color: #e79d28 !important; /* Your brand color */
+            border-bottom: 2px solid #da902e; /* Optional underline effect */
+        }
+        /* Стили для уведомлений */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .notification-container {
+            position: relative;
+            margin-right: 15px;
+        }
+        
+        .dropdown-notifications {
+            width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .notification-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .notification-item.unread {
+            background-color: #f8f9fa;
+        }
+        
+        .notification-time {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .mark-all-read {
+            font-size: 14px;
+            cursor: pointer;
+            color: #0d6efd;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -22,22 +75,39 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'user_activities' %}">Activities</a></li>
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'challenges' %}">Challenges</a></li>
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'leaderboard' %}">Leaderboard</a></li>
-                    <li class="nav-item header-text"><a class="nav-link" href="{% url 'profile_lookup' %}">Profile Lookup</a></li>
+                    <li class="nav-item header-text">
+                        <a class="nav-link {% if request.path == '/user_activities/' or request.path == '/activity/' %}active{% endif %}" href="{% url 'user_activities' %}">Activities</a>
+                    </li>
+                    <li class="nav-item header-text">
+                        <a class="nav-link {% if request.path == '/challenges/' %}active{% endif %}" href="{% url 'challenges' %}">Challenges</a>
+                    </li>
+                    <li class="nav-item header-text">
+                        <a class="nav-link {% if request.path == '/leaderboard/' %}active{% endif %}" href="{% url 'leaderboard' %}">Leaderboard</a>
+                    </li>
+                    <li class="nav-item header-text">
+                        <a class="nav-link {% if request.path == '/profile_lookup/' %}active{% endif %}" href="{% url 'profile_lookup' %}">Profile Lookup</a>
+                    </li>
                 </ul>
             </div>
             <div class="d-flex">
-                <a class="notifications"><img src="{% static 'images/bell.jpg' %}" alt="Notification"></a>
-                <!-- Notification Popup -->
-                <div id="notifPopup" class="more-ot-alert">
-                    <span class="close-ot-alert">&times;</span>
-                    <!-- Уведомления будут добавлены сюда динамически -->
+                <div class="notification-container">
+                    <a class="notifications position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% static 'images/bell.jpg' %}" alt="Notification">
+                        <span class="notification-badge d-none">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-notifications dropdown-menu-end p-2">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Notifications</h6>
+                            <span class="mark-all-read">Mark all as read</span>
+                        </div>
+                        <div class="notifications-list">
+                            <!-- Уведомления будут загружаться здесь -->
+                        </div>
+                    </ul>
                 </div>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Sign Out</button>
+                    <button type="submit" class="btn btn-gradient">Sign Out</button>
                 </form>
             </div>
         </nav>
@@ -85,11 +155,138 @@
             </div>
         </div>
     </footer>
-    {% block extra_js %}
-        <script src="{% static 'js/notifications.js' %}"></script>
-        <script src="{% static 'js/user.js' %}"></script>
+    <script src="{% static 'js/user.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Функция для загрузки уведомлений
+                function loadNotifications() {
+                    fetch('/get_notifications/')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.notifications) {
+                                updateNotificationsUI(data.notifications);
+                            }
+                        })
+                        .catch(error => console.error('Error loading notifications:', error));
+                }
+                
+                // Функция для обновления интерфейса уведомлений
+                function updateNotificationsUI(notifications) {
+                    const notificationsList = document.querySelector('.notifications-list');
+                    const badge = document.querySelector('.notification-badge');
+                    
+                    // Обновляем бейдж с количеством непрочитанных
+                    const unreadCount = notifications.filter(n => !n.is_read).length;
+                    if (unreadCount > 0) {
+                        badge.textContent = unreadCount;
+                        badge.classList.remove('d-none');
+                    } else {
+                        badge.classList.add('d-none');
+                    }
+                    
+                    // Очищаем список уведомлений
+                    notificationsList.innerHTML = '';
+                    
+                    if (notifications.length === 0) {
+                        notificationsList.innerHTML = '<div class="text-center py-3">No notifications</div>';
+                        return;
+                    }
+                    
+                    notifications.forEach(notification => {
+                        const notificationItem = document.createElement('div');
+                        notificationItem.className = `notification-item ${notification.is_read ? '' : 'unread'}`;
+                        notificationItem.innerHTML = `
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-message">${notification.message}</div>
+                                <button class="btn btn-sm btn-link mark-as-read" data-id="${notification.id}" style="display: ${notification.is_read ? 'none' : 'block'}">
+                                    <small>Mark as read</small>
+                                </button>
+                            </div>
+                            <div class="notification-time">${notification.timestamp}</div>
+                        `;
+                        notificationsList.appendChild(notificationItem);
+                    });
+                }
+                
+                // Обработчик для пометки уведомления как прочитанного
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('.mark-as-read')) {
+                        const notificationId = e.target.closest('.mark-as-read').getAttribute('data-id');
+                        markNotificationAsRead(notificationId);
+                    }
+                    
+                    if (e.target.closest('.mark-all-read')) {
+                        markAllNotificationsAsRead();
+                    }
+                });
+                
+                // Функция для пометки уведомления как прочитанного
+                function markNotificationAsRead(notificationId) {
+                    fetch('/mark_notification_as_read/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        },
+                        body: JSON.stringify({ notification_id: notificationId })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            loadNotifications();
+                        }
+                    })
+                    .catch(error => console.error('Error marking notification as read:', error));
+                }
+                
+                // Функция для пометки всех уведомлений как прочитанных
+                function markAllNotificationsAsRead() {
+                    fetch('/mark_notification_as_read/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        },
+                        body: JSON.stringify({ mark_all: true })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            loadNotifications();
+                        }
+                    })
+                    .catch(error => console.error('Error marking all notifications as read:', error));
+                }
+                
+                // Вспомогательная функция для получения CSRF токена
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+                
+                // Загружаем уведомления при загрузке страницы
+                loadNotifications();
+                
+                // Обновляем уведомления каждые 30 секунд
+                setInterval(loadNotifications, 30000);
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    {% block extra_js %}
+        
     {% endblock %}
 </body>
 </html>
