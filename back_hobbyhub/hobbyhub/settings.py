@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+import dj_database_url
+from decouple import config
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nub2-er(f#0ty4030vj2$$&ocl!mcs$nlu)f24mka0k&70yod#'
+# SECRET_KEY = 'django-insecure-nub2-er(f#0ty4030vj2$$&ocl!mcs$nlu)f24mka0k&70yod#'
 
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS =["127.0.0.1", "localhost", '192.168.3.73','192.168.0.14']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000', 'http://192.168.3.73:8000', 'http://192.168.0.14:8000']
+CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1:8000', 'https://localhost:8000', 'http://192.168.3.73:8000', 'http://192.168.0.14:8000']
 
 # CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
 
@@ -72,25 +75,19 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
+SOCIAL_AUTH_MICROSOFT_GRAPH_KEY = config('SOCIAL_AUTH_MICROSOFT_GRAPH_KEY')
+SOCIAL_AUTH_MICROSOFT_GRAPH_SECRET = config('SOCIAL_AUTH_MICROSOFT_GRAPH_SECRET')
 
-# Настройки для Google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'ваш-client-id-google'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ваш-client-secret-google'
+SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
 
-# Настройки для Microsoft
-SOCIAL_AUTH_MICROSOFT_GRAPH_KEY = 'ваш-client-id-microsoft'
-SOCIAL_AUTH_MICROSOFT_GRAPH_SECRET = 'ваш-client-secret-microsoft'
-
-# Настройки для Facebook
-SOCIAL_AUTH_FACEBOOK_KEY = 'ваш-app-id-facebook'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'ваш-app-secret-facebook'
-
-# Настройки для Apple
-SOCIAL_AUTH_APPLE_ID_CLIENT = 'ваш-client-id-apple'
-SOCIAL_AUTH_APPLE_ID_TEAM = 'ваш-team-id-apple'
-SOCIAL_AUTH_APPLE_ID_KEY = 'ваш-key-id-apple'
-SOCIAL_AUTH_APPLE_ID_SECRET = 'ваш-secret-key-apple'
+SOCIAL_AUTH_APPLE_ID_CLIENT = config('SOCIAL_AUTH_APPLE_ID_CLIENT')
+SOCIAL_AUTH_APPLE_ID_TEAM = config('SOCIAL_AUTH_APPLE_ID_TEAM')
+SOCIAL_AUTH_APPLE_ID_KEY = config('SOCIAL_AUTH_APPLE_ID_KEY')
+SOCIAL_AUTH_APPLE_ID_SECRET = config('SOCIAL_AUTH_APPLE_ID_SECRET')
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
@@ -142,13 +139,16 @@ WSGI_APPLICATION = 'hobbyhub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+    'default': dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -189,13 +189,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     (BASE_DIR / 'events/static/'),  
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
 
 AUTH_USER_MODEL = "events.Company"
 LOGIN_REDIRECT_URL = "/"
