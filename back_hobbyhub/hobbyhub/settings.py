@@ -29,9 +29,9 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS =["127.0.0.1", "localhost", '192.168.3.73','192.168.0.14']
+ALLOWED_HOSTS =['hobbyhub.onrender.com',"127.0.0.1", "localhost"]
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
-CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1:8000', 'https://localhost:8000', 'http://192.168.3.73:8000', 'http://192.168.0.14:8000']
+CSRF_TRUSTED_ORIGINS = ['https://hobbyhub.onrender.com','https://127.0.0.1:8000', 'https://localhost:8000']
 
 # CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
 
@@ -104,6 +104,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -134,6 +135,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hobbyhub.wsgi.application'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Database
