@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Gilroy-Medium', sans-serif;
+    background-color: #F5F5F5;
+}
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+
+/*table*/
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+.buttons button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #333;
+}
+
+.activeh {
+    background-color: #FFA500 !important;
+}
+
+
+.employees-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.employees-table th, .employees-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+.hidden{
+    display: none;
+}
+
+.approve-btn {
+    background-color: green;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.remove-btn {
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 7px;
+}
+.delete-btn{
+    padding: 7px;
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .employees-table {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .employees-table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .employees-table th, .employees-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    #action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #action-buttons button {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .buttons button {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .employees-table th, .employees-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #action-buttons button {
+        width: 100%;
+    }
+}

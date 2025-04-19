@@ -1,0 +1,133 @@
+[
+        {
+            "model":"events.event",
+            "pk":1,
+            "fields":{
+                "title": "Photography Walk",
+                "description": "Explore and capture stunning moments with a group of photography enthusiasts.",
+                "location": "Botanical Garden",
+                "date": "2025-05-10",
+                "time": "16:00:00",
+                "hobby_type": "Photography ",
+                "image": "event_images/photo_walk.JPG"
+            }
+        },
+        {
+            "model":"events.event",
+            "pk":2,
+            "fields":{
+                "title": "DIY Craft Session",
+                "description": "Get hands-on with DIY crafts like candle-making, scrapbooking, and more.",
+                "location": "Art Studio",
+                "date": "2025-05-13",
+                "time": "18:30:00",
+                "hobby_type": "Crafting ",
+                "image":"event_images/diy_craft.JPG"
+            }
+        },
+    
+        {
+            "model": "events.event",
+            "pk": 3,
+            "fields": {
+                "title": "Coding for Fun",
+                "description": "Work on a fun coding challenge or build a mini-project with peers.",
+                "location": "Tech Hub",
+                "date": "2025-05-15",
+                "time": "18:30:00",
+                "hobby_type": "Technology",
+                "image": "event_images/code_for_fun.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 4,
+            "fields": {
+                "title": "Guitar Jam",
+                "description": "Join fellow music lovers for a casual jam session—bring your instrument!",
+                "location": "Art Studio",
+                "date": "2025-05-25",
+                "time": "17:30:00",
+                "hobby_type": "Music",
+                "image": "event_images/guitar_jam.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 5,
+            "fields": {
+                "title": "Cooking Challenge",
+                "description": "Cook a dish using surprise ingredients and compete for the best recipe!",
+                "location": "Office Kitchen",
+                "date": "2025-05-28",
+                "time": "18:00:00",
+                "hobby_type": "Cooking",
+                "image": "event_images/cook_chal.png"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 6,
+            "fields": {
+                "title": "Creative Writing Club",
+                "description": "Share stories, poetry, and writing tips with fellow writers.",
+                "location": "Library Lounge",
+                "date": "2025-05-30",
+                "time": "18:00:00",
+                "hobby_type": "Writing",
+                "image": "event_images/creative_writing.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 7,
+            "fields": {
+                "title": "Origami Workshop",
+                "description": "Learn the art of paper folding and create intricate origami designs.",
+                "location": "Art Studio",
+                "date": "2025-06-09",
+                "time": "13:00:00",
+                "hobby_type": "Crafting",
+                "image": "event_images/origami.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 8,
+            "fields": {
+                "title": "Gardening Meetup",
+                "description": "Connect with nature by planting and learning gardening techniques.",
+                "location": "Rooftop Garden",
+                "date": "2025-06-12",
+                "time": "09:00:00",
+                "hobby_type": "Gardening",
+                "image": "event_images/gardening.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 9,
+            "fields": {
+                "title": "Dance Workshop",
+                "description": "Learn a new dance style and enjoy an energetic session with fellow dancers.",
+                "location": "Dance Studio",
+                "date": "2025-06-14",
+                "time": "19:00:00",
+                "hobby_type": "Dance",
+                "image": "event_images/dance_workshop.JPG"
+            }
+        },
+        {
+            "model": "events.event",
+            "pk": 10,
+            "fields": {
+                "title": "Hiking Adventure",
+                "description": "Explore local trails and enjoy nature with fellow hikers.",
+                "location": "Mountain Trail",
+                "date": "2025-06-18",
+                "time": "08:00:00",
+                "hobby_type": "Outdoor Adventure",
+                "image": "event_images/hiking.JPG"
+            }
+        }
+]
