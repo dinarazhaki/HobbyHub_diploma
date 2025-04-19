@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+
+.container-act {
+    width: 100%;
+    display: flex;
+    margin-top: 100px;
+    padding-top: 40px;
+}
+
+.filter-panel {
+    max-width: 36%;
+    margin-left: 50px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.filter-panel h4, .filter-panel h5 {
+    margin-bottom: 15px;
+}
+
+.filter-panel ul {
+    list-style: none;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+.filter-panel li {
+    margin-bottom: 7px;
+}
+
+/* Style checkboxes */
+input[type="checkbox"] {
+    appearance: none; /* Removes default styling */
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+/* Gradient Background when Checked */
+input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    border: none;
+}
+
+
+.event-list {
+    width: 58%;
+    margin-left: 30px;
+    padding-left: 30px;
+}
+
+.event-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.event-card:hover {
+    border-color: #ff007f;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.event-image {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.event-details {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.event-details h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-details p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    opacity: 0.8;
+}
+
+.event-card:hover .icon {
+    opacity: 1;
+}

@@ -1,0 +1,830 @@
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), 
+         url('fonts/Gilroy-Medium.woff') format('woff'), 
+         url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url('fonts/Gilroy-Bold.woff2') format('woff2');
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #FF6A00;
+    --secondary-color: #FFC300;
+    --accent-color: #E10098;
+    --dark-color: #333333;
+    --light-color: #F5F5F5;
+    --white: #FFFFFF;
+    --gray: #9F9F9F;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body{
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+
+.container-act {
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+    padding-top: 40px;
+}
+
+.filter-panel {
+    max-width: 36%;
+    margin-left: 50px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.filter-panel h4, .filter-panel h5 {
+    margin-bottom: 15px;
+}
+
+.filter-panel ul {
+    list-style: none;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+.filter-panel li {
+    margin-bottom: 7px;
+}
+
+
+.filter-panel input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.filter-panel input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+    border-color: transparent;
+}
+.filter-panel input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.filter-panel input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.event-list {
+    width: 80%;
+    margin-left: 30px;
+    padding-left: 30px;
+}
+
+.event-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.event-card:hover {
+    border-color: #ff007f;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.event-image {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.event-details {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.event-details h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-details p {
+    margin: 8px 10;
+    font-size: 15px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    opacity: 0.8;
+}
+
+.event-card:hover .icon {
+    opacity: 1;
+}
+
+/*Symbats section*/
+ /* Button */
+ .create-event-btn {
+    background: #FF6A00;
+    color: #fff; /* White text */
+    font-family: 'Gilroy-Bold', sans-serif;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: solid black 1px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.create-event-btn:hover {
+    background-color: #FF6A00;
+    transform: scale(1.05);
+}
+
+.create-event-btn:active {
+    background-color: #E65C00;
+    transform: scale(0.98);
+}
+/* Button */
+.edit-event-btn {
+    background-color: cornflowerblue; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.edit-event-btn:hover {
+    background-color: cornflowerblue;
+    transform: scale(1.05);
+}
+
+.edit-event-btn:active {
+    background-color: cornflowerblue;
+    transform: scale(0.98);
+}
+.delete-event-btn {
+    background-color: red; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.delete-event-btn:hover {
+    background-color: red;
+    transform: scale(1.05);
+}
+
+.delete-event-btn:active {
+    background-color: red;
+    transform: scale(0.98);
+}
+.participants-list-btn {
+    background-color: #666; 
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    margin-bottom: 30px;
+}
+
+.participants-list-btn:hover {
+    background-color: #666;
+    transform: scale(1.05);
+}
+
+.participants-list-btn:active {
+    background-color: #666;
+    transform: scale(0.98);
+}
+
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#editEventForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+
+
+#editEventForm label,
+#editEventForm input,
+#editEventForm select,
+#editEventForm textarea {
+    width: 48%;
+}
+
+
+
+/* Two-Column Form */
+#eventForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#eventForm label,
+#eventForm input,
+#eventForm select,
+#eventForm textarea {
+    width: 48%;
+}
+
+textarea {
+    width: 100%;
+}
+
+/* Input Fields */
+input, select, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background-color:linear-gradient(to right, red, #ff69b4);
+}
+
+/* ===== QR Modal Specific Styles ===== */
+.qr-live {
+    text-align: center;
+}
+
+.qr-container {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    display: inline-block;
+}
+
+#qr-code {
+    width: 200px;
+    height: 200px;
+}
+
+#qr-timer {
+    margin-top: 0.5rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Confirmation Popup */
+.confirmation-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Fancy Checkmark */
+.checkmark {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #28a745;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    position: relative;
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    border: 3px solid #28a745;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    opacity: 0;
+    animation: drawCheck 0.4s ease-in-out forwards 0.3s;
+}
+
+/* Checkmark Animation */
+@keyframes drawCheck {
+    from { opacity: 0; transform: scale(0.5) rotate(-45deg); }
+    to { opacity: 1; transform: scale(1) rotate(-45deg); }
+}
+
+/* Fade-in effect */
+.show-confirmation {
+    display: block;
+    opacity: 1;
+    position: fixed;
+}
+
+/* Buttons */
+.confirmation-box button {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.confirmation-box button:hover {
+    background: darkorange;
+}
+
+
+
+#hobby-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+#edit-hobby-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.hobby-option {
+    background: #f2f2f2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+
+.hobby-option:hover {
+    background: #ddd;
+}
+
+.hobby-option.selected {
+    background-color: #ff69b4; /* Orange when selected */
+    color: white;
+    border: 1px solid #ff69b4;
+}
+
+
+
+
+
+/*Responsive Design for Creation Part*/
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .container-act {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        padding-top: 20px;
+    }
+
+    .filter-panel {
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+    }
+
+    .event-list {
+        width: 90%;
+        margin: 0 auto;
+        padding-left: 0;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .event-image {
+        width: 100%;
+    }
+
+    .event-details {
+        padding-left: 0;
+        margin-top: 15px;
+    }
+
+    .event-details p {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .filter-panel {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .event-list {
+        width: 95%;
+    }
+
+    .event-card {
+        padding: 15px;
+    }
+
+    .create-event-btn {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-height: 75vh;
+    }
+
+    #eventForm {
+        flex-direction: column;
+    }
+
+    #eventForm label,
+    #eventForm input,
+    #eventForm select,
+    #eventForm textarea {
+        width: 100%;
+    }
+
+    .confirmation-box {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .filter-panel {
+        padding: 15px;
+    }
+
+    .event-card {
+        padding: 10px;
+    }
+
+    .event-details h3 {
+        font-size: 18px;
+    }
+
+    .event-details p {
+        font-size: 14px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .create-event-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .confirmation-box {
+        width: 90%;
+    }
+}
+
+
+
+
+.game-code-container {
+    margin-top: 20px;
+    border: 2px solid #FF6A00;
+    padding: 30px 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+.game-code-container h3 {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.digit {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #666;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    background: white;  /* Ensure a visible background */
+    color: red; /* Make digits visible */
+    transition: transform 0.2s ease-in-out;
+}
+
+.digit:hover {
+    transform: scale(1.2);
+}
+
+.code-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.attendance-table{
+    margin-top: 50px;
+}
+
+
+
+/*Live Game part*/
+.live_game_btn{
+    background: linear-gradient(to right, #FF6EC7, #FFD166);
+    color: #fff; /* White text */
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 30px;   
+}
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 700px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+.close-btn:hover {
+    color: red;
+}
+
+/* Input Fields */
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Game Form Spacing */
+.game-form {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Button Styles */
+.create-btn, .add-game-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.create-btn {
+    background: #28a745;
+    color: white;
+    margin-top: 10px;
+}
+.create-btn:hover {
+    background: #218838;
+}
+.add-game-btn {
+    background: #007bff;
+    color: white;
+}
+.add-game-btn:hover {
+    background: #0056b3;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+    .container-act {
+        flex-direction: column;
+    }
+    
+    .filter-panel {
+        position: static;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-act {
+        padding: 1rem;
+        margin-top: 5rem;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-image {
+        flex: 0 0 auto;
+        height: 200px;
+        width: 100%;
+    }
+    
+    .event-actions {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .form-group label,
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+    }
+    
+    .event-details h3 {
+        font-size: 1.1rem;
+    }
+    
+    .event-details p {
+        font-size: 0.8rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,130 @@
+.challenges{
+    background-color: #f8f8f8;
+    margin-top: 150px;
+    padding: 20px;
+    align-items: center;
+}
+
+h2 {
+    margin-left: 30px;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.all_challenges {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 50px 0;
+}
+.right_challenges{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.challenge-card {
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.activities{
+    margin-left: 50px;
+}
+
+.activities ul {
+    list-style: none;
+    padding: 0;
+}
+
+.activities li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.score {
+    width: 80%;
+    height: 70%;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin: 10px auto;
+    position: relative;
+}
+
+.progress-fill {
+    width: 10%;
+    height: 100%;
+    background: orange;
+    border-radius: 5px;
+}
+
+.progress-text {
+    font-size: 14px;
+}
+
+#addScore {
+    background: orange;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.connect {
+    width: 80%;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.connect-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.connect-buttons button {
+    border: 1px solid #555;
+    padding: 6px 12px;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.not-completed {
+    background-color: #2e2e2e; /* Darker background */
+    color: #aaa; /* Light gray text */
+    opacity: 0.7; /* Slight transparency */
+}
+
+.not-completed .progress-fill {
+    background-color: #555; /* Darker progress bar */
+}
+.no-progress {
+    background-color: #1c1c1c; /* Even darker background */
+    color: #777; /* Faded text */
+    opacity: 0.6; /* More transparency */
+}
+
+.no-progress .progress-fill {
+    background-color: #444; /* Darker progress bar */
+}

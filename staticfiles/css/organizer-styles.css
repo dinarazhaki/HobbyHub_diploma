@@ -1,0 +1,401 @@
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('fonts/Gilroy-Medium.woff2') format('woff2'), url('fonts/Gilroy-Medium.woff') format('woff'), url('fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Gilroy-Medium', sans-serif;
+    background-color: #F5F5F5;
+}
+body h1, h2, h3, h4,h5,h6, header{
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+p{
+    color: #000000;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+
+/*Header*/
+.header{
+    background-color: gainsboro;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: bold;
+}
+
+
+.btn-gradient {
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-gradient:hover {
+    opacity: 0.8;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    padding-left: 50px;
+}
+
+
+/*Footer*/
+
+.footer {
+    height: 450px;
+    background: #FFFFFF;
+    color: black;
+    padding: 100px 0;
+}
+.footer h2{
+    font-size: 30px;
+}
+.footer h5 {
+    padding-left: 80px;
+    color: #FFC300;
+}
+
+.footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column; 
+    padding-left: 50px; 
+}
+
+.footer ul li {
+    margin-bottom: 13px; 
+}
+
+.footer ul li a {
+    color: #9F9F9F;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+.footer ul li a:hover{
+    color: #000000;
+}
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url('fonts/Gilroy-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Gilroy-SemiBold';
+    src: url('fonts/Gilroy-SemiBold.woff2') format('woff2');
+}
+.your-activities{
+    padding: 100px;
+    background-color: #FFFFFF;
+}
+.title {
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.activity-card {
+    display: flex;
+    align-items: center;
+    background: #F5F5F5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.activity-img {
+    width: 200px;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 50px;
+}
+
+.activity-info h5 {
+    font-family: 'Gilroy-Bold', sans-serif;
+    margin: 0;
+    font-size: 18px;
+}
+
+.activity-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.btn {
+    font-size: 14px;
+    margin-right: 5px;
+}
+.notifications img{
+    width:30px;
+    height:30px;
+    margin-right: 25px;
+    margin-top: 6px;
+}
+.notifications img:hover{
+    opacity: 0.8;
+}
+
+
+
+
+
+.event-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #e0e0e0;
+}
+
+/* Hover effect */
+.event-card:hover {
+    border-color: #ff007f;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 20px;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container */
+.event-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.05);
+}
+
+/* Event details */
+.event-details {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.event-details h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-details p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Icons */
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.event-card:hover .icon {
+    opacity: 1;
+}
+
+
+/* Tablets and Small Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .activity-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .activity-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.5rem;
+        padding-left: 20px;
+    }
+
+    .notifications img {
+        width: 25px;
+        height: 25px;
+        margin-right: 15px;
+    }
+
+    .activity-card {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+
+    .activity-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .event-card {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .event-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .event-details h3 {
+        font-size: 18px;
+    }
+
+    .event-details p {
+        font-size: 14px;
+    }
+
+    .footer {
+        height: auto;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .footer h2 {
+        font-size: 24px;
+    }
+
+    .footer h5 {
+        padding-left: 0;
+    }
+
+    .footer ul {
+        padding-left: 0;
+        align-items: center;
+    }
+
+    .footer ul li {
+        text-align: center;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .activity-card {
+        padding: 10px;
+    }
+
+    .activity-info h5 {
+        font-size: 16px;
+    }
+
+    .activity-info p {
+        font-size: 12px;
+    }
+
+    .event-details h3 {
+        font-size: 16px;
+    }
+
+    .event-details p {
+        font-size: 12px;
+    }
+
+    .btn-gradient {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .footer h2 {
+        font-size: 20px;
+    }
+
+    .footer ul li a {
+        padding-left: 0;
+    }
+}
+
+
+/* Добавьте эти стили в organizer-styles.css */
+.navbar {
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 500;
+    margin: 0 10px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #e79d28;
+}
+
+.header-text {
+    font-family: 'Gilroy-SemiBold', sans-serif;
+    font-size: 18px;
+}

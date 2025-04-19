@@ -1,0 +1,311 @@
+body {
+    font-family: 'Gilroy-Medium', sans-serif;
+    text-align: center;
+    background-color: #f0f0f5;
+    color: #333;
+    margin-top: 150px;
+    padding: 0;
+}
+
+.leaderboard {
+    margin: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rank-container {
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #e01a1a, #eed324);
+    padding: 20px 30px;
+    border-radius: 10%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: fit-content;
+    max-width: 400px;
+}
+.rank-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.rank-number {
+    margin-left: 4px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+.leaderboard-container {
+    margin-top: 30px;
+    width: 90%;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, #ff6600, #e10098);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#leaderboard-table th {
+    background: #ff6600;
+    color: white;
+    font-weight: bold;
+}
+
+#leaderboard-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.prize-pyramid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.prize {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.prize:hover {
+    transform: translateY(-5px);
+}
+
+.prize img {
+    width: 120px;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+.prize_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.prize_buttons button {
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#addprize {
+    background: #1CB0F6;
+    color: white;
+}
+
+#editprize {
+    background: tomato;
+    color: white;
+}
+
+#addprize:hover, #editprize:hover {
+    transform: scale(1.05);
+}
+
+#countdown, #countdown_text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4500;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .leaderboard-container {
+        width: 95%;
+    }
+    .prize img {
+        max-width: 60px;
+    }
+}
+/* Custom Edit Prize Button */
+.edit-prize-custom {
+    position: relative;
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    overflow: hidden;
+}
+
+.edit-prize-shadow {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.edit-prize-edge {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: #222;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.edit-prize-front {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #28a745, #218838);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-prize-custom:hover .edit-prize-front {
+    transform: scale(1.05);
+}
+
+.edit-prize-custom:active .edit-prize-front {
+    transform: scale(0.98);
+}
+
+.edit-prize-custom:hover .edit-prize-shadow {
+    top: 3px;
+    left: 3px;
+}
+
+/* Custom Delete Prize Button */
+.delete-prize-custom {
+    position: relative;
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    overflow: hidden;
+}
+
+.delete-prize-shadow {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.delete-prize-edge {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: #222;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.delete-prize-front {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #dc3545, #c82333);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.delete-prize-custom:hover .delete-prize-front {
+    transform: scale(1.05);
+}
+
+.delete-prize-custom:active .delete-prize-front {
+    transform: scale(0.98);
+}
+
+.delete-prize-custom:hover .delete-prize-shadow {
+    top: 3px;
+    left: 3px;
+}
+
+.rank-icon{
+    width: 70px;
+    gap:10px;
+    margin-bottom: 20px;
+}
+/* First place - Gold */
+tbody tr:nth-child(1) {
+    color: #FFD700; /* Brighter gold */
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(215, 213, 58, 0.682); /* Glowing effect */
+}
+
+/* Second place - Silver */
+tbody tr:nth-child(2) {
+    color: #181818; /* True silver */
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(250, 107, 107, 0.7); /* Soft glow */
+}
+
+/* Third place - Bronze */
+tbody tr:nth-child(3) {
+    color: #CD7F32; /* Warmer, richer bronze */
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(205, 50, 50, 0.7); /* Subtle glow */
+}

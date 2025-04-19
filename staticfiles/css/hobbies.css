@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 100px auto;
+}
+
+.logo {
+    
+    font-size: 28px;
+    font-weight: 600;
+    color: #ff1493;
+}
+
+.logo span {
+    color: #FFA500;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff1493, #FFA500);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+}
+
+#hobbies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.hobby-btn {
+    background: #fff;
+    border: 1px solid #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hobby-btn:hover {
+    background: #f0f0f0;
+}
+
+.hobby-btn.selected {
+    background: linear-gradient(90deg, #ff1493, #FFA500);
+    color: white;
+    border-color: #007bff;
+}
+
+
+
+.buttons {
+    margin-top: 20px;
+}
+
+.skip-btn, .continue-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+}
+
+.skip-btn {
+    background: #fff;
+    border: 1px solid #333;
+}
+
+.continue-btn {
+    background: linear-gradient(90deg, #ff1493, #FFA500);
+    color: white;
+}
+
+
+
+/* Tablets and Small Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 500px;
+        margin: 80px auto;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .hobby-btn {
+        padding: 7px 14px;
+        font-size: 14px;
+    }
+
+    .skip-btn, .continue-btn {
+        padding: 7px 18px;
+        font-size: 13px;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        margin: 60px auto;
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .hobbies-container {
+        gap: 8px;
+    }
+
+    .hobby-btn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .skip-btn, .continue-btn {
+        font-size: 12px;
+        padding: 6px 16px;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        max-width: 95%;
+        margin: 50px auto;
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+
+    .hobbies-container {
+        gap: 6px;
+    }
+
+    .hobby-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .skip-btn, .continue-btn {
+        font-size: 11px;
+        padding: 5px 14px;
+    }
+}

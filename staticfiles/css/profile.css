@@ -1,0 +1,967 @@
+.mainpartpro{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: -50px;
+    margin-bottom: 50px;
+}
+.mainpartpro img{
+    border: 10px 10px 0px 0px;
+}
+
+label{
+    color: #9F9F9F;
+}
+
+.pro-act-set-tab i, .pro-set-tab i {
+    font-size: 16px;
+}
+.pro-act-set-tab{
+    background: #F5F5F5;
+    color: #000000;
+    margin-left: 25px;
+    border-radius: 25px 0px 0px 25px;
+    height: 30px;
+    font-size: 16px;
+
+}
+
+.sidebar {
+    margin-top: 50px;
+    margin-left: -150px;
+    height: 335px;
+    background: linear-gradient(90deg, #E10098 0%, #FF6A00 50%, #FFC300 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 0px 45px 45px 0px;
+    text-align: center;
+}
+
+.pro-set-img{
+    width: 18px;
+    height: 20px;
+    border-radius: 0px;
+}
+
+
+.user_det {
+    display: flex;
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    border-radius: 25px 0px 0px 25px;
+    padding: 0px 100px 0px 100px;
+    max-width: 1200px;
+    height: 80px;
+    margin: 30px auto;
+    position: relative;
+}
+
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab a, .pro-set-tab a{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+}
+
+.tab_act a{
+    margin-left: 100px;
+}
+.tab_act_ach a{
+    margin-left: -50px;
+}
+.active-tab {
+    margin-top: 22px;
+    background: #F5F5F5;
+    color: black;
+    border-radius: 20px 20px 0px 0px;
+    padding: 15px;
+    height: 60px;
+}
+
+.act-active-tab {
+    margin-top: 22px;
+    background: #F5F5F5;
+    color: black;
+    border-radius: 20px 20px 0px 0px;
+    padding: 15px;
+    height: 60px;
+}
+.active-tab a,.act-active-tab a, .pro-act-set-tab a{
+    text-decoration: none;
+    color: black;
+}
+
+/* Form Section */
+.form-container {
+    width: 90%;
+    margin-right: 20px;
+    padding: 20px;
+    text-align: left;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    display: block;
+    color: #666;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #d400a5;
+}
+
+.input-field {
+    margin-top: 20px;
+    position: relative;
+    width: 48%;
+}
+
+.input-field i {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    color: gray;
+}
+
+input{
+    margin-top: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Hobbies Section */
+.hobbies {
+    width: 90%;
+    margin-right: 20px;
+    padding: 20px;
+    text-align: left;
+}
+
+.hobbies span {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hobby-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.hobby-btn:nth-child(1) { border-color: #d400a5; color: #d400a5; }
+.hobby-btn:nth-child(2) { border-color: #ff6600; color: #ff6600; }
+.hobby-btn:nth-child(3) { border-color: #ffcc00; color: #ffcc00; }
+.hobby-btn:nth-child(4) { border-color: #ff0077; color: #ff0077; }
+.hobby-btn:nth-child(5) { border-color: #ff9900; color: #ff9900; }
+
+.hobby-btn:hover {
+    background: #ffcc00;
+    color: white;
+    border-color: transparent;
+}
+.points {
+    font-size: 1.2rem;
+}
+.banner img {
+    height: 150px;
+    object-fit: cover;
+}
+.activity-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.activity-card:hover {
+    transform: scale(1.05);
+}
+
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Event card styling */
+.event-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gradient border effect */
+.event-card:hover {
+    border-color: #d400a5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 18px;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Image container */
+.event-image {
+    width: 110px;
+    height: 110px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Event details */
+.event-details {
+    padding-left: 18px;
+    z-index: 1;
+}
+
+.event-details h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.event-details p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #444;
+    display: flex;
+    align-items: center;
+}
+
+/* Icons */
+.icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+
+.earned-activity-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px;
+}
+
+/* Earned Activity Box */
+.earned-activity-box {
+    background: #fff;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 15px;
+    width: 260px;
+    text-align: center;
+    
+}
+
+/* Hover Effect */
+.earned-activity-box:hover {
+    border-color: #d400a5;
+    border-width: 1px;
+    border-style: solid;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Earned Reward Text */
+.earned-reward-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Earned Diamond Icon */
+.earned-reward-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* Earned Activity Image */
+.earned-activity-image {
+    width: 100%;
+    border-radius: 10px;
+    height: 170px;
+    object-fit: cover;
+}
+
+/* Title */
+.earned-activity-container h3 {
+    font-size: 20px;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+/* Earned Activity Category */
+.earned-activity-category {
+    font-size: 15px;
+    color: #666;
+}
+
+/* Earned Activity Location */
+.earned-activity-location {
+    font-size: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Earned Location Icon */
+.earned-location-icon {
+    width: 18px;
+    height: 18px;
+}
+
+
+.settings-nav {
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.settings-nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.settings-nav .active {
+    background: white;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+/* Profile Section */
+.profile-section {
+    text-align: left;
+    margin: 30px 0px;
+    margin-left: 100px;
+}
+
+.profile-picture img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #d400a5;
+}
+.form-container{
+    margin-left: 80px;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: left;
+    margin: 20px 0px 0px 0px;
+    margin-left: 100px;
+}
+
+/* Flexbox wrapper to align items in a row */
+.profile-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between items */
+}
+
+/* Profile Picture */
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.profile-picture img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #d400a5;
+}
+
+.profile-picture p {
+    margin-left: 25px;
+    margin-top: 5px;
+    font-size: 14px;
+    color: gray;
+    cursor: pointer;
+}
+
+/* Buttons */
+.profile-actions {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.upload-btn {
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    border: none;
+    padding: 8px 13px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: -35px;
+}
+
+.removee-btn {
+    background: white;
+    border: 2px solid #444;
+    padding: 8px 13px;
+    color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -35px;
+}
+
+/* Input Fields */
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.input-group input {
+    border: none;
+    flex: 1;
+    padding: 10px;
+}
+
+.input-group .input-group-text {
+    background: white;
+    border: none;
+}
+
+/* Hobbies Section */
+.hobbies-section {
+    width: 80%;
+    text-align: left;
+    margin: 30px 0;
+    margin-left: 90px;
+
+}
+
+.hobbies-edit {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 10px;
+}
+
+.hobbies-edit span {
+    border: 2px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+.hobbies-edit span:hover {
+    border: 2px solid #d400a5 ;
+    background: #d400a5;
+    color: white;
+}
+
+.hobbies-edit .active {
+    border: 2px solid #d400a5 ;
+    background: #d400a5;
+    color: white;
+}
+
+/* Update Profile Button */
+.update-btn-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.update-profile-btn {
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.update-profile-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/*notification-pref*/
+
+.notification-container {
+    width: 100%;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.notification-container h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 14px;
+    color: gray;
+}
+
+.notification-container h3 {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.sub-description {
+    font-size: 14px;
+    color: gray;
+}
+
+.notification-option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+/* Custom checkbox styling */
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Checked checkbox */
+.notification-container input[type="checkbox"]:checked + label .custom-checkbox {
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    border: none;
+    position: relative;
+}
+
+.notification-container input[type="checkbox"]:checked + label .custom-checkbox::after {
+    content: "✔";
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    top: 2px;
+    left: 4px;
+}
+
+.notification-container label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+.notification-text {
+    display: flex;
+    flex-direction: column; /* Places items in two rows */
+} 
+
+.notification-container strong {
+    font-size: 16px;
+}
+
+.notification-container p {
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+}
+
+.save-btn {
+    background: linear-gradient(to right, #d400a5, #ffb400);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    width: 100px;
+}
+
+/*language options*/
+.language-section {
+    text-align: left;
+    margin: 20px;
+    padding-top: 20px;
+}
+.language-section h3{
+    margin-top: 30px;
+}
+.language-container {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.language-btn {
+    padding: 10px 25px;
+    border: 2px solid #ccc;
+    background: white;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    margin-right: 20px;
+}
+
+.language-btn.active {
+    border: 2px solid transparent;
+    background: #d400a5;
+    color: white;
+}
+.language-btn:hover {
+    border: 2px solid transparent;
+    background: #d400a5;
+    color: white;
+}
+
+.language-section .save-btn{
+    margin-top: 40px;
+    margin-left: 400px;
+}
+
+/*privacy settings*/
+.account-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    margin-left: 50px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 40px; /* Matches spacing in the photo */
+    margin-bottom: 20px;
+}
+
+.account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    padding: 20px 0; /* Adjusted for better spacing */
+    border-bottom: 1px solid #ddd;
+}
+
+.account-item span {
+    font-size: 16px;
+}
+
+.account-btn {
+    padding: 8px 18px;
+    border: 2px solid #ccc;
+    background: white;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.account-btn.verified {
+    color: #555;
+    border: 2px solid #ccc;
+    cursor: default;
+}
+
+
+
+.tab-section {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.form-control {
+    border-radius: 10px;
+}
+.btn-custom {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border-radius: 10px;
+}
+.hobbies button {
+    border: 1px solid #ff4b2b;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin: 5px;
+    background: white;
+    color: #ff4b2b;
+}
+
+a:hover{
+    color: #666;
+}
+
+.modall {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .user_det {
+        padding: 0 40px;
+    }
+
+    .form-container, .hobbies, .hobbies-section {
+        width: 100%;
+        margin-left: 15px;
+    }
+
+    .profile-section, .profile-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-picture img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .upload-btn, .remove-btn {
+        width: 100%;
+    }
+
+    .settings-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .settings-nav button {
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mainpartpro {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .sidebar {
+        margin-left: 0;
+        padding: 12px;
+        height: auto;
+    }
+
+    .user_det {
+        padding: 0 25px;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab, .pro-act-set-tab {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: 100%;
+    }
+
+    .notification-container, .account-container {
+        padding: 12px;
+    }
+
+    .earned-activity-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 18px;
+    }
+
+    .earned-activity-box {
+        width: 100%;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100%;
+        height: 140px;
+    }
+
+    .event-details {
+        padding: 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user_det {
+        padding: 8px;
+    }
+
+    .tab, .pro-act-set-tab {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .form-container, .hobbies, .hobbies-section {
+        padding: 8px;
+    }
+
+    .notification-option {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .notification-container label {
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .profile-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .update-btn-container {
+        text-align: center;
+    }
+
+    .update-profile-btn {
+        width: 100%;
+    }
+
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image {
+        width: 100%;
+        height: 120px;
+    }
+
+    .event-details {
+        padding: 8px 0;
+    }
+}
