@@ -32,7 +32,8 @@ DEBUG = os.getenv('DEBUG', 'False')=='True'
 ALLOWED_HOSTS =['*']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
 # ["127.0.0.1", "localhost"]
-CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1:8000', 'https://localhost:8000']
+CSRF_TRUSTED_ORIGINS =['https://hobby-hub-diploma-web.onrender.com']
+# ['https://127.0.0.1:8000', 'https://localhost:8000']
 
 # CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
 
@@ -194,7 +195,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =os.path.join(BASE_DIR, '/static/')
+# STATIC_ROOT =os.path.join(BASE_DIR, '/static/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'events/static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
