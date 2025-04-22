@@ -23,11 +23,11 @@
         <div class="right-panel">
             <h2>Sign in to <span>HobbyHub</span></h2>
             <p>Enter your details below</p>
-            {% load socialaccount %}
+            {% comment %} {% load socialaccount %} {% endcomment %}
             {% comment %} <a href="{% provider_login_url 'google' %}?next=/" class="google-login-btn" style="margin-bottom: 25px;"> {% endcomment %}
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" class="icon">
+              {% comment %} <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" class="icon">
               Login with Google
-            </a>
+            </a> {% endcomment %}
             
             <!-- Social Media Buttons 
             <div class="social-buttons">
