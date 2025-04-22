@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False')=='True'
 
-ALLOWED_HOSTS =['*']
+ALLOWED_HOSTS = ['hobby-hub-diploma-web.onrender.com', 'localhost', '127.0.0.1']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
 # ["127.0.0.1", "localhost"]
 CSRF_TRUSTED_ORIGINS =['https://hobby-hub-diploma-web.onrender.com']
