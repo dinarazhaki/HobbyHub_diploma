@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-nub2-er(f#0ty4030vj2$$&ocl!mcs$nlu)f24mka0k&70yod#'
 
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = os.getenv('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS =['*']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
@@ -148,9 +148,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     # }
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
-                ssl_require=True
+        ssl_require=True
 
     )
    
