@@ -140,13 +140,17 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-
+#
+# 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': str(BASE_DIR / config('SQLITE_DB_NAME')),
+    # }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / config('SQLITE_DB_NAME')),
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600
+    )
+   
 }
 # DATABASES = {
 #     'default': dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600)
@@ -187,10 +191,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT =os.path.join(BASE_DIR, '/static/')
-STATICFILES_DIRS = [
-    (BASE_DIR / 'events/static/'),  
-]
+STATIC_ROOT =os.path.join(BASE_DIR, '/static/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'events/static')]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
