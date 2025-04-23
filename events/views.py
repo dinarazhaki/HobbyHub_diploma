@@ -163,7 +163,7 @@ def user_activities(request):
 
     today_events = []
     other_events = []
-
+    event_data = None
     for event in events:
         # Создаем datetime объекта события с учетом времени
         event_datetime = timezone.make_aware(
@@ -877,7 +877,7 @@ def organizer_activities(request):
 
     today_events = []
     other_events = []
-
+    event_data = None
     for event in events:
         # Создаем datetime объекта события с учетом времени
         event_datetime = timezone.make_aware(
