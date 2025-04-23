@@ -19,7 +19,24 @@ import logging
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'django_errors.log',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'ERROR',
+    },
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -33,7 +50,7 @@ DEBUG = os.getenv('DEBUG', 'False')=='True'
 ALLOWED_HOSTS = ['hobby-hub-diploma-web.onrender.com', 'localhost', '127.0.0.1']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']
 # ["127.0.0.1", "localhost"]
-CSRF_TRUSTED_ORIGINS =['https://hobby-hub-diploma-web.onrender.com']
+CSRF_TRUSTED_ORIGINS =['https://hobby-hub-diploma-web.onrender.com', 'http://localhost', 'http://127.0.0.1']
 # ['https://127.0.0.1:8000', 'https://localhost:8000']
 
 # CSRF_TRUSTED_ORIGINS = ['http://hobbyhub.com', 'http://www.hobbyhub.com', 'http://192.168.3.30:8000']
@@ -150,7 +167,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     # }
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+        default=config('DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True
 
@@ -208,7 +225,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = "events.Company"
 LOGIN_REDIRECT_URL = "/"
@@ -225,21 +242,3 @@ ACCOUNT_LOGIN_METHODS = {"email"}
 
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'django_errors.log',
-        },
-    },
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'ERROR',
-    },
-}
