@@ -169,12 +169,13 @@ class AttendanceRecord(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='attendance_records')
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
-    timestamp = models.DateTimeField(default=timezone.now)  
+    timestamp = models.DateTimeField(default=timezone.now)  # Changed from auto_now_add
     
     class Meta:
         unique_together = ('event', 'employee')
     
     def save(self, *args, **kwargs):
+        # Set names automatically
         if self.employee:
             if not self.first_name:
                 self.first_name = self.employee.name

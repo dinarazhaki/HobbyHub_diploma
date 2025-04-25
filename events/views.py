@@ -853,9 +853,12 @@ def sign_in(request):
     return render(request, "sign_in.html")
 
 
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 @role_required("organizer")
 def organizer_activities(request):
+    # Получаем текущее время с учетом часового пояса
     now = timezone.localtime(timezone.now())
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
     today_end = today_start + timedelta(days=1)
@@ -876,6 +879,7 @@ def organizer_activities(request):
     other_events = []
     event_data = None
     for event in events:
+        # Создаем datetime объекта события с учетом времени
         event_datetime = timezone.make_aware(
             datetime.combine(event.date, event.time)
         )
@@ -897,6 +901,7 @@ def organizer_activities(request):
             'event_types': event.EVENT_TYPES,
         }
 
+        # Проверяем, попадает ли событие в сегодняшний день (00:00 - 23:59)
         if today_start <= event_datetime < today_end:
             today_events.append(event_data)
         else:
@@ -1188,10 +1193,12 @@ def add_prize(request):
             image = request.FILES.get('image')
             company_id = request.session["company_id"]
 
+            # Проверяем, существует ли приз с таким рангом в этой компании
             if Prize.objects.filter(rank=rank, company_id=company_id).exists():
                 messages.error(request, "A prize with this rank already exists for your company.")
                 return redirect('leaderboard_show')
 
+            # Создаем приз
             Prize.objects.create(
                 name=name,
                 description=description,
