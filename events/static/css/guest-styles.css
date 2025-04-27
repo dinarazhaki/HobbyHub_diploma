@@ -232,6 +232,9 @@ p{
 
 /* Mobile Devices (max-width: 768px) */
 @media (max-width: 768px) {
+    .header{
+        margin-bottom: 80px;
+    }
     .navbar-nav {
         flex-direction: column;
         align-items: center;
@@ -249,8 +252,12 @@ p{
         padding-left: 0;
         text-align: center;
     }
+    .signup button{
+        margin-bottom: 10px;
+    }
 
     .hero {
+        margin-top: 150px;
         height: auto;
         padding: 60px 20px;
     }
@@ -266,6 +273,10 @@ p{
 
     .image-container {
         height: 300px;
+    }
+    .join-img {
+        width: 80%; /* Adjust width on tablet screens */
+        height: 50%;
     }
 
     .rounded-image {
@@ -308,8 +319,12 @@ p{
 
 /* Small Mobile Devices (max-width: 480px) */
 @media (max-width: 480px) {
+    .header{
+        margin-bottom: 200px;
+    }
     .hero {
         padding-top: 40px;
+        margin-top: 200px;
     }
 
     .hero h1 {
@@ -336,5 +351,13 @@ p{
     .btn-gradient {
         font-size: 16px;
         padding: 8px 20px;
+    }
+}
+@media (max-width:390px) {
+    .hero{
+        margin-top: 200px;
+    }
+    .header{
+        margin-bottom: 400px;
     }
 }

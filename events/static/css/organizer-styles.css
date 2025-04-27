@@ -399,3 +399,44 @@ p{
     font-family: 'Gilroy-SemiBold', sans-serif;
     font-size: 18px;
 }
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        padding-left: 0;
+    }
+
+    .gradient-text {
+        font-size: 1.5rem;
+    }
+
+    .btn-gradient {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .btn-gradient {
+        font-size: 14px;
+        padding: 6px 15px;
+    }
+
+    .gradient-text {
+        font-size: 1.2rem;
+    }
+
+    .header {
+        padding: 15px;
+    }
+}
