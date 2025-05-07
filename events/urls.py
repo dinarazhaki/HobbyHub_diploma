@@ -13,7 +13,7 @@ urlpatterns = [
     path('guest_faq/',guest_faq, name='guest_faq'),
     path('guest_support/', guest_support, name='guest_support'),
     path('guest_service/', guest_service, name='guest_service'),
-    path('become-partner/', become_partner, name='become_partner'),
+    path('become_partner/', become_partner, name='become_partner'),
     path('forgot-password/', forgot_password, name='forgot_password'),
     path('reset/<uidb64>/<token>/', reset_password, name='reset_password'),
 
