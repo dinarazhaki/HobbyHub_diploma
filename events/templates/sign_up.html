@@ -25,23 +25,7 @@
             <h2>Get started with <span>HobbyHub</span></h2>
             <p>Enter your details below</p>
 
-            <!-- Social Media Buttons -->
-            <div class="social-buttons">
-                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn-icon">
-                    <i class="fab fa-google" style="color: #DB4437;"></i>
-                </a>
-                <a href="{% url 'social:begin' 'microsoft-graph' %}" class="btn-icon">
-                    <i class="fab fa-microsoft" style="color: #00A4EF;"></i>
-                </a>
-                <a href="{% url 'social:begin' 'facebook' %}" class="btn-icon">
-                    <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
-                </a>
-                <a href="{% url 'social:begin' 'apple' %}" class="btn-icon">
-                    <i class="fab fa-apple" style="color: black;"></i>
-                </a>
-            </div>
-            
-            <p class="or-divider">OR</p>
+        
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
