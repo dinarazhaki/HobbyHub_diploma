@@ -44,7 +44,8 @@ LOGGING = {
 
 SECRET_KEY = 'django-insecure-nub2-er(f#0ty4030vj2$$&ocl!mcs$nlu)f24mka0k&70yod#'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False')=='True'
+# DEBUG = os.getenv('DEBUG', 'False')=='True'
+Debug=False
 
 ALLOWED_HOSTS = ['hobby-hub-diploma-web.onrender.com', 'localhost', '127.0.0.1']
 # ['localhost', '127.0.0.1', '192.168.3.30', 'hobbyhub.com', 'www.hobbyhub.com']

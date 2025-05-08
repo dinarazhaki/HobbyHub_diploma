@@ -1,0 +1,1047 @@
+Internal Server Error: /get_notifications/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\views\decorators\http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\diploma_hobbyhub\final\HobbyHub_diploma\events\views.py", line 1321, in get_notifications
+    nickname = request.session.get("nickname")
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /get_notifications/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /get_notifications/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\views\decorators\http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\diploma_hobbyhub\final\HobbyHub_diploma\events\views.py", line 1321, in get_notifications
+    nickname = request.session.get("nickname")
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /get_notifications/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\diploma_hobbyhub\final\HobbyHub_diploma\events\views.py", line 25, in wrapper
+    if role == "employee" and not request.session.get("nickname"):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /profile_lookup/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\diploma_hobbyhub\final\HobbyHub_diploma\events\views.py", line 25, in wrapper
+    if role == "employee" and not request.session.get("nickname"):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /profile_lookup/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /profile_lookup/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\diploma_hobbyhub\final\HobbyHub_diploma\events\views.py", line 25, in wrapper
+    if role == "employee" and not request.session.get("nickname"):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /profile_lookup/
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\middleware.py", line 48, in process_response
+    if request.session.get_expire_at_browser_close():
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 285, in get_expire_at_browser_close
+    if (expiry := self.get("_session_expiry")) is None:
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 68, in get
+    return self._session.get(key, default)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\django\db\backends\postgresql\base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\ASUS ViVoBooK\OneDrive\Рабочий стол\demo\HobbyHub_diploma\back_hobbyhub\myenv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "dpg-d03tm1euk2gs73cl8uag-a.singapore-postgres.render.com" to address: No such host is known. 
+
