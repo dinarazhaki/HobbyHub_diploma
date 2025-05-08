@@ -76,6 +76,67 @@
 .prize-3 {
     background: linear-gradient(135deg, #cd7f32, #b87333); /* Bronze */
 }
+@media (max-width: 768px) {
+    .leaderboard{
+    margin-top: 100px;
+}
+  .prize-pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .prize {
+    width: 90%;
+    margin: 10px 0;
+  }
+
+  .leaderboard-container h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  #leaderboard-table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+  }
+
+  #leaderboard-table thead {
+    display: none;
+  }
+
+  #leaderboard-table tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  #leaderboard-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+  }
+
+  .rank-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .rank-text {
+    font-size: 18px;
+  }
+
+  .rank-number {
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
 
     </style>
 {% endblock %}
