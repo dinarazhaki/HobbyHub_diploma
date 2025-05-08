@@ -20,11 +20,11 @@
 }
 
 .swiper-wrapper {
-    margin-left: -15px; 
-    margin-right: -15px; 
+    margin-left: -15px; /* Cancel out first padding */
+    margin-right: -15px; /* Cancel out last padding */
 }
 
-
+/* Optional: keep everything aligned nicely */
 .activities {
     padding: 0 30px;
 }
