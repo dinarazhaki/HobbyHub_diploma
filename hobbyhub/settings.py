@@ -247,3 +247,4 @@ ACCOUNT_LOGIN_METHODS = {"email"}
 
 
 
+print(os.getenv("CLOUDINARY_CLOUD_NAME"))
