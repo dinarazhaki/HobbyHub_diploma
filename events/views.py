@@ -720,9 +720,7 @@ def update_organizer_profile(request):
             company.password = make_password(new_password)
 
         if "profile_photo" in request.FILES:
-            image = request.FILES["profile_photo"]
-            file_path = f"profile_photo/{company_id}_{image.name}"
-            company.profile_photo.save(file_path, ContentFile(image.read()))
+            company.profile_photo = request.FILES["profile_photo"]
 
         company.save()
         return redirect("organizer_settings")
