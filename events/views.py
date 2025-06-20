@@ -712,6 +712,9 @@ def update_organizer_profile(request):
         return redirect("sign_in")
 
     if request.method == "POST":
+        print("POST received")
+        print("FILES:", request.FILES)
+        
         company.name = request.POST.get("name", company.name)
         company.email = request.POST.get("email", company.email)
 
