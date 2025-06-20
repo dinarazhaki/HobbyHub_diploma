@@ -154,7 +154,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hobbyhub.wsgi.application'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Database
